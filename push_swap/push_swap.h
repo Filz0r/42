@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:45:55 by fparreir          #+#    #+#             */
-/*   Updated: 2023/05/30 15:00:03 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/08/21 17:43:01 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,39 @@
 
 # include "libft/includes/libft.h"
 
-typedef struct ps_list
-{
-	int				*a_stack;
-	int				*b_stack;
-	int				length; 
-}	t_ps_list;
+# define BLACK		"\033[0;30m"
+# define RED		"\033[0;31m"
+# define GREEN		"\033[0;32m"
+# define YELLOW		"\033[0;33m"
+# define BLUE		"\033[0;34m"
+# define PURPLE		"\033[0;35m"
+# define CYAN		"\033[0;36m"
+# define WHITE		"\033[0m"
+# define MAGENTA	"\e[0;35m"
 
-void		errors(int err_type);
-t_ps_list	handle_args(int counter, char **values);
-void		sort_small(int counter, t_ps_list stack);
-void		sort_big(int counter, t_ps_list stack);
-t_ps_list	swap(t_ps_list stack, char current);
-void		rotate(int *stack);
-void		push(int *stack);
-void		reverse_rotate(int *stack);
-void		change_both(int *a_stack, int *b_stack, char *operation);
-int			is_sorted(t_ps_list stack); 
+typedef struct s_plist {
+	int				data;
+	int				pos;
+	struct s_plist	*next;
+}	t_plist;
+
+// General functions
+void	errors(void);
+int		*handle_args(int counter, char **values, t_plist **start);
+
+// Array Functions
+void	bubble_sort(int *arr, int size);
+void	print_array(int *arr, int size);
+int		get_array_index(int *arr, int size, int nb);
+
+// List Functions
+void	add_list_end(t_plist **start, int num);
+size_t	list_length(t_plist **start);
+void	print_list(t_plist **start);
+void	set_list_positions(t_plist **start, int *array, int array_size);
+void	print_list_long(t_plist **start);
+
+
+
 
 #endif 

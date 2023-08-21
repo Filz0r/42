@@ -3,29 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fparreir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/23 14:57:39 by fparreir          #+#    #+#             */
-/*   Updated: 2023/05/29 15:59:09 by fparreir         ###   ########.fr       */
+/*   Created: 2023/08/21 14:58:03 by fparreir          #+#    #+#             */
+/*   Updated: 2023/08/21 17:33:25 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
- 
+
 int	main(int ac, char **av)
 {
-	t_ps_list	stack;
+	int		*array;
+	t_plist	*root_a;
+	//t_plist	*root_b;
 
-	if (ac > 1)
+	root_a = NULL;
+	//root_b = NULL;
+	array = NULL;
+	if (ac >= 2)
 	{
-		stack = handle_args(--ac, av); 
-		if (ac <= 5)
-			sort_small(ac, stack);
-		else
-			sort_big(ac, stack);
+		array = handle_args(--ac, av, &root_a);
+		print_list(&root_a);
+		bubble_sort(array, ac);
+		print_array(array, ac);
+		print_list_long(&root_a);
+		set_list_positions(&root_a, array, ac);
+		print_list_long(&root_a);
 	}
-	else
-		errors(0);
-//	free(stack); 
 	return (0); 
 }

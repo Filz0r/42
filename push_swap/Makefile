@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: fparreir <marvin@42.fr>                    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/05/23 14:20:46 by fparreir          #+#    #+#              #
-#    Updated: 2023/07/18 17:42:53 by fparreir         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME	= push_swap
 CC		= cc
 CFLAGS	= -Wall -Werror -Wextra
@@ -17,7 +5,8 @@ DFLAGS	= $(CFLAGS) -g3
 FFLAGS	= $(DFLAGS) -fsanitize=address
 OBJDIR	= build/
 LIBFT	= libft/
-SOURCES	= push_swap.c utils.c sort.c operations.c
+SOURCES	= push_swap.c utils.c array_utils.c list_utils.c \
+			print_utils.c
 OBJECTS	= ${SOURCES:.c=.o}
 ARGS	= 5 35 10# 20 40
 

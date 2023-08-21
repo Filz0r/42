@@ -3,68 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fparreir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/23 14:52:29 by fparreir          #+#    #+#             */
-/*   Updated: 2023/05/29 16:43:50 by fparreir         ###   ########.fr       */
+/*   Created: 2023/08/21 13:53:25 by fparreir          #+#    #+#             */
+/*   Updated: 2023/08/21 16:34:18 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "push_swap.h"
 
-t_ps_list	handle_args(int counter, char **values)
+int	*handle_args(int counter, char **values, t_plist **start)
 {
-	int			k;
-	int			i;
-	int			*temp;
-	int			*temp2;
-	int			arg; 
-	t_ps_list	stack;
+	int	i;
+	int k;
+	int	*array;
 
-	k = 1;
+	i = 1;
+	while (i <= counter)
+		add_list_end(start, ft_atoi(values[i++]));
 	i = 0;
-	arg = 0;
-	temp = malloc(sizeof(int) * counter);
-	temp2 = malloc(sizeof(int) * counter);
-	if (!temp || !temp2)
-		errors(2);
-	while (counter--)
+	k = 1;
+	array = malloc(sizeof(int) * counter);
+	while (k <= (counter))
 	{
-		arg = ft_atoi(values[k]);
-		if (arg != 0)
-		{
-			temp[i] = arg;
-			i++;
-		}
-		else
-			errors(1);
-		k++; 
+		array[i++] = ft_atoi(values[k++]);
 	}
-	stack.a_stack = temp;
-	i = 0; 
-	while (i < k - 1)
-		temp2[i++] = 0;
-	stack.b_stack = temp2;
-	stack.length = k - 2; 
-	return (stack); 
+	return (array);
 }
- 
-void	errors(int err_type)
+
+void	errors(void)
 {
-	if (err_type == 0)
-	{ 
-		ft_printf("\033[1;31mERROR:\033[0m insuficient number of arguments!\n");
-		exit(2);
-	}
-	else if (err_type == 1)
-	{
-		ft_printf("\033[1;31mERROR:\033[0m One of your arguments could not be converted into a int!\n");
-		exit(2);
-	}
-	else if (err_type == 2)
-	{
-		ft_printf("\033[1;31mERROR:\033[0m Error allocating memory for the stack!\n");
-		exit(2);
-	}
+	ft_putstr_fd("Error\n", 2);
+	exit(2);
 }
