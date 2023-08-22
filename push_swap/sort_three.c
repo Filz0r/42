@@ -1,34 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   sort_three.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/21 14:58:03 by fparreir          #+#    #+#             */
-/*   Updated: 2023/08/21 19:23:44 by fparreir         ###   ########.fr       */
+/*   Created: 2023/08/21 19:26:20 by fparreir          #+#    #+#             */
+/*   Updated: 2023/08/22 08:07:34 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main(int ac, char **av)
-{
-	int		*array;
-	t_plist	*root_a;
-	t_plist	*root_b;
 
-	root_a = NULL;
-	root_b = NULL;
-	array = NULL;
-	if (ac >= 2)
+void	sort_three(t_plist **stack_a, t_plist **stack_b, int *array, int size)
+{
+	int			current_position;
+	t_plist		*curr;
+
+	if (*stack_a == NULL || *stack_b != NULL)
+		errors();
+	curr = *stack_a;
+	while (curr)
 	{
-		array = handle_args(--ac, av, &root_a);
-		bubble_sort(array, ac);
-		set_list_positions(&root_a, array, ac);
-		print_list_long(&root_a); // remove later
-		if (ac == 3)
-			sort_three(&root_a, &root_b, array, ac);
+		current_position = get_current_position();
+		curr = curr->next;
 	}
-	return (0); 
 }

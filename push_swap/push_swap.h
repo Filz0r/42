@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:45:55 by fparreir          #+#    #+#             */
-/*   Updated: 2023/08/21 17:43:01 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/08/21 19:29:37 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_plist {
 // General functions
 void	errors(void);
 int		*handle_args(int counter, char **values, t_plist **start);
+void	sort_three(t_plist **stack_a, t_plist **stack_b, int *array, int size);
 
 // Array Functions
 void	bubble_sort(int *arr, int size);
@@ -46,7 +47,7 @@ size_t	list_length(t_plist **start);
 void	print_list(t_plist **start);
 void	set_list_positions(t_plist **start, int *array, int array_size);
 void	print_list_long(t_plist **start);
-
+int		get_current_position(t_plist **start, t_plist *node);
 
 
 
