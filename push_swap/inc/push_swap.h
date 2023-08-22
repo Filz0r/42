@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:45:55 by fparreir          #+#    #+#             */
-/*   Updated: 2023/08/22 10:58:35 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/08/22 16:49:33 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,20 +50,23 @@ typedef struct s_info {
 // General functions
 void	errors(void);
 int		*handle_args(int counter, char **values, t_plist **start);
-void	sort_three(t_plist **stack_a, t_plist **stack_b, int *array, int size);
+void	info_init(t_plist **start, int *arr, int size);
+void	initialize_move_counters(t_plist **start);
+void	sort_three(t_plist **stack_a, t_plist **stack_b);
 
 // Array Functions
 void	bubble_sort(int *arr, int size);
-void	print_array(int *arr, int size);
 int		get_array_index(int *arr, int size, int nb);
 
 // List Functions
 void	add_list_end(t_plist **start, int num);
 size_t	list_length(t_plist **start);
-void	print_list(t_plist **start);
-void	set_list_positions(t_plist **start, int *array, int array_size);
+
+//Print functions
+void	print_moves(t_plist **start);
 void	print_list_long(t_plist **start);
-int		get_current_position(t_plist **start, t_plist *node);
+void	print_list(t_plist **start);
+void	print_array(int *arr, int size);
 
 
 
