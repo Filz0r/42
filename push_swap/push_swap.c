@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:58:03 by fparreir          #+#    #+#             */
-/*   Updated: 2023/08/21 19:23:44 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/08/22 13:10:08 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,11 @@ int	main(int ac, char **av)
 	{
 		array = handle_args(--ac, av, &root_a);
 		bubble_sort(array, ac);
-		set_list_positions(&root_a, array, ac);
+		info_init(&root_a, array, ac);
 		print_list_long(&root_a); // remove later
+		free(array);
 		if (ac == 3)
-			sort_three(&root_a, &root_b, array, ac);
+			sort_three(&root_a, &root_b);
 	}
 	return (0); 
 }
