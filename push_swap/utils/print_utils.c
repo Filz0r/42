@@ -6,11 +6,11 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 17:27:33 by fparreir          #+#    #+#             */
-/*   Updated: 2023/08/21 19:27:55 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/08/22 10:52:19 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
 void	print_list(t_plist **start)
 {

@@ -6,11 +6,11 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 16:00:38 by fparreir          #+#    #+#             */
-/*   Updated: 2023/08/21 17:23:54 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/08/22 10:51:56 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
 static void	swap(int *a, int *b)
 {

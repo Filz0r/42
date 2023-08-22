@@ -1,34 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/21 14:58:03 by fparreir          #+#    #+#             */
-/*   Updated: 2023/08/21 19:23:44 by fparreir         ###   ########.fr       */
+/*   Created: 2023/08/21 13:53:25 by fparreir          #+#    #+#             */
+/*   Updated: 2023/08/22 10:52:35 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/push_swap.h"
+#include "../inc/push_swap.h"
 
-int	main(int ac, char **av)
+int	*handle_args(int counter, char **values, t_plist **start)
 {
-	int		*array;
-	t_plist	*root_a;
-	t_plist	*root_b;
+	int	i;
+	int	k;
+	int	*array;
 
-	root_a = NULL;
-	root_b = NULL;
-	array = NULL;
-	if (ac >= 2)
+	i = 1;
+	while (i <= counter)
+		add_list_end(start, ft_atoi(values[i++]));
+	i = 0;
+	k = 1;
+	array = malloc(sizeof(int) * counter);
+	while (k <= (counter))
 	{
-		array = handle_args(--ac, av, &root_a);
-		bubble_sort(array, ac);
-		set_list_positions(&root_a, array, ac);
-		print_list_long(&root_a); // remove later
-		if (ac == 3)
-			sort_three(&root_a, &root_b, array, ac);
+		array[i++] = ft_atoi(values[k++]);
 	}
-	return (0); 
+	return (array);
+}
+
+void	errors(void)
+{
+	ft_putstr_fd("Error\n", 2);
+	exit(2);
 }

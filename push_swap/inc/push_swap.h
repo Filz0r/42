@@ -6,14 +6,14 @@
 /*   By: fparreir <fparreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:45:55 by fparreir          #+#    #+#             */
-/*   Updated: 2023/08/21 19:29:37 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/08/22 10:58:35 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H 
 
-# include "libft/includes/libft.h"
+# include "../libft/includes/libft.h"
 
 # define BLACK		"\033[0;30m"
 # define RED		"\033[0;31m"
@@ -27,9 +27,25 @@
 
 typedef struct s_plist {
 	int				data;
-	int				pos;
+	struct s_info	*info;
 	struct s_plist	*next;
 }	t_plist;
+
+typedef struct s_info {
+	struct s_plist	*parent;
+	int				curr_pos;
+	int				final_pos;
+	char			stack;
+	int				stack_size;
+	int				sa;
+	int				sb;
+	int				pa;
+	int				pb;
+	int				ra;
+	int				rb;
+	int				rra;
+	int				rrb;
+}	t_info;
 
 // General functions
 void	errors(void);

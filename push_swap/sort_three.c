@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "inc/push_swap.h"
 
 
 void	sort_three(t_plist **stack_a, t_plist **stack_b, int *array, int size)

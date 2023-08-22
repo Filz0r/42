@@ -1,23 +1,33 @@
-NAME	= push_swap
-CC		= cc
-CFLAGS	= -Wall -Werror -Wextra
-DFLAGS	= $(CFLAGS) -g3
-FFLAGS	= $(DFLAGS) -fsanitize=address
-OBJDIR	= build/
-LIBFT	= libft/
-SOURCES	= push_swap.c utils.c array_utils.c list_utils.c \
-			print_utils.c sort_three.c
-OBJECTS	= ${SOURCES:.c=.o}
+NAME			= push_swap
+CC				= cc
+CFLAGS			= -Wall -Werror -Wextra
+DFLAGS			= $(CFLAGS) -g3
+FFLAGS			= $(DFLAGS) -fsanitize=address
+OBJDIR			= build/
+LIBFT			= libft/
+SOURCES_UTILS	= utils/
+SOURCES_SORT	= sort_three.c
+SOURCES_MAIN	= push_swap.c
+SRC_UTILS		= $(SOURCES_UTILS)array_utils.c $(SOURCES_UTILS)list_utils.c \
+					$(SOURCES_UTILS)print_utils.c $(SOURCES_UTILS)utils.c
+SRC				= $(SRC_UTILS) $(SOURCES_MAIN) $(SOURCES_SORT)
+OBJ				= $(subst $(SOURCES_UTILS),$(OBJDIR), $(SRC_UTILS:.c=.o)) \
+					$(OBJDIR)$(SOURCES_MAIN:.c=.o) \
+					$(OBJDIR)$(SOURCES_SORT:.c=.o)
 ARGS	= 5 35 10# 20 40
 
 all: $(NAME)
 
-$(NAME): $(OBJECTS)
+$(NAME): $(OBJ)
 	@make -C $(LIBFT)
-	@$(CC) -o $(NAME) $(CFLAGS) $(OBJECTS) -L$(LIBFT) -lft
+	$(CC) -o $(NAME) $(CFLAGS) $(OBJ) -L$(LIBFT) -lft
 
-$(OBJECTS): $(SOURCES)
-	@$(CC) $(CFLAGS) -c $(SOURCES) -I $(LIBFT)includes/
+$(OBJDIR):
+	mkdir $(OBJDIR)
+
+$(OBJ): $(SRC) $(OBJDIR)
+	$(CC) $(CFLAGS) -c $(SRC) -I $(LIBFT)includes/
+	mv *.o $(OBJDIR)
 
 valgrind: fclean
 	@$(CC) $(DFLAGS) -c $(SOURCES) -I $(LIBFT)includes/
@@ -32,7 +42,7 @@ debug: fclean
 
 
 clean:
-	@rm -f $(OBJECTS)
+	@rm -rf $(OBJDIR)
 
 fclean: clean
 	@rm -f $(NAME)
