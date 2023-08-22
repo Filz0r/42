@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 17:27:33 by fparreir          #+#    #+#             */
-/*   Updated: 2023/08/21 17:50:28 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/08/21 19:27:55 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,5 @@ void	print_list_long(t_plist **start)
 			ft_printf("\n");
 		curr = curr->next;
 	}
-	ft_printf(" %s}\n%s", PURPLE, WHITE);
+	ft_printf("\n%s", WHITE);
 }
