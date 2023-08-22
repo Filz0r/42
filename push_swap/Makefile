@@ -6,7 +6,7 @@ FFLAGS	= $(DFLAGS) -fsanitize=address
 OBJDIR	= build/
 LIBFT	= libft/
 SOURCES	= push_swap.c utils.c array_utils.c list_utils.c \
-			print_utils.c
+			print_utils.c sort_three.c
 OBJECTS	= ${SOURCES:.c=.o}
 ARGS	= 5 35 10# 20 40
 
