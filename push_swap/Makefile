@@ -9,7 +9,8 @@ SOURCES_UTILS	= utils/
 SOURCES_SORT	= sort_three.c
 SOURCES_MAIN	= push_swap.c
 SRC_UTILS		= $(SOURCES_UTILS)array_utils.c $(SOURCES_UTILS)list_utils.c \
-					$(SOURCES_UTILS)print_utils.c $(SOURCES_UTILS)utils.c
+					$(SOURCES_UTILS)print_utils.c $(SOURCES_UTILS)utils.c \
+					$(SOURCES_UTILS)sort_utils.c
 SRC				= $(SRC_UTILS) $(SOURCES_MAIN) $(SOURCES_SORT)
 OBJ				= $(subst $(SOURCES_UTILS),$(OBJDIR), $(SRC_UTILS:.c=.o)) \
 					$(OBJDIR)$(SOURCES_MAIN:.c=.o) \
@@ -35,9 +36,10 @@ valgrind: fclean
 	@valgrind -s --leak-check=full --show-leak-kinds=all \
 		--track-origins=yes ./$(NAME) $(ARGS)
 
-debug: fclean
-	@$(CC) $(FFLAGS) -c $(SOURCES) -I $(LIBFT)includes/
-	@$(CC) -o $(NAME) $(FFLAGS) $(OBJECTS) -L$(LIBFT) -lft
+debug: fclean $(OBJDIR)
+	@$(CC) $(FFLAGS) -c $(SRC) -I $(LIBFT)includes/
+	@mv *.o $(OBJDIR)
+	@$(CC) -o $(NAME) $(FFLAGS) $(OBJ) -L$(LIBFT) -lft
 	./$(NAME) $(ARGS)
 
 
