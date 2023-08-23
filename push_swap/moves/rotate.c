@@ -6,11 +6,9 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:30:19 by fparreir          #+#    #+#             */
-/*   Updated: 2023/08/23 12:01:07 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/08/23 13:23:02 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #include "../inc/push_swap.h"
 
