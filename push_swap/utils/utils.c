@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 13:53:25 by fparreir          #+#    #+#             */
-/*   Updated: 2023/08/23 12:55:02 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/08/23 14:36:50 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,22 @@
 
 int	*handle_args(int counter, char **values, t_plist **start)
 {
-	int	i;
-	int	k;
-	int	nb;
-	int	*array;
+	int		i;
+	int		k;
+	int		*array;
+	long	num;
 
 	i = 1;
 	while (i <= counter)
 	{
-		nb = ft_atoi(values[i++]);
-		if (is_num_in_stack(start, nb) == 1)
+		if (has_digits(values[i]) == 0)
 			errors();
-		add_list_end(start, nb);
+		num = ft_atol(values[i++]);
+		if (!check_number(num))
+			errors();
+		if (is_num_in_stack(start, (int)num) == 1)
+			errors();
+		add_list_end(start, (int)num);
 	}
 	i = 0;
 	k = 1;
@@ -35,6 +39,34 @@ int	*handle_args(int counter, char **values, t_plist **start)
 		array[i++] = ft_atoi(values[k++]);
 	}
 	return (array);
+}
+
+int	check_number(long nb)
+{
+	return (nb >= INT_MIN && nb <= INT_MAX);
+}
+
+int	has_digits(const char *str)
+{
+	int	i;
+	int	c;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		c = (int)str[i];
+		if (ft_isdigit(c) == 1)
+			i++;
+		else
+		{
+			i = 0;
+			break ;
+		}
+	}
+	if (i == 0)
+		return (0);
+	else
+		return (1);
 }
 
 void	errors(void)

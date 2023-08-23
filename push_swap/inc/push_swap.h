@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:45:55 by fparreir          #+#    #+#             */
-/*   Updated: 2023/08/23 13:15:17 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/08/23 14:36:58 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	info_init(t_plist **start, int *arr, int size);
 void	update_info(t_plist **start, char stack);
 void	initialize_move_counters(t_plist **start);
 void	sort_three(t_plist **stack_a, t_plist **stack_b);
+int		check_number(long nb);
+int		has_digits(const char *str);
 
 // Array Functions
 void	bubble_sort(int *arr, int size);
