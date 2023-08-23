@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:30:19 by fparreir          #+#    #+#             */
-/*   Updated: 2023/08/23 13:23:02 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/08/23 15:41:52 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	ra(t_plist **stack_a, int trigger)
 	first->next = NULL;
 	if (trigger == 1)
 		ft_printf("ra\n");
+	update_info(stack_a, 'a');
 }
 
 void	rb(t_plist **stack_b, int trigger)
@@ -50,6 +51,7 @@ void	rb(t_plist **stack_b, int trigger)
 	first->next = NULL;
 	if (trigger == 1)
 		ft_printf("rb\n");
+	update_info(stack_b, 'b');
 }
 
 void	rr(t_plist **stack_a, t_plist **stack_b)
