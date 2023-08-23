@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:30:19 by fparreir          #+#    #+#             */
-/*   Updated: 2023/08/23 10:31:15 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/08/23 12:01:07 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,40 @@
 
 void	ra(t_plist **stack_a, int trigger)
 {
-	//logic goes above
+	t_plist	*first;
+	t_plist	*second;
+	t_plist	*last;
+
+	if (*stack_a == NULL || (*stack_a)->next == NULL)
+		return ;
+	first = *stack_a;
+	second = (*stack_a)->next;
+	last = *stack_a;
+	while (last->next != NULL)
+		last = last->next;
+	*stack_a = second;
+	last->next = first;
+	first->next = NULL;
 	if (trigger == 1)
 		ft_printf("ra\n");
 }
 
 void	rb(t_plist **stack_b, int trigger)
 {
-	//logic goes above
+	t_plist	*first;
+	t_plist	*second;
+	t_plist	*last;
+
+	if (*stack_b == NULL || (*stack_b)->next == NULL)
+		return ;
+	first = *stack_b;
+	second = (*stack_b)->next;
+	last = *stack_b;
+	while (last->next != NULL)
+		last = last->next;
+	*stack_b = second;
+	last->next = first;
+	first->next = NULL;
 	if (trigger == 1)
 		ft_printf("rb\n");
 }

@@ -6,22 +6,56 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:33:49 by fparreir          #+#    #+#             */
-/*   Updated: 2023/08/23 10:33:49 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/08/23 12:45:07 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
-void	pa(t_plist **stack_a, int trigger)
+void	pa(t_plist **stack_a, t_plist **stack_b, int trigger)
 {
-	//logic goes above
+	t_plist	*element;
+	t_plist	*temp;
+
+	if (*stack_b == NULL)
+		return ;
+	element = *stack_b;
+	*stack_b = element->next;
+	if (*stack_a == NULL)
+	{
+		element->next = NULL;
+		*stack_a = element;
+	}
+	else
+	{
+		temp = *stack_a;
+		*stack_a = element;
+		element->next = temp;
+	}
 	if (trigger == 1)
-		ft_printf("ra\n");
+		ft_printf("pa\n");
 }
 
-void	pb(t_plist **stack_b, int trigger)
+void	pb(t_plist **stack_a, t_plist **stack_b, int trigger)
 {
-	//logic goes above
+	t_plist	*element;
+	t_plist	*temp;
+
+	if (*stack_a == NULL)
+		return ;
+	element = *stack_a;
+	*stack_a = element->next;
+	if (*stack_b == NULL)
+	{
+		element->next = NULL;
+		*stack_b = element;
+	}
+	else
+	{
+		temp = *stack_b;
+		*stack_b = element;
+		element->next = temp;
+	}
 	if (trigger == 1)
-		ft_printf("rb\n");
+		ft_printf("pb\n");
 }
