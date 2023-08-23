@@ -15,7 +15,7 @@ SRC_UTILS		= $(SOURCES_UTILS)array_utils.c $(SOURCES_UTILS)list_utils.c \
 SRC_MOVES		= $(SOURCES_MOVES)swap.c  $(SOURCES_MOVES)push.c \
 					$(SOURCES_MOVES)rotate.c $(SOURCES_MOVES)rev_rotate.c
 
-SRC				= $(SRC_UTILS) $(SOURCES_MAIN) $(SOURCES_SORT)
+SRC				= $(SRC_UTILS) $(SOURCES_MAIN) $(SOURCES_SORT) $(SRC_MOVES)
 OBJ				= $(subst $(SOURCES_UTILS),$(OBJDIR), $(SRC_UTILS:.c=.o)) \
  					$(subst $(SOURCES_MOVES),$(OBJDIR), $(SRC_MOVES:.c=.o)) \
 					$(OBJDIR)$(SOURCES_MAIN:.c=.o) \
