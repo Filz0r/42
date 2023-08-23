@@ -16,11 +16,18 @@ int	*handle_args(int counter, char **values, t_plist **start)
 {
 	int	i;
 	int	k;
+	int	nb;
 	int	*array;
 
 	i = 1;
 	while (i <= counter)
-		add_list_end(start, ft_atoi(values[i++]));
+	{
+		nb = ft_atoi(values[i++]);
+		if (is_num_in_stack(start, nb) == 1)
+			errors();
+		add_list_end(start, nb);
+
+	}
 	i = 0;
 	k = 1;
 	array = malloc(sizeof(int) * counter);
