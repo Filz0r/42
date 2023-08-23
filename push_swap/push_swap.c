@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:58:03 by fparreir          #+#    #+#             */
-/*   Updated: 2023/08/22 17:19:17 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/08/23 11:59:14 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int	main(int ac, char **av)
 		info_init(&root_a, array, ac);
 		print_list_long(&root_a); // remove later
 		free(array);
-		if (ac == 3)
-			sort_three(&root_a, &root_b);
+
+		sort_three(&root_a, &root_b);
 		//something like that freees the data
 		// the errors function should also call this function when something
 		// goes wrong with the program, to avoid leaks.

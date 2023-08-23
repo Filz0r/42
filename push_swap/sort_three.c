@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 19:26:20 by fparreir          #+#    #+#             */
-/*   Updated: 2023/08/22 11:19:47 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/08/23 12:52:11 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,10 @@
 
 void	sort_three(t_plist **stack_a, t_plist **stack_b)
 {
-	t_plist	*curr;
-
 	if (*stack_a == NULL || *stack_b != NULL)
 		errors();
-	curr = *stack_a;
-	while (curr)
-	{
 
-		curr = curr->next;
-	}
-
+	rra(stack_a, 1);
+	ft_printf("====================\n");
+	print_list_long(stack_a);
 }
