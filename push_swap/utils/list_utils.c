@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:19:37 by fparreir          #+#    #+#             */
-/*   Updated: 2023/08/23 12:55:13 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/08/23 16:33:36 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,20 @@ void	add_list_end(t_plist **start, int num)
 	curr->next = new_node;
 }
 
-size_t	list_length(t_plist **start)
+int	is_sorted(t_plist **start)
 {
-	size_t	i;
 	t_plist	*curr;
 
-	i = 0;
 	if (*start == NULL)
-		return (i);
+		return (0);
 	curr = *start;
 	while (curr)
 	{
-		i++;
+		if (curr->info->curr_pos != curr->info->final_pos)
+			return (0);
 		curr = curr->next;
 	}
-	return (i);
+	return (1);
 }
 
 int	is_num_in_stack(t_plist **start, int nb)
