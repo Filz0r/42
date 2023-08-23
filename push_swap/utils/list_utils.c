@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:19:37 by fparreir          #+#    #+#             */
-/*   Updated: 2023/08/22 16:49:49 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/08/23 10:17:21 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,3 +51,18 @@ size_t	list_length(t_plist **start)
 	return (i);
 }
 
+int	is_num_in_stack(t_plist **start, int nb)
+{
+	t_plist	*curr;
+
+	if (*start == NULL)
+		return (0);
+	curr = *start;
+	while (curr)
+	{
+		if (curr->data == nb)
+			return (1);
+		curr = curr->next;
+	}
+	return (0);
+}
