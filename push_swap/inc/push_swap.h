@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:45:55 by fparreir          #+#    #+#             */
-/*   Updated: 2023/08/23 10:34:34 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/08/23 12:42:28 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	rr(t_plist **stack_a, t_plist **stack_b);
 void	rra(t_plist **stack_a, int trigger);
 void	rrb(t_plist **stack_b, int trigger);
 void	rrr(t_plist **stack_a, t_plist **stack_b);
-void	pa(t_plist **stack_a, int trigger);
-void	pb(t_plist **stack_b, int trigger);
+void	pa(t_plist **stack_a, t_plist **stack_b, int trigger);
+void	pb(t_plist **stack_a, t_plist **stack_b, int trigger);
 
 #endif 
