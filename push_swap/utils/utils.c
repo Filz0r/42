@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 13:53:25 by fparreir          #+#    #+#             */
-/*   Updated: 2023/08/23 14:36:50 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/08/23 18:11:50 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ int	has_digits(const char *str)
 	int	c;
 
 	i = 0;
+	if (str[i] == '-')
+		i++;
 	while (str[i] != '\0')
 	{
 		c = (int)str[i];
