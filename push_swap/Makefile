@@ -6,13 +6,18 @@ FFLAGS			= $(DFLAGS) -fsanitize=address
 OBJDIR			= build/
 LIBFT			= libft/
 SOURCES_UTILS	= utils/
+SOURCES_MOVES	= moves/
 SOURCES_SORT	= sort_three.c
 SOURCES_MAIN	= push_swap.c
 SRC_UTILS		= $(SOURCES_UTILS)array_utils.c $(SOURCES_UTILS)list_utils.c \
 					$(SOURCES_UTILS)print_utils.c $(SOURCES_UTILS)utils.c \
 					$(SOURCES_UTILS)sort_utils.c
+SRC_MOVES		= $(SOURCES_MOVES)swap.c  $(SOURCES_MOVES)push.c \
+					$(SOURCES_MOVES)rotate.c $(SOURCES_MOVES)rev_rotate.c
+
 SRC				= $(SRC_UTILS) $(SOURCES_MAIN) $(SOURCES_SORT)
 OBJ				= $(subst $(SOURCES_UTILS),$(OBJDIR), $(SRC_UTILS:.c=.o)) \
+ 					$(subst $(SOURCES_MOVES),$(OBJDIR), $(SRC_MOVES:.c=.o)) \
 					$(OBJDIR)$(SOURCES_MAIN:.c=.o) \
 					$(OBJDIR)$(SOURCES_SORT:.c=.o)
 ARGS	= 5 35 10# 20 40

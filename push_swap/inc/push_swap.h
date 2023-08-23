@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:45:55 by fparreir          #+#    #+#             */
-/*   Updated: 2023/08/23 10:12:29 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/08/23 10:34:34 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int		get_array_index(int *arr, int size, int nb);
 // List Functions
 void	add_list_end(t_plist **start, int num);
 size_t	list_length(t_plist **start);
-int 	is_num_in_stack(t_plist **start, int nb);
+int		is_num_in_stack(t_plist **start, int nb);
 
 //Print functions
 void	print_moves(t_plist **start);
@@ -69,6 +69,17 @@ void	print_list_long(t_plist **start);
 void	print_list(t_plist **start);
 void	print_array(int *arr, int size);
 
-
+//Move Functions
+void	sa(t_plist **stack_a, int trigger);
+void	sb(t_plist **stack_b, int trigger);
+void	ss(t_plist **stack_a, t_plist **stack_b);
+void	ra(t_plist **stack_a, int trigger);
+void	rb(t_plist **stack_b, int trigger);
+void	rr(t_plist **stack_a, t_plist **stack_b);
+void	rra(t_plist **stack_a, int trigger);
+void	rrb(t_plist **stack_b, int trigger);
+void	rrr(t_plist **stack_a, t_plist **stack_b);
+void	pa(t_plist **stack_a, int trigger);
+void	pb(t_plist **stack_b, int trigger);
 
 #endif 
