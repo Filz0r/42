@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:19:37 by fparreir          #+#    #+#             */
-/*   Updated: 2023/08/23 16:33:36 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/08/24 12:42:49 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,16 @@ void	add_list_end(t_plist **start, int num)
 int	is_sorted(t_plist **start)
 {
 	t_plist	*curr;
+	t_plist	*next;
 
-	if (*start == NULL)
-		return (0);
 	curr = *start;
-	while (curr)
+	while (curr->next)
 	{
-		if (curr->info->curr_pos != curr->info->final_pos)
+		next = curr->next;
+		if (curr->data < next->data)
+			curr = curr->next;
+		else
 			return (0);
-		curr = curr->next;
 	}
 	return (1);
 }
