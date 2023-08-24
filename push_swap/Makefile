@@ -7,6 +7,7 @@ OBJDIR			= build/
 LIBFT			= libft/
 SOURCES_UTILS	= utils/
 SOURCES_MOVES	= moves/
+TESTS_SRC		= tests/
 SOURCES_SORT	= sort_three.c sort_five.c
 SOURCES_MAIN	= push_swap.c
 SRC_UTILS		= $(SOURCES_UTILS)array_utils.c $(SOURCES_UTILS)list_utils.c \
@@ -50,6 +51,8 @@ debug: fclean $(OBJDIR)
 	@$(CC) -o $(NAME) $(FFLAGS) $(OBJ) -L$(LIBFT) -lft
 	./$(NAME) $(ARGS)
 
+$(TESTS_SRC):
+	@mkdir $(TESTS_SRC)
 
 clean:
 	@rm -rf $(OBJDIR)
