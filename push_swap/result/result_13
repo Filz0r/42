@@ -1,0 +1,36 @@
+before List: { 3, 1, 2, 4 }
+pb
+List: 
+[ value: 1, info-p: 0x55c27cd70380
+{
+	curr_pos:0,
+	final_pos: 0
+	stack: a,
+	ssize: 3
+}
+, next: 0x55c27cd702e0 ]
+[ value: 2, info-p: 0x55c27cd703c0
+{
+	curr_pos:1,
+	final_pos: 1
+	stack: a,
+	ssize: 3
+}
+, next: 0x55c27cd70300 ]
+[ value: 4, info-p: 0x55c27cd70400
+{
+	curr_pos:2,
+	final_pos: 3
+	stack: a,
+	ssize: 3
+}
+, next: (nil) ]
+List: 
+[ value: 3, info-p: 0x55c27cd70340
+{
+	curr_pos:0,
+	final_pos: 2
+	stack: b,
+	ssize: 1
+}
+, next: (nil) ]
