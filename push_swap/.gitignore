@@ -1,3 +1,5 @@
 *.vim
 *.o
 push_swap
+push_swap_tester
+result
