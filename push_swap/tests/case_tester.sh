@@ -1,8 +1,8 @@
 #!/bin/bash
 
 input_file="./tests/$1"
-output_folder="../result"
-push_swap_binary="../push_swap"
+output_folder="./result"
+push_swap_binary="./push_swap"
 
 # Create the output folder if it doesn't exist
 mkdir -p "$output_folder"
