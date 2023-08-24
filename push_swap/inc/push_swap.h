@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:45:55 by fparreir          #+#    #+#             */
-/*   Updated: 2023/08/23 16:28:59 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/08/23 18:24:25 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	info_init(t_plist **start, int *arr, int size);
 void	update_info(t_plist **start, char stack);
 void	initialize_move_counters(t_plist **start);
 void	sort_three(t_plist **stack, int size);
-void	sort_five(t_plist **root_a, t_plist **root_b);
+void	sort_five(t_plist **root_a, t_plist **root_b, int size);
 int		check_number(long nb);
 int		has_digits(const char *str);
 
@@ -65,7 +65,7 @@ int		get_array_index(int *arr, int size, int nb);
 // List Functions
 void	add_list_end(t_plist **start, int num);
 int		is_num_in_stack(t_plist **start, int nb);
-int 	is_sorted(t_plist **start);
+int		is_sorted(t_plist **start);
 
 //Print functions
 void	print_moves(t_plist **start);
