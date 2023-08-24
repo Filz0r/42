@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:58:03 by fparreir          #+#    #+#             */
-/*   Updated: 2023/08/23 17:17:35 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/08/24 11:23:29 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(int ac, char **av)
 		if (ac <= 3)
 			sort_three(&root_a, ac);
 		else if (ac <= 5)
-			sort_five(&root_a, &root_b);
+			sort_five(&root_a, &root_b, ac);
 		//something like that freees the data
 		// the errors function should also call this function when something
 		// goes wrong with the program, to avoid leaks.
