@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 19:26:20 by fparreir          #+#    #+#             */
-/*   Updated: 2023/08/24 13:21:07 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/08/25 16:41:01 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,7 @@ void	sort_three(t_plist **stack, int size)
 			sa(stack, 1);
 		return ;
 	}
-	if (is_sorted(stack) == 1)
-		return ;
-	else if (case_check(stack) == 1)
+	if (case_check(stack) == 1)
 	{
 		rra(stack, 1);
 		sa(stack, 1);
