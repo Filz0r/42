@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 17:27:33 by fparreir          #+#    #+#             */
-/*   Updated: 2023/08/22 13:06:56 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/08/25 14:53:42 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,14 @@ static void	print_info(t_plist *curr)
 	ft_printf("\n{\n\tcurr_pos:%s%d%s,\n" \
 					"\tfinal_pos: %s%d%s\n" \
 					"\tstack: %s%c%s,\n" \
+					"\tbig: %s%d%s,\n" \
+					"\tsmall: %s%d%s,\n" \
 					"\tssize: %s%d%s\n}\n", \
 			GREEN, curr->info->curr_pos, WHITE, \
 			GREEN, curr->info->final_pos, WHITE, \
 			GREEN, curr->info->stack, WHITE, \
+			GREEN, curr->info->biggest_in_stack, WHITE, \
+			GREEN, curr->info->smallest_in_stack, WHITE, \
 			GREEN, curr->info->stack_size, WHITE);
 }
 
@@ -86,31 +90,4 @@ void	print_list_long(t_plist **start)
 		curr = curr->next;
 	}
 	ft_printf("\n%s", WHITE);
-}
-
-void	print_moves(t_plist **start)
-{
-	t_plist	*curr;
-
-	if (*start == NULL)
-		errors();
-	curr = *start;
-	while (curr)
-	{
-		if (curr->info != NULL)
-		{
-			ft_printf("%sMOVES FOR %p:\n%s", RED, curr, WHITE);
-			ft_printf("{");
-			ft_printf("\tsa: %s%d%s\n", YELLOW, curr->info->sa, WHITE);
-			ft_printf("\tsb: %s%d%s\n", YELLOW, curr->info->sb, WHITE);
-			ft_printf("\tpa: %s%d%s\n", YELLOW, curr->info->pa, WHITE);
-			ft_printf("\tpb: %s%d%s\n", YELLOW, curr->info->pb, WHITE);
-			ft_printf("\tra: %s%d%s\n", YELLOW, curr->info->ra, WHITE);
-			ft_printf("\trb: %s%d%s\n", YELLOW, curr->info->rb, WHITE);
-			ft_printf("\trra: %s%d%s\n", YELLOW, curr->info->rra, WHITE);
-			ft_printf("\trrb: %s%d%s\t", YELLOW, curr->info->rrb, WHITE);
-			ft_printf("}\n");
-		}
-		curr = curr->next;
-	}
 }

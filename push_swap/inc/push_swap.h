@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:45:55 by fparreir          #+#    #+#             */
-/*   Updated: 2023/08/24 17:06:20 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/08/25 16:17:58 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,12 @@ typedef struct s_plist {
 }	t_plist;
 
 typedef struct s_info {
-	struct s_plist	*parent;
 	int				curr_pos;
 	int				final_pos;
 	char			stack;
 	int				stack_size;
-	int				sa;
-	int				sb;
-	int				pa;
-	int				pb;
-	int				ra;
-	int				rb;
-	int				rra;
-	int				rrb;
+	int				smallest_in_stack;
+	int				biggest_in_stack;
 }	t_info;
 
 // General functions
@@ -52,12 +45,11 @@ void	errors(void);
 int		*handle_args(int counter, char **values, t_plist **start);
 void	info_init(t_plist **start, int *arr, int size);
 void	update_info(t_plist **start, char stack);
-void	initialize_move_counters(t_plist **start);
 void	sort_three(t_plist **stack, int size);
-void	sort_five(t_plist **root_a, t_plist **root_b, int size);
+void	sort_five(t_plist **root_a, t_plist **root_b);
 int		check_number(long nb);
 int		has_digits(const char *str);
-void	handle_five_fnorm(t_plist **a, t_plist **b, t_plist *sl, t_plist *l);
+void	free_list(t_plist **start);
 
 // Array Functions
 void	bubble_sort(int *arr, int size);
@@ -69,10 +61,10 @@ int		is_num_in_stack(t_plist **start, int nb);
 int		is_sorted(t_plist **start);
 t_plist	*get_last(t_plist **start);
 t_plist	*get_second_last(t_plist **start);
+void	set_smallest_and_biggest(t_plist **start);
 
 
 //Print functions
-void	print_moves(t_plist **start);
 void	print_list_long(t_plist **start);
 void	print_list(t_plist **start);
 void	print_array(int *arr, int size);
