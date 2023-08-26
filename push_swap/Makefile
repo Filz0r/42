@@ -8,11 +8,11 @@ LIBFT			= libft/
 SOURCES_UTILS	= utils/
 SOURCES_MOVES	= moves/
 TESTS_SRC		= tests/
-SOURCES_SORT	= sort_three.c sort_five.c
+SOURCES_SORT	= sort_three.c sort_five.c sort_big.c
 SOURCES_MAIN	= push_swap.c
 SRC_UTILS		= $(SOURCES_UTILS)array_utils.c $(SOURCES_UTILS)list_utils.c \
 					$(SOURCES_UTILS)print_utils.c $(SOURCES_UTILS)utils.c \
-					$(SOURCES_UTILS)sort_utils.c
+					$(SOURCES_UTILS)sort_utils.c $(SOURCES_UTILS)math_utils.c
 SRC_MOVES		= $(SOURCES_MOVES)swap.c  $(SOURCES_MOVES)push.c \
 					$(SOURCES_MOVES)rotate.c $(SOURCES_MOVES)rev_rotate.c
 

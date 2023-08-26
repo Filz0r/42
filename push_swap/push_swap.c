@@ -38,6 +38,8 @@ int	main(int ac, char **av)
 			sort_three(&root_a, ac);
 		else if (ac <= 5)
 			sort_five(&root_a, &root_b);
+		else
+			sort_big(&root_a, &root_b);
 		//something like that freees the data
 		// the errors function should also call this function when something
 		// goes wrong with the program, to avoid leaks.

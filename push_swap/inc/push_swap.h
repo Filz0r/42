@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:45:55 by fparreir          #+#    #+#             */
-/*   Updated: 2023/08/25 16:17:58 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/08/25 17:03:17 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	info_init(t_plist **start, int *arr, int size);
 void	update_info(t_plist **start, char stack);
 void	sort_three(t_plist **stack, int size);
 void	sort_five(t_plist **root_a, t_plist **root_b);
+void	sort_big(t_plist **a, t_plist **b);
 int		check_number(long nb);
 int		has_digits(const char *str);
 void	free_list(t_plist **start);
@@ -68,6 +69,10 @@ void	set_smallest_and_biggest(t_plist **start);
 void	print_list_long(t_plist **start);
 void	print_list(t_plist **start);
 void	print_array(int *arr, int size);
+
+//Math Functions
+int		get_mean_number(t_plist **stack);
+
 
 //Move Functions
 void	sa(t_plist **stack_a, int trigger);
