@@ -84,23 +84,3 @@ int	list_size(t_plist **start)
 	}
 	return (res);
 }
-
-t_plist	*get_last(t_plist **start)
-{
-	t_plist	*curr;
-
-	curr = *start;
-	while (curr->next)
-		curr = curr->next;
-	return (curr);
-}
-
-t_plist	*get_second_last(t_plist **start)
-{
-	t_plist	*curr;
-
-	curr = *start;
-	while (curr->next->next)
-		curr = curr->next;
-	return (curr);
-}

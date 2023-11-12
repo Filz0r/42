@@ -55,9 +55,6 @@ int		has_digits(const char *str);
 void	free_list(t_plist **start);
 void	free_words(char **arr);
 
-// Array Functions
-void	bubble_sort(int *arr, int size);
-int		get_array_index(int *arr, int size, int nb);
 
 // List Functions
 void	add_list_end(t_plist **start, int num);
