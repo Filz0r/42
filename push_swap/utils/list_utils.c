@@ -67,6 +67,24 @@ int	is_num_in_stack(t_plist **start, int nb)
 	return (0);
 }
 
+int	list_size(t_plist **start)
+{
+	t_plist	*curr;
+	int		res;
+
+	res = 0;
+	if (*start == NULL)
+		return (0);
+	else
+		curr = *start;
+	while (curr)
+	{
+		res++;
+		curr = curr->next;
+	}
+	return (res);
+}
+
 t_plist	*get_last(t_plist **start)
 {
 	t_plist	*curr;
