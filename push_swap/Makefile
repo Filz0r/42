@@ -49,7 +49,11 @@ debug: fclean $(OBJDIR)
 	@$(CC) $(FFLAGS) -c $(SRC) -I $(LIBFT)includes/
 	@mv *.o $(OBJDIR)
 	@$(CC) -o $(NAME) $(FFLAGS) $(OBJ) -L$(LIBFT) -lft
-	./$(NAME) $(ARGS)
+
+clion: fclean $(OBJDIR)
+	@$(CC) $(DFLAGS) -c $(SRC) -I $(LIBFT)includes/
+	@mv *.o $(OBJDIR)
+	@$(CC) -o $(NAME) $(DFLAGS) $(OBJ) -L$(LIBFT) -lft
 
 $(TESTS_SRC):
 	@mkdir $(TESTS_SRC)
