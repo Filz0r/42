@@ -60,8 +60,6 @@ void	free_words(char **arr);
 void	add_list_end(t_plist **start, int num);
 int		is_num_in_stack(t_plist **start, int nb);
 int		is_sorted(t_plist **start);
-t_plist	*get_last(t_plist **start);
-t_plist	*get_second_last(t_plist **start);
 void	set_smallest_and_biggest(t_plist **start);
 int		list_size(t_plist **start);
 
