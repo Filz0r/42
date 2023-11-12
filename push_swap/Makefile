@@ -21,7 +21,7 @@ OBJ				= $(subst $(SOURCES_UTILS),$(OBJDIR), $(SRC_UTILS:.c=.o)) \
  					$(subst $(SOURCES_MOVES),$(OBJDIR), $(SRC_MOVES:.c=.o)) \
 					$(OBJDIR)$(SOURCES_MAIN:.c=.o) \
 					$(addprefix $(OBJDIR), $(SOURCES_SORT:.c=.o)) #adds the build/ prefix to all vars
-ARGS	= 5 35 10# 20 40
+ARGS	= 6 52 10 3 2 7 5 4 21 1
 
 all: $(NAME)
 
@@ -33,7 +33,7 @@ $(LIBFT):
 	git clone git@github.com:Filz0r/libft.git
 
 $(OBJDIR):
-	mkdir $(OBJDIR)
+	mkdir -p $(OBJDIR)
 
 $(OBJ): $(SRC) $(OBJDIR) $(LIBFT)
 	$(CC) $(CFLAGS) -c $(SRC) -I $(LIBFT)includes/
@@ -72,4 +72,4 @@ re: fclean all
 run: re
 	./$(NAME) $(ARGS)
 
-.PHONY: clean fclean re run all debug valgrind
+.PHONY: clean fclean re run all debug valgrind $(OBJDIR)
