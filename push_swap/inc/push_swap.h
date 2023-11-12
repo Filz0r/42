@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:45:55 by fparreir          #+#    #+#             */
-/*   Updated: 2023/08/25 17:03:17 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/11 18:58:28 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,25 +32,28 @@ typedef struct s_plist {
 }	t_plist;
 
 typedef struct s_info {
-	int				curr_pos;
-	int				final_pos;
-	char			stack;
-	int				stack_size;
-	int				smallest_in_stack;
-	int				biggest_in_stack;
+	t_plist		*parent;
+	t_plist		*bf;
+	int			stack_size;
+	int			total_size;
+	int			smallest_in_stack;
+	int			biggest_in_stack;
+	char		stack;
 }	t_info;
 
 // General functions
 void	errors(void);
-int		*handle_args(int counter, char **values, t_plist **start);
-void	info_init(t_plist **start, int *arr, int size);
+void	handle_args(int counter, char **values, t_plist **start);
+void	info_init(t_plist **start);
 void	update_info(t_plist **start, char stack);
 void	sort_three(t_plist **stack, int size);
 void	sort_five(t_plist **root_a, t_plist **root_b);
 void	sort_big(t_plist **a, t_plist **b);
+void	push_swap(t_plist **a, t_plist **b);
 int		check_number(long nb);
 int		has_digits(const char *str);
 void	free_list(t_plist **start);
+void	free_words(char **arr);
 
 // Array Functions
 void	bubble_sort(int *arr, int size);
@@ -63,7 +66,7 @@ int		is_sorted(t_plist **start);
 t_plist	*get_last(t_plist **start);
 t_plist	*get_second_last(t_plist **start);
 void	set_smallest_and_biggest(t_plist **start);
-
+int		list_size(t_plist **start);
 
 //Print functions
 void	print_list_long(t_plist **start);
@@ -72,7 +75,6 @@ void	print_array(int *arr, int size);
 
 //Math Functions
 int		get_mean_number(t_plist **stack);
-
 
 //Move Functions
 void	sa(t_plist **stack_a, int trigger);
