@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 16:57:22 by fparreir          #+#    #+#             */
-/*   Updated: 2023/08/25 17:33:18 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/11 22:08:50 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 
 void	sort_big(t_plist **a, t_plist **b)
 {
-	int		mean;
-	t_plist	*temp;
+	int	mean;
+//	int	bf;
+//	int	bf_val;
 
-	temp = NULL;
 	print_list(a);
 	print_list(b);
+	//push below mean
 	while ((*a)->info->stack_size != 5)
 	{
 		mean = get_mean_number(a);
@@ -28,9 +29,11 @@ void	sort_big(t_plist **a, t_plist **b)
 		else
 			ra(a, 1);
 	}
+
 	printf("========================\n");
-	sort_five(a, &temp);
+	sort_five(a, b);
 	printf("========================\n");
+
 	print_list(a);
 	print_list(b);
 }
