@@ -58,7 +58,7 @@ int	is_num_in_stack(t_plist **start, int nb)
 	if (*start == NULL)
 		return (0);
 	curr = *start;
-	while (curr)
+	while (curr != NULL && curr)
 	{
 		if (curr->data == nb)
 			return (1);
