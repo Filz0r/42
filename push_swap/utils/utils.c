@@ -6,21 +6,24 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 13:53:25 by fparreir          #+#    #+#             */
-/*   Updated: 2023/08/25 16:20:40 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/11 22:34:28 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
-int	*handle_args(int counter, char **values, t_plist **start)
+void	handle_args(int counter, char **values, t_plist **start)
 {
 	int		i;
-	int		k;
-	int		*array;
 	long	num;
 
 	i = 1;
-	while (i <= counter)
+	if (counter == 1)
+	{
+		values = ft_split(values[1], ' ');
+		i = 0;
+	}
+	while (values[i] != 0 || values[i] != NULL)
 	{
 		if (has_digits(values[i]) == 0)
 			errors();
@@ -31,14 +34,8 @@ int	*handle_args(int counter, char **values, t_plist **start)
 			errors();
 		add_list_end(start, (int)num);
 	}
-	i = 0;
-	k = 1;
-	array = malloc(sizeof(int) * counter);
-	while (k <= (counter))
-	{
-		array[i++] = ft_atoi(values[k++]);
-	}
-	return (array);
+	if (counter == 1)
+		free_words(values);
 }
 
 int	check_number(long nb)
@@ -91,5 +88,5 @@ void	free_list(t_plist **start)
 void	errors(void)
 {
 	ft_putstr_fd("Error\n", 2);
-	exit(2);
+	exit(EXIT_FAILURE);
 }
