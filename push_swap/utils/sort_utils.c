@@ -61,16 +61,15 @@ void	set_smallest_and_biggest(t_plist **start)
 	}
 }
 
-void	info_init(t_plist **start, int *array, int size)
+void	info_init(t_plist **start)
 {
 	t_plist	*curr;
 	t_info	*new;
-	int		i;
+	int		size;
 
-
+	size = list_size(start);
 	if (*start == NULL)
 		errors();
-	i = 0;
 	curr = *start;
 	while (curr)
 	{
@@ -79,9 +78,9 @@ void	info_init(t_plist **start, int *array, int size)
 			errors();
 		new->stack = 'a';
 		new->stack_size = size;
-		new->final_pos = get_array_index(array, size, curr->data);
-		new->curr_pos = i;
-		i++;
+		new->total_size = size;
+		new->parent = curr;
+		new->bf = NULL;
 		curr->info = new;
 		curr = curr->next;
 	}
@@ -99,7 +98,6 @@ void	update_info(t_plist **start, char stack)
 	{
 		if (curr->info->stack != stack)
 			curr->info->stack = stack;
-		curr->info->curr_pos = i;
 		i++;
 		curr = curr->next;
 	}
