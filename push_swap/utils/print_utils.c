@@ -54,18 +54,14 @@ static void	print_info(t_plist *curr)
 {
 	if (curr == NULL || curr->info == NULL)
 		return ;
-	ft_printf("\n{\n\tcurr_pos:%s%d%s,\n" \
-					"\tfinal_pos: %s%d%s\n" \
-					"\tstack: %s%c%s,\n" \
-					"\tbig: %s%d%s,\n" \
-					"\tsmall: %s%d%s,\n" \
-					"\tssize: %s%d%s\n}\n", \
-			GREEN, curr->info->curr_pos, WHITE, \
-			GREEN, curr->info->final_pos, WHITE, \
-			GREEN, curr->info->stack, WHITE, \
-			GREEN, curr->info->biggest_in_stack, WHITE, \
-			GREEN, curr->info->smallest_in_stack, WHITE, \
-			GREEN, curr->info->stack_size, WHITE);
+	ft_printf("\n{\n\tparent:%s%x%s,\n" \
+					"\tbf: %s%x%s\n" \
+					"\tstack_size: %s%c%s,\n" \
+					"\ttotal_size: %s%d%s\n}\n", \
+			GREEN, curr->info->parent, WHITE, \
+			GREEN, curr->info->bf, WHITE, \
+			GREEN, curr->info->stack_size, WHITE, \
+			GREEN, curr->info->total_size, WHITE);
 }
 
 void	print_list_long(t_plist **start)
