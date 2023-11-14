@@ -33,23 +33,6 @@ void	print_list(t_plist **start)
 	ft_printf(" %s}\n%s", PURPLE, WHITE);
 }
 
-void	print_array(int *arr, int size)
-{
-	int	i;
-
-	i = 0;
-	ft_printf("%sArray:%s { ", GREEN, WHITE);
-	while (i <= (size - 1))
-	{
-		ft_printf("%s%d%s", CYAN, arr[i], WHITE);
-		if (i < (size - 1))
-			ft_printf(", ");
-		i++;
-	}
-	if (i == size)
-		ft_printf(" }\n");
-}
-
 static void	print_info(t_plist *curr)
 {
 	if (curr == NULL || curr->info == NULL)
