@@ -6,12 +6,13 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:21:48 by fparreir          #+#    #+#             */
-/*   Updated: 2023/08/23 15:42:11 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/14 17:00:02 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
+// Swaps the first element of the A stack with the second element
 void	sa(t_plist **stack_a, int trigger)
 {
 	t_plist	*first;
@@ -29,6 +30,7 @@ void	sa(t_plist **stack_a, int trigger)
 	update_info(stack_a, 'a');
 }
 
+// Swaps the first element of the B stack with the second element
 void	sb(t_plist **stack_b, int trigger)
 {
 	t_plist	*first;
@@ -46,6 +48,7 @@ void	sb(t_plist **stack_b, int trigger)
 	update_info(stack_b, 'b');
 }
 
+// Swaps the first element of both stacks with the second element
 void	ss(t_plist **stack_a, t_plist **stack_b)
 {
 	sa(stack_a, 0);

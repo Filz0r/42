@@ -6,12 +6,13 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:30:19 by fparreir          #+#    #+#             */
-/*   Updated: 2023/08/23 15:41:52 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/14 16:59:19 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
+// Places the first element of the A stack in the end of the stack
 void	ra(t_plist **stack_a, int trigger)
 {
 	t_plist	*first;
@@ -33,6 +34,7 @@ void	ra(t_plist **stack_a, int trigger)
 	update_info(stack_a, 'a');
 }
 
+// Places the first element of the B stack in the end of the stack
 void	rb(t_plist **stack_b, int trigger)
 {
 	t_plist	*first;
@@ -54,6 +56,7 @@ void	rb(t_plist **stack_b, int trigger)
 	update_info(stack_b, 'b');
 }
 
+// Places the first element of both stacks in the end of the stacks
 void	rr(t_plist **stack_a, t_plist **stack_b)
 {
 	ra(stack_a, 0);

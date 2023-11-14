@@ -6,12 +6,14 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:19:37 by fparreir          #+#    #+#             */
-/*   Updated: 2023/08/24 15:44:17 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/14 11:52:21 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
+// Adds a node to the end of the Linked List structure
+// (this makes it so that the arguments are added in order)
 void	add_list_end(t_plist **start, int num)
 {
 	t_plist	*new_node;
@@ -19,7 +21,7 @@ void	add_list_end(t_plist **start, int num)
 
 	new_node = malloc(sizeof(t_plist));
 	if (new_node == NULL)
-		errors();
+		errors(start);
 	new_node->data = num;
 	new_node->info = NULL;
 	new_node->next = NULL;
@@ -34,6 +36,7 @@ void	add_list_end(t_plist **start, int num)
 	curr->next = new_node;
 }
 
+// Check is a list is sorted
 int	is_sorted(t_plist **start)
 {
 	t_plist	*curr;
@@ -51,6 +54,7 @@ int	is_sorted(t_plist **start)
 	return (1);
 }
 
+// Check if the nb value is inside the Linked List we pass
 int	is_num_in_stack(t_plist **start, int nb)
 {
 	t_plist	*curr;
@@ -67,6 +71,7 @@ int	is_num_in_stack(t_plist **start, int nb)
 	return (0);
 }
 
+// Checks the size of the Linked List
 int	list_size(t_plist **start)
 {
 	t_plist	*curr;

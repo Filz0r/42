@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:45:55 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/11 18:58:28 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/14 14:25:11 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ typedef struct s_plist {
 
 typedef struct s_info {
 	t_plist		*parent;
-	t_plist		*bf;
 	int			stack_size;
 	int			total_size;
 	int			smallest_in_stack;
@@ -42,11 +41,11 @@ typedef struct s_info {
 }	t_info;
 
 // General functions
-void	errors(void);
+void	errors(t_plist **start);
 void	handle_args(int counter, char **values, t_plist **start);
 void	info_init(t_plist **start);
 void	update_info(t_plist **start, char stack);
-void	sort_three(t_plist **stack, int size);
+void	sort_three(t_plist **stack);
 void	sort_five(t_plist **root_a, t_plist **root_b);
 void	sort_big(t_plist **a, t_plist **b);
 void	push_swap(t_plist **a, t_plist **b);
@@ -54,7 +53,7 @@ int		check_number(long nb);
 int		has_digits(const char *str);
 void	free_list(t_plist **start);
 void	free_words(char **arr);
-
+char	**fuck_norm(const char *str, int *i);
 
 // List Functions
 void	add_list_end(t_plist **start, int num);
@@ -66,10 +65,15 @@ int		list_size(t_plist **start);
 //Print functions
 void	print_list_long(t_plist **start);
 void	print_list(t_plist **start);
-void	print_array(int *arr, int size);
 
 //Math Functions
 int		get_mean_number(t_plist **stack);
+int		get_lowest_cost(t_plist **a, t_plist **b);
+int		get_bf(t_plist **a, int bf_val);
+int		get_cost(t_plist **a, t_plist **b, int bf, int current);
+int		count_moves(t_plist **start, int length, int value);
+void	put_b_on_top(t_plist **stack, int length, int bf_val);
+void	put_a_on_top(t_plist **stack, int length, int bf);
 
 //Move Functions
 void	sa(t_plist **stack_a, int trigger);

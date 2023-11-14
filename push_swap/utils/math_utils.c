@@ -6,12 +6,13 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 17:02:46 by fparreir          #+#    #+#             */
-/*   Updated: 2023/08/25 17:06:01 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/14 15:19:13 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
+// This function returns the mean value of the stack
 int	get_mean_number(t_plist **stack)
 {
 	int		res;

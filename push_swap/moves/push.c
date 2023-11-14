@@ -6,12 +6,13 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:33:49 by fparreir          #+#    #+#             */
-/*   Updated: 2023/08/23 15:40:44 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/14 16:57:12 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
+// Pushes an element from top of the B stack to the top of A stack
 void	pa(t_plist **stack_a, t_plist **stack_b, int trigger)
 {
 	t_plist	*element;
@@ -38,6 +39,7 @@ void	pa(t_plist **stack_a, t_plist **stack_b, int trigger)
 	update_info(stack_b, 'b');
 }
 
+// Pushes an element from top of the A stack to the top of B stack
 void	pb(t_plist **stack_a, t_plist **stack_b, int trigger)
 {
 	t_plist	*element;

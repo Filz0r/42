@@ -6,12 +6,13 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 17:27:33 by fparreir          #+#    #+#             */
-/*   Updated: 2023/08/25 14:53:42 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/14 15:21:44 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
+// Util function to print the linked list (for debug purposes only)
 void	print_list(t_plist **start)
 {
 	t_plist	*curr;
@@ -49,6 +50,9 @@ static void	print_info(t_plist *curr)
 			GREEN, curr->info->total_size, WHITE);
 }
 
+// Util function to print the linked list (for debug purposes only)
+// This version also calls the function above this comment in order to also
+// print the info pointer we have inside our List nodes
 void	print_list_long(t_plist **start)
 {
 	t_plist	*curr;
