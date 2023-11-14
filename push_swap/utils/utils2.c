@@ -24,3 +24,9 @@ void	free_words(char **arr)
 	}
 	free(arr);
 }
+
+char	**fuck_norm(const char *str, int *i)
+{
+	*i = 0;
+	return (ft_split(str, ' '));
+}

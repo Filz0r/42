@@ -19,10 +19,7 @@ void	handle_args(int counter, char **values, t_plist **start)
 
 	i = 1;
 	if (counter == 1)
-	{
-		values = ft_split(values[1], ' ');
-		i = 0;
-	}
+		values = fuck_norm(values[1], &i);
 	while (values[i] != 0 || values[i] != NULL)
 	{
 		if (has_digits(values[i]) == 0)
