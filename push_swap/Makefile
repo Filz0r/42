@@ -8,41 +8,45 @@ LIBFT			= libft/
 SOURCES_UTILS	= utils/
 SOURCES_MOVES	= moves/
 TESTS_SRC		= tests/
-SOURCES_SORT	= sort_three.c sort_five.c sort_big.c
 SOURCES_MAIN	= push_swap.c
-SRC_UTILS		= $(SOURCES_UTILS)array_utils.c $(SOURCES_UTILS)list_utils.c \
+SRC_UTILS		=  	$(SOURCES_UTILS)list_utils.c \
 					$(SOURCES_UTILS)print_utils.c $(SOURCES_UTILS)utils.c \
 					$(SOURCES_UTILS)sort_utils.c $(SOURCES_UTILS)math_utils.c \
-					$(SOURCES_UTILS)utils2.c
+					$(SOURCES_UTILS)utils2.c $(SOURCES_UTILS)sort_big_utils.c \
+					$(SOURCES_UTILS)sort_big_utils2.c
 SRC_MOVES		= $(SOURCES_MOVES)swap.c  $(SOURCES_MOVES)push.c \
 					$(SOURCES_MOVES)rotate.c $(SOURCES_MOVES)rev_rotate.c
 
 SRC				= $(SRC_UTILS) $(SOURCES_MAIN) $(SOURCES_SORT) $(SRC_MOVES)
 OBJ				= $(subst $(SOURCES_UTILS),$(OBJDIR), $(SRC_UTILS:.c=.o)) \
  					$(subst $(SOURCES_MOVES),$(OBJDIR), $(SRC_MOVES:.c=.o)) \
-					$(OBJDIR)$(SOURCES_MAIN:.c=.o) \
-					$(addprefix $(OBJDIR), $(SOURCES_SORT:.c=.o)) #adds the build/ prefix to all vars
+					$(OBJDIR)$(SOURCES_MAIN:.c=.o)
 ARGS	= 6 52 10 3 2 7 5 4 21 1
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@make -C $(LIBFT)
-	$(CC) -o $(NAME) $(CFLAGS) $(OBJ) -L$(LIBFT) -lft
+	@echo "Compiling push_swap"
+	@$(CC) -o $(NAME) $(CFLAGS) $(OBJ) -L$(LIBFT) -lft
+	@echo "Done!"
 
 $(LIBFT):
-	git clone git@github.com:Filz0r/libft.git
+	@git clone git@github.com:Filz0r/libft.git
+	@make -C $(LIBFT)
 
 $(OBJDIR):
-	mkdir -p $(OBJDIR)
+	@mkdir -p $(OBJDIR)
 
-$(OBJ): $(SRC) $(OBJDIR) $(LIBFT)
-	$(CC) $(CFLAGS) -c $(SRC) -I $(LIBFT)includes/
+$(OBJ): $(OBJDIR) $(LIBFT)
+	@echo "Compiling source files into object files"
+	@$(CC) $(CFLAGS) -c $(SRC) -I $(LIBFT)includes/
+	@mv *.o $(OBJDIR)
+	@echo "Done!"
+
+valgrind: fclean $(OBJDIR)
+	@$(CC) $(DFLAGS) -c $(SRC) -I $(LIBFT)includes/
 	mv *.o $(OBJDIR)
-
-valgrind: fclean
-	@$(CC) $(DFLAGS) -c $(SOURCES) -I $(LIBFT)includes/
-	@$(CC) -o $(NAME) $(DFLAGS) $(OBJECTS) -L$(LIBFT) -lft
+	@$(CC) -o $(NAME) $(DFLAGS) $(OBJ) -L$(LIBFT) -lft
 	@valgrind -s --leak-check=full --show-leak-kinds=all \
 		--track-origins=yes ./$(NAME) $(ARGS)
 
@@ -56,8 +60,7 @@ clion: fclean $(OBJDIR)
 	@mv *.o $(OBJDIR)
 	@$(CC) -o $(NAME) $(DFLAGS) $(OBJ) -L$(LIBFT) -lft
 
-$(TESTS_SRC):
-	@mkdir $(TESTS_SRC)
+libft: $(LIBFT)
 
 clean:
 	@rm -rf $(OBJDIR)
@@ -73,4 +76,4 @@ re: fclean all
 run: re
 	./$(NAME) $(ARGS)
 
-.PHONY: clean fclean re run all debug valgrind $(OBJDIR)
+.PHONY: clean fclean re run all debug valgrind lclean clion
