@@ -38,9 +38,84 @@ int	main(int ac, char **av)
 void push_swap(t_plist **a, t_plist **b)
 {
 	if ((*a)->info->total_size == 3)
-		sort_three(a, (*a)->info->total_size);
+		sort_three(a);
 	else if ((*a)->info->total_size == 5)
 		sort_five(a, b);
 	else
 		sort_big(a, b);
+}
+
+void	sort_three(t_plist **stack)
+{
+	t_plist	*curr;
+
+	curr = *stack;
+	if (curr->data == curr->info->smallest_in_stack)
+	{
+		sa(stack, 1);
+		ra(stack, 1);
+	}
+	else if (curr->data == curr->info->biggest_in_stack)
+	{
+		if (curr->next->data == curr->info->smallest_in_stack)
+			ra(stack, 1);
+		else
+		{
+			sa(stack, 1);
+			rra(stack, 1);
+		}
+	}
+	else
+	{
+		if (curr->next->data == curr->info->smallest_in_stack)
+			sa(stack, 1);
+		else
+			rra(stack, 1);
+	}
+}
+
+void	sort_five(t_plist **root_a, t_plist **root_b)
+{
+	if ((*root_a)->next->data == (*root_a)->info->smallest_in_stack)
+		sa(root_a, 1);
+	else
+		while ((*root_a)->data != (*root_a)->info->smallest_in_stack)
+			rra(root_a, 1);
+	pb(root_a, root_b, 1);
+	if ((*root_a)->info->stack_size == 3)
+	{
+		if (!(is_sorted(root_a)))
+			sort_three(root_a);
+		pa(root_a, root_b, 1);
+		pa(root_a, root_b, 1);
+	}
+	else
+		sort_five(root_a, root_b);
+}
+
+void	sort_big(t_plist **a, t_plist **b)
+{
+	int	mean;
+	int	bf_val;
+	int	bf;
+
+	while ((*a)->info->stack_size != 5)
+	{
+		mean = get_mean_number(a);
+		if ((*a)->data <= mean)
+			pb(a, b, 1);
+		else
+			ra(a, 1);
+	}
+	sort_five(a, b);
+	while (*b != NULL)
+	{
+		bf_val = get_lowest_cost(a, b);
+		bf = get_bf(a, bf_val);
+		put_b_on_top(b, (*b)->info->stack_size, bf_val);
+		put_a_on_top(a, (*a)->info->stack_size, bf);
+		pa(a, b, 1);
+	}
+	while ((*a)->data != (*a)->info->smallest_in_stack)
+		ra(a, 1);
 }
