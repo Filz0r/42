@@ -55,11 +55,13 @@ static void	print_info(t_plist *curr)
 	if (curr == NULL || curr->info == NULL)
 		return ;
 	ft_printf("\n{\n\tparent:%s%x%s,\n" \
-					"\tbf: %s%x%s\n" \
-					"\tstack_size: %s%c%s,\n" \
+					"\tsmallest: %s%d%s\n" \
+					"\tbiggest: %s%d%s\n" \
+					"\tstack_size: %s%d%s,\n" \
 					"\ttotal_size: %s%d%s\n}\n", \
 			GREEN, curr->info->parent, WHITE, \
-			GREEN, curr->info->bf, WHITE, \
+			GREEN, curr->info->smallest_in_stack, WHITE, \
+			GREEN, curr->info->biggest_in_stack, WHITE, \
 			GREEN, curr->info->stack_size, WHITE, \
 			GREEN, curr->info->total_size, WHITE);
 }
