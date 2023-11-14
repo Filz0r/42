@@ -69,13 +69,13 @@ void	info_init(t_plist **start)
 
 	size = list_size(start);
 	if (*start == NULL)
-		errors();
+		errors(start);
 	curr = *start;
 	while (curr)
 	{
 		new = malloc(sizeof(t_info));
 		if (!new)
-			errors();
+			errors(start);
 		new->stack = 'a';
 		new->stack_size = size;
 		new->total_size = size;

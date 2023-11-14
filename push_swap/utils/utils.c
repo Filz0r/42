@@ -26,12 +26,16 @@ void	handle_args(int counter, char **values, t_plist **start)
 	while (values[i] != 0 || values[i] != NULL)
 	{
 		if (has_digits(values[i]) == 0)
-			errors();
+		{
+			if (counter == 1)
+				free_words(values);
+			errors(start);
+		}
 		num = ft_atol(values[i++]);
 		if (!check_number(num))
-			errors();
+			errors(start);
 		if (is_num_in_stack(start, (int)num) == 1)
-			errors();
+			errors(start);
 		add_list_end(start, (int)num);
 	}
 	if (counter == 1)
@@ -86,7 +90,9 @@ void	free_list(t_plist **start)
 }
 
 void	errors(void)
+void	errors(t_plist **start)
 {
+	free_list(start);
 	ft_putstr_fd("Error\n", 2);
 	exit(EXIT_FAILURE);
 }
