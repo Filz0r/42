@@ -51,7 +51,6 @@ clean:
 	@rm -rf $(OBJDIR)
 
 fclean: clean libclean
-	@rm -rf $(NAME)
 
 clion: fclean libft mlx $(OBJDIR)
 	@$(CC) $(DFLAGS) -c $(SRC) -I $(LIBFT_DIR)includes/ -I$(MLX) -I/usr/include
