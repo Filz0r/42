@@ -1,67 +1,55 @@
-NAME 			= so_long
-CC 				= cc
-CFLAGS 			= #-Wall -Werror -Wextra
-DFLAGS 			= $(CFLAGS) -g3
-FFLAGS 			= $(DFLAGS) -fsanitize=address
-OBJDIR 			= build/
-LIBFT_DIR		= libft/
-MLX				= mlx/
-SRC_DIR 		= src/
-SRC_UTILS		= $(SRC_DIR)utils/
-SOURCES_MAIN	= $(SRC_DIR)so_long.c
-SOURCES_UTILS	= $(SRC_UTILS)maps.c $(SRC_UTILS)errors.c
-SRC				= $(SOURCES_MAIN) $(SOURCES_UTILS)
-OBJ				= $(subst $(SRC_DIR),$(OBJDIR), $(SOURCES_MAIN:.c=.o)) \
-				$(subst $(SRC_UTILS),$(OBJDIR), $(SOURCES_UTILS:.c=.o))
+# Project name
+NAME = so_long
 
-all: $(NAME)
+# Directories
+SRC_DIR = src
+INC_DIR = inc
+OBJ_DIR = build
+LIBFT_DIR = libft
+MLX_DIR = mlx
 
-$(NAME): $(OBJ)
-	@echo "Compiling $(NAME)"
-	@$(CC) -o $(NAME) $(CFLAGS) $(OBJ) -L$(LIBFT_DIR) -lft -Lmlx -lmlx -L/usr/lib/X11 -lXext -lX11
-	@echo "Done!"
+# Source files
+SRC_FILES = map_parser.c so_long.c utils/errors.c utils/map_utils.c utils/utils.c
+SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
+OBJS = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 
-libft:
-	@echo "Compiling $(LIBFT_DIR)"
-	@echo "=========OUTPUT_START========="
+# Libraries
+LIBFT = $(LIBFT_DIR)/libft.a
+MLX = $(MLX_DIR)/libmlx.a
+
+# Compilation flags
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
+INCLUDES = -I$(LIBFT_DIR)/inc -I$(MLX_DIR) -I/usr/include
+
+# Linking flags
+LDFLAGS = -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -L/usr/lib/X11 -lXext -lX11
+
+# Rules
+all: $(LIBFT) $(MLX) $(NAME)
+
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $^ $(INCLUDES) $(LDFLAGS)
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(@D)
+	$(CC) $(CFLAGS) -o $@ -c $< $(INCLUDES)
+
+$(LIBFT):
 	@make -s -C $(LIBFT_DIR)
-	@echo "=========OUTPUT_END========="
-	@echo "Done!"
 
-mlx:
-	@echo "Compiling $(MLX)"
-	@echo "=========OUTPUT_START========="
-	@make -s -C $(MLX)
-	@echo "=========OUTPUT_END========="
-	@echo "Done!"
-
-$(OBJDIR):
-	@mkdir -p $(OBJDIR)
-
-$(OBJ): $(OBJDIR) libft mlx
-	@echo "Compiling Source files into Object Files"
-	@$(CC) $(CFLAGS) -c $(SRC) -I$(LIBFT_DIR)includes/ -I$(MLX) -I/usr/include
-	@mv *.o $(OBJDIR)
-	@echo "Done!"
-
-libclean:
-	@echo "Cleaning libft"
-	@make -s -C $(LIBFT_DIR) fclean
-	@echo "Cleaning mlx"
-	@make -s -C $(MLX) clean
+$(MLX):
+	@make -s -C $(MLX_DIR)
 
 clean:
-	@rm -rf $(OBJDIR)
+	@make -s -C $(LIBFT_DIR) clean
+	@make -s -C $(MLX_DIR) clean
+	@rm -rf $(OBJ_DIR)
 
-fclean: clean libclean
-	@rm -rf $(NAME)
-
-clion: fclean libft mlx $(OBJDIR)
-	@$(CC) $(DFLAGS) -c $(SRC) -I $(LIBFT_DIR)includes/ -I$(MLX) -I/usr/include
-	@mv *.o $(OBJDIR)
-	@$(CC) -o $(NAME) $(DFLAGS) $(OBJ) -L$(LIBFT_DIR) -lft -Lmlx -lmlx -L/usr/lib/X11 -lXext -lX11
-
+fclean: clean
+	@make -C $(LIBFT_DIR) fclean
+	@rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: clean fclean all re clion mlx libft
+.PHONY: all clean fclean re
