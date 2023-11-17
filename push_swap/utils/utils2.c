@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 22:34:28 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/14 12:04:44 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/17 14:42:28 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,12 @@ char	**fuck_norm(const char *str, int *i)
 {
 	*i = 0;
 	return (ft_split(str, ' '));
+}
+
+// Same thing as above, norminette made me do it
+void	fuck_norm2(char **values, int counter, t_plist **start)
+{
+	if (counter == 1)
+		free_words(values);
+	errors(start);
 }

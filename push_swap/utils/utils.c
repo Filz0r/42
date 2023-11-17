@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 13:53:25 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/14 12:04:29 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/17 14:40:08 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,12 @@ void	handle_args(int counter, char **values, t_plist **start)
 	while (values[i] != 0 || values[i] != NULL)
 	{
 		if (has_digits(values[i]) == 0)
-		{
-			if (counter == 1)
-				free_words(values);
-			errors(start);
-		}
+			fuck_norm2(values, counter, start);
 		num = ft_atol(values[i++]);
 		if (!check_number(num))
-			errors(start);
+			fuck_norm2(values, counter, start);
 		if (is_num_in_stack(start, (int)num) == 1)
-			errors(start);
+			fuck_norm2(values, counter, start);
 		add_list_end(start, (int)num);
 	}
 	if (counter == 1)

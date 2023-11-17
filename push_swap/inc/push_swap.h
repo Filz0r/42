@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:45:55 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/14 14:25:11 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/17 14:39:14 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int		has_digits(const char *str);
 void	free_list(t_plist **start);
 void	free_words(char **arr);
 char	**fuck_norm(const char *str, int *i);
+void	fuck_norm2(char **values, int counter, t_plist **start);
 
 // List Functions
 void	add_list_end(t_plist **start, int num);
