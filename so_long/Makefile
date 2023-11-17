@@ -2,6 +2,7 @@
 NAME = so_long
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
+DFLAGS = $(CFLAGS) -g3
 INCLUDES = -I$(LIBFT_DIR)/inc -I$(MLX_DIR) -I/usr/include
 LDFLAGS = -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -L/usr/lib/X11 -lXext -lX11
 SRC_DIR = src
@@ -15,7 +16,6 @@ SRC_FILES = map_parser.c so_long.c utils/errors.c utils/map_utils.c utils/utils.
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 
-# Rules
 all: $(LIBFT) $(MLX) $(NAME)
 
 $(NAME): $(OBJS)
@@ -33,6 +33,10 @@ $(LIBFT):
 
 $(MLX):
 	@make -s -C $(MLX_DIR)
+
+clion: $(LIBFT) $(MLX) $(OBJS)
+	@$(CC) $(CFLAGS) -o $(NAME) $^ $(INCLUDES) $(LDFLAGS)
+
 
 clean:
 	@make -s -C $(LIBFT_DIR) clean
