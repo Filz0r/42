@@ -24,6 +24,12 @@ int	main(int ac, char **av)
 		game.mlx_ptr = mlx_init();
 		if (!game.mlx_ptr)
 			return (1);
+		game.win_ptr = mlx_new_window(game.mlx_ptr, \
+		600, 400, "Will you work??");
+		if (!game.win_ptr)
+			return (free(game.mlx_ptr), 1);
+		mlx_destroy_window(game.mlx_ptr, game.win_ptr);
+		mlx_destroy_display(game.mlx_ptr);
 		free(game.mlx_ptr);
 	}
 	else
