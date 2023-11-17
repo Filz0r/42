@@ -1,39 +1,32 @@
 # Project name
 NAME = so_long
-
-# Directories
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
+INCLUDES = -I$(LIBFT_DIR)/inc -I$(MLX_DIR) -I/usr/include
+LDFLAGS = -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -L/usr/lib/X11 -lXext -lX11
 SRC_DIR = src
 INC_DIR = inc
 OBJ_DIR = build
 LIBFT_DIR = libft
 MLX_DIR = mlx
-
-# Source files
+LIBFT = $(LIBFT_DIR)/libft.a
+MLX = $(MLX_DIR)/libmlx.a
 SRC_FILES = map_parser.c so_long.c utils/errors.c utils/map_utils.c utils/utils.c
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
-
-# Libraries
-LIBFT = $(LIBFT_DIR)/libft.a
-MLX = $(MLX_DIR)/libmlx.a
-
-# Compilation flags
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
-INCLUDES = -I$(LIBFT_DIR)/inc -I$(MLX_DIR) -I/usr/include
-
-# Linking flags
-LDFLAGS = -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -L/usr/lib/X11 -lXext -lX11
 
 # Rules
 all: $(LIBFT) $(MLX) $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $^ $(INCLUDES) $(LDFLAGS)
+	@echo "Compiling $@"
+	@$(CC) $(CFLAGS) -o $@ $^ $(INCLUDES) $(LDFLAGS)
+	@echo "Done!"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(@D)
-	$(CC) $(CFLAGS) -o $@ -c $< $(INCLUDES)
+	@echo "Compiling $@"
+	@$(CC) $(CFLAGS) -o $@ -c $< $(INCLUDES)
 
 $(LIBFT):
 	@make -s -C $(LIBFT_DIR)
