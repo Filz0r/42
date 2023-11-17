@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 19:48:40 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/16 15:33:31 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/17 12:31:44 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include "../libft/includes/libft.h"
 # include "../mlx/mlx.h"
+# include <X11/X.h>
+# include <X11/keysym.h>
 
 # define BLACK		"\033[0;30m"
 # define RED		"\033[0;31m"
