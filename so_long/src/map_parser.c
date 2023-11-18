@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 21:19:11 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/16 21:19:11 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/17 16:41:08 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,11 @@ void	validate_map(char *map_path, t_data *game)
 		errors(game, 4);
 	if (game->map != NULL && is_walled(game->map))
 		errors(game, 5);
-	find_player(game->map);
-	flood_fill(game->map, game->map->player->x, game->map->player->y, 'F');
+	if (game->map != NULL)
+	{
+		find_player(game->map);
+		flood_fill(game->map, game->map->player->x, game->map->player->y, 'F');
+	}
 	if (game->map != NULL && check_pathing(game->map))
 		errors(game, 6);
 }
@@ -85,9 +88,7 @@ t_map	*load_map(char *map_path, t_map *map)
 		if (!line)
 			break ;
 		if (map->width == 0)
-		{
 			map->width = (int)ft_strlen(line) - 1;
-		}
 		result = ft_strjoin(result, line);
 		map->height++;
 		free(line);
