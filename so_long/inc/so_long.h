@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 19:48:40 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/18 10:15:52 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/18 16:20:48 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	validate_map(char *map_path, t_data *game);
 void	flood_fill(t_map *m, int x, int y, char fill_val);
 void	get_info(t_map *map);
 void	find_player(t_map *m);
+char    *read_map(int fd, t_map *map);
 t_map	*load_map(char *map_path, t_map *map);
 t_map	*map_init(void);
 
