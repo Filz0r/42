@@ -2,7 +2,7 @@
 NAME = so_long
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-DFLAGS = $(CFLAGS) -g3
+DFLAGS = $(CFLAGS) -g3 #-fsanitize=address
 INCLUDES = -I$(LIBFT_DIR)/inc -I$(MLX_DIR) -I/usr/include
 LDFLAGS = -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -L/usr/lib/X11 -lXext -lX11
 SRC_DIR = src
@@ -12,7 +12,8 @@ LIBFT_DIR = libft
 MLX_DIR = mlx
 LIBFT = $(LIBFT_DIR)/libft.a
 MLX = $(MLX_DIR)/libmlx.a
-SRC_FILES = map_parser.c so_long.c utils/errors.c utils/map_utils.c utils/utils.c
+SRC_FILES = map_parser.c so_long.c utils/errors.c utils/map_utils.c utils/utils.c events.c \
+			game_start.c
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 
@@ -26,7 +27,7 @@ $(NAME): $(OBJS)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(@D)
 	@echo "Compiling $@"
-	@$(CC) $(CFLAGS) -o $@ -c $< $(INCLUDES)
+	@$(CC) $(DFLAGS) -o $@ -c $< $(INCLUDES)
 
 $(LIBFT):
 	@make -s -C $(LIBFT_DIR)
@@ -35,7 +36,7 @@ $(MLX):
 	@make -s -C $(MLX_DIR)
 
 clion: $(LIBFT) $(MLX) $(OBJS)
-	@$(CC) $(CFLAGS) -o $(NAME) $^ $(INCLUDES) $(LDFLAGS)
+	@$(CC) $(DFLAGS) -o $(NAME) $^ $(INCLUDES) $(LDFLAGS)
 
 
 clean:
