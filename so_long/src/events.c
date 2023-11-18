@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 18:08:37 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/18 11:02:15 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/18 12:13:35 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,6 @@ void	my_mlx_pixel_put(t_data *game, int x, int y, int color)
 	char	*dst;
 
 	dst = game->img->addr + \
-	(y * game->imgadded new rule to test for segmentation faults in clion->line_length + x * (game->img->bits_per_pixel / 8));
+	(y * game->img->line_length + x * (game->img->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
