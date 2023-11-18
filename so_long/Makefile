@@ -13,7 +13,7 @@ MLX_DIR = mlx
 LIBFT = $(LIBFT_DIR)/libft.a
 MLX = $(MLX_DIR)/libmlx.a
 SRC_FILES = map_parser.c so_long.c utils/errors.c utils/map_utils.c utils/utils.c events.c \
-			game_start.c
+			game_start.c utils/map_utils2.c
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 
