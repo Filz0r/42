@@ -6,14 +6,14 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 12:36:27 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/16 21:19:11 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/18 16:11:40 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/so_long.h"
 
-// Goes trough the first and last rows and checks if they are '1'.
-// Also goes trough all the rows and checks if the first and last char are '1'.
+// Goes through the first and last rows and checks if they are '1'.
+// Also goes through all the rows and checks if the first and last char are '1'.
 int	is_walled(t_map *m)
 {
 	int	x;
@@ -50,7 +50,7 @@ int	validate_details(t_map *m)
 		|| m->collectibles == 0);
 }
 
-// Goes trough the entire map char by char looking for invalid chars.
+// Goes through the entire map char by char looking for invalid chars.
 int	check_for_invalid(t_map *m)
 {
 	int	y;
@@ -97,7 +97,3 @@ void	find_player(t_map *m)
 	}
 	m->player = NULL;
 }
-
-
-
-
