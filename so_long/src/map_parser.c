@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 21:19:11 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/18 16:24:27 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/18 17:40:42 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,13 @@ t_map	*map_init(void)
 // And also sets its width and height;
 t_map	*load_map(char *map_path, t_map *map)
 {
-	int		file;
-    char	*result;
+	char		*result;
+	int			file;
 
 	file = open(map_path, O_RDONLY);
 	if (map == NULL)
 		return (NULL);
-    result = read_map(file, map);
+	result = read_map(file, map);
 	map->map = ft_split(result, '\n');
 	map->map_validator = ft_split(result, '\n');
 	free(result);
