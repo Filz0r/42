@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 19:48:40 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/17 12:31:44 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/18 10:15:52 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@
 # define WHITE		"\033[0m"
 # define MAGENTA	"\e[0;35m"
 
-# define ASSETSDIR 	"./assets/"
-# define MAPSDIR 	"./maps/"
+# define TILE_SIZE		16
+# define FLOOR_PATH 	"./assets/floor.xpm"
+# define WALL_PATH		"./assets/wall.xpm"
 
 typedef struct s_point {
 	int	x;
@@ -49,9 +50,20 @@ typedef struct s_map
 	t_point	*exit;
 }			t_map;
 
+typedef struct s_img{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int		width;
+	int		height;
+}				t_img;
+
 typedef struct s_data {
 	void	*mlx_ptr;
 	void	*win_ptr;
+	t_img	*img;
 	t_map	*map;
 }				t_data;
 
@@ -72,4 +84,11 @@ t_map	*map_init(void);
 //Errors and frees
 void	errors(t_data *game, int code);
 void	free_map(t_data *game);
+
+//mlx stuff
+int	on_destroy(t_data *game);
+int	on_keypress(int keysym, t_data *game);
+void	my_mlx_pixel_put(t_data *game, int x, int y, int color);
+void	game_init(t_data *game);
+int 	quit_game(t_data *game);
 #endif
