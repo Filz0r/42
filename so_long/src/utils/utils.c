@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 21:23:40 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/17 16:43:58 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/19 02:34:47 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,17 @@ void	flood_fill(t_map *m, int x, int y, char fill_val)
 int	invalid_char(char c)
 {
 	return (c == '0' || c == '1' || c == 'P' || c == 'E' || c == 'C');
+}
+
+char *generate_player_path(int nb)
+{
+	char *temp;
+	char *path;
+
+	temp = ft_itoa(nb);
+	path = ft_strjoin(PLAYER, temp);
+	free(temp);
+	temp = ft_strjoin(path, ".xpm");
+	free(path);
+	return (temp);
 }

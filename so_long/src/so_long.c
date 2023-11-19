@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 19:45:16 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/17 20:18:01 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/19 12:45:55 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@ int	main(int ac, char **av)
 		validate_map(av[1], &game);
 		if (game.map == NULL)
 			return (1);
+		game.frames = 0;
+		game.tile_size = TILE_SIZE;
+		game.microseconds_time = ((double)CYCLE_SIZE / FPS);
+		game.count = malloc(sizeof(unsigned long));
+		*(game.count) = 1;
+		game.img = malloc(sizeof(t_img));
 		game_init(&game);
 	}
 	else
