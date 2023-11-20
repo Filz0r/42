@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 18:08:37 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/19 22:37:18 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/20 17:27:11 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,13 @@ int	on_keypress(int keysym, t_data *game)
 {
 	printf("pressed: %d\n", keysym);
 	if (keysym == XK_a || keysym == XK_Left)
-	{
 		move_player(game, LEFT);
-		printf("this is left\n");
-	}
 	else if (keysym == XK_s || keysym == XK_Down)
-	{
 		move_player(game, DOWN);
-		printf("this is down\n");
-	}
 	else if (keysym == XK_d || keysym == XK_Right)
-	{
 		move_player(game, RIGHT);
-		printf("this is right\n");
-	}
 	else if (keysym == XK_w || keysym == XK_Up)
-	{
 		move_player(game, UP);
-		ft_printf("up was pressed\n");
-	}
-	game->steps++;
-	ft_printf("Player has moved %d times.\n", game->steps);
 	if (keysym == XK_Escape)
 		quit_game(game);
 	return (0);
@@ -49,23 +35,20 @@ void	move_player(t_data *game, int action)
 		handle_movement(game, game->map->player->x, game->map->player->y - 1, UP);
 	else if (action == DOWN)
 		handle_movement(game, game->map->player->x, game->map->player->y + 1, DOWN);
-	/*else if (action == LEFT)
-		handle_movement_left(game->map, game->map->player->x, game->map->player->y);
+	else if (action == LEFT)
+		handle_movement(game, game->map->player->x - 1, game->map->player->y, LEFT);
 	else if (action == RIGHT)
-		handle_movement_right(game->map, game->map->player->x, game->map->player->y);*/
+		handle_movement(game, game->map->player->x + 1, game->map->player->y, RIGHT);
 }
 
 void	handle_movement(t_data *g, int x, int y, int action)
 {
-	if (g->map->map[y][x] == '0')
-	{
-		g->map->map[y][x] = 'P';
-		g->map->map[y][x] = '0';
-	}
-	else if (g->map->map[y][x] == '1')
+	int	signal;
+
+	signal = 0;
+	move_on_map(g, &signal, x, y);
+	if (signal == 1)
 		return ;
-	else if (g->map->map[y][x] == 'C')
-		remove_collectible(g, x, y);
 	if (action == UP)
 		g->map->player->y--;
 	else if (action == DOWN)
@@ -74,6 +57,46 @@ void	handle_movement(t_data *g, int x, int y, int action)
 		g->map->player->x--;
 	else if (action == RIGHT)
 		g->map->player->x++;
+	g->steps++;
+	ft_printf("Player has moved %d times.\n", g->steps);
+}
+
+void	move_on_map(t_data *g, int *signal, int x, int y)
+{
+	if (x < 0 || y < 0)
+	{
+		*signal = 1;
+		return ;
+	}
+	if (g->map->map[y][x] == '0')
+	{
+		g->map->map[y][x] = 'P';
+		g->map->map[g->map->player->y][g->map->player->x] = '0';
+	}
+	else if (g->map->map[y][x] == '1')
+	{
+		*signal = 1;
+		return ;
+	}
+	else if (g->map->map[y][x] == 'C')
+	{
+		g->map->map[y][x] = 'P';
+		g->map->map[g->map->player->y][g->map->player->x] = '0';
+		remove_collectible(g, x, y);
+	}
+	else
+		handle_end(g, x, y);
+}
+
+//todo: fix all memory leaks
+void	handle_end(t_data *g, int x, int y)
+{
+	g->map->map[y][x] = 'P';
+	g->map->map[g->map->player->y][g->map->player->x] = '0';
+	ft_printf("Congratulations!\nYou have completed the map in %d moves\n", \
+		g->steps);
+	free_map(g);
+	quit_game(g);
 }
 
 void	remove_collectible(t_data *g, int x, int y)
@@ -82,14 +105,18 @@ void	remove_collectible(t_data *g, int x, int y)
 	t_list	*prev;
 	t_point	*temp;
 
+	prev = NULL;
 	curr = g->collectibles;
 	while (curr)
 	{
 		temp = (t_point *)curr->content;
-		if (temp->x == x && temp->y == y)
+		if (temp && temp->x == x && temp->y == y)
 		{
 			if (prev)
 				prev->next = curr->next;
+			else
+				g->collectibles = curr->next;
+			free(temp);
 			free(curr);
 			break ;
 		}
