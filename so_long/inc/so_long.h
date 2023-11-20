@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 19:48:40 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/19 19:57:04 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/20 17:26:35 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@
 # define WALL_PATH		"assets/wall.xpm"
 # define COLLECTIBLE	"assets/collectible.xpm"
 # define PLAYER			"assets/player/"
+# define EXIT			"assets/exit.xpm"
 
 typedef struct s_point {
 	int	x;
@@ -64,6 +65,7 @@ typedef struct s_img{
 	void	*floor;
 	void	*walls;
 	void	*collectible;
+	void	*exit;
 	t_list	*player;
 }				t_img;
 
