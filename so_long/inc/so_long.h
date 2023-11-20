@@ -129,4 +129,6 @@ void	handle_movement(t_data *g, int x, int y, int action);
 void	handle_movement_down(t_map *m, int x, int y);
 void	handle_movement_left(t_map *m, int x, int y);
 void	handle_movement_right(t_map *m, int x, int y);
+void	move_on_map(t_data *g, int *signal, int x, int y);
+void	handle_end(t_data *g, int x, int y);
 #endif
