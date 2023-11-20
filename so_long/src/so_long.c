@@ -22,6 +22,7 @@ int	main(int ac, char **av)
 		if (game.map == NULL)
 			return (1);
 		game.frames = 0;
+		game.steps = 0;
 		game.tile_size = TILE_SIZE;
 		game.microseconds_time = ((double)CYCLE_SIZE / FPS);
 		game.count = malloc(sizeof(unsigned long));
@@ -31,7 +32,7 @@ int	main(int ac, char **av)
 	}
 	else
 	{
-		ft_printf("%sError that you need to handle idiot%s\n", RED, WHITE);
+		printf("%sError that you need to handle idiot%s\n", RED, WHITE);
 		exit(EXIT_FAILURE);
 	}
 	return (0);
