@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 10:10:36 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/19 19:27:39 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/20 15:24:04 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	game_init(t_data *game)
 	if (game->win_ptr == NULL)
 		return (free(game->mlx_ptr));
 	mlx_hook(game->win_ptr, \
-		KeyPress, KeyPressMask,\
+		KeyPress, KeyPressMask, \
 		on_keypress, game);
 	mlx_hook(game->win_ptr, \
 		DestroyNotify, StructureNotifyMask, \
@@ -41,6 +41,22 @@ void	game_init(t_data *game)
 // Runs inside an endless loop
 int	run_game(t_data *game)
 {
+	draw_map(game);
+/*
+	t_list *temp = game->collectibles;
+	while (temp)
+	{
+		t_point *test = (t_point *)temp->content;
+		printf("Start ptr: %p\n", game->collectibles);
+		printf("current ptr: %p", temp);
+		if (test != NULL)
+		{
+			printf("test->x: %d\n", test->x);
+			printf("test->y: %d\n", test->y);
+		}
+		temp = temp->next;
+	}*/
+
 	/*
 	static unsigned long counter;
 	static unsigned long last_count;
@@ -61,7 +77,6 @@ int	run_game(t_data *game)
 	last_count = current;
 */
 	//game->frames++;
-	draw_map(game);
 	/*if (counter % FPS == 0 && elapsed > 0)
 	{
 		//print_player(game, game->img->player, game->map->player->x, game->map->player->y);
@@ -127,8 +142,8 @@ void	recursive_workload(int count)
 // Goes through a matrix and sends its position to select the texture to print
 void	draw_map(t_data *game)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	y = -1;
 	while (game->map->map[++y])
@@ -151,7 +166,7 @@ void	select_texture(t_data *game, int x, int y)
 	else if (game->map->map[y][x] == 'E')
 	{
 		if (game->collectibles == NULL)
-			print_texture(game, game->img->collectible, x, y);
+			print_texture(game, game->img->exit, x, y);
 		else
 			print_texture(game, game->img->floor, x, y);
 
@@ -175,8 +190,8 @@ void	print_player(t_data *game, t_list *start, int x, int y)
 		//ft_usleep((unsigned int)game->microseconds_time * 10);
 		//if (counter % delay == 0)
 		//{
-			print_texture(game, temp->content, x, y);
-			temp = temp->next;
+		print_texture(game, temp->content, x, y);
+		temp = temp->next;
 		//}
 
 	}
@@ -202,8 +217,11 @@ void	load_textures(t_data *game)
 	game->img->walls = mlx_xpm_file_to_image(game->mlx_ptr, WALL_PATH, \
 		&size, &size);
 	game->img->collectible = mlx_xpm_file_to_image
-			(game->mlx_ptr, COLLECTIBLE, \
-			&size, &size);
+		(game->mlx_ptr, COLLECTIBLE, \
+		&size, &size);
+	game->img->exit = mlx_xpm_file_to_image
+		(game->mlx_ptr, EXIT, \
+		&size, &size);
 	load_player_textures(game);
 
 }
