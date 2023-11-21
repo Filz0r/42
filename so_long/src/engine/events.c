@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 18:08:37 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/20 17:27:11 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/20 19:06:51 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ void	move_on_map(t_data *g, int *signal, int x, int y)
 //todo: fix all memory leaks
 void	handle_end(t_data *g, int x, int y)
 {
+	if (g->collectibles != NULL)
+		return ;
 	g->map->map[y][x] = 'P';
 	g->map->map[g->map->player->y][g->map->player->x] = '0';
 	ft_printf("Congratulations!\nYou have completed the map in %d moves\n", \
