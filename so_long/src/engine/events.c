@@ -97,7 +97,7 @@ void	handle_end(t_data *g, int x, int y)
 	g->map->map[g->map->player->y][g->map->player->x] = '0';
 	ft_printf("Congratulations!\nYou have completed the map in %d moves\n", \
 		g->steps);
-	free_map(g);
+	//free_map(g);
 	quit_game(g);
 }
 
@@ -132,6 +132,6 @@ int	quit_game(t_data *game)
 	mlx_destroy_window(game->mlx_ptr, game->win_ptr);
 	mlx_destroy_display(game->mlx_ptr);
 	free(game->mlx_ptr);
-	free_map(game);
+	//free_map(game);
 	exit(1);
 }
