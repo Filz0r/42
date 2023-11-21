@@ -6,26 +6,24 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 21:23:40 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/19 02:34:47 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/21 14:45:13 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/so_long.h"
 
 // This function fills the map array that we store in our map pointer
-void	flood_fill(t_map *m, int x, int y, char fill_val)
+void	flood_fill(char **map, int x, int y, char fill_val)
 {
-	if (!m)
+	if (x < 0 || x >= get_map_width(map) || y < 0 || y >= get_map_height(map))
 		return ;
-	if (x < 0 || x >= m->width || y < 0 || y >= m->height)
+	if (map[y][x] == '1' || map[y][x] == fill_val)
 		return ;
-	if (m->map_validator[y][x] == '1' || m->map_validator[y][x] == fill_val)
-		return ;
-	m->map_validator[y][x] = fill_val;
-	flood_fill(m, x, (y - 1), fill_val);
-	flood_fill(m, x, (y + 1), fill_val);
-	flood_fill(m, (x - 1), y, fill_val);
-	flood_fill(m, (x + 1), y, fill_val);
+	map[y][x] = fill_val;
+	flood_fill(map, x, (y - 1), fill_val);
+	flood_fill(map, x, (y + 1), fill_val);
+	flood_fill(map, (x - 1), y, fill_val);
+	flood_fill(map, (x + 1), y, fill_val);
 }
 
 // Checks if the passed char is valid for the map.

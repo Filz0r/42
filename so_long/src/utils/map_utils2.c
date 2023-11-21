@@ -6,13 +6,13 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 16:22:40 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/18 17:42:43 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/21 16:23:31 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/so_long.h"
 
-char	*read_map(int fd, t_map *map)
+char	*read_map(int fd)
 {
 	char		*line;
 	char		*result;
@@ -20,7 +20,6 @@ char	*read_map(int fd, t_map *map)
 	size_t		res_size;
 
 	res_size = 0;
-	new_size = 0;
 	result = ft_strdup("");
 	while (1)
 	{
@@ -29,12 +28,33 @@ char	*read_map(int fd, t_map *map)
 			break ;
 		new_size = res_size + ft_strlen(line) + 1;
 		result = ft_realloc(result, new_size);
-		if (map->width == 0)
-			map->width = (int)ft_strlen(line) - 1;
 		ft_strlcat(result, line, new_size);
 		res_size = new_size - 1;
-		map->height++;
 		free(line);
 	}
 	return (result);
+}
+
+int	get_map_height(char **map)
+{
+	int	res;
+
+	if (*map == NULL)
+		return (0);
+	res = 0;
+	while (map[res])
+		res++;
+	return (res);
+}
+
+int	get_map_width(char **map)
+{
+	int	res;
+
+	if (*map == NULL)
+		return (0);
+	res = 0;
+	while (map[0][res])
+		res++;
+	return (res);
 }
