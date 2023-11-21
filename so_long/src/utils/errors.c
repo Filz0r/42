@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 16:39:21 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/16 16:51:41 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/21 11:23:54 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 // This function frees everything inside the map pointer and
 // prints error messages.
-void	errors(t_data *game, int code)
+void	errors(char **map, int code)
 {
-	free_map(game);
+	free_map(map);
 	if (code == 0)
 	{
 		ft_printf("Error\nThere was an issue allocating memory ");
@@ -43,25 +43,17 @@ void	errors(t_data *game, int code)
 // This function frees the map pointer, and anything inside it, however
 // it might cause issues if by any reason the program fails to allocate
 //  memory for the map.
-void	free_map(t_data *game)
+void	free_map(char **map)
 {
 	char	**temp;
 	int		i;
 
 	i = 0;
-	if (!game->map || !game->map->map)
+	if (!map || !(*map))
 		return ;
-	temp = game->map->map;
+	temp = map;
 	while (temp[i] != 0)
 		free(temp[i++]);
 	free(temp);
-	temp = game->map->map_validator;
-	i = 0;
-	while (temp[i] != 0)
-		free(temp[i++]);
-	free(temp);
-	free(game->map->player);
-	free(game->map->exit);
-	free(game->map);
-	game->map = NULL;
+	*map = NULL;
 }
