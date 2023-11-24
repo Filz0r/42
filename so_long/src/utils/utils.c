@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 21:23:40 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/21 14:45:13 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/24 11:48:34 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,47 @@ int	invalid_char(char c)
 	return (c == '0' || c == '1' || c == 'P' || c == 'E' || c == 'C');
 }
 
-char *generate_player_path(int nb)
+// Counts how many rows exist inside the file
+int	get_map_height(char **map)
 {
-	char *temp;
-	char *path;
+	int	res;
 
-	temp = ft_itoa(nb);
-	path = ft_strjoin(PLAYER, temp);
-	free(temp);
-	temp = ft_strjoin(path, ".xpm");
-	free(path);
-	return (temp);
+	if (*map == NULL)
+		return (0);
+	res = 0;
+	while (map[res])
+		res++;
+	return (res);
+}
+
+// counts how many columns exist inside the first row of the map
+int	get_map_width(char **map)
+{
+	int	res;
+
+	if (*map == NULL)
+		return (0);
+	res = 0;
+	while (map[0][res])
+		res++;
+	return (res);
+}
+
+// Creates a new map from an existing map variable
+char	**mapdup(char **map)
+{
+	int		h;
+	int		i;
+	char	**res;
+
+	i = 0;
+	h = get_map_height(map);
+	res = malloc(sizeof(char *) * (h + 1));
+	while (map[i])
+	{
+		res[i] = ft_strdup(map[i]);
+		i++;
+	}
+	res[i] = 0;
+	return (res);
 }

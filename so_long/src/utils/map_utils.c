@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 12:36:27 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/21 16:25:08 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/24 00:44:41 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,9 @@ int	validate_details(char **map)
 	return ((players > 1 || exits > 1) || collectibles < 1);
 }
 
+// checks if C is any of the chars that shouldn't exist when the game ends
+// and increments the respective pointer, does nothing if char isn't
+// the one we are looking for
 void	handle_chars(char c, int *collectible, int *exits, int *players)
 {
 	if (c == 'E')
@@ -113,31 +116,4 @@ int	check_for_invalid(char **map)
 		y++;
 	}
 	return (0);
-}
-
-// Finds the player in the map and sets his position on the map pointer.
-void	find_player(char **map, int *pos_x, int *pos_y)
-{
-	int	x;
-	int	y;
-
-	if (*map == NULL)
-		return ;
-	y = 0;
-	while (map[y])
-	{
-		x = 0;
-		while (map[y][x])
-		{
-			if (map[y][x] == 'P')
-			{
-				*pos_x = x;
-				*pos_y = y;
-				return ;
-			}
-			x++;
-		}
-		y++;
-	}
-	*map = NULL;
 }

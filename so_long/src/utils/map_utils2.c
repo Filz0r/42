@@ -6,55 +6,57 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 16:22:40 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/21 16:23:31 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/24 11:54:14 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/so_long.h"
 
-char	*read_map(int fd)
+// Finds the player in the map and sets his position on the map pointer.
+void	find_player(char **map, int *pos_x, int *pos_y)
 {
-	char		*line;
-	char		*result;
-	size_t		new_size;
-	size_t		res_size;
+	int	x;
+	int	y;
 
-	res_size = 0;
-	result = ft_strdup("");
-	while (1)
+	if (*map == NULL)
+		return ;
+	y = 0;
+	while (map[y])
 	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		new_size = res_size + ft_strlen(line) + 1;
-		result = ft_realloc(result, new_size);
-		ft_strlcat(result, line, new_size);
-		res_size = new_size - 1;
-		free(line);
+		x = 0;
+		while (map[y][x])
+		{
+			if (map[y][x] == 'P')
+			{
+				*pos_x = x;
+				*pos_y = y;
+				return ;
+			}
+			x++;
+		}
+		y++;
 	}
-	return (result);
+	*map = NULL;
 }
 
-int	get_map_height(char **map)
+// This function checks the pathing after the map_validator is flooded
+// returns true if any E or C elements exist
+int	check_pathing(char **map)
 {
-	int	res;
+	int	x;
+	int	y;
 
-	if (*map == NULL)
-		return (0);
-	res = 0;
-	while (map[res])
-		res++;
-	return (res);
-}
-
-int	get_map_width(char **map)
-{
-	int	res;
-
-	if (*map == NULL)
-		return (0);
-	res = 0;
-	while (map[0][res])
-		res++;
-	return (res);
+	y = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			if (map[y][x] == 'E' || map[y][x] == 'C')
+				return (1);
+			x++;
+		}
+		y++;
+	}
+	return (0);
 }

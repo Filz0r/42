@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 19:48:40 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/21 14:12:25 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/24 11:40:28 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,29 +28,29 @@
 # define MAGENTA	"\e[0;35m"
 
 
-//Map stuff
-void	get_info(t_map *map);
-t_map	*map_init(void);
-
-
-
-char	**validate_map(char *map_path);
+// Functions for loading the file and contents to memory
 char	*read_map(int fd);
+char	**validate_map(char *map_path);
 void	load_map(char *map_path, char ***map);
+
+// Utils
+char	**mapdup(char **map);
+void	flood_fill(char **map, int x, int y, char fill_val);
+void	find_player(char **map, int *x, int *y);
+int		check_file_path(char *file);
+int		get_map_width(char **map);
+int		get_map_height(char **map);
+
+// Map Validation
 int		check_for_invalid(char **map);
 int		validate_details(char **map);
 void	handle_chars(char c, int *collectible, int *exits, int *players);
 int		is_rectangle(char **map);
-int		get_map_width(char **map);
-int		get_map_height(char **map);
+
 int		is_walled(char **map);
 int		check_pathing(char **map);
-char	**ft_mapdup(char **map);
-void	find_player(char **map, int *x, int *y);
-void	flood_fill(char **map, int x, int y, char fill_val);
 int		invalid_char(char c);
 int		is_completable(char **map);
-int		check_file_path(char *file);
 
 
 

@@ -23,10 +23,15 @@ int	main(int ac, char **av)
 		if (!map || *map == NULL)
 			return (1);
 		game_init(map, "so_long");
-		/*game = game_init(map);
+		/*
+		game = game_init(map);
 		if (!game)
+		{
+		 	free(game);
 			return (1);
-		game_run(game);*/
+		}
+		game_run(game);
+		 */
 	}
 	else
 	{
