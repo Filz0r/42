@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 21:23:40 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/24 11:48:34 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/24 21:38:36 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // This function fills the map array that we store in our map pointer
 void	flood_fill(char **map, int x, int y, char fill_val)
 {
-	if (x < 0 || x >= get_map_width(map) || y < 0 || y >= get_map_height(map))
+	if (x < 0 || x >= get_width(map) || y < 0 || y >= get_height(map))
 		return ;
 	if (map[y][x] == '1' || map[y][x] == fill_val)
 		return ;
@@ -33,7 +33,7 @@ int	invalid_char(char c)
 }
 
 // Counts how many rows exist inside the file
-int	get_map_height(char **map)
+int	get_height(char **map)
 {
 	int	res;
 
@@ -46,7 +46,7 @@ int	get_map_height(char **map)
 }
 
 // counts how many columns exist inside the first row of the map
-int	get_map_width(char **map)
+int	get_width(char **map)
 {
 	int	res;
 
@@ -66,7 +66,7 @@ char	**mapdup(char **map)
 	char	**res;
 
 	i = 0;
-	h = get_map_height(map);
+	h = get_height(map);
 	res = malloc(sizeof(char *) * (h + 1));
 	while (map[i])
 	{

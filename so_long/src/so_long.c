@@ -6,11 +6,12 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 19:45:16 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/21 14:36:06 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/24 21:33:37 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
+#include "../inc/engine.h"
 
 int	main(int ac, char **av)
 {

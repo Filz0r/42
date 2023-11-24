@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 16:22:40 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/24 11:54:14 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/24 21:39:51 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	find_player(char **map, int *pos_x, int *pos_y)
 		}
 		y++;
 	}
-	*map = NULL;
+	*map = NULL; //todo: leak?
 }
 
 // This function checks the pathing after the map_validator is flooded

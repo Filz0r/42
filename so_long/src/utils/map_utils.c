@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 12:36:27 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/24 00:44:41 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/24 21:36:36 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ int	is_walled(char **map)
 		if (map[0][x] != '1')
 			return (1);
 	x = -1;
-	while (map[get_map_height(map) - 1][++x])
-		if (map[get_map_height(map) - 1][x] != '1')
+	while (map[get_height(map) - 1][++x])
+		if (map[get_height(map) - 1][x] != '1')
 			return (1);
 	y = -1;
 	while (map[++y])
-		if (map[y][0] != '1' || map[y][get_map_width(map) - 1] != '1')
+		if (map[y][0] != '1' || map[y][get_width(map) - 1] != '1')
 			return (1);
 	return (0);
 }
