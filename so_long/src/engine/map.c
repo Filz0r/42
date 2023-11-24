@@ -6,11 +6,11 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:25:51 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/24 12:36:10 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/24 22:35:43 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/engine.h"
+#include "../../inc/engine_utils.h"
 
 // Calculates the height of the map
 int	get_map_height(char **map)
@@ -82,19 +82,3 @@ void	get_collectibles(char **map, t_list **lst)
 	}
 }
 
-void	*map_cleanup(t_map *res)
-{
-	if (res)
-	{
-		if (res->player)
-			free(res->player);
-		if (res->start)
-			free(res->start);
-		if (res->exit)
-			free(res->exit);
-		if (res->collectibles)
-			ft_lstiter(res->collectibles, free);
-		free(res);
-	}
-	return (NULL);
-}

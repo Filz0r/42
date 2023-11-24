@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   window.c                                           :+:      :+:    :+:   */
+/*   game_cleanup.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/24 14:25:58 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/24 21:59:16 by fparreir         ###   ########.fr       */
+/*   Created: 2023/11/24 22:23:09 by fparreir          #+#    #+#             */
+/*   Updated: 2023/11/24 22:23:09 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/engine_utils.h"
 #include "../../inc/engine.h"
+#include "../../inc/engine_utils.h"
 
-t_window	*new_window(int width, int height, char *name)
+void	*game_cleanup(void *ptr)
 {
-	t_window	*win;
+	t_game	*game;
 
-	win = malloc(sizeof(t_window));
-	if (!win)
+	game = (t_game *)ptr;
+	if (!game)
 		return (NULL);
-	win->mlx_ptr = mlx_init();
-	if (!win->mlx_ptr)
-		return (window_cleanup(win));
-	win->win_ptr = mlx_new_window
-		(win->mlx_ptr, width * SIZE, height * SIZE, name);
-	win->height = height * SIZE;
-	win->width = width * SIZE;
-	return (win);
+	if (game->map)
+		return (map_cleanup(game->map));
+	if (game->win)
+		return (window_cleanup(game->win));
+	if (game->images)
+		return (images_cleanup(game->images));
+	return (NULL);
 }
-

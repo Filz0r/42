@@ -6,11 +6,11 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:44:45 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/24 16:48:24 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/24 21:59:16 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/engine.h"
+#include "../../inc/engine_utils.h"
 
 t_img	*create_image(char *path, t_window *win)
 {
@@ -53,8 +53,8 @@ t_list	*load_frames(t_window *w, char *path, int size)
 	char	*frame_path;
 	char	*file_path;
 
-	frames = NULL;
 	i = 0;
+	frames = NULL;
 	if (size == 1)
 		ft_lstadd_back(&frames, (void *)create_image(path, w));
 	else

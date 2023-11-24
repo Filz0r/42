@@ -6,11 +6,13 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:52:23 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/24 16:52:23 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/24 21:59:16 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../inc/engine_utils.h"
 #include "../../inc/engine.h"
+
 
 t_player	*load_player(t_game *ptr)
 {
