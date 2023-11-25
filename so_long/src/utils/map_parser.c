@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 21:19:11 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/24 11:35:48 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/25 11:02:49 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	**validate_map(char *map_path)
 	if (check_file_path(map_path))
 		errors(result, 1);
 	else
-		load_map(map_path, &result);
+		get_map(map_path, &result);
 	if (result && *result == NULL)
 		errors(result, 0);
 	if (result && *result != NULL && check_for_invalid(result))
@@ -60,7 +60,7 @@ int	check_file_path(char *file)
 }
 
 // Opens the file where the map is inside and loads it into memory.
-void	load_map(char *map_path, char ***temp)
+void	get_map(char *map_path, char ***temp)
 {
 	char		*result;
 	int			file;

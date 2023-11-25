@@ -15,7 +15,6 @@
 
 # include "../libft/includes/libft.h"
 
-
 # define BLACK		"\033[0;30m"
 # define RED		"\033[0;31m"
 # define GREEN		"\033[0;32m"
@@ -30,7 +29,8 @@
 // Functions for loading the file and contents to memory
 char	*read_map(int fd);
 char	**validate_map(char *map_path);
-void	load_map(char *map_path, char ***map);
+void	get_map(char *map_path, char ***map);
+
 
 // Utils
 char	**mapdup(char **map);
