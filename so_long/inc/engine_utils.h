@@ -6,14 +6,13 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 21:33:37 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/25 10:33:39 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/25 15:54:20 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENGINE_UTILS_H
 # define ENGINE_UTILS_H
 
-# include <time.h>
 # include "../mlx/mlx.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
