@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:09:58 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/24 22:35:48 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/25 13:56:22 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,6 @@ void	*game_init(char **map, const char *name)
 		return (game_cleanup(ptr));
 	ptr->tick = 0;
 	ptr->frames = 0;
-	ptr->ns_time = 6000000000;
+	ptr->ns_time = 200000000;
 	return (ptr);
 }
