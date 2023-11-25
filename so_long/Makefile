@@ -1,8 +1,7 @@
 # Project name
 NAME = so_long
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
-DFLAGS = $(CFLAGS) -g3 #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -O3
 INCLUDES = -I$(LIBFT_DIR)/inc -I$(MLX_DIR) -I/usr/include
 LDFLAGS = -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -L/usr/lib/X11 -lXext -lX11
 SRC_DIR = src
@@ -14,7 +13,7 @@ LIBFT = $(LIBFT_DIR)/libft.a
 MLX = $(MLX_DIR)/libmlx_Linux.a
 SRC_FILES = so_long.c utils/utils.c utils/errors.c utils/map_parser.c utils/map_utils.c utils/map_utils2.c \
 	 engine/game_init.c engine/game_cleanup.c engine/images.c engine/loader.c engine/map.c engine/player.c \
-	 engine/window.c
+	 engine/window.c engine/cleanup.c engine/game_run.c
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 
@@ -36,7 +35,7 @@ $(LIBFT):
 $(MLX):
 	@make -s -C $(MLX_DIR)
 
-clion: $(CFLAGS) = $(DFLAGS)
+clion: CFLAGS += -g3
 clion: all
 
 
