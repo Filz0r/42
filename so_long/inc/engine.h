@@ -28,8 +28,8 @@
 # define DIE_PATH	"assets/player/dying/"
 
 // Library stuff
-void			*game_init(char **map, const char *name);
-void			*game_cleanup(void *ptr);
-void			*game_run(void *ptr);
+void	*game_init(char **map, const char *name);
+void	*game_cleanup(void *ptr);
+void	*game_run(void *ptr);
 
 #endif //ENGINE_H
