@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 22:23:09 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/25 10:33:19 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/25 15:00:32 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	*game_cleanup(void *ptr)
 	game = (t_game *)ptr;
 	if (game)
 	{
-		if (game->map)
-			map_cleanup(game->map);
 		if (game->images)
 			images_cleanup(game->images);
+		if (game->map)
+			map_cleanup(game->map);
 		if (game->player)
 			player_cleanup(game);
 		if (game->win)

@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 22:25:03 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/24 22:25:03 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/25 16:06:50 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ void	*window_cleanup(t_window *w)
 	if (w)
 	{
 		if (w->win_ptr)
-			free(w->win_ptr);
+		{
+			mlx_destroy_window(w->mlx_ptr, w->win_ptr);
+			mlx_destroy_display(w->mlx_ptr);
+		}
 		if (w->mlx_ptr)
 			free(w->mlx_ptr);
 		free(w);
@@ -46,7 +49,7 @@ void	*window_cleanup(t_window *w)
 void	*images_cleanup(t_list *lst)
 {
 
-	ft_lstiter(lst, destroy_frame);
+	ft_lstclear(&lst, &destroy_frame);
 	return (NULL);
 }
 
@@ -55,11 +58,10 @@ void	destroy_image(void *ptr)
 	t_img	*img;
 
 	img = (t_img *)ptr;
-	if (img)
+	if (img != NULL && img->win != NULL && img->win->mlx_ptr != NULL)
 	{
 		mlx_destroy_image(img->win->mlx_ptr, img->img_ptr);
 		free(img);
-		img = NULL;
 	}
 }
 
@@ -70,8 +72,7 @@ void	destroy_frame(void *ptr)
 	frame = (t_frame *)ptr;
 	if (frame)
 	{
-		ft_lstiter(frame->frames, destroy_image);
+		ft_lstclear(&(frame->frames), &destroy_image);
 		free(frame);
-		frame = NULL;
 	}
 }
