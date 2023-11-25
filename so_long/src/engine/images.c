@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:44:45 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/24 21:59:16 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/25 11:58:21 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,15 @@ t_list	*load_frames(t_window *w, char *path, int size)
 	i = 0;
 	frames = NULL;
 	if (size == 1)
-		ft_lstadd_back(&frames, (void *)create_image(path, w));
+		ft_lstadd_back(&frames, ft_lstnew((void *)create_image(path, w)));
 	else
 	{
 		while (i < (size - 1))
 		{
 			frame_path = ft_strjoin(path, ft_itoa(i));
 			file_path = ft_strjoin(frame_path, ".xpm");
-			ft_lstadd_back(&frames, (void *)create_image(file_path, w));
+			ft_lstadd_back(&frames,
+				ft_lstnew((void *)create_image(file_path, w)));
 			free(frame_path);
 			free(file_path);
 			i++;
