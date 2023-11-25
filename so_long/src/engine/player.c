@@ -13,7 +13,6 @@
 #include "../../inc/engine_utils.h"
 #include "../../inc/engine.h"
 
-
 t_player	*load_player(t_game *ptr)
 {
 	t_player	*res;
@@ -36,4 +35,23 @@ t_player	*load_player(t_game *ptr)
 		ft_lstnew((void *)create_frame(ptr->win,
 				DIE_PATH, PLAYER_DYING, 4)));
 	return (res);
+}
+
+void	*player_cleanup(t_game *game)
+{
+	if (game->player)
+	{
+		if (game->player->dying)
+			images_cleanup(game->player->dying);
+		if (game->player->walking)
+			images_cleanup(game->player->walking);
+		if (game->player->idle)
+			images_cleanup(game->player->idle);
+		if (game->map)
+			if (game->player->current)
+				map_cleanup(game->map);
+		free(game->player);
+		game->player = NULL;
+	}
+	return (NULL);
 }

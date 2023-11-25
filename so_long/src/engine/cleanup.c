@@ -38,13 +38,40 @@ void	*window_cleanup(t_window *w)
 		if (w->mlx_ptr)
 			free(w->mlx_ptr);
 		free(w);
+		w = NULL;
 	}
 	return (NULL);
 }
 
 void	*images_cleanup(t_list *lst)
 {
-	//TODO: finish this
+
+	ft_lstiter(lst, destroy_frame);
 	return (NULL);
 }
 
+void	destroy_image(void *ptr)
+{
+	t_img	*img;
+
+	img = (t_img *)ptr;
+	if (img)
+	{
+		mlx_destroy_image(img->win->mlx_ptr, img->img_ptr);
+		free(img);
+		img = NULL;
+	}
+}
+
+void	destroy_frame(void *ptr)
+{
+	t_frame	*frame;
+
+	frame = (t_frame *)ptr;
+	if (frame)
+	{
+		ft_lstiter(frame->frames, destroy_image);
+		free(frame);
+		frame = NULL;
+	}
+}

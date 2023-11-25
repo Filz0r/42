@@ -32,6 +32,8 @@ void	*game_init(char **map, const char *name)
 	if (!(ptr->images))
 		return (game_cleanup(ptr));
 	ptr->player = load_player(ptr);
+	if (!(ptr->player))
+		return (game_cleanup(ptr));
 	ptr->tick = 0;
 	ptr->frames = 0;
 	ptr->ns_time = 6000000000;
