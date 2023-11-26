@@ -67,16 +67,15 @@ static int	draw_game(t_game *game)
 	static struct timespec	last_tick;
 	unsigned long			elapsed;
 	struct timespec			current;
-	struct timespec			sleep_time;
 
+	draw_background(game);
 	clock_gettime(CLOCK_MONOTONIC, &current);
-	sleep_time.tv_sec = CYCLE / 1000000000;
-	sleep_time.tv_nsec = CYCLE % 1000000000;
 	elapsed = (current.tv_sec - last_tick.tv_sec) * 1000000000 + (
 			current.tv_nsec - last_tick.tv_nsec);
 	if (elapsed >= game->ns_time)
 	{
 		printf("gt: %lu\n", game->tick);
+		nanosleep(&(game->sleep_time), NULL);
 		game->tick++;
 		nanosleep(&sleep_time, NULL);
 		clock_gettime(CLOCK_MONOTONIC, &last_tick);

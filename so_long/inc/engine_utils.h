@@ -84,6 +84,7 @@ typedef struct s_game {
 	t_player		*player;
 	t_map			*map;
 	t_list			*images;
+	struct timespec	sleep_time;
 	unsigned long	tick;
 	unsigned long	frames;
 	unsigned long	ns_time;

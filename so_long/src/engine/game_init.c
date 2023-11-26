@@ -24,7 +24,8 @@ void	*game_init(char **map, const char *name)
 	ptr->map = load_map(map);
 	if (!(ptr->map))
 		return (game_cleanup(ptr));
-	ptr->win = new_window(ptr->map->width, ptr->map->height, (char *)name);
+	ptr->win = new_window(ptr->map->width,
+			ptr->map->height, (char *)name);
 	if (!(ptr->win))
 		return (game_cleanup(ptr));
 	ptr->images = NULL;
@@ -37,5 +38,7 @@ void	*game_init(char **map, const char *name)
 	ptr->tick = 0;
 	ptr->frames = 0;
 	ptr->ns_time = 200000000;
+	ptr->sleep_time = (struct timespec){CYCLE / 1000000000,
+		CYCLE % 1000000000};
 	return (ptr);
 }
