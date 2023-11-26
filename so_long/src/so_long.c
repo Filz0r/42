@@ -13,6 +13,7 @@
 #include "../inc/so_long.h"
 #include "../inc/engine.h"
 
+// The program has 2 parts the engine and the map parser/validator,
 int	main(int ac, char **av)
 {
 	char	**map;
@@ -30,6 +31,8 @@ int	main(int ac, char **av)
 			return (1);
 		}
 		game_run(game);
+
+//		free_map(map);
 	}
 	else
 	{
