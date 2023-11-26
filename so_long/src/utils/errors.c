@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 16:39:21 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/21 11:23:54 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/26 19:06:42 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	errors(char **map, int code)
 		ft_printf("for the program\n");
 	}
 	else if (code == 1)
-		ft_printf("Error\nThe map you provided has an invalid extension\n");
+		ft_printf("Error\nThe file you provided has an invalid extension\n");
 	else if (code == 2)
 		ft_printf("Error\nThere are invalid char in your map!\n");
 	else if (code == 3)
