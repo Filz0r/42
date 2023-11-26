@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 21:33:37 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/25 15:54:20 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/26 18:40:20 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include "../libft/includes/libft.h"
+# include <time.h>
 
 typedef enum e_entity {
 	PLAYER_IDLE,
@@ -120,12 +121,14 @@ t_frame			*create_frame(t_window *w,
 					char *asset_path, t_entity type, int frame_num);
 t_window		*new_window(int width, int height, char *name);
 
-// Memory cleaning
+// Memory cleaning TODO: this is bugged and segfaults
 void			*map_cleanup(t_map *res);
 void			*window_cleanup(t_window *w);
 void			*images_cleanup(t_list *lst);
 void			destroy_image(void *ptr);
 void			destroy_frame(void *ptr);
 
+//Utils
+t_frame			*find_frame_by_entity(t_list *images, t_entity entity);
 
 #endif

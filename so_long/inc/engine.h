@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 10:35:15 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/25 12:25:22 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/26 18:39:35 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 
 // Library stuff
 void	*game_init(char **map, const char *name);
-void	*game_cleanup(void *ptr);
+void	*game_cleanup(void *ptr); //todo: this is bugged and causes segfault
 void	game_run(void *ptr);
 
 #endif //ENGINE_H
