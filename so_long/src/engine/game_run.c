@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:38:48 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/25 16:41:20 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/26 16:46:24 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,36 +15,51 @@
 #include <time.h>
 
 
-static t_frame *find_frame_by_entity(t_list *images, t_entity entity)
+static t_frame	*find_frame_by_entity(t_list *images, t_entity entity)
 {
-	t_list *current = images;
+	t_list	*current;
+	t_frame	*frame;
 
+	current = images;
 	while (current)
 	{
-		t_frame *frame = (t_frame *)current->content;
+		frame = (t_frame *)current->content;
 		if (frame && frame->type == entity)
-			return frame;
-
+			return (frame);
 		current = current->next;
 	}
-
-	return NULL;
+	return (NULL);
 }
 
 static void	draw_background(t_game *game)
 {
-	char **map;
+	t_frame	*floor;
+	t_img	*frame;
+	int		x;
+	int		y;
 
-	map = game->map->map;
-	t_frame *floor = find_frame_by_entity(game->images, FLOOR);
-	for (int y = 0; y < game->map->height; y++)
-		for(int x = 0; x < game->map->width; x++)
+	floor = find_frame_by_entity(game->images, FLOOR);
+	if (floor)
+	{
+		frame = (t_img *)(ft_lstget(floor->frames, 0))->content;
+		if (frame)
 		{
-			if (map[y][x])
+			y = -1;
+			while (game->map->map[++y])
 			{
-				mlx_put_image_to_window(game->win->mlx_ptr, game->win->win_ptr, )
+				x = -1;
+				while (game->map->map[y][++x])
+				{
+					if (game->map->map[y][x])
+					{
+						mlx_put_image_to_window(frame->win->mlx_ptr,
+							frame->win->win_ptr, frame->img_ptr,
+							x * SIZE, y * SIZE);
+					}
+				}
 			}
 		}
+	}
 }
 
 static int	draw_game(t_game *game)
@@ -66,13 +81,11 @@ static int	draw_game(t_game *game)
 		nanosleep(&sleep_time, NULL);
 		clock_gettime(CLOCK_MONOTONIC, &last_tick);
 	}
-	draw_background(game);
-	printf("fps: %lu\n", game->frames);
 	game->frames++;
 //	if (game->tick == 1)
 //	{
 //		exit(1);
-		//game_cleanup((void *)game);
+////		game_cleanup((void *)game);
 //	}
 	return (0);
 }

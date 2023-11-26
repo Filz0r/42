@@ -114,7 +114,7 @@ void			put_pixel_img(t_img img, int x, int y, int color);
 void			load_assets(t_window *win, t_list **lst);
 unsigned int	get_pixel_img(t_img img, int x, int y);
 t_img			*create_image(char *path, t_window *win);
-t_list			*load_frames(t_window *w, char *path, int size);
+void			load_frames(t_window *w, t_list **lst, char *path, int size);
 t_frame			*create_frame(t_window *w,
 					char *asset_path, t_entity type, int frame_num);
 t_window		*new_window(int width, int height, char *name);
