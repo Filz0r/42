@@ -55,8 +55,9 @@ int	check_file_path(char *file)
 		size = ft_strlen(check);
 		if (size != 4)
 			return (1);
+		return (0);
 	}
-	return (0);
+	return (1);
 }
 
 // Opens the file where the map is inside and loads it into memory.
