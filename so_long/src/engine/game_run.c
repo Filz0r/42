@@ -12,24 +12,6 @@
 
 #include "../../inc/engine.h"
 #include "../../inc/engine_utils.h"
-#include <time.h>
-
-
-static t_frame	*find_frame_by_entity(t_list *images, t_entity entity)
-{
-	t_list	*current;
-	t_frame	*frame;
-
-	current = images;
-	while (current)
-	{
-		frame = (t_frame *)current->content;
-		if (frame && frame->type == entity)
-			return (frame);
-		current = current->next;
-	}
-	return (NULL);
-}
 
 static void	draw_background(t_game *game)
 {
@@ -76,6 +58,7 @@ static int	draw_game(t_game *game)
 	{
 		printf("gt: %lu\n", game->tick);
 		nanosleep(&(game->sleep_time), NULL);
+		clock_gettime(CLOCK_MONOTONIC, &last_tick);
 		game->tick++;
 		nanosleep(&sleep_time, NULL);
 		clock_gettime(CLOCK_MONOTONIC, &last_tick);
