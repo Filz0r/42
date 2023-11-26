@@ -36,7 +36,9 @@ $(MLX):
 	@make -s -C $(MLX_DIR)
 
 clion: CFLAGS += -g3
-clion: all
+clion:
+	make -C $(LIBFT_DIR) debug
+	make all
 
 
 clean:
