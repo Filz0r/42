@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:45:42 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/24 21:59:16 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/26 15:52:12 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ t_map	*load_map(char **map)
 void	load_assets(t_window *win, t_list **lst)
 {
 	ft_lstadd_back(lst,
-		ft_lstnew((void *)create_frame(win, FLOOR_PATH, FLOOR, 1)));
+		ft_lstnew(create_frame(win, FLOOR_PATH, FLOOR, 1)));
 	ft_lstadd_back(lst,
-		ft_lstnew((void *)create_frame(win, EXIT_PATH, EXIT, 1)));
+		ft_lstnew(create_frame(win, EXIT_PATH, EXIT, 1)));
 	ft_lstadd_back(lst,
-		ft_lstnew((void *)create_frame(win, COLL_PATH, COLLECTIBLE, 1)));
+		ft_lstnew(create_frame(win, COLL_PATH, COLLECTIBLE, 1)));
 	ft_lstadd_back(lst,
-		ft_lstnew((void *)create_frame(win, WALL_PATH, WALL, 1)));
+		ft_lstnew(create_frame(win, WALL_PATH, WALL, 1)));
 }

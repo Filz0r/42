@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:44:45 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/25 11:58:21 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/26 16:34:55 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,21 @@ t_img	*create_image(char *path, t_window *win)
 {
 	t_img	*res;
 
-	res = malloc(sizeof(t_img));
+	res = (t_img *)malloc(sizeof(t_img));
 	if (!res)
 		return (NULL);
 	res->img_ptr = mlx_xpm_file_to_image
-		(win->mlx_ptr, path, &(res->w), &(res->h));
-	if (!(res->img_ptr))
+		(win->mlx_ptr, path, &res->w, &res->h);
+	if (!res->img_ptr)
+	{
+		ft_putendl_fd(path, 2);
 		ft_putendl_fd("Error: file could not be read", 2);
-	else
-		res->addr = mlx_get_data_addr
-			(res->img_ptr, &(res->bpp), &(res->line_len), &(res->endian));
+		free(res);
+		return (NULL);
+	}
+
+	res->addr = mlx_get_data_addr
+		(res->img_ptr, &(res->bpp), &(res->line_len), &(res->endian));
 	return (res);
 }
 
@@ -38,7 +43,8 @@ t_frame	*create_frame(t_window *w,
 	if (!res)
 		return (NULL);
 	res->type = type;
-	res->frames = load_frames(w, asset_path, frame_num);
+	res->frames = NULL;
+	load_frames(w, &(res->frames), asset_path, frame_num);
 	res->total_frames = frame_num;
 	res->current_frame = 0;
 	res->delay = 0;
@@ -46,31 +52,28 @@ t_frame	*create_frame(t_window *w,
 	return (res);
 }
 
-t_list	*load_frames(t_window *w, char *path, int size)
+void	load_frames(t_window *w, t_list **lst, char *path, int size)
 {
-	t_list	*frames;
 	int		i;
 	char	*frame_path;
 	char	*file_path;
 
 	i = 0;
-	frames = NULL;
 	if (size == 1)
-		ft_lstadd_back(&frames, ft_lstnew((void *)create_image(path, w)));
+		ft_lstadd_back(lst, ft_lstnew(create_image(path, w)));
 	else
 	{
 		while (i < (size - 1))
 		{
 			frame_path = ft_strjoin(path, ft_itoa(i));
 			file_path = ft_strjoin(frame_path, ".xpm");
-			ft_lstadd_back(&frames,
-				ft_lstnew((void *)create_image(file_path, w)));
+			ft_lstadd_back(lst,
+				ft_lstnew(create_image(file_path, w)));
 			free(frame_path);
 			free(file_path);
 			i++;
 		}
 	}
-	return (frames);
 }
 
 // Finds the color of the current pixel we are trying to draw
