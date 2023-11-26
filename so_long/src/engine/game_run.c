@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:38:48 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/26 16:46:24 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/26 17:58:29 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,25 +21,17 @@ static void	draw_background(t_game *game)
 	int		y;
 
 	floor = find_frame_by_entity(game->images, FLOOR);
-	if (floor)
+	frame = (t_img *)(ft_lstget(floor->frames, 0))->content;
+	y = -1;
+	while (game->map->map[++y])
 	{
-		frame = (t_img *)(ft_lstget(floor->frames, 0))->content;
-		if (frame)
+		x = -1;
+		while (game->map->map[y][++x])
 		{
-			y = -1;
-			while (game->map->map[++y])
-			{
-				x = -1;
-				while (game->map->map[y][++x])
-				{
-					if (game->map->map[y][x])
-					{
-						mlx_put_image_to_window(frame->win->mlx_ptr,
-							frame->win->win_ptr, frame->img_ptr,
-							x * SIZE, y * SIZE);
-					}
-				}
-			}
+			if (frame->img_ptr && frame->win->mlx_ptr && frame->win->win_ptr)
+				mlx_put_image_to_window(frame->win->mlx_ptr,
+					frame->win->win_ptr, frame->img_ptr,
+					x * SIZE, y * SIZE);
 		}
 	}
 }
@@ -60,8 +52,6 @@ static int	draw_game(t_game *game)
 		nanosleep(&(game->sleep_time), NULL);
 		clock_gettime(CLOCK_MONOTONIC, &last_tick);
 		game->tick++;
-		nanosleep(&sleep_time, NULL);
-		clock_gettime(CLOCK_MONOTONIC, &last_tick);
 	}
 	game->frames++;
 //	if (game->tick == 1)

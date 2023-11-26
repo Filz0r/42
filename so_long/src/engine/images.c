@@ -31,6 +31,7 @@ t_img	*create_image(char *path, t_window *win)
 
 	res->addr = mlx_get_data_addr
 		(res->img_ptr, &(res->bpp), &(res->line_len), &(res->endian));
+	res->win = win;
 	return (res);
 }
 
