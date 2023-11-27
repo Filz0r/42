@@ -15,10 +15,6 @@
 
 # define CYCLE		350000000
 # define SIZE		32
-# define UP			1
-# define DOWN		2
-# define LEFT		3
-# define RIGHT		4
 # define FLOOR_PATH	"assets/floor.xpm"
 # define WALL_PATH	"assets/wall.xpm"
 # define EXIT_PATH	"assets/exit.xpm"

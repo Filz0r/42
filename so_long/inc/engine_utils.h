@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 21:33:37 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/27 01:23:15 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/27 17:17:52 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@
 # include <X11/keysym.h>
 # include "../libft/includes/libft.h"
 # include <time.h>
+
+# define UP			1
+# define DOWN		2
+# define LEFT		3
+# define RIGHT		4
 
 typedef enum e_entity {
 	PLAYER_IDLE,
@@ -60,13 +65,10 @@ typedef struct s_img {
 }			t_img;
 
 typedef struct s_player {
-	t_list		*walking;
-	t_list		*dying;
-	t_list		*idle;
 	t_point		start;
 	t_point		*current;
-	//t_rpoint	*r_curr;
-	//t_rpoint	last;
+	t_rpoint	smooth;
+	t_rpoint	target;
 }			t_player;
 
 typedef struct s_map {
@@ -86,6 +88,7 @@ typedef struct s_game {
 	t_list			*images;
 	t_map			*map;
 	t_img			*overlay;
+	double			treshold;
 	struct timespec	sleep_time;
 	unsigned long	tick;
 	unsigned long	frames;//This has to be deleted for delivery
@@ -113,11 +116,20 @@ t_map			*load_map(char **map);
 t_point			*get_point(char **map, char to_find);
 
 // Rendering stuff
-void			draw_background(t_game *game);
-void			draw_overlay(t_game *game);
+void			render_frame(t_game *game, t_entity animation);
 void			put_image_to_image(t_img *src, t_img *dest, int x, int y);
-unsigned int	get_pixel_img(t_img img, int x, int y);
-void			put_pixel_img(t_img img, int x, int y, int color);
+unsigned int	get_pixel_img(t_img *img, int x, int y);
+void			put_pixel_img(t_img *img, int x, int y, int color);
+t_img			*create_overlay(t_window *w);
+void			select_asset_to_put(t_game *game, char c, t_point pos,
+					t_entity animation);
+void			handle_player_render(t_game *game, t_entity animation);
+
+// Movement
+void			move_on_map(t_game *g, int *signal, int x, int y);
+void			handle_movement(t_game *g, int x, int y, int action);
+void			move_player(t_game *game, int action);
+int				on_keypress(int keysym, t_game *game);
 
 // Window stuff
 void			load_assets(t_window *win, t_list **lst);
@@ -136,5 +148,6 @@ void			destroy_frame(void *ptr);
 
 //Utils
 t_frame			*find_frame_by_entity(t_list *images, t_entity entity);
+t_img			*get_img_by_entity(t_list *lst, t_entity entity);
 
 #endif

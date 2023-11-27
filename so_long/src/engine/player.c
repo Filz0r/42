@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:52:23 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/24 21:59:16 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/27 15:23:50 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,9 @@ t_player	*load_player(t_game *ptr)
 		return (NULL);
 	res->start = *(ptr->map->start);
 	res->current = ptr->map->player;
-	res->walking = NULL;
-	res->idle = NULL;
-	res->dying = NULL;
-	ft_lstadd_back(&(res->walking),
-		ft_lstnew((void *)create_frame(ptr->win,
-				WALK_PATH, PLAYER_WALKING, 4)));
-	ft_lstadd_back(&(res->dying),
-		ft_lstnew((void *)create_frame(ptr->win,
-				IDLE_PATH, PLAYER_IDLE, 4)));
-	ft_lstadd_back(&(res->idle),
-		ft_lstnew((void *)create_frame(ptr->win,
-				DIE_PATH, PLAYER_DYING, 4)));
+	res->target = (t_rpoint){-1, -1};
+	res->smooth = (t_rpoint){(float)res->current->x,
+		(float)res->current->y};
 	return (res);
 }
 
@@ -41,12 +32,6 @@ void	*player_cleanup(t_game *game)
 {
 	if (game->player)
 	{
-		if (game->player->dying)
-			images_cleanup(game->player->dying);
-		if (game->player->walking)
-			images_cleanup(game->player->walking);
-		if (game->player->idle)
-			images_cleanup(game->player->idle);
 		if (game->map)
 			if (game->player->current)
 				map_cleanup(game->map);
