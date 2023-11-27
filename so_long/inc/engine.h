@@ -6,14 +6,14 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 10:35:15 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/26 18:39:35 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/26 23:56:19 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENGINE_H
 # define ENGINE_H
 
-# define CYCLE		1000000000
+# define CYCLE		350000000
 # define SIZE		32
 # define UP			1
 # define DOWN		2

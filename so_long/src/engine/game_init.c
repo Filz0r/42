@@ -35,8 +35,9 @@ void	*game_init(char **map, const char *name)
 	ptr->player = load_player(ptr);
 	if (!(ptr->player))
 		return (game_cleanup(ptr));
+	ptr->overlay = NULL;
 	ptr->tick = 0;
-	ptr->frames = 0;
+	ptr->frames = 0; //This has to be deleted for delivery
 	ptr->ns_time = 200000000;
 	ptr->sleep_time = (struct timespec){CYCLE / 1000000000,
 		CYCLE % 1000000000};

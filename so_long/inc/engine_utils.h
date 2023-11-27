@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 21:33:37 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/26 18:40:20 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/27 01:23:15 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,12 @@ typedef struct s_map {
 typedef struct s_game {
 	t_window		*win;
 	t_player		*player;
-	t_map			*map;
 	t_list			*images;
+	t_map			*map;
+	t_img			*overlay;
 	struct timespec	sleep_time;
 	unsigned long	tick;
-	unsigned long	frames;
+	unsigned long	frames;//This has to be deleted for delivery
 	unsigned long	ns_time;
 }				t_game;
 
@@ -111,10 +112,15 @@ void			get_collectibles(char **map, t_list **lst);
 t_map			*load_map(char **map);
 t_point			*get_point(char **map, char to_find);
 
-// Window stuff
-void			put_pixel_img(t_img img, int x, int y, int color);
-void			load_assets(t_window *win, t_list **lst);
+// Rendering stuff
+void			draw_background(t_game *game);
+void			draw_overlay(t_game *game);
+void			put_image_to_image(t_img *src, t_img *dest, int x, int y);
 unsigned int	get_pixel_img(t_img img, int x, int y);
+void			put_pixel_img(t_img img, int x, int y, int color);
+
+// Window stuff
+void			load_assets(t_window *win, t_list **lst);
 t_img			*create_image(char *path, t_window *win);
 void			load_frames(t_window *w, t_list **lst, char *path, int size);
 t_frame			*create_frame(t_window *w,
