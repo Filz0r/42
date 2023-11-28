@@ -24,8 +24,6 @@ void	*game_cleanup(void *ptr)
 			images_cleanup(game->images);
 		if (game->map)
 			map_cleanup(game->map);
-		if (game->player)
-			player_cleanup(game);
 		if (game->win)
 			window_cleanup(game->win);
 	}

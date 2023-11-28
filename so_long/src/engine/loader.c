@@ -13,7 +13,6 @@
 #include "../../inc/engine_utils.h"
 #include "../../inc/engine.h"
 
-
 t_map	*load_map(char **map)
 {
 	t_map	*res;
@@ -29,9 +28,11 @@ t_map	*load_map(char **map)
 	if (!(res->start))
 		return (map_cleanup(res));
 	res->player = get_point(map, 'P');
-	res->player->x *= 32;
-	res->player->y *= 32;
+	res->player->x *= SIZE;
+	res->player->y *= SIZE;
 	res->exit = get_point(map, 'E');
+	res->start->x *= SIZE;
+	res->start->y *= SIZE;
 	if (!(res->exit))
 		return (map_cleanup(res));
 	get_collectibles(map, &(res->collectibles));

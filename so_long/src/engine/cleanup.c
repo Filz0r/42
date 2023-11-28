@@ -6,12 +6,13 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 22:25:03 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/25 16:06:50 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/28 12:18:31 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/engine_utils.h"
 
+//TODO: This file is GIGA bugged
 void	*map_cleanup(t_map *res)
 {
 	if (res)

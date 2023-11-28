@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:44:45 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/26 18:26:37 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/28 12:12:22 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "../../inc/engine.h"
 #include <string.h>
 
+//TODO: Norm + documentation
 t_img	*create_image(char *path, t_window *win)
 {
 	t_img	*res;
@@ -40,48 +41,64 @@ t_img	*create_image(char *path, t_window *win)
 	return (res);
 }
 
-t_frame	*create_frame(t_window *w,
-	char *asset_path, t_entity type, int frame_num)
+t_img	*create_overlay(t_window *w)
 {
-	t_frame	*res;
+	t_img	*res;
 
-	res = malloc(sizeof(t_frame));
+	res = malloc(sizeof(t_img));
 	if (!res)
 		return (NULL);
-	res->type = type;
-	res->frames = NULL;
-	load_frames(w, &(res->frames), asset_path, frame_num);
-	res->total_frames = frame_num;
-	res->current_frame = 0;
-	res->delay = 0;
-	res->last_updated = 0;
+	res->win = w;
+	res->img_ptr = mlx_new_image(w->mlx_ptr, w->width, w->height);
+	if (!(res->img_ptr))
+	{
+		free(res);
+		ft_putendl_fd("Error creating overlay", 2);
+		return (NULL);
+	}
+	res->w = w->width;
+	res->h = w->height;
+	res->addr = mlx_get_data_addr
+		(res->img_ptr, &(res->bpp), &(res->line_len), &(res->endian));
 	return (res);
 }
 
-void	load_frames(t_window *w, t_list **lst, char *path, int size)
+// Finds the color of the current pixel we are trying to draw
+unsigned int	get_pixel_img(t_img *img, int x, int y)
 {
-	int		i;
-	char	*frame_path;
-	char	*file_path;
-	char	*temp;
+	return (*(unsigned int *)(
+		(img->addr + (y * img->line_len) + (x * img->bpp / 8))));
+}
 
-	i = 0;
-	if (size == 1)
-		ft_lstadd_back(lst, ft_lstnew(create_image(path, w)));
-	else
+// puts the pixel inside the image object
+void	put_pixel_img(t_img *img, int x, int y, int color)
+{
+	char	*dest;
+
+	if (color == (int)0xFF000000)
+		return ;
+	if (x >= 0 && y >= 0 && x <= img->w && y <= img->h)
 	{
-		while (i < (size - 1))
-		{
-			temp = ft_itoa(i);
-			frame_path = ft_strjoin(path, temp);
-			file_path = ft_strjoin(frame_path, ".xpm");
-			ft_lstadd_back(lst,
-				ft_lstnew(create_image(file_path, w)));
-			free(temp);
-			free(frame_path);
-			free(file_path);
-			i++;
-		}
+		dest = img->addr + (y * img->line_len + x * (img->bpp / 8));
+		*(unsigned int *)dest = (unsigned int)color;
 	}
 }
 
+void	put_image_to_image(t_img *src, t_img *dest, int x, int y)
+{
+	int	i;
+	int	k;
+
+	i = 0;
+	while (i < src->h)
+	{
+		k = 0;
+		while (k < src->w)
+		{
+			put_pixel_img(dest, x + k, y + i,
+				get_pixel_img(src, k, i));
+			k++;
+		}
+		i++;
+	}
+}

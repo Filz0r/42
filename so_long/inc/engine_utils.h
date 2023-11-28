@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 21:33:37 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/27 22:32:42 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/28 18:54:44 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,11 @@ typedef enum e_entity {
 }			t_entity;
 
 typedef struct s_point {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
+	double	relative_x;
+	double	relative_y;
 }				t_point;
-
-typedef struct s_rpoint {
-	float	x;
-	float	y;
-}				t_rpoint;
 
 
 typedef struct s_window
@@ -64,13 +61,6 @@ typedef struct s_img {
 	int			line_len;
 }			t_img;
 
-typedef struct s_player {
-	t_point		start;
-	t_point		*current;
-	t_rpoint	smooth;
-	t_rpoint	target;
-}			t_player;
-
 typedef struct s_map {
 	char	**map;
 	t_point	*player;
@@ -84,7 +74,6 @@ typedef struct s_map {
 
 typedef struct s_game {
 	t_window		*win;
-	t_player		*player;
 	t_list			*images;
 	t_map			*map;
 	t_img			*overlay;
@@ -106,10 +95,6 @@ typedef struct s_frame {
 	unsigned long	last_updated;
 }				t_frame;
 
-// Player stuff
-t_player		*load_player(t_game *ptr);
-void			*player_cleanup(t_game *game);
-
 // Map stuff
 int				get_map_width(char **map);
 int				get_map_height(char **map);
@@ -127,10 +112,10 @@ void			select_asset_to_put(t_game *game, char c, t_point pos);
 void			handle_player_render(t_game *game, t_entity animation);
 
 // Movement
-void			move_on_map(t_game *g, int *signal, int x, int y);
-void			handle_movement(t_game *g, int x, int y, int action);
 void			move_player(t_game *game, int action);
+void			check_collision(t_game *g, int x, int y, int action);
 int				on_keypress(int keysym, t_game *game);
+int				will_collide(t_game *g, t_point going_to);
 
 // Window stuff
 void			load_assets(t_window *win, t_list **lst);
@@ -150,5 +135,8 @@ void			destroy_frame(void *ptr);
 //Utils
 t_frame			*find_frame_by_entity(t_list *images, t_entity entity);
 t_img			*get_img_by_entity(t_list *lst, t_entity entity);
+t_point			normalize_point(t_point pt, double threshold_x,
+					double threshold_y);
+int				normalize(double nb, double threshold);
 
 #endif

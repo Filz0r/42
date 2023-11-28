@@ -49,7 +49,7 @@ t_point	*get_point(char **map, char to_find)
 		{
 			if (map[y][x] == to_find)
 			{
-				*res = (t_point){x, y};
+				*res = (t_point){x, y, (double)x, (double)y};
 				return (res);
 			}
 		}
@@ -75,10 +75,9 @@ void	get_collectibles(char **map, t_list **lst)
 			if (map[y][x] == 'C')
 			{
 				temp = malloc(sizeof(t_point));
-				*temp = (t_point){x, y};
+				*temp = (t_point){x, y, (double)x, (double)y};
 				ft_lstadd_back(lst, ft_lstnew((void *)temp));
 			}
 		}
 	}
 }
-

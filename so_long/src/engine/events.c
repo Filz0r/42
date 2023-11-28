@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   window.c                                           :+:      :+:    :+:   */
+/*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/24 14:25:58 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/28 12:18:36 by fparreir         ###   ########.fr       */
+/*   Created: 2023/11/28 12:28:19 by fparreir          #+#    #+#             */
+/*   Updated: 2023/11/28 12:28:19 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/engine_utils.h"
-#include "../../inc/engine.h"
 
-t_window	*new_window(int width, int height, char *name)
+int	on_keypress(int keysym, t_game *game)
 {
-	t_window	*win;
-
-	win = malloc(sizeof(t_window));
-	if (!win)
-		return (NULL);
-	win->mlx_ptr = mlx_init();
-	if (!win->mlx_ptr)
-		return (window_cleanup(win));
-	win->win_ptr = mlx_new_window
-		(win->mlx_ptr, width * SIZE, height * SIZE, name);
-	win->height = height * SIZE;
-	win->width = width * SIZE;
-	return (win);
+	printf("pressed: %d\n", keysym);
+	if (keysym == XK_a || keysym == XK_Left)
+		move_player(game, LEFT);
+	else if (keysym == XK_s || keysym == XK_Down)
+		move_player(game, DOWN);
+	else if (keysym == XK_d || keysym == XK_Right)
+		move_player(game, RIGHT);
+	else if (keysym == XK_w || keysym == XK_Up)
+		move_player(game, UP);
+//	if (keysym == XK_Escape)
+//		quit_game(game);
+	return (1);
 }
+

@@ -11,10 +11,11 @@ LIBFT_DIR = libft
 MLX_DIR = mlx
 LIBFT = $(LIBFT_DIR)/libft.a
 MLX = $(MLX_DIR)/libmlx_Linux.a
-SRC_FILES = so_long.c utils/utils.c utils/errors.c utils/map_parser.c utils/map_utils.c utils/map_utils2.c \
-	 engine/game_init.c engine/game_cleanup.c engine/images.c engine/loader.c engine/map.c engine/player.c \
-	 engine/window.c engine/cleanup.c engine/game_run.c engine/utils.c engine/render.c \
-	 engine/movement.c
+SRC_FILES = so_long.c utils/utils.c utils/errors.c utils/map_parser.c \
+		utils/map_utils.c utils/map_utils2.c engine/game_init.c  \
+		engine/game_cleanup.c engine/images.c engine/loader.c engine/map.c \
+	 	engine/window.c engine/cleanup.c engine/game_run.c engine/utils.c \
+	 	engine/render.c engine/movement.c engine/frame.c engine/events.c
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 
@@ -40,14 +41,13 @@ clion: CFLAGS += -g3
 clion: all
 
 clean:
-	@make -s -C $(LIBFT_DIR) clean
-	@make -s -C $(MLX_DIR) clean
 	@rm -rf $(OBJ_DIR)
 
 fclean: clean
 	@make -C $(LIBFT_DIR) fclean
+	@make -s -C $(MLX_DIR) clean
 	@rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re clion

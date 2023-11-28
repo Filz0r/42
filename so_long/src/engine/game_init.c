@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:09:58 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/27 22:05:39 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/28 10:52:06 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,6 @@ void	*game_init(char **map, const char *name)
 	ptr->images = NULL;
 	load_assets(ptr->win, &(ptr->images));
 	if (!(ptr->images))
-		return (game_cleanup(ptr));
-	ptr->player = load_player(ptr);
-	if (!(ptr->player))
 		return (game_cleanup(ptr));
 	ptr->tick = 0;
 	ptr->frames = 0; //This has to be deleted for delivery
