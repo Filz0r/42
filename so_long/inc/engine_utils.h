@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 21:33:37 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/28 18:54:44 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/28 20:11:11 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,8 @@ void			handle_player_render(t_game *game, t_entity animation);
 void			move_player(t_game *game, int action);
 void			check_collision(t_game *g, int x, int y, int action);
 int				on_keypress(int keysym, t_game *game);
-int				will_collide(t_game *g, t_point going_to);
+void			handle_restof_movement(t_game *g, t_point norm_point,
+					int x, int y);
 
 // Window stuff
 void			load_assets(t_window *win, t_list **lst);
