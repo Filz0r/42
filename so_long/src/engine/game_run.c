@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:38:48 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/27 15:56:32 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/27 22:13:36 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,20 @@ static int	draw_game(t_game *game)
 	struct timespec			current;
 
 	clock_gettime(CLOCK_MONOTONIC, &current);
-	elapsed = (current.tv_sec - last_tick.tv_sec) * 1000000000 + (
+	elapsed = (current.tv_sec - last_tick.tv_sec) * game->ns_time + (
 			current.tv_nsec - last_tick.tv_nsec);
-	render_frame(game);
 	if (elapsed >= game->ns_time)
 	{
+		render_frame(game, game->current);
 		printf("gt: %lu\n", game->tick);
-		nanosleep(&(game->sleep_time), NULL);
+//		nanosleep(&(game->sleep_time), NULL);
 		clock_gettime(CLOCK_MONOTONIC, &last_tick);
 		game->tick++;
+	}
+	if (game->current == PLAYER_WALKING)
+	{
+		game->last = game->current;
+		game->current = PLAYER_IDLE;
 	}
 	game->frames++;//This has to be deleted for delivery
 //	if (game->tick == 20)
@@ -48,7 +53,9 @@ void	game_run(void *ptr)
 	{
 		game->treshold = (double)SIZE / 0.75;
 		game->overlay = create_overlay(game->win);
-		render_frame(game);
+		game->last = PLAYER_IDLE;
+		game->current = PLAYER_IDLE;
+		render_frame(game, game->current);
 		mlx_hook(game->win->win_ptr, KeyPress, KeyPressMask, on_keypress, game);
 		mlx_loop_hook(game->win->mlx_ptr, draw_game, game);
 		mlx_loop(game->win->mlx_ptr);

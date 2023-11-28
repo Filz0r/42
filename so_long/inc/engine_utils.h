@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 21:33:37 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/27 17:17:52 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/27 22:32:42 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ typedef struct s_game {
 	t_list			*images;
 	t_map			*map;
 	t_img			*overlay;
+	t_entity		last;
+	t_entity		current;
 	double			treshold;
 	struct timespec	sleep_time;
 	unsigned long	tick;
@@ -121,8 +123,7 @@ void			put_image_to_image(t_img *src, t_img *dest, int x, int y);
 unsigned int	get_pixel_img(t_img *img, int x, int y);
 void			put_pixel_img(t_img *img, int x, int y, int color);
 t_img			*create_overlay(t_window *w);
-void			select_asset_to_put(t_game *game, char c, t_point pos,
-					t_entity animation);
+void			select_asset_to_put(t_game *game, char c, t_point pos);
 void			handle_player_render(t_game *game, t_entity animation);
 
 // Movement

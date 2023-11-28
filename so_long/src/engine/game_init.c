@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:09:58 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/25 13:56:22 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/27 22:05:39 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,10 @@ void	*game_init(char **map, const char *name)
 	ptr->player = load_player(ptr);
 	if (!(ptr->player))
 		return (game_cleanup(ptr));
-	ptr->overlay = NULL;
 	ptr->tick = 0;
 	ptr->frames = 0; //This has to be deleted for delivery
-	ptr->ns_time = 200000000;
-	ptr->sleep_time = (struct timespec){CYCLE / 1000000000,
-		CYCLE % 1000000000};
+	ptr->ns_time = SECOND - CYCLE;
+	ptr->sleep_time = (struct timespec){CYCLE / SECOND,
+		CYCLE % SECOND};
 	return (ptr);
 }

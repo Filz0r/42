@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 17:16:41 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/27 17:16:41 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/27 22:52:10 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void	move_player(t_game *game, int action)
 	else if (action == RIGHT)
 		handle_movement(game, game->map->player->x + 1,
 			game->map->player->y, RIGHT);
+	game->current = PLAYER_WALKING;
+	render_frame(game, game->current);
 }
 
 void	handle_movement(t_game *g, int x, int y, int action)
@@ -54,35 +56,54 @@ void	handle_movement(t_game *g, int x, int y, int action)
 	if (signal == 1)
 		return ;
 	if (action == UP)
-		g->map->player->y -= 16;
+		g->map->player->y -= SIZE / 4;
 	else if (action == DOWN)
-		g->map->player->y += 16;
+		g->map->player->y += SIZE / 4;
 	else if (action == LEFT)
-		g->map->player->x -= 16;
+		g->map->player->x -= SIZE / 4;
 	else if (action == RIGHT)
-		g->map->player->x += 16;
+		g->map->player->x += SIZE / 4;
 	g->player->target = (t_rpoint)
 	{(float)g->player->current->x, (float)g->player->current->y};
 }
 
 void	move_on_map(t_game *g, int *signal, int x, int y)
 {
-	if (x < 0 || y < 0)
+	float	target_x;
+	float	target_y;
+	int		target_tile_x;
+	int		target_tile_y;
+
+	if (x < 0 || y < 0 || x >= g->win->width || y >= g->win->height)
 	{
 		*signal = 1;
 		return ;
 	}
-	if (g->map->map[y][x] == '0')
+	target_x = g->player->target.x;
+	target_y = g->player->target.y;
+	target_tile_x = target_x / SIZE;
+	target_tile_y = target_y / SIZE;
+	if (g->map->map[target_tile_y][target_tile_x] == '1')
 	{
-		g->map->map[y][x] = 'P';
-		g->map->map[g->map->player->y / SIZE][g->map->player->x / SIZE] = '0';
+		if (target_x >= 0 && target_x < g->win->width
+			&& target_y >= 0 && target_y < g->win->height)
+		{
+			if (target_x < g->player->current->x)
+				target_x = target_tile_x * SIZE + SIZE / 4;
+			else if (target_x > g->player->current->x)
+				target_x = (target_tile_x + 1) * SIZE - SIZE / 4;
+			if (target_y < g->player->current->y)
+				target_y = target_tile_y * SIZE + SIZE / 4;
+			else if (target_y > g->player->current->y)
+				target_y = (target_tile_y + 1) * SIZE - SIZE / 4;
+		}
 	}
-	else if (g->map->map[y][x] == '1')
+	if (g->map->map[target_tile_y][target_tile_x] == 'E')
 	{
 		*signal = 1;
 		return ;
 	}
-	else if (g->map->map[y][x] == 'C')
+	if (g->map->map[y][x] == 'C')
 	{
 		g->map->map[y][x] = 'P';
 		g->map->map[g->map->player->y / SIZE][g->map->player->x / SIZE] = '0';

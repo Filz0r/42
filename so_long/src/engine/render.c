@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 17:01:10 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/27 16:01:29 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/27 22:33:19 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,17 +67,17 @@ void	render_frame(t_game *game, t_entity animation)
 		while (game->map->map[y][x])
 		{
 			pos = (t_point){x * SIZE, y * SIZE};
-			select_asset_to_put(game, game->map->map[y][x], pos, animation);
+			select_asset_to_put(game, game->map->map[y][x], pos);
 			x++;
 		}
 		y++;
 	}
+	handle_player_render(game, animation);
 	mlx_put_image_to_window(game->overlay->win->mlx_ptr,
 		game->overlay->win->win_ptr, game->overlay->img_ptr, 0, 0);
 }
 
-void	select_asset_to_put(t_game *game, char c, t_point pos,
-	t_entity animation)
+void	select_asset_to_put(t_game *game, char c, t_point pos)
 {
 	t_img			*wall;
 	t_img			*floor;
@@ -96,7 +96,8 @@ void	select_asset_to_put(t_game *game, char c, t_point pos,
 		put_image_to_image(collectible, game->overlay, pos.x, pos.y);
 	else if (c == 'E')
 		put_image_to_image(exit, game->overlay, pos.x, pos.y);
-	handle_player_render(game, animation);
+//	else if (c == 'P')
+//		handle_player_render(game, animation);
 }
 
 void	handle_player_render(t_game *game, t_entity animation)
