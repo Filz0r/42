@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 12:05:34 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/28 12:05:34 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/29 16:13:17 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_frame	*create_frame(t_window *w,
 	res = malloc(sizeof(t_frame));
 	if (!res)
 		return (NULL);
+	ft_memset(res, 0, sizeof(t_frame));
 	res->type = type;
 	res->frames = NULL;
 	load_frames(w, &(res->frames), asset_path, frame_num);

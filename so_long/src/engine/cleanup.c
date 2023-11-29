@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 22:25:03 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/28 12:18:31 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/29 19:07:38 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	*map_cleanup(t_map *res)
 		if (res->exit)
 			free(res->exit);
 		if (res->collectibles)
-			ft_lstiter(res->collectibles, free);
+			ft_lstclear(&(res->collectibles), free);
+		free_game_map(res->map);
 		free(res);
 	}
 	return (NULL);
@@ -59,7 +60,7 @@ void	destroy_image(void *ptr)
 	t_img	*img;
 
 	img = (t_img *)ptr;
-	if (img != NULL && img->win != NULL && img->win->mlx_ptr != NULL)
+	if (img != NULL)
 	{
 		mlx_destroy_image(img->win->mlx_ptr, img->img_ptr);
 		free(img);
@@ -71,9 +72,24 @@ void	destroy_frame(void *ptr)
 	t_frame	*frame;
 
 	frame = (t_frame *)ptr;
-	if (frame)
+	if (frame != NULL)
 	{
-		ft_lstclear(&(frame->frames), &destroy_image);
+		ft_lstclear(&(frame->frames), destroy_image);
 		free(frame);
 	}
+}
+
+void	free_game_map(char **map)
+{
+	char	**temp;
+	int		i;
+
+	i = 0;
+	if (!map || !(*map))
+		return ;
+	temp = map;
+	while (temp[i] != 0)
+		free(temp[i++]);
+	free(temp);
+//	*map = NULL;
 }

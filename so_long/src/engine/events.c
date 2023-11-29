@@ -40,15 +40,17 @@ void	remove_collectible(t_game *g, t_point norm_point)
 	while (curr)
 	{
 		temp = (t_point *)curr->content;
-		if (temp && temp->x / SIZE == norm_point.x
-			&& temp->y / SIZE == norm_point.y)
+		if (temp && (temp->x / SIZE) == norm_point.x
+			&& (temp->y / SIZE) == norm_point.y)
 		{
 			if (prev)
 				prev->next = curr->next;
 			else
 				g->map->collectibles = curr->next;
-			free(temp);
-			free(curr);
+			g->map->collectibles--;
+//			free(temp);
+//			free(curr);
+			ft_lstdelone(curr, free);
 			break ;
 		}
 		prev = curr;

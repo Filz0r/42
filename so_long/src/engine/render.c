@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 17:01:10 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/28 23:04:11 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/29 19:24:43 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,4 @@ void	render_other_assets(t_game *game)
 		}
 
 	}
-
 }

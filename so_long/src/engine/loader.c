@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:45:42 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/27 15:40:54 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/29 16:15:17 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_map	*load_map(char **map)
 	res = malloc(sizeof(t_map));
 	if (!res)
 		return (NULL);
+	ft_memset(res, 0, sizeof(t_map));
 	res->map = map;
 	res->collectibles = NULL;
 	res->height = get_map_height(map);

@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 10:35:15 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/27 21:48:17 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/29 14:52:47 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # define DIE_PATH	"assets/player/dying/"
 
 // Library stuff
-void	*game_init(char **map, const char *name);
+void	*game_init(char **map);
 void	*game_cleanup(void *ptr); //todo: this is bugged and causes segfault
-void	game_run(void *ptr);
+void	*game_run(void *ptr, char *name);
 
 #endif //ENGINE_H

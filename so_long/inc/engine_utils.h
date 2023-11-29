@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 21:33:37 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/29 00:09:12 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/29 19:08:02 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,8 @@ void			*window_cleanup(t_window *w);
 void			*images_cleanup(t_list *lst);
 void			destroy_image(void *ptr);
 void			destroy_frame(void *ptr);
+void			free_game_map(char **map);
+
 
 //Utils
 t_frame			*find_frame_by_entity(t_list *images, t_entity entity);

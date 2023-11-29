@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:38:48 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/29 00:16:41 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/29 18:50:53 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,28 +35,54 @@ static int	draw_game(t_game *game)
 		game->last = game->current;
 		game->current = PLAYER_IDLE;
 	}
-//	if (game->tick == 10)
+//	if (game->tick == 5)
 //	{
-//		exit(1);
 //		game_cleanup(game);
+//		exit(1);
 //	}
 	return (0);
 }
 
-void	game_run(void *ptr)
+static int quit_game(t_game *game)
+{
+	int	i;
+
+	i = -1;
+	while (game->map->map[++i] != 0)
+		free(game->map->map[i]);
+	free(game->map->map);
+	game_cleanup(game);
+	exit(EXIT_SUCCESS);
+}
+
+void	*game_run(void *ptr, char *name)
 {
 	t_game	*game;
 
 	game = (t_game *)ptr;
 	if (game)
 	{
-		game->treshold = (double)SIZE / 0.75;
+		game->win = new_window(game->map->width, game->map->height, name);
+		if (!(game->win))
+			return (game_cleanup(ptr));
+		game->images = NULL;
+		load_assets(game->win, &(game->images));
+		if (!(game->images))
+			return (game_cleanup(ptr));
+//		game->treshold = (double)SIZE / 0.75;
 		game->overlay = create_overlay(game->win);
 		game->last = PLAYER_IDLE;
 		game->current = PLAYER_IDLE;
 		render_frame(game, game->current);
-		mlx_hook(game->win->win_ptr, KeyPress, KeyPressMask, on_keypress, game);
+		mlx_hook(game->win->win_ptr, DestroyNotify, \
+		StructureNotifyMask, quit_game, game);
+		mlx_hook(game->win->win_ptr, KeyPress, \
+		KeyPressMask, on_keypress, game);
 		mlx_loop_hook(game->win->mlx_ptr, draw_game, game);
+//		mlx_expose_hook(game->win->mlx_ptr, draw_game, game);
 		mlx_loop(game->win->mlx_ptr);
 	}
+	return (game_cleanup(game));
 }
+
+

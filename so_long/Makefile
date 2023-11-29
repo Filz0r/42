@@ -38,7 +38,7 @@ $(LIBFT):
 $(MLX):
 	@make -s -C $(MLX_DIR)
 
-clion: CFLAGS += -g3
+clion: CFLAGS += -g3# -fsanitize=address
 clion: all
 
 clean:
