@@ -43,7 +43,7 @@ static int	draw_game(t_game *game)
 	return (0);
 }
 
-static int quit_game(t_game *game)
+int quit_game(t_game *game)
 {
 	int	i;
 
