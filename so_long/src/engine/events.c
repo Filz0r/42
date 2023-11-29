@@ -24,8 +24,8 @@ int	on_keypress(int keysym, t_game *game)
 		return (move_player(game, RIGHT));
 	else if (keysym == XK_w || keysym == XK_Up)
 		return (move_player(game, UP));
-//	if (keysym == XK_Escape)
-//		quit_game(game);
+	if (keysym == XK_Escape)
+		quit_game(game);
 	return (1);
 }
 

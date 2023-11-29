@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:38:48 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/29 18:50:53 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/29 21:40:10 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	draw_game(t_game *game)
 	return (0);
 }
 
-static int quit_game(t_game *game)
+int quit_game(t_game *game)
 {
 	int	i;
 
@@ -82,7 +82,7 @@ void	*game_run(void *ptr, char *name)
 //		mlx_expose_hook(game->win->mlx_ptr, draw_game, game);
 		mlx_loop(game->win->mlx_ptr);
 	}
-	return (game_cleanup(game));
+	return ((void *)0);
 }
 
 
