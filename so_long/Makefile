@@ -15,7 +15,8 @@ SRC_FILES = so_long.c utils/utils.c utils/errors.c utils/map_parser.c \
 		utils/map_utils.c utils/map_utils2.c engine/game_init.c  \
 		engine/game_cleanup.c engine/images.c engine/loader.c engine/map.c \
 	 	engine/window.c engine/cleanup.c engine/game_run.c engine/utils.c \
-	 	engine/render.c engine/movement.c engine/frame.c engine/events.c
+	 	engine/render.c engine/movement.c engine/frame.c engine/events.c \
+	 	engine/debug.c
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 

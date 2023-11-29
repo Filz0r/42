@@ -32,6 +32,7 @@ void	*game_init(char **map, const char *name)
 	load_assets(ptr->win, &(ptr->images));
 	if (!(ptr->images))
 		return (game_cleanup(ptr));
+	ptr->mirror = 0;
 	ptr->tick = 0;
 	ptr->frames = 0; //This has to be deleted for delivery
 	ptr->ns_time = SECOND - CYCLE;

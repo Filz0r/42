@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 21:33:37 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/28 20:11:11 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/29 00:09:12 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ typedef struct s_game {
 	t_img			*overlay;
 	t_entity		last;
 	t_entity		current;
+	int				mirror;
 	double			treshold;
 	struct timespec	sleep_time;
 	unsigned long	tick;
@@ -104,7 +105,8 @@ t_point			*get_point(char **map, char to_find);
 
 // Rendering stuff
 void			render_frame(t_game *game, t_entity animation);
-void			put_image_to_image(t_img *src, t_img *dest, int x, int y);
+void			put_image_to_overlay(t_img *src, t_game *g,
+					t_entity type, t_point pos);
 unsigned int	get_pixel_img(t_img *img, int x, int y);
 void			put_pixel_img(t_img *img, int x, int y, int color);
 t_img			*create_overlay(t_window *w);
@@ -112,8 +114,8 @@ void			select_asset_to_put(t_game *game, char c, t_point pos);
 void			handle_player_render(t_game *game, t_entity animation);
 
 // Movement
-void			move_player(t_game *game, int action);
-void			check_collision(t_game *g, int x, int y, int action);
+int				move_player(t_game *game, int action);
+int				check_collision(t_game *g, int x, int y, int action);
 int				on_keypress(int keysym, t_game *game);
 void			handle_restof_movement(t_game *g, t_point norm_point,
 					int x, int y);

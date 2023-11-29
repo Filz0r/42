@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:38:48 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/27 22:13:36 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/29 00:16:41 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	draw_game(t_game *game)
 	if (elapsed >= game->ns_time)
 	{
 		render_frame(game, game->current);
-		printf("gt: %lu\n", game->tick);
+//		print_time_status(game, &last_tick);
 //		nanosleep(&(game->sleep_time), NULL);
 		clock_gettime(CLOCK_MONOTONIC, &last_tick);
 		game->tick++;
@@ -35,11 +35,10 @@ static int	draw_game(t_game *game)
 		game->last = game->current;
 		game->current = PLAYER_IDLE;
 	}
-	game->frames++;//This has to be deleted for delivery
-//	if (game->tick == 20)
+//	if (game->tick == 10)
 //	{
 //		exit(1);
-//		game_cleanup((void *)game);
+//		game_cleanup(game);
 //	}
 	return (0);
 }

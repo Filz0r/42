@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:44:45 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/28 12:12:22 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/28 22:33:21 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,19 +84,27 @@ void	put_pixel_img(t_img *img, int x, int y, int color)
 	}
 }
 
-void	put_image_to_image(t_img *src, t_img *dest, int x, int y)
+void	put_image_to_overlay(t_img *src, t_game *g, t_entity type, t_point pos)
 {
 	int	i;
 	int	k;
+	int	x;
+	int	y;
 
 	i = 0;
+	x = pos.x;
+	y = pos.y;
 	while (i < src->h)
 	{
 		k = 0;
 		while (k < src->w)
 		{
-			put_pixel_img(dest, x + k, y + i,
-				get_pixel_img(src, k, i));
+			if (type == PLAYER_WALKING && g->mirror)
+				put_pixel_img(g->overlay, x + src->h - k - 1, y + i,
+					get_pixel_img(src, k, i));
+			else
+				put_pixel_img(g->overlay, x + k, y + i,
+					get_pixel_img(src, k, i));
 			k++;
 		}
 		i++;

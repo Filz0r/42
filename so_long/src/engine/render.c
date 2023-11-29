@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 17:01:10 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/27 22:33:19 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/28 23:04:11 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	render_frame(t_game *game, t_entity animation)
 	handle_player_render(game, animation);
 	mlx_put_image_to_window(game->overlay->win->mlx_ptr,
 		game->overlay->win->win_ptr, game->overlay->img_ptr, 0, 0);
+	game->frames++;
 }
 
 void	select_asset_to_put(t_game *game, char c, t_point pos)
@@ -47,13 +48,13 @@ void	select_asset_to_put(t_game *game, char c, t_point pos)
 	floor = get_img_by_entity(game->images, FLOOR);
 	collectible = get_img_by_entity(game->images, COLLECTIBLE);
 	exit = get_img_by_entity(game->images, EXIT);
-	put_image_to_image(floor, game->overlay, pos.x, pos.y);
+	put_image_to_overlay(floor, game, FLOOR, pos);
 	if (c == '1')
-		put_image_to_image(wall, game->overlay, pos.x, pos.y);
+		put_image_to_overlay(wall, game, WALL, pos);
 	else if (c == 'C')
-		put_image_to_image(collectible, game->overlay, pos.x, pos.y);
+		put_image_to_overlay(collectible, game, COLLECTIBLE, pos);
 	else if (c == 'E')
-		put_image_to_image(exit, game->overlay, pos.x, pos.y);
+		put_image_to_overlay(exit, game, EXIT, pos);
 }
 
 void	handle_player_render(t_game *game, t_entity animation)
@@ -66,7 +67,11 @@ void	handle_player_render(t_game *game, t_entity animation)
 		p_frame->current_frame = 0;
 	p_img = (t_img *)(ft_lstget(p_frame->frames,
 				p_frame->current_frame))->content;
-	put_image_to_image(p_img, game->overlay,
-		game->map->player->x, game->map->player->y);
+	if (game->mirror)
+		put_image_to_overlay(p_img, game,
+			PLAYER_WALKING, *(game->map->player));
+	else
+		put_image_to_overlay(p_img, game,
+			PLAYER_WALKING, *(game->map->player));
 	p_frame->current_frame++;
 }
