@@ -6,11 +6,12 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 12:28:19 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/29 00:13:37 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/29 12:39:59 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/engine_utils.h"
+#include "../../inc/engine.h"
 
 int	on_keypress(int keysym, t_game *game)
 {
@@ -28,3 +29,29 @@ int	on_keypress(int keysym, t_game *game)
 	return (1);
 }
 
+void	remove_collectible(t_game *g, t_point norm_point)
+{
+	t_list	*curr;
+	t_list	*prev;
+	t_point	*temp;
+
+	prev = NULL;
+	curr = g->map->collectibles;
+	while (curr)
+	{
+		temp = (t_point *)curr->content;
+		if (temp && temp->x / SIZE == norm_point.x
+			&& temp->y / SIZE == norm_point.y)
+		{
+			if (prev)
+				prev->next = curr->next;
+			else
+				g->map->collectibles = curr->next;
+			free(temp);
+			free(curr);
+			break ;
+		}
+		prev = curr;
+		curr = curr->next;
+	}
+}

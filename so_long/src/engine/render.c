@@ -31,6 +31,7 @@ void	render_frame(t_game *game, t_entity animation)
 		}
 		y++;
 	}
+	render_other_assets(game);
 	handle_player_render(game, animation);
 	mlx_put_image_to_window(game->overlay->win->mlx_ptr,
 		game->overlay->win->win_ptr, game->overlay->img_ptr, 0, 0);
@@ -41,20 +42,12 @@ void	select_asset_to_put(t_game *game, char c, t_point pos)
 {
 	t_img			*wall;
 	t_img			*floor;
-	t_img			*collectible;
-	t_img			*exit;
 
 	wall = get_img_by_entity(game->images, WALL);
 	floor = get_img_by_entity(game->images, FLOOR);
-	collectible = get_img_by_entity(game->images, COLLECTIBLE);
-	exit = get_img_by_entity(game->images, EXIT);
 	put_image_to_overlay(floor, game, FLOOR, pos);
 	if (c == '1')
 		put_image_to_overlay(wall, game, WALL, pos);
-	else if (c == 'C')
-		put_image_to_overlay(collectible, game, COLLECTIBLE, pos);
-	else if (c == 'E')
-		put_image_to_overlay(exit, game, EXIT, pos);
 }
 
 void	handle_player_render(t_game *game, t_entity animation)
@@ -74,4 +67,28 @@ void	handle_player_render(t_game *game, t_entity animation)
 		put_image_to_overlay(p_img, game,
 			PLAYER_WALKING, *(game->map->player));
 	p_frame->current_frame++;
+}
+
+void	render_other_assets(t_game *game)
+{
+	t_img	*exit;
+	t_img	*collectible;
+	t_list	*coll_lst;
+
+	collectible = get_img_by_entity(game->images, COLLECTIBLE);
+	exit = get_img_by_entity(game->images, EXIT);
+	if (game->map->collectibles == NULL)
+		put_image_to_overlay(exit, game, EXIT, *(game->map->exit));
+	else
+	{
+		coll_lst = game->map->collectibles;
+		while (coll_lst)
+		{
+			put_image_to_overlay(collectible, game,
+				COLLECTIBLE, *((t_point *)(coll_lst->content)));
+			coll_lst = coll_lst->next;
+		}
+
+	}
+
 }

@@ -31,6 +31,8 @@ t_map	*load_map(char **map)
 	res->player->x *= SIZE;
 	res->player->y *= SIZE;
 	res->exit = get_point(map, 'E');
+	res->exit->x *= SIZE;
+	res->exit->y *= SIZE;
 	res->start->x *= SIZE;
 	res->start->y *= SIZE;
 	if (!(res->exit))

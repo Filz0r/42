@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../inc/engine_utils.h"
+#include "../../inc/engine.h"
 
 // Calculates the height of the map
 int	get_map_height(char **map)
@@ -75,7 +76,7 @@ void	get_collectibles(char **map, t_list **lst)
 			if (map[y][x] == 'C')
 			{
 				temp = malloc(sizeof(t_point));
-				*temp = (t_point){x, y, (double)x, (double)y};
+				*temp = (t_point){x * SIZE, y * SIZE, (double)x, (double)y};
 				ft_lstadd_back(lst, ft_lstnew((void *)temp));
 			}
 		}

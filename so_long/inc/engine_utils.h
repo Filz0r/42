@@ -112,6 +112,8 @@ void			put_pixel_img(t_img *img, int x, int y, int color);
 t_img			*create_overlay(t_window *w);
 void			select_asset_to_put(t_game *game, char c, t_point pos);
 void			handle_player_render(t_game *game, t_entity animation);
+void			render_other_assets(t_game *game);
+void			remove_collectible(t_game *g, t_point norm_point);
 
 // Movement
 int				move_player(t_game *game, int action);
