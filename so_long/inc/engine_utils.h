@@ -140,4 +140,7 @@ t_point			normalize_point(t_point pt, double threshold_x,
 					double threshold_y);
 int				normalize(double nb, double threshold);
 
+// Debugging functions not used in running code
+void			print_time_status(t_game *g, struct timespec *last_tick);
+
 #endif
