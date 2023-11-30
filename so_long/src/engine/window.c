@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 14:25:58 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/29 23:49:17 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/30 19:00:09 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ t_window	*new_window(int width, int height, char *name)
 	if (!win->mlx_ptr)
 		return (window_cleanup(win));
 	win->win_ptr = mlx_new_window
-		(win->mlx_ptr, width * SIZE, height * SIZE, name);
+		(win->mlx_ptr, width * SIZE, (height * SIZE) + SIZE, name);
 	if (!win->win_ptr)
 		return (window_cleanup(win));
-	win->height = height * SIZE;
+	win->height = (height * SIZE) + SIZE;
 	win->width = width * SIZE;
 	return (win);
 }

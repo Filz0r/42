@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 21:33:37 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/30 12:08:50 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/30 19:36:17 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ typedef enum e_entity {
 	FLOOR,
 	WALL,
 	COLLECTIBLE,
-	EXIT
+	EXIT,
+	DIGITS
 }			t_entity;
 
 typedef struct s_point {
@@ -79,6 +80,7 @@ typedef struct s_game {
 	t_img			*overlay;
 	t_entity		last;
 	t_entity		current;
+	int				moves;
 	int				mirror;
 	struct timespec	sleep_time;
 	unsigned long	tick;
@@ -115,6 +117,11 @@ void			select_asset_to_put(t_game *game, char c, t_point pos);
 void			handle_player_render(t_game *game, t_entity animation);
 void			render_other_assets(t_game *game);
 void			remove_collectible(t_game *g, t_point norm_point);
+void			fill_bottom(t_game *g);
+void			draw_game_ticks(t_game *g);
+void			draw_game_moves(t_game *g);
+
+
 
 // Movement
 int				move_player(t_game *game, int action);

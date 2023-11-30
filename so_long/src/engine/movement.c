@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 17:16:41 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/30 12:15:40 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/30 19:41:34 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	handle_restof_movement(t_game *g, t_point norm_point, int x, int y)
 
 	interpolated = interpolate_point(*(g->map->player),
 			(t_point){x, y, x, y}, 0.3);
-//	if (g->map->map[norm_point.y][norm_point.x] == 'C')
 	if (g->map->map[norm_point.y][norm_point.x] == '1')
 		return ;
 	else if (g->map->map[norm_point.y][norm_point.x] == 'C')
@@ -68,6 +67,7 @@ void	handle_restof_movement(t_game *g, t_point norm_point, int x, int y)
 	else if (g->map->map[norm_point.y][norm_point.x] == 'E'
 		&& g->map->collectibles == NULL)
 		quit_game(g);
+	g->moves++;
 	*(g->map->player) = interpolated;
 	render_frame(g, g->current);
 }
