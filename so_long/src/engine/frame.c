@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 12:05:34 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/29 23:57:54 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/30 19:48:09 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ void	load_frames(t_window *w, t_list **lst, char *path, int size)
 	char	*file_path;
 	char	*temp;
 
-	i = 0;
 	if (size == 1)
 		ft_lstadd_back(lst, ft_lstnew(create_image(path, w)));
 	else
 	{
-		while (i < (size - 1))
+		i = 0;
+		while (i <= (size - 1))
 		{
 			temp = ft_itoa(i);
 			frame_path = ft_strjoin(path, temp);
