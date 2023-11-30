@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:45:42 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/29 16:15:17 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/30 19:50:26 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,13 @@ t_map	*load_map(char **map)
 	res->collectibles = NULL;
 	res->height = get_map_height(map);
 	res->width = get_map_width(map);
-	res->start = get_point(map, 'P');
-	if (!(res->start))
-		return (map_cleanup(res));
 	res->player = get_point(map, 'P');
-	res->player->x *= SIZE;
-	res->player->y *= SIZE;
+	if (!(res->player))
+		return (map_cleanup(res));
+	*(res->player) = scale_up(*(res->player));
+	res->start = *(res->player);
 	res->exit = get_point(map, 'E');
-	res->exit->x *= SIZE;
-	res->exit->y *= SIZE;
-	res->start->x *= SIZE;
-	res->start->y *= SIZE;
+	*(res->exit) = scale_up(*(res->exit));
 	if (!(res->exit))
 		return (map_cleanup(res));
 	get_collectibles(map, &(res->collectibles));
@@ -60,5 +56,7 @@ void	load_assets(t_window *win, t_list **lst)
 	ft_lstadd_back(lst,
 		ft_lstnew(create_frame(win, WALK_PATH, PLAYER_WALKING, 4)));
 	ft_lstadd_back(lst,
-		ft_lstnew(create_frame(win, DIE_PATH, PLAYER_DYING, 4)));
+		ft_lstnew(create_frame(win, DIE_PATH, PLAYER_DYING, 3)));
+	ft_lstadd_back(lst,
+		ft_lstnew(create_frame(win, DIGIT_PATH, DIGITS, 10)));
 }

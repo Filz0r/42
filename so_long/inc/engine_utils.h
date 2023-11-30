@@ -64,7 +64,7 @@ typedef struct s_img {
 typedef struct s_map {
 	char	**map;
 	t_point	*player;
-	t_point	*start;
+	t_point	start;
 	t_point	*exit;
 	t_list	*collectibles;
 	int		width;
@@ -147,6 +147,7 @@ t_point			normalize_point(t_point pt, double threshold_x,
 int				normalize(double nb, double threshold);
 t_point			interpolate_point(t_point current, t_point target,
 					double factor);
+t_point			scale_up(t_point pt);
 
 // Debugging functions not used in running code
 void			print_time_status(t_game *g, struct timespec *last_tick);

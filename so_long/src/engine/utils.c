@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../inc/engine_utils.h"
+#include "../../inc/engine.h"
 
 int	normalize(double nb, double threshold)
 {
@@ -68,4 +69,9 @@ t_point	interpolate_point(t_point current, t_point target, double factor)
 		current.y + factor * (target.y - current.y),
 		current.x + factor * (target.x - current.x),
 		current.y + factor * (target.y - current.y)});
+}
+
+t_point		scale_up(t_point pt)
+{
+	return ((t_point){pt.x * SIZE, pt.y * SIZE, pt.x * SIZE, pt.y * SIZE});
 }
