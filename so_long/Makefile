@@ -33,7 +33,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(CC) $(CFLAGS) -o $@ -c $< $(INCLUDES)
 
 $(LIBFT):
-	@make -s -C $(LIBFT_DIR)
+	@make -s -C $(LIBFT_DIR) debug
 
 $(MLX):
 	@make -s -C $(MLX_DIR)

@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 12:28:19 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/29 12:39:59 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/30 01:14:31 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,34 @@ void	remove_collectible(t_game *g, t_point norm_point)
 				prev->next = curr->next;
 			else
 				g->map->collectibles = curr->next;
-			g->map->collectibles--;
-//			free(temp);
-//			free(curr);
+			g->map->col_count--;
 			ft_lstdelone(curr, free);
 			break ;
 		}
 		prev = curr;
 		curr = curr->next;
 	}
+}
+
+int	quit_game(t_game *game)
+{
+	int	i;
+
+	i = 0;
+	if (game)
+	{
+		while (game->map->map[i] != 0)
+			free(game->map->map[i++]);
+		free(game->map->map);
+		if (game->map)
+			map_cleanup(game->map);
+		if (game->overlay)
+			destroy_image(game->overlay);
+		if (game->images)
+			images_cleanup(game->images);
+		if (game->win)
+			window_cleanup(game->win);
+	}
+	free(game);
+	exit(0);
 }

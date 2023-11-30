@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 21:33:37 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/29 20:46:48 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/30 01:05:18 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,9 @@ typedef struct s_game {
 	t_entity		last;
 	t_entity		current;
 	int				mirror;
-	double			treshold;
 	struct timespec	sleep_time;
 	unsigned long	tick;
-	unsigned long	frames;//This has to be deleted for delivery
+	unsigned long	frames;
 	unsigned long	ns_time;
 }				t_game;
 
@@ -92,9 +91,11 @@ typedef struct s_frame {
 	t_entity		type;
 	int				total_frames;
 	int				current_frame;
-	unsigned long	delay;
-	unsigned long	last_updated;
 }				t_frame;
+
+// game stuff
+int				quit_game(t_game *game);
+
 
 // Map stuff
 int				get_map_width(char **map);
@@ -136,8 +137,6 @@ void			*window_cleanup(t_window *w);
 void			*images_cleanup(t_list *lst);
 void			destroy_image(void *ptr);
 void			destroy_frame(void *ptr);
-void			free_game_map(char ***map);
-int quit_game(t_game *game);
 
 
 //Utils

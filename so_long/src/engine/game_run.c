@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:38:48 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/29 21:40:10 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/30 01:07:56 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,25 +35,10 @@ static int	draw_game(t_game *game)
 		game->last = game->current;
 		game->current = PLAYER_IDLE;
 	}
-//	if (game->tick == 5)
-//	{
-//		game_cleanup(game);
-//		exit(1);
-//	}
 	return (0);
 }
 
-int quit_game(t_game *game)
-{
-	int	i;
 
-	i = -1;
-	while (game->map->map[++i] != 0)
-		free(game->map->map[i]);
-	free(game->map->map);
-	game_cleanup(game);
-	exit(EXIT_SUCCESS);
-}
 
 void	*game_run(void *ptr, char *name)
 {
@@ -69,7 +54,6 @@ void	*game_run(void *ptr, char *name)
 		load_assets(game->win, &(game->images));
 		if (!(game->images))
 			return (game_cleanup(ptr));
-//		game->treshold = (double)SIZE / 0.75;
 		game->overlay = create_overlay(game->win);
 		game->last = PLAYER_IDLE;
 		game->current = PLAYER_IDLE;
@@ -79,8 +63,8 @@ void	*game_run(void *ptr, char *name)
 		mlx_hook(game->win->win_ptr, KeyPress, \
 		KeyPressMask, on_keypress, game);
 		mlx_loop_hook(game->win->mlx_ptr, draw_game, game);
-//		mlx_expose_hook(game->win->mlx_ptr, draw_game, game);
 		mlx_loop(game->win->mlx_ptr);
+//		mlx_expose_hook(game->win->mlx_ptr, draw_game, game);
 	}
 	return ((void *)0);
 }
