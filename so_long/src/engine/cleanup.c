@@ -19,8 +19,8 @@ void	*map_cleanup(t_map *res)
 	{
 		if (res->player)
 			free(res->player);
-		if (res->start)
-			free(res->start);
+//		if (res->start)
+//			free(res->start);
 		if (res->exit)
 			free(res->exit);
 		if (res->collectibles)
