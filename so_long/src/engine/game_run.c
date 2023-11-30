@@ -60,11 +60,10 @@ void	*game_run(void *ptr, char *name)
 		render_frame(game, game->current);
 		mlx_hook(game->win->win_ptr, DestroyNotify, \
 		StructureNotifyMask, quit_game, game);
-		mlx_hook(game->win->win_ptr, KeyPress, \
-		KeyPressMask, on_keypress, game);
+		mlx_hook(game->win->win_ptr, KeyRelease, \
+		KeyReleaseMask, on_key, game);
 		mlx_loop_hook(game->win->mlx_ptr, draw_game, game);
 		mlx_loop(game->win->mlx_ptr);
-//		mlx_expose_hook(game->win->mlx_ptr, draw_game, game);
 	}
 	return ((void *)0);
 }

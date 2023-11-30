@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 21:33:37 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/30 01:05:18 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/30 12:08:50 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void			remove_collectible(t_game *g, t_point norm_point);
 // Movement
 int				move_player(t_game *game, int action);
 int				check_collision(t_game *g, int x, int y, int action);
-int				on_keypress(int keysym, t_game *game);
+int				on_key(int keysym, t_game *game);
 void			handle_restof_movement(t_game *g, t_point norm_point,
 					int x, int y);
 
@@ -145,6 +145,8 @@ t_img			*get_img_by_entity(t_list *lst, t_entity entity);
 t_point			normalize_point(t_point pt, double threshold_x,
 					double threshold_y);
 int				normalize(double nb, double threshold);
+t_point			interpolate_point(t_point current, t_point target,
+					double factor);
 
 // Debugging functions not used in running code
 void			print_time_status(t_game *g, struct timespec *last_tick);

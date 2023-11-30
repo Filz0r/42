@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 18:38:14 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/28 18:53:54 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/30 12:12:19 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../inc/engine_utils.h"
@@ -60,4 +60,12 @@ t_point	normalize_point(t_point point,
 		point.relative_x,
 		point.relative_y
 	});
+}
+
+t_point	interpolate_point(t_point current, t_point target, double factor)
+{
+	return ((t_point){current.x + factor * (target.x - current.x),
+		current.y + factor * (target.y - current.y),
+		current.x + factor * (target.x - current.x),
+		current.y + factor * (target.y - current.y)});
 }

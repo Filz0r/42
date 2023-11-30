@@ -13,7 +13,7 @@
 #include "../../inc/engine_utils.h"
 #include "../../inc/engine.h"
 
-int	on_keypress(int keysym, t_game *game)
+int	on_key(int keysym, t_game *game)
 {
 	printf("pressed: %d\n", keysym);
 	if (keysym == XK_a || keysym == XK_Left)

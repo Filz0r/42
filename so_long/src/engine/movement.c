@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 17:16:41 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/29 12:33:02 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/30 12:15:40 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	check_collision(t_game *g, int x, int y, int action)
 	else if (action == LEFT)
 		norm_check = normalize_point(check, 0.3515, 0.45);
 	else if (action == RIGHT)
-		norm_check = normalize_point(check, 0.525, 0.45);
+		norm_check = normalize_point(check, 0.725, 0.45);
 	else
 		norm_check = normalize_point(check, 0.375, 0.55);
 	if (action == RIGHT)
@@ -56,14 +56,18 @@ int	check_collision(t_game *g, int x, int y, int action)
 
 void	handle_restof_movement(t_game *g, t_point norm_point, int x, int y)
 {
+	t_point	interpolated;
+
+	interpolated = interpolate_point(*(g->map->player),
+			(t_point){x, y, x, y}, 0.3);
 //	if (g->map->map[norm_point.y][norm_point.x] == 'C')
-	(void)norm_point;
 	if (g->map->map[norm_point.y][norm_point.x] == '1')
 		return ;
 	else if (g->map->map[norm_point.y][norm_point.x] == 'C')
 		remove_collectible(g, norm_point);
-//	else if (g->map->map[norm_point.y][norm_point.x] == 'E'
-//		&& g->map->collectibles == NULL)
-	*(g->map->player) = (t_point){x, y, (double)x, (double)y};
+	else if (g->map->map[norm_point.y][norm_point.x] == 'E'
+		&& g->map->collectibles == NULL)
+		quit_game(g);
+	*(g->map->player) = interpolated;
 	render_frame(g, g->current);
 }
