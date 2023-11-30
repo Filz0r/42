@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 21:19:11 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/25 11:02:49 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/30 01:12:48 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	**validate_map(char *map_path)
 	if (check_file_path(map_path))
 		errors(result, 1);
 	else
-		get_map(map_path, &result);
+		result = get_map(map_path);
 	if (result && *result == NULL)
 		errors(result, 0);
 	if (result && *result != NULL && check_for_invalid(result))
@@ -61,41 +61,36 @@ int	check_file_path(char *file)
 }
 
 // Opens the file where the map is inside and loads it into memory.
-void	get_map(char *map_path, char ***temp)
+char	**get_map(char *map_path)
 {
+	char		**ret;
 	char		*result;
 	int			file;
 
-	if (*temp != NULL)
-	{
-		return ;
-	}
 	file = open(map_path, O_RDONLY);
 	result = read_map(file);
-	*temp = ft_split(result, '\n');
+	ret = ft_split(result, '\n');
 	free(result);
 	close(file);
+	return (ret);
 }
 
 // reads the file line by line and places it inside a single string
 char	*read_map(int fd)
 {
-	char		*line;
-	char		*result;
-	size_t		new_size;
-	size_t		res_size;
+	char	*line;
+	char	*result;
+	char	*temp;
 
-	res_size = 0;
 	result = ft_strdup("");
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		new_size = res_size + ft_strlen(line) + 1;
-		result = ft_realloc(result, new_size);
-		ft_strlcat(result, line, new_size);
-		res_size = new_size - 1;
+		temp = ft_strjoin(result, line);
+		free(result);
+		result = temp;
 		free(line);
 	}
 	return (result);

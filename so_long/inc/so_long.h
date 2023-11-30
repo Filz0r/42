@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 19:48:40 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/24 21:38:24 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/30 00:45:24 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 // Functions for loading the file and contents to memory
 char	*read_map(int fd);
 char	**validate_map(char *map_path);
-void	get_map(char *map_path, char ***map);
+char	**get_map(char *map_path);
 
 
 // Utils

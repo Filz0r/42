@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 19:45:16 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/29 14:53:00 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/30 01:19:24 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,13 @@ int	main(int ac, char **av)
 		if (!map || *map == NULL)
 			return (1);
 		game = game_init(map);
-		if (!game)
+		if (!game) // TODO: test this
 		{
 			free(game);
+			free_map(map);
 			return (1);
 		}
 		game_run(game, "so_long");
-		free(game);
-		free_map(map);
 	}
 	else
 	{
