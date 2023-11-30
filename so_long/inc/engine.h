@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 10:35:15 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/29 14:52:47 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/30 19:13:47 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define WALK_PATH	"assets/player/walking/"
 # define IDLE_PATH	"assets/player/idle/"
 # define DIE_PATH	"assets/player/dying/"
+# define DIGIT_PATH	"assets/digits/"
 
 // Library stuff
 void	*game_init(char **map);
