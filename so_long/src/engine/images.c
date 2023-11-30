@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:44:45 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/29 16:13:00 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/11/30 19:27:57 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,6 @@ t_img	*create_image(char *path, t_window *win)
 		ft_putendl_fd("Error: file could not be read", 2);
 		free(res);
 		return (NULL);
-	}
-	if (strcmp(path, FLOOR_PATH) == 0 || strcmp(path, WALL_PATH) == 0)
-	{
-		ft_printf("%s ptr:%p\n" ,path, res);
 	}
 	res->addr = mlx_get_data_addr
 		(res->img_ptr, &(res->bpp), &(res->line_len), &(res->endian));
