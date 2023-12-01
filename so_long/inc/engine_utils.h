@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 21:33:37 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/30 19:36:17 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/01 17:01:36 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ typedef enum e_entity {
 	WALL,
 	COLLECTIBLE,
 	EXIT,
-	DIGITS
+	DIGITS,
+	ENEMY
 }			t_entity;
 
 typedef struct s_point {
@@ -82,6 +83,7 @@ typedef struct s_game {
 	t_entity		current;
 	int				moves;
 	int				mirror;
+	int 			kill_scale;
 	struct timespec	sleep_time;
 	unsigned long	tick;
 	unsigned long	frames;
@@ -97,7 +99,8 @@ typedef struct s_frame {
 
 // game stuff
 int				quit_game(t_game *game);
-
+int				will_raise_fire(t_game *g);
+void			light_map(t_map *m, t_point pt, int max, int *limit);
 
 // Map stuff
 int				get_map_width(char **map);
@@ -105,6 +108,7 @@ int				get_map_height(char **map);
 void			get_collectibles(char **map, t_list **lst);
 t_map			*load_map(char **map);
 t_point			*get_point(char **map, char to_find);
+t_point			update_start(char **map, char to_find);
 
 // Rendering stuff
 void			render_frame(t_game *game, t_entity animation);

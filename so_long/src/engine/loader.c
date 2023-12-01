@@ -28,8 +28,8 @@ t_map	*load_map(char **map)
 	res->player = get_point(map, 'P');
 	if (!(res->player))
 		return (map_cleanup(res));
-	*(res->player) = scale_up(*(res->player));
 	res->start = *(res->player);
+	*(res->player) = scale_up(*(res->player));
 	res->exit = get_point(map, 'E');
 	*(res->exit) = scale_up(*(res->exit));
 	if (!(res->exit))
@@ -59,4 +59,6 @@ void	load_assets(t_window *win, t_list **lst)
 		ft_lstnew(create_frame(win, DIE_PATH, PLAYER_DYING, 3)));
 	ft_lstadd_back(lst,
 		ft_lstnew(create_frame(win, DIGIT_PATH, DIGITS, 10)));
+	ft_lstadd_back(lst,
+		ft_lstnew(create_frame(win, ENEMY_PATH, ENEMY, 4)));
 }

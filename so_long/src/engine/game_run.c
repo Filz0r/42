@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:38:48 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/30 01:07:56 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/01 14:33:25 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,17 @@ static int	draw_game(t_game *game)
 			current.tv_nsec - last_tick.tv_nsec);
 	if (elapsed >= game->ns_time)
 	{
+//		will_raise_fire(game, 1);
 		render_frame(game, game->current);
 //		print_time_status(game, &last_tick);
 //		nanosleep(&(game->sleep_time), NULL);
 		clock_gettime(CLOCK_MONOTONIC, &last_tick);
 		game->tick++;
+		if (game->tick % 10 == 0)
+		{
+			will_raise_fire(game);
+			game->kill_scale = game->kill_scale * 2;
+		}
 	}
 	if (game->current == PLAYER_WALKING)
 	{
@@ -37,8 +43,6 @@ static int	draw_game(t_game *game)
 	}
 	return (0);
 }
-
-
 
 void	*game_run(void *ptr, char *name)
 {
@@ -67,5 +71,3 @@ void	*game_run(void *ptr, char *name)
 	}
 	return ((void *)0);
 }
-
-

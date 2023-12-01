@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 18:38:14 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/30 12:12:19 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/01 18:49:46 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../inc/engine_utils.h"
@@ -74,4 +74,22 @@ t_point	interpolate_point(t_point current, t_point target, double factor)
 t_point		scale_up(t_point pt)
 {
 	return ((t_point){pt.x * SIZE, pt.y * SIZE, pt.x * SIZE, pt.y * SIZE});
+}
+
+t_point		update_start(char **map, char to_find)
+{
+	int	x;
+	int	y;
+
+	y = -1;
+	while (map[++y])
+	{
+		x = -1;
+		while (map[y][++x])
+		{
+			if (map[y][x] == to_find)
+				return ((t_point){x, y, x, y});
+		}
+	}
+	return ((t_point){-1, -1, -1, -1});
 }

@@ -43,12 +43,16 @@ void	select_asset_to_put(t_game *game, char c, t_point pos)
 {
 	t_img			*wall;
 	t_img			*floor;
+	t_img			*fire;
 
 	wall = get_img_by_entity(game->images, WALL);
 	floor = get_img_by_entity(game->images, FLOOR);
+	fire = get_img_by_entity(game->images, ENEMY);
 	put_image_to_overlay(floor, game, FLOOR, pos);
 	if (c == '1')
 		put_image_to_overlay(wall, game, WALL, pos);
+	if (c == 'F')
+		put_image_to_overlay(fire, game, ENEMY, pos);
 }
 
 void	handle_player_render(t_game *game, t_entity animation)

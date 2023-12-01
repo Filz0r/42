@@ -28,7 +28,8 @@ void	*game_init(char **map)
 	ptr->mirror = 0;
 	ptr->tick = 0;
 	ptr->moves = 0;
-	ptr->frames = 0; //This has to be deleted for delivery
+	ptr->kill_scale = 1;
+	ptr->frames = 0;
 	ptr->ns_time = SECOND - CYCLE;
 	ptr->sleep_time = (struct timespec){CYCLE / SECOND,
 		CYCLE % SECOND};
