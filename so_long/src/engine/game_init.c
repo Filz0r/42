@@ -13,7 +13,7 @@
 #include "../../inc/engine.h"
 #include "../../inc/engine_utils.h"
 
-//todo: Protect the pointers for null;
+//todo: docs;
 void	*game_init(char **map)
 {
 	t_game	*ptr;

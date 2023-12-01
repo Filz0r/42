@@ -13,6 +13,7 @@
 #include "../../inc/engine_utils.h"
 #include "../../inc/engine.h"
 
+//TODO: DOCUMENTATION
 int	on_key(int keysym, t_game *game)
 {
 	printf("pressed: %d\n", keysym);
@@ -25,7 +26,7 @@ int	on_key(int keysym, t_game *game)
 	else if (keysym == XK_w || keysym == XK_Up)
 		return (move_player(game, UP));
 	if (keysym == XK_Escape)
-		quit_game(game);
+		quit_game(game, EXIT_SUCCESS);
 	return (1);
 }
 

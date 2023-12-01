@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 19:45:16 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/30 01:19:24 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/01 22:26:21 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int ac, char **av)
 		if (!map || *map == NULL)
 			return (1);
 		game = game_init(map);
-		if (!game) // TODO: test this
+		if (!game) // TODO: test this or remove
 		{
 			free(game);
 			free_map(map);

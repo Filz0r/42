@@ -13,6 +13,7 @@
 #include "../../inc/engine_utils.h"
 #include "../../inc/engine.h"
 
+// TODO DOCUMENTATION
 t_map	*load_map(char **map)
 {
 	t_map	*res;
@@ -25,12 +26,12 @@ t_map	*load_map(char **map)
 	res->collectibles = NULL;
 	res->height = get_map_height(map);
 	res->width = get_map_width(map);
-	res->player = get_point(map, 'P');
+	res->player = create_point(map, 'P');
 	if (!(res->player))
 		return (map_cleanup(res));
 	res->start = *(res->player);
 	*(res->player) = scale_up(*(res->player));
-	res->exit = get_point(map, 'E');
+	res->exit = create_point(map, 'E');
 	*(res->exit) = scale_up(*(res->exit));
 	if (!(res->exit))
 		return (map_cleanup(res));

@@ -12,6 +12,7 @@
 #include "../../inc/engine_utils.h"
 #include "../../inc/engine.h"
 
+//TODO: docs
 int	normalize(double nb, double threshold)
 {
 	int	res;
@@ -52,44 +53,3 @@ t_img	*get_img_by_entity(t_list *lst, t_entity entity)
 	return (img);
 }
 
-t_point	normalize_point(t_point point,
-	double threshold_x, double threshold_y)
-{
-	return ((t_point){
-		normalize(point.relative_x, threshold_x),
-		normalize(point.relative_y, threshold_y),
-		point.relative_x,
-		point.relative_y
-	});
-}
-
-t_point	interpolate_point(t_point current, t_point target, double factor)
-{
-	return ((t_point){current.x + factor * (target.x - current.x),
-		current.y + factor * (target.y - current.y),
-		current.x + factor * (target.x - current.x),
-		current.y + factor * (target.y - current.y)});
-}
-
-t_point		scale_up(t_point pt)
-{
-	return ((t_point){pt.x * SIZE, pt.y * SIZE, pt.x * SIZE, pt.y * SIZE});
-}
-
-t_point		update_start(char **map, char to_find)
-{
-	int	x;
-	int	y;
-
-	y = -1;
-	while (map[++y])
-	{
-		x = -1;
-		while (map[y][++x])
-		{
-			if (map[y][x] == to_find)
-				return ((t_point){x, y, x, y});
-		}
-	}
-	return ((t_point){-1, -1, -1, -1});
-}

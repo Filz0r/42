@@ -6,13 +6,14 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 17:16:41 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/30 19:41:34 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/01 22:21:18 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/engine_utils.h"
 #include "../../inc/engine.h"
 
+//TODO: DOCUMENTATION
 int	move_player(t_game *game, int action)
 {
 	if (action == UP)
@@ -27,7 +28,6 @@ int	move_player(t_game *game, int action)
 	else
 		return (check_collision(game, game->map->player->x + 8,
 				game->map->player->y, action));
-//	nanosleep(&(game->sleep_time), NULL);
 }
 
 int	check_collision(t_game *g, int x, int y, int action)
@@ -66,7 +66,7 @@ void	handle_restof_movement(t_game *g, t_point norm_point, int x, int y)
 		remove_collectible(g, norm_point);
 	else if (g->map->map[norm_point.y][norm_point.x] == 'E'
 		&& g->map->collectibles == NULL)
-		quit_game(g);
+		quit_game(g, EXIT_SUCCESS);
 	g->moves++;
 	*(g->map->player) = interpolated;
 	render_frame(g, g->current);

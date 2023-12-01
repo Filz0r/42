@@ -6,13 +6,14 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 14:25:58 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/30 19:00:09 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/01 22:24:32 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/engine_utils.h"
 #include "../../inc/engine.h"
 
+// TODO:docs
 t_window	*new_window(int width, int height, char *name)
 {
 	t_window	*win;

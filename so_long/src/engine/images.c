@@ -14,7 +14,7 @@
 #include "../../inc/engine.h"
 #include <string.h>
 
-//TODO: Norm + documentation
+//TODO: documentation
 t_img	*create_image(char *path, t_window *win)
 {
 	t_img	*res;
