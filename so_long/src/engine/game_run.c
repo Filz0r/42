@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:38:48 by fparreir          #+#    #+#             */
-/*   Updated: 2023/12/01 14:33:25 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/01 21:45:48 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	*game_run(void *ptr, char *name)
 		game->images = NULL;
 		load_assets(game->win, &(game->images));
 		if (!(game->images))
-			return (game_cleanup(ptr));
+			return (game_cleanup(game));
 		game->overlay = create_overlay(game->win);
 		game->last = PLAYER_IDLE;
 		game->current = PLAYER_IDLE;

@@ -55,5 +55,4 @@ void	free_map(char **map)
 	while (temp[i] != 0)
 		free(temp[i++]);
 	free(temp);
-//	*map = NULL;
 }

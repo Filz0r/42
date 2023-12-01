@@ -83,7 +83,7 @@ typedef struct s_game {
 	t_entity		current;
 	int				moves;
 	int				mirror;
-	int 			kill_scale;
+	int				kill_scale;
 	struct timespec	sleep_time;
 	unsigned long	tick;
 	unsigned long	frames;
@@ -98,7 +98,7 @@ typedef struct s_frame {
 }				t_frame;
 
 // game stuff
-int				quit_game(t_game *game);
+int				quit_game(t_game *game, int signal);
 int				will_raise_fire(t_game *g);
 void			light_map(t_map *m, t_point pt, int max, int *limit);
 
@@ -107,8 +107,8 @@ int				get_map_width(char **map);
 int				get_map_height(char **map);
 void			get_collectibles(char **map, t_list **lst);
 t_map			*load_map(char **map);
-t_point			*get_point(char **map, char to_find);
-t_point			update_start(char **map, char to_find);
+t_point			*create_point(char **map, char to_find);
+t_point			get_point(char **map, char to_find);
 
 // Rendering stuff
 void			render_frame(t_game *game, t_entity animation);
@@ -125,8 +125,6 @@ void			fill_bottom(t_game *g);
 void			draw_game_ticks(t_game *g);
 void			draw_game_moves(t_game *g);
 
-
-
 // Movement
 int				move_player(t_game *game, int action);
 int				check_collision(t_game *g, int x, int y, int action);
@@ -142,7 +140,7 @@ t_frame			*create_frame(t_window *w,
 					char *asset_path, t_entity type, int frame_num);
 t_window		*new_window(int width, int height, char *name);
 
-// Memory cleaning TODO: this is bugged and segfaults
+// Memory cleaning
 void			*map_cleanup(t_map *res);
 void			*window_cleanup(t_window *w);
 void			*images_cleanup(t_list *lst);
