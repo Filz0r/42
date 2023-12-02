@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 21:33:37 by fparreir          #+#    #+#             */
-/*   Updated: 2023/12/01 17:01:36 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/02 20:07:08 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,13 @@ typedef struct s_map {
 	int		col_count;
 }	t_map;
 
+typedef struct s_queue {
+	t_point	*points;
+	int		front;
+	int		rear;
+	int		size;
+}				t_queue;
+
 typedef struct s_game {
 	t_window		*win;
 	t_list			*images;
@@ -81,6 +88,8 @@ typedef struct s_game {
 	t_img			*overlay;
 	t_entity		last;
 	t_entity		current;
+	t_queue			*tiles_to_flood;
+	t_list			*flooded_tiles;
 	int				moves;
 	int				mirror;
 	int				kill_scale;
@@ -100,7 +109,14 @@ typedef struct s_frame {
 // game stuff
 int				quit_game(t_game *game, int signal);
 int				will_raise_fire(t_game *g);
-void			light_map(t_map *m, t_point pt, int max, int *limit);
+void			light_map(t_map *map, t_point pt, t_queue *q);
+
+//queue stuff
+int				count_fillable_tiles(char **map);
+t_queue			*create_queue(int size);
+void			add_to_queue(t_queue *q, t_point point);
+t_point			remove_from_queue(t_queue *q);
+void			free_queue(t_queue *q);
 
 // Map stuff
 int				get_map_width(char **map);
@@ -108,7 +124,9 @@ int				get_map_height(char **map);
 void			get_collectibles(char **map, t_list **lst);
 t_map			*load_map(char **map);
 t_point			*create_point(char **map, char to_find);
-t_point			get_point(char **map, char to_find);
+t_point			*new_point(t_point pt);
+char			**map_clone(t_map *map);
+void			clean_map(char **map);
 
 // Rendering stuff
 void			render_frame(t_game *game, t_entity animation);
@@ -118,8 +136,9 @@ unsigned int	get_pixel_img(t_img *img, int x, int y);
 void			put_pixel_img(t_img *img, int x, int y, int color);
 t_img			*create_overlay(t_window *w);
 void			select_asset_to_put(t_game *game, char c, t_point pos);
-void			handle_player_render(t_game *game, t_entity animation);
+void			render_fire(t_game *game);
 void			render_other_assets(t_game *game);
+void			render_animation(t_game *game, t_point pos, t_entity type);
 void			remove_collectible(t_game *g, t_point norm_point);
 void			fill_bottom(t_game *g);
 void			draw_game_ticks(t_game *g);

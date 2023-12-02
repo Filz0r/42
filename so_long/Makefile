@@ -1,7 +1,7 @@
 # Project name
 NAME = so_long
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror #-O2
 INCLUDES = -I$(LIBFT_DIR)/inc -I$(MLX_DIR) -I/usr/include
 LDFLAGS = -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -L/usr/lib/X11 -lXext -lX11
 SRC_DIR = src
@@ -16,7 +16,8 @@ SRC_FILES = so_long.c utils/utils.c utils/errors.c utils/map_parser.c \
 		engine/game_cleanup.c engine/images.c engine/loader.c engine/map.c \
 	 	engine/window.c engine/cleanup.c engine/game_run.c engine/utils.c \
 	 	engine/render.c engine/movement.c engine/frame.c engine/events.c \
-	 	engine/debug.c engine/light_map.c engine/points.c engine/info_panel.c
+	 	engine/debug.c engine/light_map.c engine/points.c engine/info_panel.c \
+	 	engine/queue.c
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 

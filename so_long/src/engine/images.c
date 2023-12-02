@@ -97,7 +97,7 @@ void	put_image_to_overlay(t_img *src, t_game *g, t_entity type, t_point pos)
 		k = 0;
 		while (k < src->w)
 		{
-			if (type == PLAYER_WALKING && g->mirror)
+			if ((type == PLAYER_WALKING || type == PLAYER_IDLE) && g->mirror)
 				put_pixel_img(g->overlay, x + src->h - k - 1, y + i,
 					get_pixel_img(src, k, i));
 			else

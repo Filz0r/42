@@ -24,7 +24,6 @@ static int	draw_game(t_game *game)
 			current.tv_nsec - last_tick.tv_nsec);
 	if (elapsed >= game->ns_time)
 	{
-//		will_raise_fire(game, 1);
 		render_frame(game, game->current);
 //		print_time_status(game, &last_tick);
 //		nanosleep(&(game->sleep_time), NULL);
@@ -33,7 +32,7 @@ static int	draw_game(t_game *game)
 		if (game->tick % 10 == 0)
 		{
 			will_raise_fire(game);
-			game->kill_scale = game->kill_scale * 2;
+			game->kill_scale = game->kill_scale + 2;
 		}
 	}
 	if (game->current == PLAYER_WALKING)
@@ -54,13 +53,13 @@ void	*game_run(void *ptr, char *name)
 		game->win = new_window(game->map->width, game->map->height, name);
 		if (!(game->win))
 			return (game_cleanup(ptr));
-		game->images = NULL;
 		load_assets(game->win, &(game->images));
 		if (!(game->images))
 			return (game_cleanup(game));
 		game->overlay = create_overlay(game->win);
-		game->last = PLAYER_IDLE;
-		game->current = PLAYER_IDLE;
+		game->tiles_to_flood = create_queue(
+				count_fillable_tiles(game->map->map));
+		light_map(game->map, game->map->start, game->tiles_to_flood);
 		render_frame(game, game->current);
 		mlx_hook(game->win->win_ptr, DestroyNotify, \
 		StructureNotifyMask, quit_game, game);

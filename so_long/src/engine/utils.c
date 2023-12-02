@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 18:38:14 by fparreir          #+#    #+#             */
-/*   Updated: 2023/12/01 18:49:46 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/02 11:58:23 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../inc/engine_utils.h"
@@ -53,3 +53,39 @@ t_img	*get_img_by_entity(t_list *lst, t_entity entity)
 	return (img);
 }
 
+int	count_fillable_tiles(char **map)
+{
+	int	x;
+	int	y;
+	int	count;
+
+	count = 0;
+	y = -1;
+	while (map[++y] != 0)
+	{
+		x = -1;
+		while (map[y][++x])
+		{
+			if (map[y][x] == '1')
+				continue ;
+			else
+				count++;
+		}
+	}
+	return (count);
+}
+
+char	**map_clone(t_map *map)
+{
+	int		k;
+	char	**res;
+
+	res = (char **)malloc(sizeof(char *) * (map->height + 1));
+	if (!res)
+		return (NULL);
+	k = -1;
+	while (map->map[++k])
+		res[k] = ft_strdup(map->map[k]);
+	res[k] = 0;
+	return (res);
+}

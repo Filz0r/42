@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:25:51 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/24 22:35:43 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/02 12:13:30 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,15 @@ void	get_collectibles(char **map, t_list **lst)
 			}
 		}
 	}
+}
+
+//De allocates a 2D char * array from memory
+void	clean_map(char **map)
+{
+	int		i;
+
+	i = 0;
+	while (map[i] != 0)
+		free(map[i++]);
+	free(map);
 }

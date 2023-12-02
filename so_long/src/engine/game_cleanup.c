@@ -43,6 +43,10 @@ int	quit_game(t_game *game, int signal)
 			images_cleanup(game->images);
 		if (game->win)
 			window_cleanup(game->win);
+		if (game->tiles_to_flood)
+			free_queue(game->tiles_to_flood);
+		if (game->flooded_tiles)
+			ft_lstclear(&(game->flooded_tiles), free);
 	}
 	free(game);
 	exit(signal);

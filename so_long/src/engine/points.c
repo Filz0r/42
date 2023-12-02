@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 21:34:26 by fparreir          #+#    #+#             */
-/*   Updated: 2023/12/01 22:30:01 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/02 20:06:26 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,20 +68,13 @@ t_point	scale_up(t_point pt)
 	return ((t_point){pt.x * SIZE, pt.y * SIZE, pt.x * SIZE, pt.y * SIZE});
 }
 
-t_point	get_point(char **map, char to_find)
+t_point	*new_point(t_point pt)
 {
-	int	x;
-	int	y;
+	t_point	*res;
 
-	y = -1;
-	while (map[++y])
-	{
-		x = -1;
-		while (map[y][++x])
-		{
-			if (map[y][x] == to_find)
-				return ((t_point){x, y, x, y});
-		}
-	}
-	return ((t_point){-1, -1, -1, -1});
+	res = malloc(sizeof(t_point));
+	if (!res)
+		return (NULL);
+	*res = pt;
+	return (res);
 }

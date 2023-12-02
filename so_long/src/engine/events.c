@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 12:28:19 by fparreir          #+#    #+#             */
-/*   Updated: 2023/12/01 17:40:31 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/02 20:17:42 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	remove_collectible(t_game *g, t_point norm_point)
 				g->map->collectibles = curr->next;
 			g->map->col_count--;
 			ft_lstdelone(curr, free);
+			g->map->map[norm_point.y][norm_point.x] = '0';
 			break ;
 		}
 		prev = curr;
@@ -57,48 +58,29 @@ void	remove_collectible(t_game *g, t_point norm_point)
 	}
 }
 
-int	quit_game(t_game *game)
+int	will_raise_fire(t_game *g)
 {
-	int	i;
+	t_point	to_clean;
+	int		i;
 
-	i = 0;
-	if (game)
+	if (g->tiles_to_flood)
 	{
-		while (game->map->map[i] != 0)
-			free(game->map->map[i++]);
-		free(game->map->map);
-		if (game->map)
-			map_cleanup(game->map);
-		if (game->overlay)
-			destroy_image(game->overlay);
-		if (game->images)
-			images_cleanup(game->images);
-		if (game->win)
-			window_cleanup(game->win);
+		i = 0;
+		while (i < g->kill_scale)
+		{
+			to_clean = remove_from_queue(g->tiles_to_flood);
+			if (to_clean.x == -1 || to_clean.y == -1)
+			{
+				free_queue(g->tiles_to_flood);
+				g->tiles_to_flood = NULL;
+				break ;
+			}
+			ft_lstadd_back(&(g->flooded_tiles), ft_lstnew(new_point
+					((t_point){to_clean.x * SIZE, to_clean.y * SIZE, 0, 0})));
+			i++;
+		}
+		return (1);
 	}
-	free(game);
-	exit(0);
-}
-
-static int	is_filled(char **map, t_point pt)
-{
-	return (map[pt.y - 1][pt.x] == 'E' || map[pt.y + 1][pt.x] == 'E'
-	|| map[pt.y][pt.x - 1] == 'E' || map[pt.y][pt.x + 1] == 'E');
-}
-
-int will_raise_fire(t_game *g)
-{
-	int	count;
-
-	count = 0;
-	light_map(g->map, g->map->start, g->kill_scale, &count);
-	if (is_filled(g->map->map, g->map->start))
-		g->map->start = update_start(g->map->map, '0');
-	if (g->map->start.x == -1 || g->map->start.y == -1)
-	{
-		ft_printf("fuck yeah you beat the game with cheats\n");
-		quit_game(g);
-	}
-	return (1);
+	return (0);
 }
 
