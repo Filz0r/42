@@ -36,7 +36,6 @@ void	*window_cleanup(t_window *w)
 		{
 			if (w->win_ptr)
 				mlx_destroy_window(w->mlx_ptr, w->win_ptr);
-			mlx_destroy_display(w->mlx_ptr);
 		}
 		if (w->mlx_ptr)
 			free(((*w).mlx_ptr));
@@ -75,4 +74,3 @@ void	destroy_frame(void *ptr)
 		free(frame);
 	}
 }
-
