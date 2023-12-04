@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 16:39:21 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/26 19:06:42 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/04 15:41:36 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 void	errors(char **map, int code)
 {
 	free_map(map);
+	map = NULL;
 	if (code == 0)
 	{
 		ft_printf("Error\nThere was an issue allocating memory ");
@@ -38,6 +39,7 @@ void	errors(char **map, int code)
 		ft_printf("Error\nThe map isn't walled of!\n");
 	else if (code == 6)
 		ft_printf("Error\nThe player cannot complete the map!\n");
+	exit(EXIT_FAILURE);
 }
 
 // This function frees the map pointer, and anything inside it, however

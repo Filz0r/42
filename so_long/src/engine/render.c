@@ -32,9 +32,9 @@ void	render_frame(t_game *game, t_entity animation)
 		}
 		y++;
 	}
+	render_fire(game);
 	render_other_assets(game);
 	render_animation(game, *(game->map->player), animation);
-	render_fire(game);
 	fill_bottom(game);
 	mlx_put_image_to_window(game->overlay->win->mlx_ptr,
 		game->overlay->win->win_ptr, game->overlay->img_ptr, 0, 0);
@@ -93,6 +93,8 @@ void	render_animation(t_game *game, t_point pos, t_entity type)
 	t_img	*i;
 
 	f = find_frame_by_entity(game->images, type);
+	if (f->current_frame == f->total_frames)
+		f->current_frame = 0;
 	i = (t_img *)(ft_lstget(f->frames, f->current_frame))->content;
 	put_image_to_overlay(i, game, type, pos);
 	f->current_frame++;

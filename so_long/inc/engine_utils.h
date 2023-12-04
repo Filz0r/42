@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 21:33:37 by fparreir          #+#    #+#             */
-/*   Updated: 2023/12/02 20:07:08 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/04 16:38:32 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ typedef struct s_point {
 	double	relative_x;
 	double	relative_y;
 }				t_point;
-
 
 typedef struct s_window
 {
@@ -150,6 +149,7 @@ int				check_collision(t_game *g, int x, int y, int action);
 int				on_key(int keysym, t_game *game);
 void			handle_restof_movement(t_game *g, t_point norm_point,
 					int x, int y);
+void			handle_fire_collision(t_game *game, t_point norm_point);
 
 // Window stuff
 void			load_assets(t_window *win, t_list **lst);
@@ -165,7 +165,6 @@ void			*window_cleanup(t_window *w);
 void			*images_cleanup(t_list *lst);
 void			destroy_image(void *ptr);
 void			destroy_frame(void *ptr);
-
 
 //Utils
 t_frame			*find_frame_by_entity(t_list *images, t_entity entity);

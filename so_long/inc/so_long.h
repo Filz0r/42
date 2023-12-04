@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 19:48:40 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/30 00:45:24 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/04 16:38:49 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,10 @@
 # define WHITE		"\033[0m"
 # define MAGENTA	"\e[0;35m"
 
-
 // Functions for loading the file and contents to memory
 char	*read_map(int fd);
 char	**validate_map(char *map_path);
 char	**get_map(char *map_path);
-
 
 // Utils
 char	**mapdup(char **map);
@@ -53,6 +51,5 @@ int		is_completable(char **map);
 //Errors and frees
 void	errors(char **map, int code);
 void	free_map(char **map);
-
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 22:25:03 by fparreir          #+#    #+#             */
-/*   Updated: 2023/12/01 22:21:57 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/04 16:38:08 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	*window_cleanup(t_window *w)
 		{
 			if (w->win_ptr)
 				mlx_destroy_window(w->mlx_ptr, w->win_ptr);
+			mlx_destroy_display(w->mlx_ptr);
 		}
 		if (w->mlx_ptr)
 			free(((*w).mlx_ptr));
@@ -46,7 +47,6 @@ void	*window_cleanup(t_window *w)
 
 void	*images_cleanup(t_list *lst)
 {
-
 	ft_lstclear(&lst, &destroy_frame);
 	return (NULL);
 }

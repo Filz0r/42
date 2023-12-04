@@ -29,7 +29,7 @@ char	**validate_map(char *map_path)
 		errors(result, 0);
 	if (result && *result != NULL && check_for_invalid(result))
 		errors(result, 2);
-	if (result && *result != NULL && validate_details(result))
+	if (result && *result != NULL && validate_details(result) == 1)
 		errors(result, 3);
 	if (result && *result != NULL && is_rectangle(result))
 		errors(result, 4);

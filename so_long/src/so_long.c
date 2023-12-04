@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 19:45:16 by fparreir          #+#    #+#             */
-/*   Updated: 2023/12/01 22:26:21 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/04 15:28:20 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int ac, char **av)
 		if (!map || *map == NULL)
 			return (1);
 		game = game_init(map);
-		if (!game) // TODO: test this or remove
+		if (!game)
 		{
 			free(game);
 			free_map(map);
@@ -35,7 +35,8 @@ int	main(int ac, char **av)
 	}
 	else
 	{
-		printf("%sError that you need to handle idiot%s\n", RED, WHITE);
+		ft_printf("%sError:%s Incorrect usage.\n"
+			"Correct usage: ./so_long /path/to/map.ber\n", RED, WHITE);
 		exit(EXIT_FAILURE);
 	}
 	return (0);

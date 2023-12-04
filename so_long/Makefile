@@ -1,7 +1,7 @@
 # Project name
 NAME = so_long
 CC = cc
-CFLAGS = -Wall -Wextra -Werror #-O2
+CFLAGS = -Wall -Wextra -Werror -O2
 INCLUDES = -I$(LIBFT_DIR)/inc -I$(MLX_DIR) -I/usr/include
 LDFLAGS = -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -L/usr/lib/X11 -lXext -lX11
 SRC_DIR = src
@@ -34,7 +34,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(CC) $(CFLAGS) -o $@ -c $< $(INCLUDES)
 
 $(LIBFT):
-	@make -s -C $(LIBFT_DIR) debug
+	@make -s -C $(LIBFT_DIR)
 
 $(MLX):
 	@make -s -C $(MLX_DIR)

@@ -25,8 +25,6 @@ static int	draw_game(t_game *game)
 	if (elapsed >= game->ns_time)
 	{
 		render_frame(game, game->current);
-//		print_time_status(game, &last_tick);
-//		nanosleep(&(game->sleep_time), NULL);
 		clock_gettime(CLOCK_MONOTONIC, &last_tick);
 		game->tick++;
 		if (game->tick % 10 == 0)

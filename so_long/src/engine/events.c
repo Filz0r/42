@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 12:28:19 by fparreir          #+#    #+#             */
-/*   Updated: 2023/12/02 20:17:42 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/04 16:37:19 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 //TODO: DOCUMENTATION
 int	on_key(int keysym, t_game *game)
 {
-	printf("pressed: %d\n", keysym);
 	if (keysym == XK_a || keysym == XK_Left)
 		return (move_player(game, LEFT));
 	else if (keysym == XK_s || keysym == XK_Down)
@@ -76,11 +75,11 @@ int	will_raise_fire(t_game *g)
 				break ;
 			}
 			ft_lstadd_back(&(g->flooded_tiles), ft_lstnew(new_point
-					((t_point){to_clean.x * SIZE, to_clean.y * SIZE, 0, 0})));
+					((t_point){to_clean.x * SIZE, to_clean.y * SIZE,
+						to_clean.x * SIZE, to_clean.y * SIZE})));
 			i++;
 		}
 		return (1);
 	}
 	return (0);
 }
-

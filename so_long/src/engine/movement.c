@@ -59,7 +59,7 @@ void	handle_restof_movement(t_game *g, t_point norm_point, int x, int y)
 	t_point	interpolated;
 
 	interpolated = interpolate_point(*(g->map->player),
-			(t_point){x, y, x, y}, 0.3);
+			(t_point){x, y, x, y}, 0.35);
 	if (g->map->map[norm_point.y][norm_point.x] == '1')
 		return ;
 	else if (g->map->map[norm_point.y][norm_point.x] == 'C')
@@ -67,7 +67,29 @@ void	handle_restof_movement(t_game *g, t_point norm_point, int x, int y)
 	else if (g->map->map[norm_point.y][norm_point.x] == 'E'
 		&& g->map->collectibles == NULL)
 		quit_game(g, EXIT_SUCCESS);
+	else
+		handle_fire_collision(g, norm_point);
 	g->moves++;
 	*(g->map->player) = interpolated;
 	render_frame(g, g->current);
+}
+
+void	handle_fire_collision(t_game *g, t_point norm_point)
+{
+	t_list	*temp;
+	t_point	pt;
+
+	temp = g->flooded_tiles;
+	while (temp)
+	{
+		pt = *((t_point *)temp->content);
+		if (norm_point.x == pt.x / SIZE && norm_point.y == pt.y / SIZE)
+		{
+			render_frame(g, PLAYER_DYING);
+			render_frame(g, PLAYER_DYING);
+			render_frame(g, PLAYER_DYING);
+			quit_game(g, EXIT_SUCCESS);
+		}
+		temp = temp->next;
+	}
 }

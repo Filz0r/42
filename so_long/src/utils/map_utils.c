@@ -46,7 +46,7 @@ int	is_rectangle(char **map)
 
 	y = -1;
 	height = 0;
-	if (*map == NULL)
+	if (!map || *map == NULL)
 		return (0);
 	while (map[++y])
 	{
@@ -81,7 +81,7 @@ int	validate_details(char **map)
 		while (map[y][++x])
 			handle_chars(map[y][x], &collectibles, &exits, &players);
 	}
-	return ((players > 1 || exits > 1) || collectibles < 1);
+	return ((players != 1 || exits != 1) || collectibles < 1);
 }
 
 // checks if C is any of the chars that shouldn't exist when the game ends
