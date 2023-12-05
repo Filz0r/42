@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 21:19:11 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/30 01:12:48 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/05 10:43:42 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ char	**get_map(char *map_path)
 
 	file = open(map_path, O_RDONLY);
 	result = read_map(file);
+	if (!result)
+		return (NULL);
 	ret = ft_split(result, '\n');
 	free(result);
 	close(file);
@@ -87,7 +89,14 @@ char	*read_map(int fd)
 	{
 		line = get_next_line(fd);
 		if (!line)
+		{
+			if (ft_strlen(result) == 0)
+			{
+				free(result);
+				return (NULL);
+			}
 			break ;
+		}
 		temp = ft_strjoin(result, line);
 		free(result);
 		result = temp;
