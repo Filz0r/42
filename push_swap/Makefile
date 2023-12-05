@@ -31,13 +31,15 @@ $(NAME): $(OBJ)
 	@echo "Done!"
 
 $(LIBFT):
-	@git clone git@github.com:Filz0r/libft.git
+	@echo "Compiling Libft"
 	@make -C $(LIBFT)
+	@echo "Done!"
 
 $(OBJDIR):
 	@mkdir -p $(OBJDIR)
 
-$(OBJ): $(OBJDIR) $(LIBFT)
+$(OBJ): $(OBJDIR) 
+	@make -C $(LIBFT)
 	@echo "Compiling source files into object files"
 	@$(CC) $(CFLAGS) -c $(SRC) -I $(LIBFT)includes/
 	@mv *.o $(OBJDIR)

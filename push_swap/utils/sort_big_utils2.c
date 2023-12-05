@@ -12,7 +12,6 @@
 
 #include "../inc/push_swap.h"
 
-
 // This function rotates the stack until we have the bf_val value at the top
 // of this stack, it also helps the algorithm determine the kind of rotation it
 // has to apply to the list, if our count is greater than half of the size

@@ -35,12 +35,13 @@ int	main(int ac, char **av)
 	return (0); 
 }
 
-// This function is responsible for checking what algorithm is going to run depending on the ammount of values passed
+// This function is responsible for checking what algorithm is going to run
+// depending on the amount of values passed
 void	push_swap(t_plist **a, t_plist **b)
 {
-	if ((*a)->info->total_size == 3)
+	if ((*a)->info->total_size <= 3)
 		sort_three(a);
-	else if ((*a)->info->total_size == 5)
+	else if ((*a)->info->total_size <= 5)
 		sort_five(a, b);
 	else
 		sort_big(a, b);
@@ -98,15 +99,22 @@ void	sort_five(t_plist **root_a, t_plist **root_b)
 
 // Sorts lists with more than 5 elements
 // First we find the mean value of the elements inside the list
-// Then we push all of the values bellow this mean value to the b stack until the A stack only has 5 elements
+// Then we push all of the values bellow this mean value to the B stack
+// until the A stack only has 5 elements
 // Finally we sort the 5 elements inside the A stack using sort_five
-// Then we enter a loop that will run until the B stack points to NULL again (meaning its empty)
-// In this loop we start by looking for the value that as the smallest cost of sorting, after finding this value
-// we look for the value that is its best_friend inside the A stack. (bf_val is the value stored in B stack)
-// Finally we put our bf_value on top of the B stack, and do the same for the A stack
-// (won't do anything if BF is already at the top) And we push the bf_val node from the B stack to the A stack
+// Then we enter a loop that will run until the B stack points to NULL again
+// (meaning its empty)
+// In this loop we start by looking for the value that as the smallest cost
+// of sorting, after finding this value
+// we look for the value that is its best_friend inside the A stack.
+// (bf_val is the value stored in B stack)
+// Finally we put our bf_value on top of the B stack, and do the
+// same for the A stack
+// (won't do anything if BF is already at the top)
+// And we push the bf_val node from the B stack to the A stack
 // Again this is done until the B stack is null.
-// after this loop we rotate the list until the smallest number is at the top of the A stack.
+// after this loop we rotate the list until the smallest number
+// is at the top of the A stack.
 void	sort_big(t_plist **a, t_plist **b)
 {
 	int	mean;

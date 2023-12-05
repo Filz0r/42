@@ -15,8 +15,8 @@
 // This function returns the mean value of the stack
 int	get_mean_number(t_plist **stack)
 {
-	int		res;
-	int		i;
+	long	res;
+	long	i;
 	t_plist	*curr;
 
 	res = 0;
@@ -28,5 +28,5 @@ int	get_mean_number(t_plist **stack)
 		i++;
 		curr = curr->next;
 	}
-	return (res / i);
+	return ((int)(res / i));
 }

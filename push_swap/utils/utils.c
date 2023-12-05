@@ -12,7 +12,6 @@
 
 #include "../inc/push_swap.h"
 
-
 // Handles the arguments we pass to the program, it also handles the exceptions
 // that are delimited in the Requirements of the project
 // This is the function that allows for the program to be able to parse either
