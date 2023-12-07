@@ -18,8 +18,12 @@ int	is_walled(char **map)
 {
 	int	x;
 	int	y;
+	int	width;
 
 	if (*map == NULL)
+		return (1);
+	width = get_width(map);
+	if (width == -1)
 		return (1);
 	x = -1;
 	while (map[0][++x])
@@ -30,8 +34,9 @@ int	is_walled(char **map)
 		if (map[get_height(map) - 1][x] != '1')
 			return (1);
 	y = -1;
-	while (map[++y])
-		if (map[y][0] != '1' || map[y][get_width(map) - 1] != '1')
+	while (map[++y] != 0)
+		if (map[y][0] != '1'
+			|| (map[y][width - 1] != '\0' && map[y][width - 1] != '1'))
 			return (1);
 	return (0);
 }

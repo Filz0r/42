@@ -15,7 +15,10 @@
 // This function fills the map array that we store in our map pointer
 void	flood_fill(char **map, int x, int y, char fill_val)
 {
-	if (x < 0 || x >= get_width(map) || y < 0 || y >= get_height(map))
+	int	width;
+
+	width = get_width(map);
+	if (width == -1 || x < 0 || x >= width || y < 0 || y >= get_height(map))
 		return ;
 	if (map[y][x] == '1' || map[y][x] == fill_val)
 		return ;
@@ -48,14 +51,27 @@ int	get_height(char **map)
 // counts how many columns exist inside the first row of the map
 int	get_width(char **map)
 {
+	int	y;
+	int	x;
 	int	res;
+	int	old_res;
 
 	if (*map == NULL)
 		return (0);
 	res = 0;
-	while (map[0][res])
-		res++;
-	return (res);
+	old_res = 0;
+	y = -1;
+	while (map[++y])
+	{
+		x = -1;
+		while (map[y][++x])
+			res++;
+		if (y > 0 && res != old_res)
+			return (-1);
+		old_res = res;
+		res = 0;
+	}
+	return (old_res);
 }
 
 // Creates a new map from an existing map variable

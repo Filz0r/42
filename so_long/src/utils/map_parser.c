@@ -25,7 +25,7 @@ char	**validate_map(char *map_path)
 		errors(result, 1);
 	else
 		result = get_map(map_path);
-	if (result && *result == NULL)
+	if (result == NULL)
 		errors(result, 0);
 	if (result && *result != NULL && check_for_invalid(result))
 		errors(result, 2);
@@ -97,6 +97,8 @@ char	*read_map(int fd)
 			}
 			break ;
 		}
+		if (ft_strlen(line) == 1)
+			return (free(result), free(line), NULL);
 		temp = ft_strjoin(result, line);
 		free(result);
 		result = temp;
