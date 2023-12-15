@@ -55,11 +55,6 @@ void	p_waiter(pid_t child1, int *fds, char **av, char **envp)
 	waitpid(child2, NULL, 0);
 }
 
-void	piping(t_pipe pipe, int count)
-{
-
-}
-
 int	main(int ac, char **av, char **envp)
 {
 	int			fds[2];
@@ -80,4 +75,27 @@ int	main(int ac, char **av, char **envp)
 	}
 	ft_printf("Invalid usage\nCorrect usage: ./pipex infile cmd1 cmd2 outfile\n");
 	return (1);
+}
+
+// TODO: refactor
+void	executor(char *cmd, char **envp)
+{
+	char	*cmd_to_run;
+	char	*cmd_path;
+	char	**command;
+	char	*path;
+
+
+	command = ft_split(cmd, 32);
+	path = get_path(envp);
+	if (path == NULL)
+		cmd_path = find_cmd_path(path, command[0]);
+	else
+		cmd_path = NULL;
+	if (cmd_path == NULL)
+		cmd_to_run = command[0];
+	else
+		cmd_to_run = cmd_path;
+	if (execve(cmd_to_run, command, envp) == -1)
+		errors(cmd_to_run, command);
 }
