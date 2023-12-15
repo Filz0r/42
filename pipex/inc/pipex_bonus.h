@@ -1,8 +1,18 @@
-//
-// Created by filipe on 08/12/23.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex_bonus.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/08 20:00:06 by fparreir          #+#    #+#             */
+/*   Updated: 2023/12/15 18:43:06 by fparreir         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#ifndef PIPEX_PIPEX_BONUS_H
-#define PIPEX_PIPEX_BONUS_H
+#ifndef PIPEX_BONUS_H
+# define PIPEX_BONUS_H
 
-#endif //PIPEX_PIPEX_BONUS_H
+# include "pipex.h"
+
+#endif //PIPEX_BONUS_H

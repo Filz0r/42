@@ -8,7 +8,7 @@ INC_DIR = inc
 OBJ_DIR = build
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
-SRC_FILES = pipex.c utils.c
+SRC_FILES = pipex.c utils.c commands.c debug.c
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 
@@ -27,8 +27,13 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 $(LIBFT):
 	@make -s -C $(LIBFT_DIR)
 
-clion: CFLAGS += -g3# -fsanitize=address
+clion: CFLAGS += -g3 #-fsanitize=address
 clion: all
+
+valgrind: clion
+	@valgrind --log-file=valgrind.log --track-fds=yes -s --leak-check=full \
+		--show-leak-kinds=all --trace-children=yes \
+		--track-origins=yes ./$(NAME) infile $(CMDS) outfile
 
 clean:
 	@rm -rf $(OBJ_DIR)
