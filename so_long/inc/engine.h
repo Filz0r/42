@@ -13,19 +13,22 @@
 #ifndef ENGINE_H
 # define ENGINE_H
 
-# define CYCLE		450000000
-# define SECOND		1000000000
-# define SIZE		32
-# define FLOOD_MAX	16
-# define FLOOR_PATH	"assets/floor.xpm"
-# define WALL_PATH	"assets/wall.xpm"
-# define EXIT_PATH	"assets/exit.xpm"
-# define COLL_PATH	"assets/collectible.xpm"
-# define WALK_PATH	"assets/player/walking/"
-# define IDLE_PATH	"assets/player/idle/"
-# define DIE_PATH	"assets/player/dying/"
-# define DIGIT_PATH	"assets/digits/"
-# define ENEMY_PATH	"assets/enemy/"
+# define CYCLE			450000000
+# define SECOND			1000000000
+# define SIZE			32
+# define PRINT_MOVES	1
+# define KILL_PLAYER	0
+# define FLOOD_MAX		16
+# define FLOOD_SCALE	1
+# define FLOOR_PATH		"assets/floor.xpm"
+# define WALL_PATH		"assets/wall.xpm"
+# define EXIT_PATH		"assets/exit.xpm"
+# define COLL_PATH		"assets/collectible.xpm"
+# define WALK_PATH		"assets/player/walking/"
+# define IDLE_PATH		"assets/player/idle/"
+# define DIE_PATH		"assets/player/dying/"
+# define DIGIT_PATH		"assets/digits/"
+# define ENEMY_PATH		"assets/enemy/"
 
 // Library stuff
 void	*game_init(char **map);
