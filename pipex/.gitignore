@@ -1,3 +1,4 @@
 build
 pipex
-pipex-tester
+pipex-tester/
+src/old_pipex.c
