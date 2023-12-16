@@ -1,4 +1,3 @@
-# Project name
 NAME = so_long
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
@@ -51,5 +50,14 @@ fclean: clean
 	@rm -f $(NAME)
 
 re: fclean all
+
+bonus: CFLAGS += -DPRINT_MOVES=0
+bonus: clean all
+
+bonus2: CFLAGS += -DKILL_PLAYER=1
+bonus2: bonus
+
+bonus3: CFLAGS += -DKILL_PLAYER=1 -DFLOOD_MAX=-1 -DFLOOD_SCALE=2
+bonus3: bonus
 
 .PHONY: all clean fclean re clion

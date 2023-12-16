@@ -13,6 +13,20 @@
 #include "../../inc/engine.h"
 #include "../../inc/engine_utils.h"
 
+static void	set_kill_scale(t_game *g)
+{
+	will_raise_fire(g);
+	if (FLOOD_MAX != -1)
+	{
+		if (g->kill_scale < FLOOD_MAX)
+			g->kill_scale += FLOOD_SCALE;
+		else
+			g->kill_scale = 1;
+	}
+	else
+		g->kill_scale += FLOOD_SCALE;
+}
+
 static int	draw_game(t_game *game)
 {
 	static struct timespec	last_tick;
@@ -28,10 +42,7 @@ static int	draw_game(t_game *game)
 		clock_gettime(CLOCK_MONOTONIC, &last_tick);
 		game->tick++;
 		if (game->tick % 10 == 0)
-		{
-			will_raise_fire(game);
-			game->kill_scale = game->kill_scale + 2;
-		}
+			set_kill_scale(game);
 	}
 	if (game->current == PLAYER_WALKING)
 	{

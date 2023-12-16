@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 17:16:41 by fparreir          #+#    #+#             */
-/*   Updated: 2023/12/01 22:21:18 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/16 16:34:16 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,15 @@ void	handle_restof_movement(t_game *g, t_point norm_point, int x, int y)
 		remove_collectible(g, norm_point);
 	else if (g->map->map[norm_point.y][norm_point.x] == 'E'
 		&& g->map->collectibles == NULL)
+	{
+		ft_printf("Congratulations you won!\n");
 		quit_game(g, EXIT_SUCCESS);
+	}
 	else
 		handle_fire_collision(g, norm_point);
 	g->moves++;
+	if (PRINT_MOVES == 1)
+		ft_printf("The player has made %d moves\n", g->moves);
 	*(g->map->player) = interpolated;
 	render_frame(g, g->current);
 }
@@ -79,6 +84,8 @@ void	handle_fire_collision(t_game *g, t_point norm_point)
 	t_list	*temp;
 	t_point	pt;
 
+	if (KILL_PLAYER != 1)
+		return ;
 	temp = g->flooded_tiles;
 	while (temp)
 	{
@@ -88,6 +95,8 @@ void	handle_fire_collision(t_game *g, t_point norm_point)
 			render_frame(g, PLAYER_DYING);
 			render_frame(g, PLAYER_DYING);
 			render_frame(g, PLAYER_DYING);
+			ft_printf("Either fire spawned on top of you or you ran into it\n");
+			ft_printf("Better luck next time!\n");
 			quit_game(g, EXIT_SUCCESS);
 		}
 		temp = temp->next;

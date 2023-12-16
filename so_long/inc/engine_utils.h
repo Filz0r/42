@@ -92,7 +92,6 @@ typedef struct s_game {
 	int				moves;
 	int				mirror;
 	int				kill_scale;
-	struct timespec	sleep_time;
 	unsigned long	tick;
 	unsigned long	frames;
 	unsigned long	ns_time;

@@ -57,6 +57,8 @@ void	render_fire(t_game *game)
 {
 	t_list	*coords;
 
+	if (KILL_PLAYER != 1)
+		return ;
 	coords = game->flooded_tiles;
 	while (coords)
 	{

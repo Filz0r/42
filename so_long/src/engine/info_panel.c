@@ -19,6 +19,8 @@ void	fill_bottom(t_game *g)
 	int		i;
 	t_img	*floor;
 
+	if (PRINT_MOVES == 1)
+		return ;
 	i = 0;
 	floor = get_img_by_entity(g->images, FLOOR);
 	while (i < g->map->width)

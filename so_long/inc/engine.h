@@ -6,20 +6,32 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 10:35:15 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/30 19:13:47 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/16 15:31:44 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENGINE_H
 # define ENGINE_H
 
+# ifndef PRINT_MOVES
+#  define PRINT_MOVES	1
+# endif
+
+# ifndef KILL_PLAYER
+#  define KILL_PLAYER	0
+# endif
+
+# ifndef FLOOD_MAX
+#  define FLOOD_MAX		4
+# endif
+
+# ifndef FLOOD_SCALE
+#  define FLOOD_SCALE	1
+# endif
+
 # define CYCLE			450000000
 # define SECOND			1000000000
 # define SIZE			32
-# define PRINT_MOVES	1
-# define KILL_PLAYER	0
-# define FLOOD_MAX		16
-# define FLOOD_SCALE	1
 # define FLOOR_PATH		"assets/floor.xpm"
 # define WALL_PATH		"assets/wall.xpm"
 # define EXIT_PATH		"assets/exit.xpm"
