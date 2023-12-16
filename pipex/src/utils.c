@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 17:54:19 by fparreir          #+#    #+#             */
-/*   Updated: 2023/12/15 18:08:48 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/16 12:02:53 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*find_cmd_path(char *path, char *cmd)
 	char	*temp2;
 	char	**paths;
 
-	if (!path)
+	if (!path || (cmd == NULL || *cmd == '\0'))
 		return (NULL);
 	paths = ft_split(path, ':');
 	i = -1;

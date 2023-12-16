@@ -8,7 +8,7 @@ INC_DIR = inc
 OBJ_DIR = build
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
-SRC_FILES = pipex.c utils.c commands.c debug.c
+SRC_FILES = pipex.c utils.c commands.c debug.c cleanup.c
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 

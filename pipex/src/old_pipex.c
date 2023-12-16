@@ -12,6 +12,12 @@
 
 #include "../inc/pipex.h"
 
+// TODO: DELETE ME
+void	run_child(int *fds, char **av, char **envp); // del
+void	run_parent(int *fds, char **av, char **envp); // del
+void	p_waiter(pid_t child1, int *fds, char **av, char **envp); // del
+void	executor(char *cmd, char **envp);
+
 void	run_parent(int *fds, char **av, char **envp)
 {
 	int	outfile;

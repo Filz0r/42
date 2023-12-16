@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:46:15 by fparreir          #+#    #+#             */
-/*   Updated: 2023/12/15 17:58:30 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/15 21:53:50 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,18 @@ t_cmd	*new_cmd(t_cmd cmd)
 	if (!res)
 		return (NULL);
 	*res = cmd;
+//	if (*(res->cmd) == '\0')
+//		res->cmd = NULL;
 	pipe(res->fds);
 	return (res);
 }
 
 /**
- * @brief
- * @param size
- * @param av
- * @param envp
- * @param outfile
+ * @brief initializes the global linked list
+ * @param size number of elements to be added to the list
+ * @param av argv array received from the program arguments
+ * @param envp environment variables array got from main function
+ * @param outfile file descriptor of the last element of the linked list
  */
 void	commands_init(int size, char **av, char **envp, int outfile)
 {
@@ -56,13 +58,13 @@ void	commands_init(int size, char **av, char **envp, int outfile)
 	i = -1;
 	while (++i < size)
 	{
-		if (av[i + 2] == NULL || *av[i + 2] == '\0')
-			temp_cmd = "/dev/null";
-		else
-		{
-			temp = ft_split(av[i + 2], 32);
-			temp_cmd = find_cmd_path(get_path(envp), temp[0]);
-		}
+//		if (av[i + 2] == NULL || *av[i + 2] == '\0')
+//			temp_cmd = "/dev/null";
+//		else
+//		{
+		temp = ft_split(av[i + 2], 32);
+		temp_cmd = find_cmd_path(get_path(envp), temp[0]);
+//		}
 		ft_lstadd_back(commands(), ft_lstnew(new_cmd((t_cmd){envp, temp_cmd,
 					av[i + 2], .fds = {-1, -1}, -69, i})));
 		if (temp_cmd != NULL)
@@ -73,8 +75,9 @@ void	commands_init(int size, char **av, char **envp, int outfile)
 }
 
 /**
- * @brief
- * @param fd
+ * @brief goes trough the global linked list until the last element and sets
+ * its fd[1] (stdout) to the file descriptor passed as argument.
+ * @param fd file descriptor to be set in the last element
  */
 void	set_command_fdout(int fd)
 {
@@ -87,5 +90,6 @@ void	set_command_fdout(int fd)
 	cmd = ((t_cmd *)temp->content);
 	if (!cmd)
 		return ;
+	close(cmd->fds[1]);
 	cmd->fds[1] = fd;
 }

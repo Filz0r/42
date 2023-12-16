@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 11:44:10 by fparreir          #+#    #+#             */
-/*   Updated: 2023/12/15 18:18:55 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/15 21:40:48 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,14 @@ typedef struct s_cmd {
 	int		pos;
 }				t_cmd;
 
+// todo:delete
 typedef struct s_pipe {
 	int	infile;
 	int	outfile;
 }				t_pipe;
 
 // Pipe
-void	pipex(t_list *node, t_pipe fd, int counter);
+void	pipex(t_list *node, int fd);
 
 // commands
 t_list	**commands(void);
@@ -51,11 +52,5 @@ char	*get_path(char **envp);
 // Debug functions
 void	print_cmds(t_list **list, int depth);
 void	print_cmd(t_cmd *cmd);
-
-// TODO: DELETE ME
-void	run_child(int *fds, char **av, char **envp); // del
-void	run_parent(int *fds, char **av, char **envp); // del
-void	p_waiter(pid_t child1, int *fds, char **av, char **envp); // del
-void	executor(char *cmd, char **envp);
 
 #endif //PIPEX_H

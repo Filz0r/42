@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 18:31:24 by fparreir          #+#    #+#             */
-/*   Updated: 2023/12/15 18:31:24 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/16 13:45:00 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
  * @param msg  The value we will pass to perror
  * @param arr  an optional argument that frees memory allocated by ft_split if
  * arr is not NULL.
+ * After cleaning the memory and printing the perror message it exits the
+ * program with the error code 127 (wrong/invalid file descriptor)
  */
 void	errors(char *msg, char **arr)
 {

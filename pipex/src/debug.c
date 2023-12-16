@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 15:52:10 by fparreir          #+#    #+#             */
-/*   Updated: 2023/12/15 17:59:17 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/15 21:51:44 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	print_cmds(t_list **list, int depth)
 	{
 		c = ((t_cmd *)(temp->content));
 		print_cmd(c);
-		if (c->pid != 0)
+		if (depth && c->pid != 0)
 			waitpid(-1, &c->fds[0], 0);
 		temp = temp->next;
 	}
