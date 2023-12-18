@@ -13,7 +13,12 @@
 #include "../inc/so_long.h"
 #include "../inc/engine.h"
 
-// The program has 2 parts the engine and the map parser/validator,
+/**
+ * @brief Main function of the game
+ * @param ac number of arguments passed
+ * @param av array of the arguments passed
+ * @return return value either 0 or 1
+ */
 int	main(int ac, char **av)
 {
 	char	**map;

@@ -12,7 +12,13 @@
 
 #include "../../inc/so_long.h"
 
-// Finds the player in the map and sets his position on the map pointer.
+/**
+ * @brief Finds the position of 'P' in the given map and sets the given x and y
+ * pointers to its values
+ * @param map the map array
+ * @param pos_x a pointer to an int
+ * @param pos_y a pointer to an int
+ */
 void	find_player(char **map, int *pos_x, int *pos_y)
 {
 	int	x;
@@ -38,8 +44,11 @@ void	find_player(char **map, int *pos_x, int *pos_y)
 	}
 }
 
-// This function checks the pathing after the map_validator is flooded
-// returns true if any E or C elements exist
+/**
+ * @brief checks if any 'E' or 'C' elements exist in the map after its flooded
+ * @param the 2d map array
+ * @return 1 if any 'E' or 'C' exist 0 if not
+ */
 int	check_pathing(char **map)
 {
 	int	x;

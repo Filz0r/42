@@ -13,7 +13,12 @@
 #include "../../inc/engine.h"
 #include "../../inc/engine_utils.h"
 
-// TODO: DOCUMENTATION
+/**
+ * @brief Function used to quit the game when we are first initializing the
+ * mlx pointers, its only called when theres an error initializing mlx stuff
+ * @param ptr an valid t_game pointer
+ * @return NULL
+ */
 void	*game_cleanup(void *ptr)
 {
 	t_game	*game;
@@ -25,6 +30,12 @@ void	*game_cleanup(void *ptr)
 	return (NULL);
 }
 
+/**
+ * @brief function that cleans all of the allocated memory and exits the game
+ * @param game the t_game pointer containing all of the data
+ * @param signal the exit code of the program, either 1 or 0 in most cases
+ * @return value passed by signal
+ */
 int	quit_game(t_game *game, int signal)
 {
 	int	i;

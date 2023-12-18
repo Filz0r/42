@@ -12,7 +12,12 @@
 
 #include "../../inc/engine_utils.h"
 
-//TODO: DOCUMENTATION
+/**
+ * @brief cleans up the memory allocated to the t_map struct that lives inside
+ * of t_game
+ * @param map_ptr a pointer to a t_map struct
+ * @return NULL
+ */
 void	*map_cleanup(t_map *res)
 {
 	if (res)
@@ -28,6 +33,12 @@ void	*map_cleanup(t_map *res)
 	return (NULL);
 }
 
+/**
+ * @brief destroys the mlx window and display and frees the mlx pointer and
+ * window_ptr
+ * @param window_ptr a pointer to the window we want to destroy
+ * @return NULL
+ */
 void	*window_cleanup(t_window *w)
 {
 	if (w)
@@ -45,12 +56,22 @@ void	*window_cleanup(t_window *w)
 	return (NULL);
 }
 
+/**
+ * @brief destroys the t_list of t_img pointers that a t_frame has
+ * @param lst pointer to a list of t_frames
+ * @return NULL
+ */
 void	*images_cleanup(t_list *lst)
 {
 	ft_lstclear(&lst, &destroy_frame);
 	return (NULL);
 }
 
+/**
+ * @brief calls mlx_destroy image on an valid t_img pointer and frees
+ * the memory allocated on the pointer
+ * @param image_ptr pointer to the t_img struct we want to free.
+ */
 void	destroy_image(void *ptr)
 {
 	t_img	*img;
@@ -63,6 +84,10 @@ void	destroy_image(void *ptr)
 	}
 }
 
+/**
+ * @brief frees a valid pointer of t_frame using libft utils and destroy_image
+ * @param ptr an valid t_frame pointer
+ */
 void	destroy_frame(void *ptr)
 {
 	t_frame	*frame;

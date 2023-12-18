@@ -12,6 +12,26 @@
 
 #include "../../inc/engine_utils.h"
 
+/**
+ * @brief a queue based implementation of flood_fill that is used to determine
+ * the positions of the tiles that we want to flood with the enemies.
+ * @param map a pointer to the t_map struct stored inside t_game.
+ * @param pt the point where we want to start to flood fill from.
+ * @param q a pointer to the queue that is allocated inside the t_game struct.
+ *
+ * This function basically does the same thing as the map parser function does.
+ * It first clones the map and creates an temporary queue where we are going to
+ * store various positions we want to check if we can fill. After that we keep
+ * filling our temporary queue with points and we check if it is either a wall
+ * or a tile that we have already visited, if we have we go to the next
+ * iteration of the loop. The reasoning behind this approach is simple, I was
+ * trying to exponentially increase the difficulty of the game as it went on
+ * and doing that with recursion caused issues (call stack told me to
+ * take a walk) and decided that it would be safer to calculate all this
+ * data inside an array before allocating memory for the positions we
+ * want to print the flames at, this made the program not only really stable
+ * but also made it consume less memory overall.
+ */
 void	light_map(t_map *map, t_point pt, t_queue *q)
 {
 	t_point	current;

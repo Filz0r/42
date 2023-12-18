@@ -13,7 +13,12 @@
 #include "../../inc/engine_utils.h"
 #include "../../inc/engine.h"
 
-//TODO: DOCUMENTATION
+/**
+ * @brief This function is what triggers the movement or an attempt of it
+ * @param keysym the value of the key we pressed
+ * @param game the t_game structure that contains everything.
+ * @return always returns 1
+ */
 int	on_key(int keysym, t_game *game)
 {
 	if (keysym == XK_a || keysym == XK_Left)
@@ -29,6 +34,12 @@ int	on_key(int keysym, t_game *game)
 	return (1);
 }
 
+/**
+ * @brief removes an collectible from the t_map structure that lives
+ * inside of t_game structure
+ * @param game the t_game struct we pass around
+ * @param norm_point the point we just collided with and want to remove.
+ */
 void	remove_collectible(t_game *g, t_point norm_point)
 {
 	t_list	*curr;
@@ -57,6 +68,12 @@ void	remove_collectible(t_game *g, t_point norm_point)
 	}
 }
 
+/**
+ * @brief removes the flooded tiles from the queue stored inside t_game
+ * and adds them to a linked list saved inside t_game
+ * @param game the t_game struct
+ * @return 1 if game->tiles_to_flood isn't NULL 0 if it is.
+ */
 int	will_raise_fire(t_game *g)
 {
 	t_point	to_clean;

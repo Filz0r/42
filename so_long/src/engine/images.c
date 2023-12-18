@@ -14,7 +14,14 @@
 #include "../../inc/engine.h"
 #include <string.h>
 
-//TODO: documentation
+/**
+ * @brief creates a t_img object that contains an XPM file inside with valid
+ * pixels that can be drawn in the screen
+ * @param path path to the xpm file we want to open
+ * @param win pointer to the t_window object that contains all the mlx stuff
+ * @return either NULL if anything goes wrong or a valid pointer to an t_img
+ * struct.
+ */
 t_img	*create_image(char *path, t_window *win)
 {
 	t_img	*res;
@@ -38,6 +45,15 @@ t_img	*create_image(char *path, t_window *win)
 	return (res);
 }
 
+/**
+ * @brief creates a mlx image with the size of the window, this is where
+ * the game is drawn, every time a frame is put to a window, it means that
+ * this image was filled with individual pixels for the entire window.
+ * @param window pointer to the t_window struct that contains the mlx stuff
+ * @return either NULL if the mlx_new_image function fails or malloc, or it
+ * returns a pointer to a valid t_img struct that can be used as our canvas
+ * that we draw into.
+ */
 t_img	*create_overlay(t_window *w)
 {
 	t_img	*res;
@@ -61,14 +77,39 @@ t_img	*create_overlay(t_window *w)
 	return (res);
 }
 
-// Finds the color of the current pixel we are trying to draw
+/**
+ * @brief with some wierd math and type casting we can determine the color
+ * of an pixel at the x and y positions, neat what you can find online.
+ * @param img an t_img pointer that contains an image with pixels we want to
+ * grab
+ * @param x the x position of the pixel we want to grab
+ * @param y the y position of the pixel we want to grab
+ * @return returns an unsigned int that can be interpreted because it
+ * basically gets casted to its hexadecimal value on the back-end which is what
+ * determines the color of the pixel we are copying.
+ */
 unsigned int	get_pixel_img(t_img *img, int x, int y)
 {
 	return (*(unsigned int *)(
 		(img->addr + (y * img->line_len) + (x * img->bpp / 8))));
 }
 
-// puts the pixel inside the image object
+/**
+ * @brief puts the color of an pixel it receives as input in the x and y
+ * position of the t_img struct pointer that it receives
+ * @param img the t_img pointer we want to fill (usually the overlay of the
+ * t_game structure)
+ * @param x the x position of the pixel we want to fill.
+ * @param y the y position of the pixel we want to fill.
+ * @param color the color of the pixel it gets as output of get_pixel_img
+ *
+ * This function uses a formula equal to get_pixel image to determine
+ * the position of the pixel we want to fill and then sets it with
+ * the value it gets from get_pixel_img, the types are casted inside because
+ * we basically only get hexadecimal values that fit inside an int.
+ * This function does not put transparent pixels on the destination, because
+ * those are bugged in Linux.
+ */
 void	put_pixel_img(t_img *img, int x, int y, int color)
 {
 	char	*dest;
@@ -82,6 +123,15 @@ void	put_pixel_img(t_img *img, int x, int y, int color)
 	}
 }
 
+/**
+ * @brief This function is what actually determines the position of the pixels
+ * we want to fill and places them inside the t_img overlay that is pushed
+ * to the window.
+ * @param src the image we want to put inside the overlay
+ * @param g the t_game structure that contains the overlay
+ * @param type the type of image we are drawing in the screen
+ * @param pos the position of the overlay we want to start filling our pixels at
+ */
 void	put_image_to_overlay(t_img *src, t_game *g, t_entity type, t_point pos)
 {
 	int	i;

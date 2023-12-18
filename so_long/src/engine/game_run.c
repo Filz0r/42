@@ -13,6 +13,18 @@
 #include "../../inc/engine.h"
 #include "../../inc/engine_utils.h"
 
+/**
+ * @brief basically its a toggle/reset switch that allows to increase the
+ * difficulty of the game
+ * @param g the t_game structure that contains all the data of the game
+ *
+ * NOTE: This function makes use off compilation flags in order to increase or
+ * decrease the difficulty of the game, if FLOOD_MAX is set to -1/0 the amount
+ * of flames that spawn in the map will exponentially increase with the value
+ * of FLOOD_SCALE. If flood max is set to anything other than 0 or -1 the game
+ * will reset the amount of flames spawned to 1 when the value isn't less than
+ * FLOOD_MAX.
+ */
 static void	set_kill_scale(t_game *g)
 {
 	will_raise_fire(g);
@@ -27,6 +39,21 @@ static void	set_kill_scale(t_game *g)
 		g->kill_scale += FLOOD_SCALE;
 }
 
+/**
+ * @brief this is the function that is responsible for triggering events
+ * and managing the time inside game
+ * @param game t_game structure
+ * @return always returns 0
+ *
+ * NOTES: This function manages time using some of the functions and data
+ * structures inside of time.h and with a static variable that keeps track
+ * of the time when the last tick happened every time the elapsed time is
+ * greater than the values calculated into game->ns_time when game_init is
+ * first called, the values are in nanoseconds. The variable game->ns_time
+ * basically sets how frequently we want to render a new frame or trigger
+ * events by default its set to 0.55 seconds meaning that if the player doesn't
+ * move a new frame is rendered every 0.55 seconds.
+ */
 static int	draw_game(t_game *game)
 {
 	static struct timespec	last_tick;

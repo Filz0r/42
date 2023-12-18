@@ -13,7 +13,15 @@
 #include "../../inc/engine_utils.h"
 #include "../../inc/engine.h"
 
-// TODO DOCS
+/**
+ * @brief This functions fills the bottom part of the window with the floor
+ * background and after that draws the counters on the window.
+ * @param game the t_game struct we pass everywhere.
+ *
+ * NOTE: IDE's are likely to not like this function, because in the default
+ * macros inside engine.h its set to have this feature off, the makefile is
+ * what turns it on.
+ */
 void	fill_bottom(t_game *g)
 {
 	int		i;
@@ -33,6 +41,10 @@ void	fill_bottom(t_game *g)
 	draw_game_moves(g);
 }
 
+/**
+ * @brief Draws the game ticks that have passed on the left side of the screen
+ * @param game you know that dumb t_game struct.
+ */
 void	draw_game_ticks(t_game *g)
 {
 	t_frame	*digits;
@@ -54,6 +66,11 @@ void	draw_game_ticks(t_game *g)
 	free(temp);
 }
 
+/**
+ * @brief Draws the moves the player has made on that have passed on the
+ * right side of the screen.
+ * @param game you know that dumb t_game struct, again.
+ */
 void	draw_game_moves(t_game *g)
 {
 	t_frame	*digits;

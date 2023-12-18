@@ -13,7 +13,13 @@
 #include "../../inc/engine_utils.h"
 #include "../../inc/engine.h"
 
-// TODO DOCUMENTATION
+/**
+ * @brief creates the t_map structure that contains the initial
+ * data needed to create the frames after the window is open.
+ * @param map an valid char ** map that we can draw with
+ * @return either returns NULL if malloc fails or a pointer to the
+ * valid t_map struct that we can use.
+ */
 t_map	*load_map(char **map)
 {
 	t_map	*res;
@@ -42,6 +48,15 @@ t_map	*load_map(char **map)
 	return (res);
 }
 
+/**
+ * @brief loads the assets that are defined in the path into a linked
+ * list that will contain all of the mlx_images we will need to draw on
+ * the game window
+ * @param win a pointer to the t_window with all the mlx stuff we need
+ * @param lst a reference to the linked list stored in t_game that contains
+ * every single mlx image and in their respective type with animations
+ * included.
+ */
 void	load_assets(t_window *win, t_list **lst)
 {
 	ft_lstadd_back(lst,

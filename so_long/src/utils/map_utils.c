@@ -6,14 +6,17 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 12:36:27 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/24 21:36:36 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/17 21:19:19 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/so_long.h"
 
-// Goes through the first and last rows and checks if they are '1'.
-// Also goes through all the rows and checks if the first and last char are '1'.
+/**
+ * @brief goes trough the entire map and checks if its surrounded by '1'
+ * @param map the map we want to check
+ * @return 1 if the map is surrounded 0 if it isn't.
+ */
 int	is_walled(char **map)
 {
 	int	x;
@@ -41,7 +44,12 @@ int	is_walled(char **map)
 	return (0);
 }
 
-// checks if height equals width
+/**
+ * @brief checks if the maps width or height are equal (yes you can determine if
+ * something is square or not like this)
+ * @param map the 2D char array we want to validate
+ * @return 1 if width and height are equal 0 if not
+ */
 int	is_rectangle(char **map)
 {
 	int	x;
@@ -65,7 +73,16 @@ int	is_rectangle(char **map)
 	return (width == height);
 }
 
-// validates that there is only 1 player and exit and at least 1 collectible.
+//
+/**
+ * @brief validates that there is only 1 player and exit and
+ * at least 1 collectible.
+ * @param map char ** array we want to validate
+ * @return 1 if conditions are met 0 if not.
+ *
+ * This function makes use of an secondary function that gets the pointers to
+ * the counters we declare in this function, because well fuck the Norm.
+ */
 int	validate_details(char **map)
 {
 	int	collectibles;
@@ -89,9 +106,16 @@ int	validate_details(char **map)
 	return ((players != 1 || exits != 1) || collectibles < 1);
 }
 
-// checks if C is any of the chars that shouldn't exist when the game ends
-// and increments the respective pointer, does nothing if char isn't
-// the one we are looking for
+
+/**
+ * @brief this functions checks if the passed char is 'E', 'P' or 'C' and
+ * if it is it increments the values of the respective passed pointers.
+ * @param c char we want to check
+ * @param collectible pointer to collectible counter
+ * @param exits pointer to exit counter
+ * @param players pointer to player counter
+ *
+ */
 void	handle_chars(char c, int *collectible, int *exits, int *players)
 {
 	if (c == 'E')
@@ -102,7 +126,12 @@ void	handle_chars(char c, int *collectible, int *exits, int *players)
 		(*collectible)++;
 }
 
-// Goes through the entire map char by char looking for invalid chars.
+/**
+ * @brief goes trough the passed map and checks if any of the present chars
+ * are not the ones required for the map to be valid.
+ * @param map 2D char array we want to validate
+ * @return either 1 if a char inside the map is invalid or 0 if there is none.
+ */
 int	check_for_invalid(char **map)
 {
 	int	y;

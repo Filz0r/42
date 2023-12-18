@@ -13,7 +13,16 @@
 #include "../../inc/engine_utils.h"
 #include "../../inc/engine.h"
 
-// TODO: DOCUMENTATION
+/**
+ * @brief this function is responsible for filling our overlay mlx image with
+ * all the correct pixels, for our entire map pointer, basically this function
+ * constantly fills the canvas with pixels, the pre processor macros defined
+ * in engine.h will be used to determine if an asset is rendered or not,
+ * this basically means that the function always tries to render all assets.
+ * @param game that sneaky t_game structure we pass everywhere
+ * @param animation the type of animation we want to render, this is only used
+ * for the player animations.
+ */
 void	render_frame(t_game *game, t_entity animation)
 {
 	int		x;
@@ -41,6 +50,15 @@ void	render_frame(t_game *game, t_entity animation)
 	game->frames++;
 }
 
+/**
+ * @brief This is an auxiliary function for render_frame, it basically always
+ * fills the given t_point with the floor pixels, and then if the passed char
+ * is an '1' it then draws the wall on top of the floor pixels, this is
+ * done so that our floor and walls are always rendered onto the screen.
+ * @param game that darn t_game pointer
+ * @param c the char we want to check if its a wall or nor
+ * @param pos the position of the screen that we want to fill.
+ */
 void	select_asset_to_put(t_game *game, char c, t_point pos)
 {
 	t_img			*wall;
@@ -53,6 +71,12 @@ void	select_asset_to_put(t_game *game, char c, t_point pos)
 		put_image_to_overlay(wall, game, WALL, pos);
 }
 
+/**
+ * @brief if the pre processor macros allow for it, it will go trough the
+ * linked list of fire positions stored in t_game and render them in their
+ * corresponding positions.
+ * @param game that darn t_game struct again.
+ */
 void	render_fire(t_game *game)
 {
 	t_list	*coords;
@@ -67,6 +91,10 @@ void	render_fire(t_game *game)
 	}
 }
 
+/**
+ * @brief renders the collectibles and the exit if the logic allows for it
+ * @param game once again t_game
+ */
 void	render_other_assets(t_game *game)
 {
 	t_img	*exit;
@@ -89,6 +117,19 @@ void	render_other_assets(t_game *game)
 	}
 }
 
+/**
+ * @brief an auxiliary function used to render animation slices on the canvas
+ * its abstracted in order to work with any kind of animated asset.
+ * @param game that darn t_game pointer
+ * @param pos the position where we want to render our asset at.
+ * @param type the type of object we are tying to render.
+ *
+ * NOTE: traditionally speaking the formula at the end of this functions limits
+ * the numbers in a fashion that they start from 1, 2, 3 ... nmax and when
+ * current_frame is equal to the total of frames it resets current_frame to 1,
+ * but render frames from 0 to nmax meaning that we need to manually reset
+ * this variable to 0 when we get to nmax.
+ */
 void	render_animation(t_game *game, t_point pos, t_entity type)
 {
 	t_frame	*f;

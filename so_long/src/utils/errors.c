@@ -12,8 +12,11 @@
 
 #include "../../inc/so_long.h"
 
-// This function frees everything inside the map pointer and
-// prints error messages.
+/**
+ * @brief error printing function that frees the map an exits the program
+ * @param map the map we want to free
+ * @param code the error code that represents the message we want to print
+ */
 void	errors(char **map, int code)
 {
 	free_map(map);
@@ -42,9 +45,10 @@ void	errors(char **map, int code)
 	exit(EXIT_FAILURE);
 }
 
-// This function frees the map pointer, and anything inside it, however
-// it might cause issues if by any reason the program fails to allocate
-//  memory for the map.
+/**
+ * @brief A (not so) basic free of a 2D char array
+ * @param map a char ** array that we want to deallocate
+ */
 void	free_map(char **map)
 {
 	char	**temp;

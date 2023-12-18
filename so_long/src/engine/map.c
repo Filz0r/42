@@ -13,7 +13,11 @@
 #include "../../inc/engine_utils.h"
 #include "../../inc/engine.h"
 
-// Calculates the height of the map
+/**
+ * @brief calculates the height of the given char **map
+ * @param map that darn valid char ** array
+ * @return returns the height of the map.
+ */
 int	get_map_height(char **map)
 {
 	int	y;
@@ -24,14 +28,23 @@ int	get_map_height(char **map)
 	return (y);
 }
 
-// Calculates the width of the map using the first row
+/**
+ * @brief calculates the width of the first row of the map, this is safe in here
+ * because we validated the map before, only then.
+ * @param map that darn valid char ** array.
+ * @return returns the width of the first row of the map.
+ */
 int	get_map_width(char **map)
 {
 	return ((int)ft_strlen(map[0]));
 }
 
-// Finds the collectible in the map and allocates it to memory
-// and adds each collectible to a linked list
+/**
+ * @brief finds all the 'C' chars inside the map and adds them to a linked
+ * list and increments the counter.
+ * @param map the map we are reading
+ * @param lst a reference to the linked list where we store everything.
+ */
 void	get_collectibles(char **map, t_list **lst)
 {
 	int		y;
@@ -54,7 +67,10 @@ void	get_collectibles(char **map, t_list **lst)
 	}
 }
 
-//De allocates a 2D char * array from memory
+/**
+ * @brief basically a free of the result of an ft_split.
+ * @param map the array we want to free.
+ */
 void	clean_map(char **map)
 {
 	int		i;

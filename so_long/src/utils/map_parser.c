@@ -12,10 +12,18 @@
 
 #include "../../inc/so_long.h"
 
-// This function is responsible for checking if the map is able to be loaded
-// into memory, if by any reason there is an error, game->map will be
-// set to NULL, and the program will end without needing to handle with the
-// game pointer.
+/**
+ * @brief from the path we get from the program argument we try to load it into
+ * a valid map that we can then pass into the game
+ * @param map_path path to the file we want to open
+ * @return either returns a valid char** map to the main function, or exits the
+ * program because an error was found
+ *
+ * This function is responsible for checking if the map is able to be loaded
+ * into memory, if by any reason there is an error, game->map will be
+ * set to NULL, and the program will end without needing to handle with the
+ * game pointer.
+ */
 char	**validate_map(char *map_path)
 {
 	char	**result;
@@ -40,10 +48,16 @@ char	**validate_map(char *map_path)
 	return (result);
 }
 
-// checks if the argument has .ber inside
-// then gets the length of the string from the pointer it gets
-// if its not equal to 4 return false, aka you just tried to
-// break my parser and failed.
+/**
+ * @brief validates that the path we are getting from the arguments ends in .ber
+ * @param file filepath we want to check
+ * @return 1 if true 0 if the file path doesn't end in .ber
+ *
+ * Checks if the argument has .ber inside
+ * then gets the length of the string from the pointer it gets
+ * if its not equal to 4 return false, aka you just tried to
+ * break my parser and failed.
+ */
 int	check_file_path(char *file)
 {
 	char	*check;
@@ -60,7 +74,14 @@ int	check_file_path(char *file)
 	return (1);
 }
 
-// Opens the file where the map is inside and loads it into memory.
+/**
+ * @brief Opens a file descriptor with the valid path, then loads its contents
+ * into a 2D char array. If the file has empty lines anywhere except at the end
+ * of the file read_map will fail and will make the map not valid anymore
+ * @param map_path a path to a file ending in .ber
+ * @return either returns a valid char ** that we can proceed to validate or
+ * null if read_map fails or finds empty lines.
+ */
 char	**get_map(char *map_path)
 {
 	char		**ret;
@@ -77,7 +98,16 @@ char	**get_map(char *map_path)
 	return (ret);
 }
 
-// reads the file line by line and places it inside a single string
+/**
+ * @brief this function reads the map line by line and places it inside a single
+ * string, if get_next_line is given an invalid fd it will return NULL so this
+ * function will also return NULL, same behavior happens for lines that only
+ * have a '\\n', meaning that if the file isn't a perfect square/rectangle
+ * this function will also return NULL
+ * @param fd
+ * @return Either returns a NULL terminated string or NULL, check brief for
+ * explanation on causes to NULL.
+ */
 char	*read_map(int fd)
 {
 	char	*line;
@@ -107,9 +137,14 @@ char	*read_map(int fd)
 	return (result);
 }
 
-// creates a new temporary map and runs flood fill inside this map
-// then checks if there are still valid characters inside the map
-// frees the temporary map and returns the answer
+/**
+ * @brief creates a temporary map that is flood filled from the position
+ * of 'P' an replaces everything that isn't a wall, if after running this
+ * the map still has chars other than 'F' and '1' it means the map is
+ * not completable.
+ * @param map the char ** we want to check
+ * @return either 1 if the map is completable or 0 if it isn't
+ */
 int	is_completable(char **map)
 {
 	char	**temp_map;

@@ -12,7 +12,15 @@
 
 #include "../../inc/so_long.h"
 
-// This function fills the map array that we store in our map pointer
+/**
+ * @brief Recursive implementation of the flood fill algorithm, to limit call
+ * stacks everytime the algorithm finds a '1' or a value that was already filled
+ * it starts returning
+ * @param map the map we want to fill
+ * @param x an x position
+ * @param y an y position
+ * @param fill_val the value we want to try and change at the position given
+ */
 void	flood_fill(char **map, int x, int y, char fill_val)
 {
 	int	width;
@@ -29,13 +37,21 @@ void	flood_fill(char **map, int x, int y, char fill_val)
 	flood_fill(map, (x + 1), y, fill_val);
 }
 
-// Checks if the passed char is valid for the map.
+/**
+ * @brief Checks if the given argument is '0', '1', 'P', 'E' or 'C'
+ * @param c the char we want to check
+ * @return either 0 if the value isn't any of the mentioned char or 1 if it is.
+ */
 int	invalid_char(char c)
 {
 	return (c == '0' || c == '1' || c == 'P' || c == 'E' || c == 'C');
 }
 
-// Counts how many rows exist inside the file
+/**
+ * @brief Counts the number of rows inside the map
+ * @param map a 2D array
+ * @return either 0 if the map isn't valid or the number of columns
+ */
 int	get_height(char **map)
 {
 	int	res;
@@ -48,7 +64,13 @@ int	get_height(char **map)
 	return (res);
 }
 
-// counts how many columns exist inside the first row of the map
+/**
+ * @brief calculates the width of the entire map and makes sure that the width
+ * is always the same for the entire map.
+ * @param 2D char ** map
+ * @return returns 0 if the map isn't valid, -1 if the width isn't the same
+ * across the entire map or the width of the map.
+ */
 int	get_width(char **map)
 {
 	int	y;
@@ -74,7 +96,12 @@ int	get_width(char **map)
 	return (old_res);
 }
 
-// Creates a new map from an existing map variable
+/**
+ * @brief duplicates a char ** array
+ * @param map the array we want to fill
+ * @return either NULL if memory allocation fails or a clone of the given
+ * argument.
+ */
 char	**mapdup(char **map)
 {
 	int		h;

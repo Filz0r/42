@@ -13,7 +13,15 @@
 #include "../../inc/engine.h"
 #include "../../inc/engine_utils.h"
 
-//todo: docs;
+/**
+ * @brief Initializes the counters/static variables of the t_game structures,
+ * and at the same time creates and populates the t_map struct and fills
+ * everything else with 0's (ft_memset)
+ * @param map a valid char ** that passes the parameters required in the
+ * subject
+ * @return returns a pointer to the initial t_game struct that will be used
+ * to launch mlx
+ */
 void	*game_init(char **map)
 {
 	t_game	*ptr;

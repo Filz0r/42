@@ -13,6 +13,18 @@
 #include "../../inc/engine_utils.h"
 #include "../../inc/engine.h"
 
+/**
+ * @brief Defines a t_point that is used to determine the size of the window
+ * mlx is going to open
+ * @param width an 1:1 scale map width
+ * @param height an 1:1 scale map height
+ * @return an t_point with the size we want to use
+ *
+ * NOTE: This makes use of pre processor macros to check what is supposed to
+ * happen, by default te window doesn't have the height required to draw the
+ * counters on the window, but with the use of some macros on compilation time
+ * we can change this behaviour.
+ */
 static t_point	set_window_size(int width, int height)
 {
 	if (PRINT_MOVES == 0)
@@ -21,7 +33,14 @@ static t_point	set_window_size(int width, int height)
 		return ((t_point){width * SIZE, height * SIZE, -1, -1});
 }
 
-// TODO:docs
+/**
+ * @brief Creates and opens an mlx window where our game will be drawn into.
+ * @param width the 1:1 width of the map
+ * @param height the 1:1 height of the map
+ * @param name the name of the window we want to create.
+ * @return returns NULL if malloc fails or if mlx_init fails, otherwise it
+ * returns a valid pointer to a t_window structure.
+ */
 t_window	*new_window(int width, int height, char *name)
 {
 	t_window	*win;
