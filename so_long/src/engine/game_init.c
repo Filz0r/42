@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:09:58 by fparreir          #+#    #+#             */
-/*   Updated: 2023/12/16 17:37:35 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/19 18:05:12 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	*game_init(char **map)
 	t_game	*ptr;
 
 	ptr = malloc(sizeof(t_game));
-	ft_memset(ptr, 0, sizeof(t_game));
 	if (!ptr)
 		return (NULL);
+	ft_memset(ptr, 0, sizeof(t_game));
 	ptr->map = load_map(map);
 	if (!(ptr->map))
 		return (game_cleanup(ptr));
