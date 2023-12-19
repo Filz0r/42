@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 16:22:40 by fparreir          #+#    #+#             */
-/*   Updated: 2023/12/19 12:26:42 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/19 20:59:50 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	check_pathing(char **map)
 /**
  * @brief this function is responsible for trimming the 2D array
  * given by read_map.
- * @param map char ** map that we want to remove te '\n' symbol from
+ * @param map char ** map that we want to remove te '\\n' symbol from the map
  * @param size the size of the array
  * @return either returns NULL when the map array contains empty lines or
  * returns the trimmed map pointer.

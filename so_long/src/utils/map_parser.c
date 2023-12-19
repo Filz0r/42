@@ -111,14 +111,12 @@ char	**get_map(char *map_path)
 }
 
 /**
- * @brief this function reads the map line by line and places it inside a single
- * string, if get_next_line is given an invalid fd it will return NULL so this
- * function will also return NULL, same behavior happens for lines that only
- * have a '\\n', meaning that if the file isn't a perfect square/rectangle
- * this function will also return NULL
- * @param fd
- * @return Either returns a NULL terminated string or NULL, check brief for
- * explanation on causes to NULL.
+ * @brief This function creates a char ** array that contains the entire
+ * contents of the map file, if its valid that is
+ * @param fd file descriptor for the file
+ * @param size the amount of lines the file has
+ * @return Returns NULL if malloc fails or if you give it an invalid file ;)
+ * Otherwise it returns a char ** array that can be trimmed.
  */
 char	**read_map(int fd, int size)
 {
