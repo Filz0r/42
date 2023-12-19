@@ -44,7 +44,6 @@
 
 // Library stuff
 void	*game_init(char **map);
-void	*game_cleanup(void *ptr); //todo: this is bugged and causes segfault
 void	*game_run(void *ptr, char *name);
 
 #endif //ENGINE_H

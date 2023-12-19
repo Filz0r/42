@@ -105,6 +105,7 @@ typedef struct s_frame {
 }				t_frame;
 
 // game stuff
+void			*game_cleanup(void *ptr);
 int				quit_game(t_game *game, int signal);
 int				will_raise_fire(t_game *g);
 void			light_map(t_map *map, t_point pt, t_queue *q);
