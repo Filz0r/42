@@ -80,7 +80,7 @@ void	draw_game_moves(t_game *g)
 	int		k;
 
 	temp = ft_itoa((int)g->moves);
-	i = ft_strlen(temp) - 1;
+	i = (int)ft_strlen(temp) - 1;
 	k = 0;
 	digits = find_frame_by_entity(g->images, DIGITS);
 	while (i >= 0)

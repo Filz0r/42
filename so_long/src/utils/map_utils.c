@@ -106,7 +106,6 @@ int	validate_details(char **map)
 	return ((players != 1 || exits != 1) || collectibles < 1);
 }
 
-
 /**
  * @brief this functions checks if the passed char is 'E', 'P' or 'C' and
  * if it is it increments the values of the respective passed pointers.

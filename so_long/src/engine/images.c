@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../inc/engine_utils.h"
-#include "../../inc/engine.h"
-#include <string.h>
 
 /**
  * @brief creates a t_img object that contains an XPM file inside with valid
