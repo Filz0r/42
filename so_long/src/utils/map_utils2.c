@@ -69,6 +69,14 @@ int	check_pathing(char **map)
 	return (0);
 }
 
+/**
+ * @brief this function is responsible for trimming the 2D array
+ * given by read_map.
+ * @param map char ** map that we want to remove te '\n' symbol from
+ * @param size the size of the array
+ * @return either returns NULL when the map array contains empty lines or
+ * returns the trimmed map pointer.
+ */
 char	**trim_map(char **map, int size)
 {
 	char	*temp;
