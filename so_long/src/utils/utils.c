@@ -111,6 +111,8 @@ char	**mapdup(char **map)
 	i = 0;
 	h = get_height(map);
 	res = malloc(sizeof(char *) * (h + 1));
+	if (!res)
+		return (NULL);
 	while (map[i])
 	{
 		res[i] = ft_strdup(map[i]);
