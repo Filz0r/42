@@ -91,6 +91,8 @@ t_point	remove_from_queue(t_queue *q)
  */
 void	free_queue(t_queue *q)
 {
+	if (!q)
+		return ;
 	free(q->points);
 	free(q);
 }

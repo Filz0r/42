@@ -77,6 +77,8 @@ t_img	*get_img_by_entity(t_list *lst, t_entity entity)
 	t_img	*img;
 
 	frame = find_frame_by_entity(lst, entity);
+	if (!frame)
+		return (NULL);
 	img = (t_img *)((ft_lstget(frame->frames, 0))->content);
 	if (!img)
 		return (NULL);
