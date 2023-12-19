@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 21:19:11 by fparreir          #+#    #+#             */
-/*   Updated: 2023/12/19 12:14:35 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/19 13:20:43 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,10 +107,7 @@ char	**get_map(char *map_path)
 	close(file);
 	if (!ret)
 		return (ft_fsplit(ret), NULL);
-	ret = trim_map(ret, sz + 1);
-	if (!ret)
-		return (NULL);
-	return (ret);
+	return (trim_map(ret, sz + 1));
 }
 
 /**
