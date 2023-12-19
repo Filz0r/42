@@ -28,6 +28,8 @@ void	*map_cleanup(t_map *res)
 			free(res->exit);
 		if (res->collectibles)
 			ft_lstclear(&(res->collectibles), free);
+		if (res->map)
+			ft_fsplit(res->map);
 		free(res);
 	}
 	return (NULL);
