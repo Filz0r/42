@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 19:48:40 by fparreir          #+#    #+#             */
-/*   Updated: 2023/12/04 16:38:49 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/19 12:25:29 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define MAGENTA	"\e[0;35m"
 
 // Functions for loading the file and contents to memory
-char	*read_map(int fd);
+char	**read_map(int fd, int sz);
 char	**validate_map(char *map_path);
 char	**get_map(char *map_path);
 
@@ -37,6 +37,7 @@ void	find_player(char **map, int *x, int *y);
 int		check_file_path(char *file);
 int		get_width(char **map);
 int		get_height(char **map);
+char	**trim_map(char **map, int size);
 
 // Map Validation
 int		check_for_invalid(char **map);

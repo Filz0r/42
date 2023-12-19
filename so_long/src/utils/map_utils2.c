@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 16:22:40 by fparreir          #+#    #+#             */
-/*   Updated: 2023/12/04 16:36:47 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/19 12:26:42 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,22 @@ int	check_pathing(char **map)
 		y++;
 	}
 	return (0);
+}
+
+char	**trim_map(char **map, int size)
+{
+	char	*temp;
+	int		i;
+
+	i = 0;
+	while (map[i] && i < size)
+	{
+		temp = ft_strclean(map[i], '\n', ft_strlen(map[i]));
+		if (ft_strlen(temp) == 0)
+			return (free(temp), ft_fsplit(map), NULL);
+		free(map[i]);
+		map[i] = temp;
+		i++;
+	}
+	return (map);
 }

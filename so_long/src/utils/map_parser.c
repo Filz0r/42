@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 21:19:11 by fparreir          #+#    #+#             */
-/*   Updated: 2023/12/05 10:43:42 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/19 12:14:35 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	**validate_map(char *map_path)
 		errors(result, 1);
 	else
 		result = get_map(map_path);
-	if (result == NULL)
+	if (result == NULL || *result == NULL)
 		errors(result, 0);
 	if (result && *result != NULL && check_for_invalid(result))
 		errors(result, 2);
@@ -85,16 +85,31 @@ int	check_file_path(char *file)
 char	**get_map(char *map_path)
 {
 	char		**ret;
-	char		*result;
+	char		*line;
 	int			file;
+	int			sz;
 
+	sz = 0;
 	file = open(map_path, O_RDONLY);
-	result = read_map(file);
-	if (!result)
+	if (file == -1)
 		return (NULL);
-	ret = ft_split(result, '\n');
-	free(result);
+	while (1)
+	{
+		line = get_next_line(file);
+		if (!line)
+			break ;
+		free(line);
+		sz++;
+	}
 	close(file);
+	file = open(map_path, O_RDONLY);
+	ret = read_map(file, sz + 1);
+	close(file);
+	if (!ret)
+		return (ft_fsplit(ret), NULL);
+	ret = trim_map(ret, sz + 1);
+	if (!ret)
+		return (NULL);
 	return (ret);
 }
 
@@ -108,33 +123,25 @@ char	**get_map(char *map_path)
  * @return Either returns a NULL terminated string or NULL, check brief for
  * explanation on causes to NULL.
  */
-char	*read_map(int fd)
+char	**read_map(int fd, int size)
 {
-	char	*line;
-	char	*result;
-	char	*temp;
+	char	**map;
+	int		i;
 
-	result = ft_strdup("");
-	while (1)
+	i = 0;
+	map = malloc(sizeof(char *) * size);
+	if (!map)
+		return (NULL);
+	map[0] = get_next_line(fd);
+	if (!map[0])
+		return (free(map), NULL);
+	while (++i < size)
 	{
-		line = get_next_line(fd);
-		if (!line)
-		{
-			if (ft_strlen(result) == 0)
-			{
-				free(result);
-				return (NULL);
-			}
+		map[i] = get_next_line(fd);
+		if (!map[i])
 			break ;
-		}
-		if (ft_strlen(line) == 1)
-			return (free(result), free(line), NULL);
-		temp = ft_strjoin(result, line);
-		free(result);
-		result = temp;
-		free(line);
 	}
-	return (result);
+	return (map);
 }
 
 /**
@@ -157,10 +164,7 @@ int	is_completable(char **map)
 	find_player(temp_map, &player_x, &player_y);
 	flood_fill(temp_map, player_x, player_y, 'F');
 	if (!check_pathing(temp_map))
-	{
-		free_map(temp_map);
-		return (0);
-	}
+		return (free_map(temp_map), 0);
 	free_map(temp_map);
 	return (1);
 }
