@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 16:39:21 by fparreir          #+#    #+#             */
-/*   Updated: 2023/12/04 15:41:36 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/19 11:23:36 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 void	errors(char **map, int code)
 {
 	free_map(map);
-	map = NULL;
 	if (code == 0)
 	{
 		ft_printf("Error\nThere was an issue allocating memory ");
