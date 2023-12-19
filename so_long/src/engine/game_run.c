@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:38:48 by fparreir          #+#    #+#             */
-/*   Updated: 2023/12/01 21:45:48 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/16 21:21:14 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 static void	set_kill_scale(t_game *g)
 {
 	will_raise_fire(g);
-	if (FLOOD_MAX != -1)
+	if (FLOOD_MAX > 0)
 	{
 		if (g->kill_scale < FLOOD_MAX)
 			g->kill_scale += FLOOD_SCALE;
@@ -79,6 +79,16 @@ static int	draw_game(t_game *game)
 	return (0);
 }
 
+/**
+ * @brief This function is what runs the game, initializes the mlx pointer and
+ * window, loads all the assets into memory, calculates the tiles that will
+ * be flooded with fire, renders the first frame and adds all of the mlx
+ * required hooks.
+ * @param ptr an valid initialized t_game struct that can be converted into an
+ * mlx window.
+ * @param name the name of the window we are going to launch
+ * @return always returns NULL
+ */
 void	*game_run(void *ptr, char *name)
 {
 	t_game	*game;
