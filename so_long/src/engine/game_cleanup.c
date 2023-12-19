@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/engine.h"
 #include "../../inc/engine_utils.h"
 
 /**
@@ -38,14 +37,8 @@ void	*game_cleanup(void *ptr)
  */
 int	quit_game(t_game *game, int signal)
 {
-	int	i;
-
-	i = 0;
 	if (game)
 	{
-		while (game->map->map[i] != 0)
-			free(game->map->map[i++]);
-		free(game->map->map);
 		if (game->map)
 			map_cleanup(game->map);
 		if (game->overlay)
