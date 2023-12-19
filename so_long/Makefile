@@ -1,6 +1,6 @@
 NAME = so_long
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror #-g3 # -fsanitize=address
 INCLUDES = -I$(LIBFT_DIR)/inc -I$(MLX_DIR) -I/usr/include
 LDFLAGS = -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -L/usr/lib/X11 -lXext -lX11
 SRC_DIR = src
