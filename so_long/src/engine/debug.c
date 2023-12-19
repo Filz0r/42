@@ -6,15 +6,16 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 23:14:20 by fparreir          #+#    #+#             */
-/*   Updated: 2023/11/28 23:55:21 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/16 21:28:45 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/engine_utils.h"
 
+// THIS CODE IS ONLY USED FOR DEBUGGING REASONS
+/*
 static unsigned long	g_total_frames = 0;
 
-// THIS CODE IS ONLY USED FOR DEBUGGING REASONS
 void	print_time_status(t_game *g, struct timespec *last_tick)
 {
 	static struct timespec	last_print;
@@ -38,3 +39,4 @@ void	print_time_status(t_game *g, struct timespec *last_tick)
 		g_total_frames++;
 	*last_tick = current;
 }
+*/
