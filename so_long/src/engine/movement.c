@@ -84,7 +84,7 @@ int	check_collision(t_game *g, int x, int y, int action)
 	return (1);
 }
 
- /**
+/**
   * @brief This function is the conclusion of check_collision, it basically
   * grabs the converted value calculated beforehand and tries to check if it
   * will result in a collision or not and tries to act accordingly,
@@ -113,7 +113,7 @@ int	check_collision(t_game *g, int x, int y, int action)
   * x amount of pixels it would result in the walking mechanism to be
   * extremely slow and this adaptation was made to make the entire process
   * smoother.
-  */
+*/
 void	handle_restof_movement(t_game *g, t_point norm_point, int x, int y)
 {
 	t_point	interpolated;
