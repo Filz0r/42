@@ -70,7 +70,7 @@ int	get_height(char **map)
  * @param 2D char ** map
  * @return returns 0 if the map isn't valid, -1 if the width isn't the same
  * across the entire map or the width of the map.
- */
+*/
 int	get_width(char **map)
 {
 	int	y;

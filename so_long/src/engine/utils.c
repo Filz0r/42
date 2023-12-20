@@ -20,7 +20,7 @@
  * @return an approximated/normalized int.
  *
  * NOTES: just like I did for the normalize_point function I'm going to give an
- * 'graphical representation of how this function works. Lets say nb is 9.125
+ * 'graphical representation' of how this function works. Lets say nb is 9.125
  * and our threshold is 0.25, we first cast nb into an in so that the compiler
  * truncates our double, then we check if the given number is greater than
  * the sum of threshold and the truncated int, if it is we return that

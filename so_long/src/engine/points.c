@@ -108,9 +108,6 @@ t_point	interpolate_point(t_point current, t_point target, double factor)
  * @brief Scales up the passed t_point structure using the SIZE macro
  * @param pt the point we want to scale up
  * @return an scaled up point
- *
- * NOTE: if this was C++, we would overload this but as this is plain old C
- * we need to define a new function.
  */
 t_point	scale_up(t_point pt)
 {
@@ -122,6 +119,9 @@ t_point	scale_up(t_point pt)
  * @param pt a t_point struct we want to allocate to memory
  * @return Either returns NULL if malloc fails or an valid pointer to
  * a t_point structure.
+ *
+ * NOTE: if this was C++, we would overload this but as this is plain old C
+ * we need to define a new function.
  */
 t_point	*new_point(t_point pt)
 {
