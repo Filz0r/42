@@ -13,6 +13,6 @@
 #ifndef PIPEX_BONUS_H
 # define PIPEX_BONUS_H
 
-# include "pipex.h"
+# include <pipex.h>
 
 #endif //PIPEX_BONUS_H
