@@ -6,11 +6,11 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:46:15 by fparreir          #+#    #+#             */
-/*   Updated: 2023/12/15 21:53:50 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/27 14:54:34 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/pipex.h"
+#include <pipex.h>
 
 /**
  * @brief fake global variable that can be called from wherever.
@@ -84,4 +84,32 @@ void	set_command_fdout(int fd)
 		return ;
 	close(cmd->fds[1]);
 	cmd->fds[1] = fd;
+}
+
+/**
+ * @brief Closes the file descriptors for the commands inside the
+ * child processes.
+ * @param pos position where are. This is used to close the infile and outfile
+ * before the program calls execve.
+ */
+void	close_unused_commands(int pos)
+{
+	t_list	*temp;
+	t_cmd	*cmd;
+
+	temp = *commands();
+	while (temp)
+	{
+		cmd = (t_cmd *)temp->content;
+		if (!cmd)
+			break ;
+		if (cmd->pos == pos)
+		{
+			close(cmd->files.infile);
+			close(cmd->files.outfile);
+		}
+		close(cmd->fds[1]);
+		close(cmd->fds[0]);
+		temp = temp->next;
+	}
 }
