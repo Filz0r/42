@@ -89,3 +89,20 @@ int	dup_closer(int fdin, int fdout)
 	close(fdin);
 	return (1);
 }
+
+/**
+ * @brief Waits for all child processes with an loop, rtfm on the returns of
+ * waitpid. Also closes the in and out files
+ * @param files t_pipe struct that contains the file descriptors of the in and
+ * out files that need to be closed.
+ *
+ * Reasoning for this is like I wanted my code to be smaller on the main
+ * function so yeah.
+ */
+void	pid_waiter(t_pipe files)
+{
+	while (waitpid(-1, NULL, 0) > 0)
+		;
+	close(files.infile);
+	close(files.outfile);
+}
