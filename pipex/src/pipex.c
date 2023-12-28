@@ -6,11 +6,11 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:39:07 by fparreir          #+#    #+#             */
-/*   Updated: 2023/12/16 13:44:30 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/21 19:10:33 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/pipex.h"
+#include <pipex.h>
 
 /**
  * @brief Recursive implementation of an UNIX pipe that goes trough the global
@@ -73,12 +73,11 @@ void	execute(t_cmd *cmd, int fdin, int fdout)
 }
 
 /**
- * @brief Main function of the pipex program
- * @param ac number of arguments
- * @param av array of the arguments
- * @param envp environment variables table
- * @return either 1 or 0 corresponding with the usage.
- * The program can also return 127 if any file is invalid
+ * @brief duplicates and closes the fdin and fdout to stdin and stdout
+ * respectively
+ * @param fdin file descriptor we want to make stdin
+ * @param fdout file descriptor we want to make stdout
+ * @return either -1 if dup2 fails or 1 if everything works.
  */
 int	dup_closer(int fdin, int fdout)
 {
