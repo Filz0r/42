@@ -1,0 +1,17 @@
+compilers:
+  - description: Clang
+    match-compiler-exe: "/usr/bin/cc"
+    match-language: C
+    include-dirs:
+      - /home/filipe/42/pipex/inc
+      - /home/filipe/42/pipex/libft/includes
+      - /home/filipe/42/pipex/libft/src/memory
+      - /home/filipe/42/pipex/libft/src/string
+      - /home/filipe/42/pipex/libft/src/gnl
+      - /home/filipe/42/pipex/libft/src/char
+      - /home/filipe/42/pipex/libft/src/printf
+      - /home/filipe/42/pipex/libft/src/lists
+      - /home/filipe/42/pipex/libft/src/fd
+      - /usr/include
+      - /usr/include/linux
+      - /usr/include/clang/16/include
