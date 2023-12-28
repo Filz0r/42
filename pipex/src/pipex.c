@@ -80,28 +80,13 @@ void	execute(t_cmd *cmd, int fdin, int fdout)
  * @return either 1 or 0 corresponding with the usage.
  * The program can also return 127 if any file is invalid
  */
-int	main(int ac, char **av, char **envp)
+int	dup_closer(int fdin, int fdout)
 {
-	int	infile;
-	int	outfile;
-
-	if (ac == 5)
-	{
-		infile = open(av[1], O_RDONLY);
-		if (infile == -1)
-			errors(av[1], NULL);
-		outfile = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		if (outfile == -1)
-			errors(av[4], NULL);
-		commands_init(ac - 3, av, envp, outfile);
-//		print_cmds(commands(), 0);
-		pipex(ft_lstget(*commands(), 0), infile);
-		waitpid(-1, NULL, 0);
-		clear_commands(commands());
-		close(outfile);
-		close(infile);
-		return (0);
-	}
-	ft_printf("Invalid usage\nCorrect usage: ./pipex infile cmd1 cmd2 outfile\n");
+	if (dup2(fdout, STDOUT_FILENO) < 0)
+		return (-1);
+	close(fdout);
+	if (dup2(fdin, STDIN_FILENO) < 0)
+		return (-1);
+	close(fdin);
 	return (1);
 }
