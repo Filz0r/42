@@ -6,21 +6,25 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 15:52:10 by fparreir          #+#    #+#             */
-/*   Updated: 2023/12/15 21:51:44 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/22 01:51:23 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/pipex.h"
+#include <pipex.h>
 
 void	print_cmd(t_cmd *cmd)
 {
-	ft_printf("cmd: %s, pos: %d, pid: %d, path: %s, in: %d, out: %d\n",
+	ft_printf("cmd: {\n cmd: %s,\n pos: %d,\n pid: %d,\n"
+		" path: %s,\n fdsin: %d,\n fdsout: %d,\n "
+		"infile: %d,\n outfile: %d\n }\n",
 		cmd->cmd,
 		cmd->pos,
 		cmd->pid,
 		cmd->path,
 		cmd->fds[0],
-		cmd->fds[1]);
+		cmd->fds[1],
+		cmd->files.infile,
+		cmd->files.outfile);
 }
 
 void	print_cmds(t_list **list, int depth)
