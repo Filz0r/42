@@ -36,9 +36,8 @@ t_cmd	*new_cmd(t_cmd cmd)
 	if (!res)
 		return (NULL);
 	*res = cmd;
-//	if (*(res->cmd) == '\0')
-//		res->cmd = NULL;
-	pipe(res->fds);
+	if (pipe(res->fds) < 0)
+		errors("pipes", NULL);
 	return (res);
 }
 
@@ -49,7 +48,7 @@ t_cmd	*new_cmd(t_cmd cmd)
  * @param envp environment variables array got from main function
  * @param outfile file descriptor of the last element of the linked list
  */
-void	commands_init(int size, char **av, char **envp, int outfile)
+void	commands_init(int size, char **av, char **envp, t_pipe fds)
 {
 	int		i;
 	char	*temp_cmd;
@@ -58,20 +57,13 @@ void	commands_init(int size, char **av, char **envp, int outfile)
 	i = -1;
 	while (++i < size)
 	{
-//		if (av[i + 2] == NULL || *av[i + 2] == '\0')
-//			temp_cmd = "/dev/null";
-//		else
-//		{
 		temp = ft_split(av[i + 2], 32);
 		temp_cmd = find_cmd_path(get_path(envp), temp[0]);
-//		}
 		ft_lstadd_back(commands(), ft_lstnew(new_cmd((t_cmd){envp, temp_cmd,
-					av[i + 2], .fds = {-1, -1}, -69, i})));
-		if (temp_cmd != NULL)
-			if (ft_strncmp(temp_cmd, "/dev/null", 9) != 0)
-				ft_fsplit(temp);
+					av[i + 2], .fds = {-1, -1}, -69, .files = fds, i})));
+		ft_fsplit(temp);
 	}
-	set_command_fdout(outfile);
+	set_command_fdout(fds.outfile);
 }
 
 /**
