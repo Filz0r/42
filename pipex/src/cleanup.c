@@ -6,11 +6,11 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 18:31:24 by fparreir          #+#    #+#             */
-/*   Updated: 2023/12/16 13:45:00 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/28 12:46:58 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/pipex.h"
+#include <pipex.h>
 
 /**
  * @brief Error function that also cleans memory
@@ -22,14 +22,10 @@
  */
 void	errors(char *msg, char **arr)
 {
-	if (arr != NULL)
-	{
-		perror(msg);
+	perror(msg);
+	if (arr)
 		ft_fsplit(arr);
-	}
-	else
-		perror(msg);
-	if (commands() != NULL || *commands() != NULL)
+	if (commands() || *commands())
 		clear_commands(commands());
 	exit(127);
 }
@@ -48,7 +44,7 @@ void	free_cmd(t_list *node)
 	c = ((t_cmd *)(node->content));
 	if (!c)
 		return ;
-	if (c->path != NULL && ft_strncmp(c->path, "/dev/null", 9) != 0)
+	if (c->path)
 		free(c->path);
 	close(c->fds[0]);
 	close(c->fds[1]);
