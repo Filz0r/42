@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 17:34:32 by fparreir          #+#    #+#             */
-/*   Updated: 2023/12/20 17:53:02 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/28 11:42:23 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,16 @@ int	main(int ac, char **av, char **envp)
 
 	if (ac >= 5)
 	{
-		files = open_files(av[1], av[ac - 2]);
+		if (ft_strncmp(av[1], "here_doc", ft_strlen(av[1])) == 0)
+		{
+			files = handle_heredoc(av[ac-- - 1], av[2]);
+			av = av + 1;
+		}
+		else
+			files = open_files(av[1], av[ac - 1]);
 		commands_init(ac - 3, av, envp, files);
 		pipex(ft_lstget(*commands(), 0), files.infile);
-		pid_waiter();
-		close(files.outfile);
-		close(files.infile);
+		pid_waiter(files);
 		clear_commands(commands());
 		return (0);
 	}
