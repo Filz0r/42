@@ -54,13 +54,19 @@ void	execute(t_cmd *cmd, int fdin, int fdout)
 	char	**temp;
 	char	*temp2;
 
-	if (dup_closer(fdin, fdout) >= 0)
+	if (dup_closer(dup(fdin), dup(fdout)) >= 0)
 	{
 		temp = ft_split(cmd->cmd, 32);
 		if (cmd->path == NULL)
-			temp2 = temp[0];
+		{
+			if (!(*temp))
+				temp2 = cmd->cmd;
+			else
+				temp2 = temp[0];
+		}
 		else
 			temp2 = cmd->path;
+		close_unused_commands(cmd->pos);
 		if (execve(temp2, temp, cmd->env) == -1)
 			errors(temp2, temp);
 	}
