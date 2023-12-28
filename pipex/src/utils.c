@@ -56,32 +56,13 @@ char	*get_path(char **envp)
 	int		i;
 
 	i = 0;
-	if (!envp || *envp == NULL)
+	if (!envp)
 		return (NULL);
 	while (envp[i] != 0)
 	{
-		if (ft_strnstr(envp[i], "PATH=", ft_strlen(envp[i])) != NULL)
+		if (ft_strnstr(envp[i], "PATH=", 5) != NULL)
 			return (envp[i] + 5);
 		i++;
 	}
 	return (NULL);
-}
-
-/**
- * @brief duplicates and closes the fdin and fdout to stdin and stdout
- * respectively
- * @param fdin file descriptor we want to make stdin
- * @param fdout file descriptor we want to make stdout
- * @return either -1 if dup2 fails or 1 if everything works.
- */
-int	dup_closer(int fdin, int fdout)
-{
-	if (dup2(fdout, STDOUT_FILENO) < 0)
-		return (-1);
-	close(fdout);
-	if (dup2(fdin, STDIN_FILENO) < 0)
-		return (-1);
-	if (fdin == STDIN_FILENO)
-		close(fdin);
-	return (1);
 }
