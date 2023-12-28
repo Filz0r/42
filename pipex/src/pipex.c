@@ -35,9 +35,11 @@ void	pipex(t_list *node, int infile)
 	else if (cmd->pid == 0)
 		execute(cmd, infile, cmd->fds[1]);
 	else
+	{
+		close(infile);
+		close(cmd->fds[1]);
 		pipex(node->next, cmd->fds[0]);
-	close(infile);
-	close(cmd->fds[1]);
+	}
 }
 
 /**
