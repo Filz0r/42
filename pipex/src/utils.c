@@ -6,11 +6,35 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 17:54:19 by fparreir          #+#    #+#             */
-/*   Updated: 2023/12/16 12:02:53 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/27 16:02:12 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/pipex.h"
+#include <pipex.h>
+
+/**
+ * @brief opens the file descriptors of the in and out files and returns a
+ * t_pipe struct to the main function, this only works because the memory
+ * from the main function is going to be stack allocated.
+ * @param infile path to the infile
+ * @param outfile path to the outfile
+ * @return returns a t_pipe struct containing the file descriptors of the
+ * in and out files, if any of these files are invalid, program exits and
+ * clears all memory.
+ */
+t_pipe	open_files(char *infile, char *outfile)
+{
+	int	in;
+	int	out;
+
+	in = open(infile, O_RDONLY);
+	if (in == -1)
+		errors(infile, NULL);
+	out = open(outfile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (out == -1)
+		errors(outfile, NULL);
+	return ((t_pipe){in, out});
+}
 
 /**
  * @brief Finds the path of an command on the environment
