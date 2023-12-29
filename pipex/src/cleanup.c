@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 18:31:24 by fparreir          #+#    #+#             */
-/*   Updated: 2023/12/28 12:46:58 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/29 10:04:01 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@
  * After cleaning the memory and printing the perror message it exits the
  * program with the error code 127 (wrong/invalid file descriptor)
  */
-void	errors(char *msg, char **arr)
+void	errors(char *msg, char **arr, int code)
 {
 	perror(msg);
 	if (arr)
 		ft_fsplit(arr);
 	if (commands() || *commands())
 		clear_commands(commands());
-	exit(127);
+	exit(code);
 }
 
 /**

@@ -29,10 +29,10 @@ t_pipe	open_files(char *infile, char *outfile)
 
 	in = open(infile, O_RDONLY);
 	if (in == -1)
-		errors(infile, NULL);
+		errors(infile, NULL, 127);
 	out = open(outfile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (out == -1)
-		errors(outfile, NULL);
+		errors(outfile, NULL, 127);
 	return ((t_pipe){in, out});
 }
 

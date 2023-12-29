@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 11:44:10 by fparreir          #+#    #+#             */
-/*   Updated: 2023/12/21 21:48:07 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/29 10:03:51 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	close_unused_commands(int pos);
 
 // Utils
 char	*find_cmd_path(char *path, char *cmd);
-void	errors(char *msg, char **arr);
+void	errors(char *msg, char **arr, int code);
 char	*get_path(char **envp);
 
 // Debug functions

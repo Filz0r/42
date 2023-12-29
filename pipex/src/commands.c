@@ -37,7 +37,7 @@ t_cmd	*new_cmd(t_cmd cmd)
 		return (NULL);
 	*res = cmd;
 	if (pipe(res->fds) < 0)
-		errors("pipes", NULL);
+		errors("pipes", NULL, 24);
 	return (res);
 }
 

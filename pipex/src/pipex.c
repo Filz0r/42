@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:39:07 by fparreir          #+#    #+#             */
-/*   Updated: 2023/12/21 19:10:33 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/29 10:01:13 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	pipex(t_list *node, int infile)
 		return ;
 	cmd->pid = fork();
 	if (cmd->pid == -1)
-		errors("Pipex: fork:", NULL);
+		errors("Pipex: fork:", NULL, 12);
 	else if (cmd->pid == 0)
 		execute(cmd, infile, cmd->fds[1]);
 	else
@@ -68,7 +68,7 @@ void	execute(t_cmd *cmd, int fdin, int fdout)
 			temp2 = cmd->path;
 		close_unused_commands(cmd->pos);
 		if (execve(temp2, temp, cmd->env) == -1)
-			errors(temp2, temp);
+			return (errors(temp2, temp, 13));
 	}
 }
 

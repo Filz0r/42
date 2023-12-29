@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 00:07:15 by fparreir          #+#    #+#             */
-/*   Updated: 2023/12/28 11:49:44 by fparreir         ###   ########.fr       */
+/*   Updated: 2023/12/29 11:58:16 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@ t_pipe	handle_heredoc(char *outfile, const char *eof)
 	int	pipes[2];
 
 	if (pipe(pipes) < 0)
-		errors("Pipex: pipe error:", NULL);
+		errors("Pipex: pipe error:", NULL, 127);
 	in = pipes[0];
 	fill_heredoc(pipes[1], eof);
 	close(pipes[1]);
 	out = open(outfile, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (out == -1)
-		errors(outfile, NULL);
+		errors(outfile, NULL, 127);
 	return ((t_pipe){in, out});
 }
 
