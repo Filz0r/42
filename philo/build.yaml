@@ -1,0 +1,9 @@
+compilers:
+  - description: Clang
+    match-compiler-exe: "/usr/bin/cc"
+    match-language: C
+    include-dirs:
+      - /home/filipe/42/philo/include
+      - /usr/include
+      - /usr/include/linux
+      - /usr/include/clang/16/include
