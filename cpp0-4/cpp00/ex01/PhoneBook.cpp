@@ -1,6 +1,4 @@
-#include <cstdlib>
 #include "PhoneBook.hpp"
-
 
 PhoneBook::PhoneBook() {
 	std::cout << "PhoneBook Constructor called" << std::endl;
@@ -28,11 +26,14 @@ void	PhoneBook::AddContact(Contact &contact)
 
 
 int	PhoneBook::GetCurrentIndex() {
-	if (this->Contacts[saved].GetFirstName().empty() || this->saved == this->max)
-		return this->saved - 1;
+	if (this->saved == this->max) {
+		int temp = this->saved - 1;
+		this->saved = 0;
+		return temp;
+	}
 	return this->saved;
 }
 
 Contact	*PhoneBook::GetContacts() { return this->Contacts; }
 
-int	PhoneBook::GetMax() { return this->max; }
+int	PhoneBook::GetMax() const { return this->max; }

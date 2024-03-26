@@ -13,7 +13,7 @@ class PhoneBook {
 		~PhoneBook();
 
 		int 	GetCurrentIndex();
-		int 	GetMax();
+		int 	GetMax() const;
 		void 	AddContact(Contact &data);
 		Contact *GetContacts();
 		Contact	GetFirstEmptyContact();

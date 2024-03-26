@@ -1,6 +1,5 @@
 #ifndef APP_H
-#define APP_H
-
+# define APP_H
 
 #include "Contact.hpp"
 #include "PhoneBook.hpp"

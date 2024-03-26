@@ -1,6 +1,6 @@
 NAME = Phonebook
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g3 -fsanitize=address
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g3
 SRC = main.cpp Contact.cpp PhoneBook.cpp Utils.cpp App.cpp
 BUILD_DIR = build
 INCLUDES = -I.
@@ -9,11 +9,11 @@ OBJ = $(addprefix $(BUILD_DIR)/, $(SRC:.cpp=.o))
 all: $(NAME)
 
 $(BUILD_DIR):
-	mkdir -p $(BUILD_DIR)
+	@mkdir -p $(BUILD_DIR)
 
 $(NAME): $(OBJ)
 	@echo "Compiling $@..."
-	$(CXX) $(CXXFLAGS) -o $@ $^ $(INCLUDES)
+	@$(CXX) $(CXXFLAGS) -o $@ $^ $(INCLUDES)
 	@echo "Done!"
 
 $(BUILD_DIR)/%.o: %.cpp | $(BUILD_DIR)

@@ -11,22 +11,25 @@ void	PhonebookApp(PhoneBook &data)
 	}
 }
 
-//TODO: not protected for ctrl + d
 int SearchContact(PhoneBook &data)
 {
 	Contact *temp = data.GetContacts();
 	int index;
 	std::string firstName, lastName, nickName;
 
-	std::cout << std::setw(10) << std::right << "Index" <<  " | ";
-	std::cout << std::setw(10) << std::left << "FirstName" <<  " | ";
-	std::cout << std::setw(10) << std::left << "LastName" <<  " | ";
-	std::cout << std::setw(10) << std::left << "Nickname" <<  std::endl;
-	if (data.GetCurrentIndex() == 0 && temp[0].GetFirstName().empty())
+	std::cout << data.GetCurrentIndex() << std::endl;
+	if (data.GetCurrentIndex() == -1 && temp[0].GetFirstName().empty())
 	{
 		system("clear");
 		std::cout << "The table is empty!" << std::endl;
 		return 0;
+	}
+	else
+	{
+		std::cout << std::setw(10) << std::right << "Index" <<  " | ";
+		std::cout << std::setw(10) << std::left << "FirstName" <<  " | ";
+		std::cout << std::setw(10) << std::left << "LastName" <<  " | ";
+		std::cout << std::setw(10) << std::left << "Nickname" <<  std::endl;
 	}
 	for(int i = 0; i < data.GetMax(); i++)
 	{
@@ -47,21 +50,32 @@ int SearchContact(PhoneBook &data)
 
 	while (true)
 	{
-		if ((index = GetIndex()) != -1 && index >= 0)
+		index = GetIndex();
+		if (index >= 0)
 			break ;
+		else if (index == -1) {
+			std::cout << std::endl << "Stop trying to break me, goodbye!" << std::endl;
+			return 1;
+		}
 	}
 	std::cout << "the index is: " << index << std::endl;
 	std::cout << "the current index is: " << data.GetCurrentIndex() << std::endl;
-	if (index > data.GetCurrentIndex() && index < data.GetMax() && temp[index].GetDarkestSecret().empty())
-	{
+	 if (index > data.GetCurrentIndex() && index < data.GetMax() && temp[index].GetDarkestSecret().empty()){
 		std::cout << "This entry hasn't been added to the PhoneBook yet!" << std::endl;
-		if (SearchContact(data)) return 1;
-		else return 0;
+
+		if (SearchContact(data))
+			return 1;
+		else
+			return 0;
+
 	} else if (index >= data.GetMax()) {
 		system("clear");
-		std::cout << "This index is out of bounds, max index is " << (data.GetMax() - 1) << std::endl;
-		if (SearchContact(data)) return 1;
-		else return 0;
+		std::cout << "This index is out of bounds, max index is "
+				  << (data.GetMax() - 1) << std::endl;
+		if (SearchContact(data))
+			return 1;
+		else
+			return 0;
 	}
 	system("clear");
 	std::cout << "First Name: " << temp[index].GetFirstName() << std::endl;
@@ -72,7 +86,6 @@ int SearchContact(PhoneBook &data)
 	std::cout << std::endl << "== LINE BREAK ==" << std::endl << std::endl;
  	return 0;
 }
-
 
 bool	UpdateEmptyContact(Contact &empty, const std::string &input ,int position)
 {
@@ -118,7 +131,7 @@ int AddNewContact(PhoneBook &data)
 				std::cout << "No empty inputs allowed! Going back to main menu!\n";
 				return 0;
 			}
-			if (IsWhitespace(input))
+			else if (IsWhitespace(input))
 			{
 				system("clear");
 				std::cout << "You gave an whitespace only string fuck off\n";
@@ -126,7 +139,7 @@ int AddNewContact(PhoneBook &data)
 					return 0;
 				return temp.ClearFields();
 			}
-			if (!UpdateEmptyContact(temp, input, i))
+			else if (!UpdateEmptyContact(temp, input, i))
 				return temp.ClearFields();
 			i++;
 		}

@@ -26,7 +26,7 @@ int PrintMenu(PhoneBook &data)
 				std::cout << "\nNo empty inputs allowed!\n\n";
 				continue;
 			}
-			else if (input == "EXIT") return 1;
+			else if (input == "EXIT") { return 1; }
 			else if (input == "ADD") {
 				system("clear");
 				return AddNewContact(data);
@@ -81,7 +81,7 @@ int GetIndex()
 		std::istringstream iss(input);
 		iss >> index;
 		if (iss.eof()) {
-			if (index < 0) { std::cout << "Invalid input!" << std::endl; }
+			if (index < 0) { std::cout << "Invalid input!" << std::endl; return 1;}
 			return index;
 		}
 		else
@@ -90,6 +90,8 @@ int GetIndex()
 			return -1;
 		}
 	}
+	else if (std::cin.eof())
+		return -1;
 	return -1;
 }
 
@@ -99,7 +101,10 @@ int isValidNumber(const std::string &str)
 	if (str.c_str()[i] == '+')
 		i++;
 	while (str.c_str()[i])
+	{
 		if(!std::isdigit(str.c_str()[i]))
 			return 0;
+		i++;
+	}
 	return 1;
 }

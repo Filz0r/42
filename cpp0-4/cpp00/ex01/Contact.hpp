@@ -21,12 +21,11 @@ class Contact {
 		std::string GetPhoneNumber();
 		std::string GetNickname();
 		std::string GetDarkestSecret();
-		void SetFirstName(std::string FirstName);
-		void SetLastName(std::string LastName);
-		void SetPhoneNumber(std::string PhoneNumber);
-		void SetNickname(std::string Nickname);
-		void SetDarkestSecret(std::string DarkestSecret);
-
+		void SetFirstName(const std::string &FirstName);
+		void SetLastName(const std::string &LastName);
+		void SetPhoneNumber(const std::string &PhoneNumber);
+		void SetNickname(const std::string &Nickname);
+		void SetDarkestSecret(const std::string &DarkestSecret);
 };
 
 #endif //CONTACT_H
