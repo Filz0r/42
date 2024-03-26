@@ -1,0 +1,7 @@
+compilers:
+  - description: Clang++
+    match-compiler-exe: "/usr/bin/c++"
+    match-language: CPP
+    include-dirs:
+      - /home/filipe/42/cpp0-4/cpp00/
+      - /usr/include

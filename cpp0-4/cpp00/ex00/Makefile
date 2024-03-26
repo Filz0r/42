@@ -1,0 +1,32 @@
+NAME = megaphone
+CXX = c++
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+SRC = megaphone.cpp
+BUILD_DIR = build
+OBJ = $(addprefix $(BUILD_DIR)/, $(SRC:.cpp=.o))
+
+all: $(NAME)
+
+$(BUILD_DIR):
+	mkdir -p $(BUILD_DIR)
+
+$(NAME): $(OBJ)
+	@echo "Compiling $@..."
+	$(CXX) $(CXXFLAGS) -o $@ $^
+	@echo "Done!"
+
+$(BUILD_DIR)/%.o: %.cpp | $(BUILD_DIR)
+	@mkdir -p $(@D)
+	@echo "Compiling $@..."
+	@$(CXX) $(CXXFLAGS) -o $@ -c $<
+
+clean:
+	@rm -rf $(BUILD_DIR)
+
+fclean: clean
+	@rm -f $(NAME)
+	@echo "Cleaned $(NAME) and object files"
+
+re: fclean all
+
+.PHONY: all clean fclean re
