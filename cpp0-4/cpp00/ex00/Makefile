@@ -8,11 +8,11 @@ OBJ = $(addprefix $(BUILD_DIR)/, $(SRC:.cpp=.o))
 all: $(NAME)
 
 $(BUILD_DIR):
-	mkdir -p $(BUILD_DIR)
+	@mkdir -p $(BUILD_DIR)
 
 $(NAME): $(OBJ)
 	@echo "Compiling $@..."
-	$(CXX) $(CXXFLAGS) -o $@ $^
+	@$(CXX) $(CXXFLAGS) -o $@ $^
 	@echo "Done!"
 
 $(BUILD_DIR)/%.o: %.cpp | $(BUILD_DIR)
