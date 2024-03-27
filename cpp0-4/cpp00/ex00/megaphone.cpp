@@ -9,7 +9,7 @@ int	main(int ac, char **av)
 		for(int i = 1; av[i]; i++)
 		{
 			std::string test (av[i]);
-			for (int k = 0; test.c_str()[k]; k++)
+			for (size_t k = 0; k < test.size(); k++)
 				std::cout << (char)std::toupper((int)test.c_str()[k]);
 			std::cout << ' ';
 		}
