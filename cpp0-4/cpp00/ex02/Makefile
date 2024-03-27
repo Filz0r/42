@@ -1,6 +1,6 @@
-NAME = test
+NAME = accounts
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g3 -fsanitize=address
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g3
 SRC = Account.cpp tests.cpp
 BUILD_DIR = build
 INCLUDES = -I.
