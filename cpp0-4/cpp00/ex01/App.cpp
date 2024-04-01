@@ -17,7 +17,6 @@ int SearchContact(PhoneBook &data)
 	int index;
 	std::string firstName, lastName, nickName;
 
-	std::cout << data.GetCurrentIndex() << std::endl;
 	if (data.GetCurrentIndex() == -1 && temp[0].GetFirstName().empty())
 	{
 		system("clear");
@@ -35,9 +34,9 @@ int SearchContact(PhoneBook &data)
 	{
 		if (temp[i].GetFirstName().empty())
 			break ;
-		firstName = temp[i].GetFirstName();
-		lastName = temp[i].GetLastName();
-		nickName = temp[i].GetNickname();
+		firstName = removeTabs(temp[i].GetFirstName());
+		lastName = removeTabs(temp[i].GetLastName());
+		nickName = removeTabs(temp[i].GetNickname());
 
 		if (firstName.size() > 10) firstName = firstName.substr(0, 9) + ".";
 		if (nickName.size() > 10) nickName = nickName.substr(0, 9) + ".";

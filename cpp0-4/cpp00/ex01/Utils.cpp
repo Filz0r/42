@@ -81,7 +81,7 @@ int GetIndex()
 		std::istringstream iss(input);
 		iss >> index;
 		if (iss.eof()) {
-			if (index < 0) { std::cout << "Invalid input!" << std::endl; return 1;}
+			if (index < 0) { std::cout << "Invalid input!" << std::endl; return -1;}
 			return index;
 		}
 		else
@@ -107,4 +107,11 @@ int isValidNumber(const std::string &str)
 		i++;
 	}
 	return 1;
+}
+
+std::string removeTabs(const std::string &str)
+{
+	size_t first = str.find_first_not_of(" \t\n\r\f\v");
+	size_t last = str.find_last_not_of(" \t\n\r\f\v");;
+	return (str.substr(first, (last - first + 1)));
 }
