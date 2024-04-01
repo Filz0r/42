@@ -1,13 +1,13 @@
 #include "PhoneBook.hpp"
 
 PhoneBook::PhoneBook() {
-	std::cout << "PhoneBook Constructor called" << std::endl;
+//	std::cout << "PhoneBook Constructor called" << std::endl;
 	this->saved = 0;
 	this->max = 8;
 }
 
 PhoneBook::~PhoneBook() {
-	std::cout << "PhoneBook Destructor called" << std::endl;
+//	std::cout << "PhoneBook Destructor called" << std::endl;
 }
 
 Contact	PhoneBook::GetFirstEmptyContact()
