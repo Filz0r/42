@@ -16,7 +16,7 @@ int SearchContact(PhoneBook &data)
 	Contact *temp = data.GetContacts();
 	int index;
 	std::string firstName, lastName, nickName;
-
+	std::cout << data.GetCurrentIndex() << std::endl;
 	if (data.GetCurrentIndex() == -1 && temp[0].GetFirstName().empty())
 	{
 		system("clear");
@@ -57,9 +57,9 @@ int SearchContact(PhoneBook &data)
 			return 1;
 		}
 	}
-	std::cout << "the index is: " << index << std::endl;
-	std::cout << "the current index is: " << data.GetCurrentIndex() << std::endl;
-	 if (index > data.GetCurrentIndex() && index < data.GetMax() && temp[index].GetDarkestSecret().empty()){
+//	std::cout << "the index is: " << index << std::endl;
+//	std::cout << "the current index is: " << data.GetCurrentIndex() << std::endl;
+	 if (index > data.GetCurrentIndex() || index < data.GetMax() || temp[index].GetDarkestSecret().empty()){
 		std::cout << "This entry hasn't been added to the PhoneBook yet!" << std::endl;
 
 		if (SearchContact(data))

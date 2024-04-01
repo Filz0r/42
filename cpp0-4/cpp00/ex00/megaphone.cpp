@@ -18,7 +18,7 @@ int	main(int ac, char **av)
 	}
 	else
 	{
-		std::cerr << "You need to provide arguements bro" << std::endl;
+		std::cerr << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
 		return (1);
 	}
 }
