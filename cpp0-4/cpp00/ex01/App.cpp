@@ -1,5 +1,6 @@
 #include <App.h>
 
+// Main loop where the App gets stuck until EXIT is called or an error occurs
 void	PhonebookApp(PhoneBook &data)
 {
 	std::cout << "Welcome to the PhoneBook App!\n";
@@ -10,14 +11,22 @@ void	PhonebookApp(PhoneBook &data)
 			break;
 	}
 }
-
+ /**
+  * @brief This recursive behemoth is what searches for the Contact array for an valid
+  * contact that we want to search and prints its details, if you don't try to break it,
+  * otherwise it either uses
+  * @param data
+  * @return
+  */
 int SearchContact(PhoneBook &data)
 {
-	Contact *temp = data.GetContacts();
 	int index;
+	Contact *temp = data.GetContacts();
 	std::string firstName, lastName, nickName;
-	std::cout << data.GetCurrentIndex() << std::endl;
-	if (data.GetCurrentIndex() == -1 && temp[0].GetFirstName().empty())
+
+	// Check if table is empty or not;
+//	std::cout << data.GetCurrentIndex() << std::endl;
+	if (temp[0].GetFirstName().empty())
 	{
 		system("clear");
 		std::cout << "The table is empty!" << std::endl;
@@ -30,13 +39,15 @@ int SearchContact(PhoneBook &data)
 		std::cout << std::setw(10) << std::left << "LastName" <<  " | ";
 		std::cout << std::setw(10) << std::left << "Nickname" <<  std::endl;
 	}
-	for(int i = 0; i < data.GetMax(); i++)
+
+	// Print the existing contacts
+	for(int i = 0; i < PhoneBook::GetMax(); i++)
 	{
 		if (temp[i].GetFirstName().empty())
 			break ;
-		firstName = removeTabs(temp[i].GetFirstName());
-		lastName = removeTabs(temp[i].GetLastName());
-		nickName = removeTabs(temp[i].GetNickname());
+		firstName = removeWhitespace(temp[i].GetFirstName());
+		lastName = removeWhitespace(temp[i].GetLastName());
+		nickName = removeWhitespace(temp[i].GetNickname());
 
 		if (firstName.size() > 10) firstName = firstName.substr(0, 9) + ".";
 		if (nickName.size() > 10) nickName = nickName.substr(0, 9) + ".";
@@ -47,6 +58,7 @@ int SearchContact(PhoneBook &data)
 		std::cout << std::setw(10) << std::right << nickName << std::endl;
 	}
 
+	// Grab an valid index from the user
 	while (true)
 	{
 		index = GetIndex();
@@ -57,25 +69,22 @@ int SearchContact(PhoneBook &data)
 			return 1;
 		}
 	}
+
+	// Check if index is valid if not return the result of a new SearchContact call
+
 //	std::cout << "the index is: " << index << std::endl;
 //	std::cout << "the current index is: " << data.GetCurrentIndex() << std::endl;
-	 if (index > data.GetCurrentIndex() || index < data.GetMax() || temp[index].GetDarkestSecret().empty()){
-		std::cout << "This entry hasn't been added to the PhoneBook yet!" << std::endl;
-
-		if (SearchContact(data))
-			return 1;
-		else
-			return 0;
-
-	} else if (index >= data.GetMax()) {
+	 if (index > data.GetCurrentIndex() || temp[index].GetDarkestSecret().empty()) {
+		std::cout << "This index isn't valid!" << std::endl;
+		return SearchContact(data);
+	} else if (index >= PhoneBook::GetMax()) {
 		system("clear");
 		std::cout << "This index is out of bounds, max index is "
-				  << (data.GetMax() - 1) << std::endl;
-		if (SearchContact(data))
-			return 1;
-		else
-			return 0;
+				  << (PhoneBook::GetMax() - 1) << std::endl;
+		return SearchContact(data);
 	}
+
+	 // if nothing goes wrong print the contact details
 	system("clear");
 	std::cout << "First Name: " << temp[index].GetFirstName() << std::endl;
 	std::cout << "Last Name: " << temp[index].GetLastName() << std::endl;
@@ -85,8 +94,15 @@ int SearchContact(PhoneBook &data)
 	std::cout << std::endl << "== LINE BREAK ==" << std::endl << std::endl;
  	return 0;
 }
-
-bool	UpdateEmptyContact(Contact &empty, const std::string &input ,int position)
+/**
+ * @brief Updates an empty contact from the Contact array inside the Phonebook object
+ * @param empty Reference to the empty contact that we want to update
+ * @param input the field of the Contact object that we want to set
+ * @param position the position of the contact that is currently being updated
+ * @return returns false if the phone number given to the contact object is valid
+ * otherwise returns true if the contact was added.
+ */
+bool	UpdateEmptyContact(Contact &empty, const std::string &input, int position)
 {
 	switch (position) {
 		case 0:
@@ -113,7 +129,12 @@ bool	UpdateEmptyContact(Contact &empty, const std::string &input ,int position)
 	}
 	return true;
 }
-
+/**
+ * @brief Adds a new Contact object to the PhoneBook object
+ * @param data a reference to the
+ * @return returns 0 if the input is invalid and the program cannot stop running
+ * returns 1 if theres an fatal error that needs to close the program, like CTRL + D
+ */
 int AddNewContact(PhoneBook &data)
 {
 	Contact temp = data.GetFirstEmptyContact();

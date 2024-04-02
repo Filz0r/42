@@ -17,6 +17,6 @@ void	PrintPrompt(int position);
 void	PhonebookApp(PhoneBook &data);
 bool	IsWhitespace(const std::string &str);
 bool	UpdateEmptyContact(Contact &empty, const std::string &input ,int position);
-std::string		removeTabs(const std::string &str);
+std::string		removeWhitespace(const std::string &str);
 
 #endif //APP_H

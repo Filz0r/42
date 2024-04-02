@@ -2,8 +2,7 @@
 
 PhoneBook::PhoneBook() {
 //	std::cout << "PhoneBook Constructor called" << std::endl;
-	this->saved = -1;
-	this->max = 8;
+	this->saved = 0;
 }
 
 PhoneBook::~PhoneBook() {
@@ -12,30 +11,20 @@ PhoneBook::~PhoneBook() {
 
 Contact	PhoneBook::GetFirstEmptyContact()
 {
-	if (this->saved == -1)
-		this->saved++;
-	if (this->saved == this->max)
-		this->saved = 0;
 	return this->Contacts[this->saved];
 }
 
 void	PhoneBook::AddContact(Contact &contact)
 {
-	if (this->saved == this->max)
-		this->saved = 0;
-	this->Contacts[this->saved++] = contact;
+	this->Contacts[saved] = contact;
+	this->saved = (this->saved + 1) % max;
 }
 
 
-int	PhoneBook::GetCurrentIndex() {
-	if (this->saved == this->max) {
-		int temp = this->saved - 1;
-		this->saved = 0;
-		return temp;
-	}
+int	PhoneBook::GetCurrentIndex() const {
 	return this->saved;
 }
 
 Contact	*PhoneBook::GetContacts() { return this->Contacts; }
 
-int	PhoneBook::GetMax() const { return this->max; }
+int	PhoneBook::GetMax() { return max; }

@@ -77,6 +77,7 @@ int GetIndex()
 		}
 		if (IsWhitespace(input)) {
 			std::cout << "You gave an whitespace only string fuck off\n";
+			return -1;
 		}
 		std::istringstream iss(input);
 		iss >> index;
@@ -98,20 +99,20 @@ int GetIndex()
 int isValidNumber(const std::string &str)
 {
 	int i = 0;
-	if (str.c_str()[i] == '+')
+	if (str[i] == '+')
 		i++;
-	while (str.c_str()[i])
+	while (str[i])
 	{
-		if(!std::isdigit(str.c_str()[i]))
+		if(!std::isdigit(str[i]))
 			return 0;
 		i++;
 	}
 	return 1;
 }
 
-std::string removeTabs(const std::string &str)
+std::string removeWhitespace(const std::string &str)
 {
 	size_t first = str.find_first_not_of(" \t\n\r\f\v");
-	size_t last = str.find_last_not_of(" \t\n\r\f\v");;
+	size_t last = str.find_last_not_of(" \t\n\r\f\v");
 	return (str.substr(first, (last - first + 1)));
 }

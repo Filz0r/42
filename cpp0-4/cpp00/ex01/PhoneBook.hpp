@@ -5,15 +5,15 @@
 
 class PhoneBook {
 	private:
-		int			max;
+		static const int	max = 8;
 		int			saved;
 		Contact		Contacts[8];
 	public:
 		PhoneBook();
 		~PhoneBook();
 
-		int 	GetCurrentIndex();
-		int 	GetMax() const;
+		int 	GetCurrentIndex() const;
+		static int 	GetMax() ;
 		void 	AddContact(Contact &data);
 		Contact *GetContacts();
 		Contact	GetFirstEmptyContact();
