@@ -13,7 +13,6 @@ class Zombie {
 
 	private:
 		std::string name;
-		std::vec
 };
 
 #endif //ZOMBIE_HPP
