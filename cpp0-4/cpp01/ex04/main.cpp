@@ -21,6 +21,7 @@ int main(int ac, char **av)
 
 void awesome_replace(const std::string &file, const std::string &needle, const std::string &replace)
 {
+	// open input file
 	std::ifstream inFile(file.c_str());
 	if (!inFile)
 	{
@@ -28,6 +29,7 @@ void awesome_replace(const std::string &file, const std::string &needle, const s
 		return ;
 	}
 
+	// create and open output file
 	std::string temp = file + ".replace";
 	std::ofstream outFile(temp.c_str());
 	if (!outFile)
@@ -35,18 +37,19 @@ void awesome_replace(const std::string &file, const std::string &needle, const s
 		std::cerr << "Unable to open output file" << std::endl;
 		return ;
 	}
-
+	// Parse the input file
 	std::string line;
+	while (std::getline(inFile, line))
 	{
-		std::cout << line << std::endl;
 		size_t pos = 0;
+		// for each line check if we can find the needle
 		while ((pos = line.find(needle, pos)) != std::string::npos)
 		{
-			line.erase(pos, needle.length());
-			line.insert(pos, replace);
-			pos += replace.length();
+			line.erase(pos, needle.length()); // if the needle was found remove it from the line
+			line.insert(pos, replace); // then insert the replace string inside the line
+			pos += replace.length(); // increment the position (to skip the replaced chars and not enter an infinite loop)
 		}
-		outFile << line << std::endl;
+		outFile << line << std::endl; // Save the line inside the output file
 	}
 	inFile.close();
 	outFile.close();
