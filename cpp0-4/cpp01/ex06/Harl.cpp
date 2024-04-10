@@ -44,7 +44,7 @@ void Harl::complain(std::string level) {
 		case ERROR:
 			Harl::error();
 			break;
-		case INVALID:
+		default:
 			std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
 			break;
 	}
