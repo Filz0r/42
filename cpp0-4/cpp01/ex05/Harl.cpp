@@ -38,7 +38,7 @@ void Harl::complain(std::string level) {
 
 
 e_level Harl::_getLevel(const std::string &level) {
-	static std::string levels[4] = {"debug", "info", "warning", "error" };
+	static std::string levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR" };
 	size_t	temp = 99;
 	for (size_t i = 0; i < 4; i++)
 	{

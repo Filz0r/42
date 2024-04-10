@@ -15,6 +15,11 @@ int main(int ac, char **av)
 		std::string file(av[1]);
 		std::string needle(av[2]);
 		std::string replace(av[3]);
+		if (file.empty() || needle.empty() || replace.empty())
+		{
+			std::cerr << "Error: arguments cannot be empty!" << std::endl;
+			return 1;
+		}
 		awesome_replace(file, needle, replace);
 	}
 }

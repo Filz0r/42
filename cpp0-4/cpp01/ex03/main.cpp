@@ -8,7 +8,7 @@ int main(void)
 	HumanB b("B_Filipe");
 	a.attack();
 	b.attack();
-	b.giveWeapon("Bazooka");
+	b.giveWeapon(shino);
 	b.attack();
 	shino.setType("shino");
 	a.attack();
