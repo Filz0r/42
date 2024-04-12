@@ -11,7 +11,6 @@ class Point
       ~Point();
       Point& operator = (const Point &obj);
 	  bool	operator==(const Point &obj) const;
-	  Point	operator+(const Point &obj) const;
 	  Fixed	getX() const;
 	  Fixed	getY() const;
 

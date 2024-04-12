@@ -38,10 +38,6 @@ bool	Point::operator==(const Point &obj) const {
 	return (this->x.toFloat() == obj.getX().toFloat() && this->y.toFloat() == obj.getY().toFloat());
 }
 
-Point Point::operator+(const Point &obj) const {
-	return Point((this->x.toFloat() + obj.getX().toFloat()), (this->y.toFloat() + obj.getY().toFloat()));
-}
-
 Fixed	Point::getX() const { return  this->x; }
 Fixed	Point::getY() const { return  this->y; }
 
