@@ -37,7 +37,7 @@ int main() {
 	std::cout << ((a == c) ? "true" : "false") << std::endl;
 	std::cout << ((a != c) ? "true" : "false") << std::endl;
 
-	std::cout << "max/min" << std::endl;
+	std::cout << std::endl << "max/min" << std::endl;
 	std::cout << Fixed::max(a, b) << std::endl;
 	std::cout << Fixed::min(a, d) << std::endl;
 	std::cout << Fixed::min(a, b) << std::endl;
