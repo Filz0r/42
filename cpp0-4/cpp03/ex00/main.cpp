@@ -13,5 +13,8 @@ int main()
 		test1.takeDamage(i + i);
 
 	for(int i = 0; i < 11; i++)
+	{
 		test1.beRepaired(i + i);
+
+	}
 }
