@@ -1,5 +1,7 @@
 #include "FragTrap.hpp"
 
+const int FragTrap::ATTACK_DAMAGE = 30;
+
 FragTrap::FragTrap() : ClapTrap() {
 	this->base_hitpoints = 100;
 	this->hitpoints = 100;
@@ -49,5 +51,9 @@ FragTrap& FragTrap::operator=(const FragTrap &obj)
 void	FragTrap::highFivesGuys() {
 	std::cout << "The FragTrap called " << this->getName();
 	std::cout << " gives a round of high fives to the guys!" << std::endl;
+}
+
+unsigned int	FragTrap::getDamage() const {
+	return this->FragTrap::damage;
 }
 

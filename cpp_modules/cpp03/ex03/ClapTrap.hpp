@@ -22,7 +22,7 @@ class ClapTrap
 	  void			printStatus() const;
 	  std::string	getName() const;
 	  unsigned int	getEnergy() const;
-	  unsigned int	getDamage() const;
+	  virtual unsigned int	getDamage() const;
 
       protected:
 	    std::string  name;

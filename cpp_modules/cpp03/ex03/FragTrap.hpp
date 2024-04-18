@@ -12,4 +12,6 @@ class FragTrap: virtual public ClapTrap
 	FragTrap& operator = (const FragTrap &obj);
 
 	void highFivesGuys();
+	unsigned int getDamage() const;
+	static const int ATTACK_DAMAGE;
 };

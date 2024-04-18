@@ -15,6 +15,7 @@ class ScavTrap: virtual public ClapTrap
 	  void guardGate();
 
 	  bool getGuardStatus() const;
+	  unsigned int getDamage() const;
 
 	private:
 		bool isGuarding;

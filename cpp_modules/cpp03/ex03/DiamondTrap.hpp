@@ -3,7 +3,7 @@
 #include <ScavTrap.hpp>
 #include <FragTrap.hpp>
 
-class DiamondTrap: public ScavTrap, public FragTrap
+class DiamondTrap: virtual public FragTrap, virtual public ScavTrap
 {
    public:
       DiamondTrap();
@@ -12,9 +12,11 @@ class DiamondTrap: public ScavTrap, public FragTrap
       ~DiamondTrap();
       DiamondTrap& operator = (const DiamondTrap &obj);
 
-	  void	attack(const std::string &target);
+	  using ScavTrap::attack;
 	  void	whoAmI();
+	  unsigned int getDamage() const;
 
-      private:
+	private:
 		std::string name;
+
 };

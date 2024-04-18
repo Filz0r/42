@@ -2,14 +2,26 @@
 
 int main() {
 	DiamondTrap filipe("Filipe");
-	for (unsigned int k = 0; k < 102; k++)
-		filipe.attack("test");
-
 	filipe.printStatus();
 	filipe.whoAmI();
+	std::cout << "-----------------------------------" << std::endl;
+
 	DiamondTrap test = filipe;
 	test.guardGate();
-	test.highFivesGuys();2
+	test.attack("binary");
+	test.highFivesGuys();
 	test.printStatus();
 	test.whoAmI();
+	std::cout << "-----------------------------------" << std::endl;
+
+	DiamondTrap empty;
+
+	empty.whoAmI();
+	empty.printStatus();
+	std::cout << "-----------------------------------" << std::endl;
+	empty = test;
+	empty.whoAmI();
+	empty.printStatus();
+	std::cout << "-----------------------------------" << std::endl;
+
 }

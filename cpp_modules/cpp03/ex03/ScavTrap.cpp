@@ -81,3 +81,7 @@ void	ScavTrap::guardGate() {
 		this->isGuarding = !this->isGuarding;
 	}
 }
+
+unsigned int	ScavTrap::getDamage() const {
+	return this->ScavTrap::damage;
+}
