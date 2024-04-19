@@ -1,7 +1,5 @@
 #include <MateriaSource.hpp>
 
-//size_t MateriaSource::currentIndex = 0;
-
 MateriaSource::MateriaSource() {
 	for (size_t i = 0; i < MateriaSource::maxIndex; i++)
 	{
@@ -21,20 +19,47 @@ MateriaSource::~MateriaSource() {
 }
 
 MateriaSource::MateriaSource(const MateriaSource &obj) {
-	(void)obj;
+	*this = obj;
 	std::cout << "MateriaSource copy constructor called" << std::endl;
 }
 
 MateriaSource& MateriaSource::operator=(const MateriaSource &obj)
 {
 	std::cout << "MateriaSource copy assignment operator called" << std::endl;
-	(void)obj;
+
+if (this != &obj)
+	{
+		for (size_t i = 0; i < MateriaSource::maxIndex; i++)
+		{
+			if (this->materias[i])
+			{
+				delete this->materias[i];
+				this->materias[i] = NULL;
+			}
+			if (obj.materias[i])
+			{
+				this->materias[i] = obj.materias[i]->clone();
+				this->savedTypes[i] = obj.savedTypes[i];
+			}
+		}
+	}
 	return *this;
 }
 
 void MateriaSource::learnMateria(AMateria *ptr) {
 	if (!ptr)
 		return;
+
+	for (size_t i = 0; i < MateriaSource::maxIndex; i++)
+	{
+		if (this->savedTypes[i] == ptr->getType())
+		{
+			std::cout << "MateriaSource has already learned the Materia of type: " << ptr->getType() << std::endl;
+			delete ptr;
+			return ;
+		}
+	}
+
 	for (size_t i = 0; i < MateriaSource::maxIndex; i++)
 	{
 		if (!this->materias[i])

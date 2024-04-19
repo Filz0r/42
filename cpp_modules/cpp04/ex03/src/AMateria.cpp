@@ -1,6 +1,7 @@
-#include <AMateria.hpp>
+#include <Interfaces.hpp>
 
 AMateria::AMateria() {
+	this->value = 0;
 	std::cout << "AMateria Constructor called" << std::endl;
 }
 
@@ -9,16 +10,21 @@ AMateria::~AMateria() {
 }
 
 AMateria::AMateria(const AMateria &obj) {
-	this->type = obj.type;
 	std::cout << "AMateria copy constructor called" << std::endl;
+
+	this->type = obj.type;
+	this->value = obj.value;
 }
 
 AMateria& AMateria::operator=(const AMateria &obj)
 {
-	if (this != &obj)
-		this->type = obj.type;
 	std::cout << "AMateria copy assignment operator called" << std::endl;
 
+	if (this != &obj)
+	{
+		this->type = obj.type;
+		this->value = obj.value;
+	}
 	return *this;
 }
 

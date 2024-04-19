@@ -3,7 +3,31 @@
 
 #include <iostream>
 
-class AMateria;
+class ICharacter;
+
+class AMateria
+{
+	protected:
+		std::string type;
+		size_t 		value;
+		AMateria();
+//		virtual void doDamage(ICharacter &target) const = 0;
+//		virtual void restoreHitpoints(ICharacter &target) const = 0;
+
+
+	public:
+		AMateria(const std::string &type);
+		const std::string &getType() const;
+
+		virtual AMateria *clone() const = 0;
+		virtual void use(ICharacter &target);
+
+		virtual size_t getValue() const = 0;
+
+		AMateria(const AMateria &obj);
+		AMateria& operator=(const AMateria &obj);
+		virtual ~AMateria();
+};
 
 class ICharacter
 {
@@ -14,14 +38,8 @@ class ICharacter
 		virtual void  unequip(int idx) = 0;
 		virtual void  use(int idx, ICharacter &target) = 0;
 
-
-
-	protected:
-		std::string			name;
-		AMateria			*materias[4];
-		int 				hitpoints;
-		static const size_t	maxIndex = 4;
-		static const int	maxHitponts = 1500;
+//		virtual void changeHitpoints(size_t value, bool isDamage) = 0;
+//		virtual int getHitpoints() const = 0;
 };
 
 class IMateriaSource {
@@ -29,11 +47,6 @@ class IMateriaSource {
 		virtual ~IMateriaSource() {};
 		virtual void learnMateria(AMateria *) = 0;
 		virtual AMateria *createMateria(const std::string &type) = 0;
-
-	protected:
-		AMateria *materias[4];
-		std::string savedTypes[4];
-		static const size_t maxIndex = 4;
 };
 
 #endif

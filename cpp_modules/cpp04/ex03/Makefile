@@ -1,7 +1,7 @@
 NAME = Polymorphism4
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g3 #-fsanitize=address
-SRC = main.cpp IceMateria.cpp AMateria.cpp MateriaSource.cpp Interfaces.cpp
+SRC = main.cpp IceMateria.cpp AMateria.cpp MateriaSource.cpp Character.cpp CureMateria.cpp
 BUILD_DIR = build
 INCLUDES = -Iinclude
 SRCS = $(addprefix src/, $(SRC))

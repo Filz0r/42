@@ -1,7 +1,7 @@
 #ifndef ICEMATERIA_HPP
 #define ICEMATERIA_HPP
 
-#include <AMateria.hpp>
+#include <Interfaces.hpp>
 
 class Ice: virtual public AMateria
 {
@@ -14,6 +14,12 @@ class Ice: virtual public AMateria
 	  void use(ICharacter &target);
 	  AMateria *clone() const;
 
+	  size_t	getValue() const;
+
+
+   protected:
+		void	doDamage(ICharacter &target) const;
+		void	restoreHitpoints(ICharacter &target) const;
 
 };
 
