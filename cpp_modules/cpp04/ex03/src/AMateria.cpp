@@ -1,4 +1,4 @@
-#include "AMateria.hpp"
+#include <AMateria.hpp>
 
 AMateria::AMateria() {
 	std::cout << "AMateria Constructor called" << std::endl;

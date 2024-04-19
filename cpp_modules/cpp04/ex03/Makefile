@@ -3,8 +3,9 @@ CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g3 #-fsanitize=address
 SRC = main.cpp IceMateria.cpp AMateria.cpp MateriaSource.cpp Interfaces.cpp
 BUILD_DIR = build
-INCLUDES = -I.
-OBJ = $(addprefix $(BUILD_DIR)/, $(SRC:.cpp=.o))
+INCLUDES = -Iinclude
+SRCS = $(addprefix src/, $(SRC))
+OBJ = $(addprefix $(BUILD_DIR)/, $(notdir $(SRCS:.cpp=.o)))
 
 all: $(NAME)
 
@@ -16,7 +17,7 @@ $(NAME): $(OBJ)
 	@$(CXX) $(CXXFLAGS) -o $@ $^ $(INCLUDES)
 	@echo "Done!"
 
-$(BUILD_DIR)/%.o: %.cpp | $(BUILD_DIR)
+$(BUILD_DIR)/%.o: src/%.cpp | $(BUILD_DIR)
 	@mkdir -p $(@D)
 	@echo "Compiling $@..."
 	@$(CXX) $(CXXFLAGS) -o $@ -c $< $(INCLUDES)

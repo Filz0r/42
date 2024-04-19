@@ -1,8 +1,8 @@
 #ifndef MATERIASOURCE_HPP
 #define MATERIASOURCE_HPP
 
-#include <Interfaces.hpp>
 #include <AMateria.hpp>
+#include <Interfaces.hpp>
 
 class MateriaSource: public IMateriaSource
 {
