@@ -10,15 +10,16 @@ Cure::~Cure() {
 }
 
 Cure::Cure(const Cure &obj): AMateria("cure") {
-	*this = obj;
+//	*this = obj;
+	this->AMateria::value = obj.getValue();
 	std::cout << "Cure copy constructor called" << std::endl;
 }
 
 Cure& Cure::operator=(const Cure &obj)
 {
-
 	std::cout << "Cure copy assignment operator called" << std::endl;
-//	if (this != &obj)
+	this->AMateria::value = obj.getValue();
+	//	if (this != &obj)
 //		this->type = obj.type;
 	return *this;
 }
