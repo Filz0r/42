@@ -10,13 +10,14 @@ Ice::~Ice() {
 }
 
 Ice::Ice(const Ice &obj): AMateria("ice") {
-	*this = obj;
+	this->AMateria::value = obj.getValue();
 	std::cout << "Ice copy constructor called" << std::endl;
 }
 
 Ice& Ice::operator=(const Ice &obj) {
-
 	std::cout << "Ice copy assignment operator called" << std::endl;
+
+	this->AMateria::value = obj.getValue();
 //	if (this != &obj)
 //		this->type = obj.type;
 	return *this;
