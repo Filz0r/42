@@ -16,7 +16,6 @@ int main()
 	heals->learnMateria(new Cure());
 	heals->learnMateria(new Revive());
 
-//	AMateria *test = database->createMateria("ice");
 	Character *me = new Character("me");
 //	me->equip(test);
 	me->equip(heals->createMateria("cure"));

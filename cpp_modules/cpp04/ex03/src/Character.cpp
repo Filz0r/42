@@ -59,20 +59,19 @@ Character& Character::operator=(const Character &obj)
 //	std::cout << "object name: " << obj.name << std::endl;
 //	std::cout << "materias address: " << obj.materias << std::endl;
 
-	this->name = std::string(obj.name);
-	this->hitpoints = obj.hitpoints;
-	for (size_t k = 0; k < Character::maxIndex; k++)
-	{
-		if (this->materias[k])
-		{
-			delete this->materias[k];
-			this->materias[k] = NULL;
-		}
-		if (obj.materias[k] != NULL)
-		{
-			this->equip(obj.materias[k]->clone());
+	if (this != &obj) {
+		this->name = std::string(obj.name);
+		this->hitpoints = obj.hitpoints;
+		for (size_t k = 0; k < Character::maxIndex; k++) {
+			if (this->materias[k]) {
+				delete this->materias[k];
+				this->materias[k] = NULL;
+			}
+			if (obj.materias[k] != NULL) {
+				this->equip(obj.materias[k]->clone());
 //			std::cout << "materias type: " << obj.materias[k]->getType() << std::endl;
 //			std::cout << "materias address: " << obj.materias[k] << std::endl;
+			}
 		}
 	}
 	return *this;

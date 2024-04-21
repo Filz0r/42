@@ -17,8 +17,8 @@ Ice::Ice(const Ice &obj): AMateria("ice") {
 Ice& Ice::operator=(const Ice &obj) {
 	std::cout << "Ice copy assignment operator called" << std::endl;
 
-	this->AMateria::value = obj.getValue();
-//	if (this != &obj)
+	if (this != &obj)
+		this->AMateria::value = obj.getValue();
 //		this->type = obj.type;
 	return *this;
 }

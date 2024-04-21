@@ -17,8 +17,8 @@ Fire::Fire(const Fire &obj): AMateria("fire") {
 Fire& Fire::operator=(const Fire &obj) {
 	std::cout << "Fire copy assignment operator called" << std::endl;
 
-	this->AMateria::value = obj.getValue();
-//	if (this != &obj)
+	if (this != &obj)
+		this->AMateria::value = obj.getValue();
 //		this->type = obj.type;
 	return *this;
 }
@@ -68,14 +68,14 @@ Wind::Wind(const Wind &obj): AMateria("wind") {
 Wind& Wind::operator=(const Wind &obj) {
 	std::cout << "Wind copy assignment operator called" << std::endl;
 
-	this->AMateria::value = obj.getValue();
-//	if (this != &obj)
+	if (this != &obj)
+		this->AMateria::value = obj.getValue();
 //		this->type = obj.type;
 	return *this;
 }
 
 void Wind::use(ICharacter &target) {
-	std::cout << "* shoots an Wind bolt at " << target.getName() << " *" <<  std::endl;
+	std::cout << "* shoots an Wind gust at " << target.getName() << " *" <<  std::endl;
 //	this->doDamage(target);
 }
 
@@ -120,14 +120,14 @@ Death::Death(const Death &obj): AMateria("death") {
 Death& Death::operator=(const Death &obj) {
 	std::cout << "Death copy assignment operator called" << std::endl;
 
-	this->AMateria::value = obj.getValue();
-//	if (this != &obj)
+	if (this != &obj)
+		this->AMateria::value = obj.getValue();
 //		this->type = obj.type;
 	return *this;
 }
 
 void Death::use(ICharacter &target) {
-	std::cout << "* shoots an Death bolt at " << target.getName() << " *" <<  std::endl;
+	std::cout << "* just kills " << target.getName() << " *" <<  std::endl;
 //	this->doDamage(target);
 }
 
@@ -141,14 +141,11 @@ size_t	Death::getValue() const {
 
 //void	Death::doDamage(ICharacter &target) const {
 //	if (target.getHitpoints() > 0)
-//	{
 //		target.changeHitpoints(this->getValue(), true);
-//	   std::cout << "* and deals " << this->getValue() << " points of damage! *" << std::endl;
-//	}
 //	else
 //		std::cout << "* but " << target.getName() << " is already dead! *" <<  std::endl;
 //}
-//
+
 //void	Death::restoreHitpoints(ICharacter &target) const {
 //	(void)target;
 //	std::cout << "if this method is called it means that the Materia is not a Cure Materia" << std::endl;
@@ -172,15 +169,15 @@ Revive::Revive(const Revive &obj): AMateria("revive") {
 Revive& Revive::operator=(const Revive &obj) {
 	std::cout << "Revive copy assignment operator called" << std::endl;
 
-	this->AMateria::value = obj.getValue();
-//	if (this != &obj)
+	if (this != &obj)
+		this->AMateria::value = obj.getValue();
 //		this->type = obj.type;
 	return *this;
 }
 
 void Revive::use(ICharacter &target) {
-	std::cout << "* shoots an Revive bolt at " << target.getName() << " *" <<  std::endl;
-//	this->doDamage(target);
+	std::cout << "* revives " << target.getName() << " *" <<  std::endl;
+//	this->restoreHitpoints(target);
 }
 
 AMateria *Revive::clone() const {
@@ -190,18 +187,18 @@ AMateria *Revive::clone() const {
 size_t	Revive::getValue() const {
 	return this->AMateria::value;
 }
-
+//
 //void	Revive::doDamage(ICharacter &target) const {
-//	if (target.getHitpoints() > 0)
-//	{
-//		target.changeHitpoints(this->getValue(), true);
-//	   std::cout << "* and deals " << this->getValue() << " points of damage! *" << std::endl;
-//	}
-//	else
-//		std::cout << "* but " << target.getName() << " is already dead! *" <<  std::endl;
+//	(void)target;
+//	std::cout << "This method should not be called for a Revive Materia" << std::endl;
 //}
 //
 //void	Revive::restoreHitpoints(ICharacter &target) const {
-//	(void)target;
-//	std::cout << "if this method is called it means that the Materia is not a Cure Materia" << std::endl;
+//	if (target.getHitpoints() <=  0)
+//	{
+//		target.changeHitpoints(this->getValue(), false);
+//		std::cout << "* and restores " << target.getName() << " to full health! *" <<  std::endl;
+//	}
+//	else
+//		std::cout << "* but " << target.getName() << " isn't dead yet! *" <<  std::endl;
 //}

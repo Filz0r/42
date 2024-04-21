@@ -10,7 +10,6 @@ Cure::~Cure() {
 }
 
 Cure::Cure(const Cure &obj): AMateria("cure") {
-//	*this = obj;
 	this->AMateria::value = obj.getValue();
 	std::cout << "Cure copy constructor called" << std::endl;
 }
@@ -18,8 +17,8 @@ Cure::Cure(const Cure &obj): AMateria("cure") {
 Cure& Cure::operator=(const Cure &obj)
 {
 	std::cout << "Cure copy assignment operator called" << std::endl;
-	this->AMateria::value = obj.getValue();
-	//	if (this != &obj)
+	if (this != &obj)
+		this->AMateria::value = obj.getValue();
 //		this->type = obj.type;
 	return *this;
 }
@@ -41,7 +40,7 @@ size_t	Cure::getValue() const {
 //	(void)target;
 //	std::cout << "This method should not be called for a Cure Materia" << std::endl;
 //}
-
+//
 //void	Cure::restoreHitpoints(ICharacter &target) const {
 //	if (target.getHitpoints() > 0)
 //	{

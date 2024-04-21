@@ -37,10 +37,10 @@ class ICharacter
 		virtual void  equip(AMateria *m) = 0;
 		virtual void  unequip(int idx) = 0;
 		virtual void  use(int idx, ICharacter &target) = 0;
+};
 
 //		virtual void changeHitpoints(size_t value, bool isDamage) = 0;
 //		virtual int getHitpoints() const = 0;
-};
 
 class IMateriaSource {
 	public:
