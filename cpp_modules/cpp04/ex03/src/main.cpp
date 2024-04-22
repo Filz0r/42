@@ -6,49 +6,102 @@
 
 int main()
 {
-	IMateriaSource *attacks = new MateriaSource();
-	attacks->learnMateria(new Ice());
-	attacks->learnMateria(new Fire());
-	attacks->learnMateria(new Wind());
-	attacks->learnMateria(new Death());
+	// subject main
+	{
+		IMateriaSource* src = new MateriaSource();
+		src->learnMateria(new Ice());
+		src->learnMateria(new Cure());
 
-	IMateriaSource *heals = new MateriaSource();
-	heals->learnMateria(new Cure());
-	heals->learnMateria(new Revive());
 
-	Character *me = new Character("me");
-//	me->equip(test);
-	me->equip(heals->createMateria("cure"));
-	me->equip(attacks->createMateria("death"));
-	me->equip(attacks->createMateria("fire"));
-	me->equip(heals->createMateria("revive"));
+		ICharacter* me = new Character("me");
+
+		AMateria* tmp;
+		tmp = src->createMateria("ice");
+		me->equip(tmp);
+		tmp = src->createMateria("cure");
+		me->equip(tmp);
+
+		ICharacter* bob = new Character("bob");
+		me->use(0, *bob);
+		me->use(1, *bob);
+
+		me->unequip(1); //extra added by be to test unequip
+		delete tmp;
+
+		delete bob;
+		delete me;
+		delete src;
+	}
+
+	// my tests 1
+//	{
+//		IMateriaSource *attacks = new MateriaSource();
+//		attacks->learnMateria(new Ice());
+//		attacks->learnMateria(new Fire());
+//		attacks->learnMateria(new Wind());
+//		attacks->learnMateria(new Death());
 //
-	AMateria *temp = attacks->createMateria("ice");
-
-	me->equip(temp);
-	delete temp;
-	Character *enemy = new Character("enemy");
-//	ICharacter *enemy2 = new Character(*enemy);
-//	Character me2;
-//	me2 = *me;
+//		IMateriaSource *heals = new MateriaSource();
+//		heals->learnMateria(new Cure());
+//		heals->learnMateria(new Revive());
 //
-//	Character me3(me2);
+//		Character *me = new Character("me");
+//		me->equip(heals->createMateria("cure"));
+//		me->equip(attacks->createMateria("death"));
+//		me->equip(attacks->createMateria("fire"));
+//		me->equip(heals->createMateria("revive"));
 //
-	me->use(0, *enemy);
-	me->use(1, *enemy);
-	me->use(2, *enemy);
-	me->use(3, *enemy);
-//	me->use(1, *enemy2);
-//	me->use(0, me2);
-//	me2.use(1, *me);
-//	me2.use(0, *enemy);
-//	me2.use(0, *enemy2);
-//	me3.use(0, *enemy2);
+//		AMateria *temp = attacks->createMateria("ice");
+//
+//		me->equip(temp);
+//		delete temp;
+//		Character *enemy = new Character("enemy");
+//		me->use(0, *enemy);
+//		me->use(1, *enemy);
+//		me->use(2, *enemy);
+//		me->use(3, *enemy);
+//
+//
+//		delete attacks;
+//		delete heals;
+//		delete me;
+//		delete enemy;
+//	}
 
+	// Materia Source tests
+//	{
+//		IMateriaSource *materiaSource = new MateriaSource();
+//		materiaSource->learnMateria(new Ice());
+//		materiaSource->learnMateria(new Fire());
+//		materiaSource->learnMateria(new Wind());
+//		materiaSource->learnMateria(new Death());
+//		materiaSource->learnMateria(new Cure());
+//
+//		AMateria *temp = materiaSource->createMateria("ice");
+//
+//		delete temp;
+//
+//		delete materiaSource;
+//	}
 
-	delete attacks;
-	delete heals;
-	delete me;
-	delete enemy;
-//	delete enemy2;
+	// Deep Copy tests
+//	{
+//		IMateriaSource *materiaSource = new MateriaSource();
+//		materiaSource->learnMateria(new Ice());
+//		materiaSource->learnMateria(new Fire());
+//
+//		Character t1("filipe");
+//		t1.equip(materiaSource->createMateria("fire"));
+//		t1.equip(materiaSource->createMateria("ice"));
+//		t1.equip(materiaSource->createMateria("asd"));
+//		Character t2;
+//		t2 = t1;
+//		t1.use(0, t2);
+//		t1.use(1, t2);
+//		t1.use(2, t2);
+//
+//		t2.use(0, t1);
+//		delete materiaSource;
+//	}
+
 }

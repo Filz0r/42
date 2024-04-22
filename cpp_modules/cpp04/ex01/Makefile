@@ -1,6 +1,6 @@
 NAME = Polymorphism2
 CXX = c++
-CXXFLAGS = 3-Wall -Wextra -Werror -std=c++98 -g3 #-fsanitize=address
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g3 #-fsanitize=address
 SRC = main.cpp Animal.cpp Dog.cpp Cat.cpp Brain.cpp
 BUILD_DIR = build
 INCLUDES = -I.
