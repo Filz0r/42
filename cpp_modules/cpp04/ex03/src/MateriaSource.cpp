@@ -72,7 +72,7 @@ void MateriaSource::learnMateria(AMateria *ptr) {
 		}
 	}
 	std::cout << "Error learning the a new materia of type: " << ptr->getType() << std::endl;
-	delete ptr;
+//	delete ptr;
 }
 
 AMateria *MateriaSource::createMateria(const std::string &type) {

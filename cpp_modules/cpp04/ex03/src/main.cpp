@@ -7,31 +7,31 @@
 int main()
 {
 	// subject main
-	{
-		IMateriaSource* src = new MateriaSource();
-		src->learnMateria(new Ice());
-		src->learnMateria(new Cure());
-
-
-		ICharacter* me = new Character("me");
-
-		AMateria* tmp;
-		tmp = src->createMateria("ice");
-		me->equip(tmp);
-		tmp = src->createMateria("cure");
-		me->equip(tmp);
-
-		ICharacter* bob = new Character("bob");
-		me->use(0, *bob);
-		me->use(1, *bob);
-
-		me->unequip(1); //extra added by be to test unequip
-		delete tmp;
-
-		delete bob;
-		delete me;
-		delete src;
-	}
+//	{
+//		IMateriaSource* src = new MateriaSource();
+//		src->learnMateria(new Ice());
+//		src->learnMateria(new Cure());
+//
+//
+//		ICharacter* me = new Character("me");
+//
+//		AMateria* tmp;
+//		tmp = src->createMateria("ice");
+//		me->equip(tmp);
+//		tmp = src->createMateria("cure");
+//		me->equip(tmp);
+//
+//		ICharacter* bob = new Character("bob");
+//		me->use(0, *bob);
+//		me->use(1, *bob);
+//
+//		me->unequip(1); //extra added by be to test unequip
+//		delete tmp; // as per the subject requirements unequip doesn't clear memory so we need to clean it manually
+//
+//		delete bob;
+//		delete me;
+//		delete src;
+//	}
 
 	// my tests 1
 //	{
@@ -85,23 +85,32 @@ int main()
 //	}
 
 	// Deep Copy tests
-//	{
-//		IMateriaSource *materiaSource = new MateriaSource();
-//		materiaSource->learnMateria(new Ice());
-//		materiaSource->learnMateria(new Fire());
-//
-//		Character t1("filipe");
-//		t1.equip(materiaSource->createMateria("fire"));
-//		t1.equip(materiaSource->createMateria("ice"));
-//		t1.equip(materiaSource->createMateria("asd"));
-//		Character t2;
-//		t2 = t1;
-//		t1.use(0, t2);
-//		t1.use(1, t2);
-//		t1.use(2, t2);
-//
-//		t2.use(0, t1);
-//		delete materiaSource;
-//	}
+	{
+		IMateriaSource *materiaSource = new MateriaSource();
+		materiaSource->learnMateria(new Ice());
+		materiaSource->learnMateria(new Fire());
+
+		Character  *t1 = new Character("filipe");
+		t1->equip(materiaSource->createMateria("fire"));
+		t1->equip(materiaSource->createMateria("ice"));
+		try {
+			AMateria *invalid = materiaSource->createMateria("asd");
+			t1->equip(invalid);
+		} catch (std::exception)
+		{
+			std::cerr << "wtf" << std::endl;
+		}
+		Character t2;
+		t2 = *t1;
+		Character t3 = *t1;
+		t1->use(0, t2);
+		t1->use(1, t2);
+		t1->use(2, t2);
+//		delete t1;
+
+		t2.use(0, t3);
+		delete materiaSource;
+		delete t1;
+	}
 
 }
