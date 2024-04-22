@@ -108,6 +108,8 @@ int main()
 		delete t1; // deleting the t1 pointer, if the copy wasn't deep, trying to use the materias from t3 would cause a segfault;
 
 		t3->use(0, t2);
+		t2.use(1, *t3);
+		t2.use(2, *t3);
 		delete materiaSource;
 		delete t3;
 	}
