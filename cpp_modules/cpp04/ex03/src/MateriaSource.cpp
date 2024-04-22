@@ -52,7 +52,7 @@ void MateriaSource::learnMateria(AMateria *ptr) {
 
 	for (size_t i = 0; i < MateriaSource::maxIndex; i++)
 	{
-		if (this->savedTypes[i] == ptr->getType())
+		if (this->savedTypes[i].empty() && this->savedTypes[i] == ptr->getType())
 		{
 			std::cout << "MateriaSource has already learned the Materia of type: " << ptr->getType() << std::endl;
 			delete ptr;
@@ -72,13 +72,13 @@ void MateriaSource::learnMateria(AMateria *ptr) {
 		}
 	}
 	std::cout << "Error learning the a new materia of type: " << ptr->getType() << std::endl;
-//	delete ptr;
+	delete ptr;
 }
 
 AMateria *MateriaSource::createMateria(const std::string &type) {
 	for (size_t i = 0; i < MateriaSource::maxIndex; i++)
 	{
-		if (this->materias[i]->getType() == type)
+		if (this->materias[i] && this->materias[i]->getType() == type)
 			return this->materias[i]->clone();
 	}
 	return NULL;

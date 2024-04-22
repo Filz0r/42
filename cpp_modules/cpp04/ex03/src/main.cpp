@@ -93,24 +93,23 @@ int main()
 		Character  *t1 = new Character("filipe");
 		t1->equip(materiaSource->createMateria("fire"));
 		t1->equip(materiaSource->createMateria("ice"));
-		try {
-			AMateria *invalid = materiaSource->createMateria("asd");
-			t1->equip(invalid);
-		} catch (std::exception)
-		{
-			std::cerr << "wtf" << std::endl;
-		}
+
+		// Testing if its possible to create an invalid materia;
+		t1->equip(materiaSource->createMateria("asd"));
+
+		// creating some deep copies
 		Character t2;
 		t2 = *t1;
-		Character t3 = *t1;
+		Character *t3 = new Character(*t1);
+
 		t1->use(0, t2);
 		t1->use(1, t2);
 		t1->use(2, t2);
-//		delete t1;
+		delete t1; // deleting the t1 pointer, if the copy wasn't deep, trying to use the materias from t3 would cause a segfault;
 
-		t2.use(0, t3);
+		t3->use(0, t2);
 		delete materiaSource;
-		delete t1;
+		delete t3;
 	}
 
 }
