@@ -1,0 +1,18 @@
+version: '3.8'
+
+
+services:
+  mymariadb:
+    image: mymariadb:1.0
+    container_name: mariadb
+    restart: always
+    build: .
+    expose:
+      - 3306
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DIR: ${MYSQL_DIR}
+      MYSQL_SOCKET: ${MYSQL_SOCKET}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_USER_PASSWORD: ${MYSQL_USER_PASSWORD}
+      WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}

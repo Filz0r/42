@@ -1,0 +1,57 @@
+version: "3.8"
+
+
+services:
+  mymariadb:
+    extends:
+      service: mymariadb
+      file: src/mariadb/docker-compose.yml
+    networks:
+      - inception_network
+    volumes:
+      - mariadb_volume:${MYSQL_DIR}
+  mywordpress:
+    depends_on:
+      mymariadb:
+        condition: service_started
+    extends:
+      service: mywordpress
+      file: src/wordpress/docker-compose.yml
+    networks:
+      - inception_network
+    volumes:
+      - wordpress_volume:/app
+  mynginx:
+    volumes:
+     - wordpress_volume:/app:ro
+    extends:
+      service: mynginx
+      file: src/nginx/docker-compose.yml
+    networks:
+      - inception_network
+    ports:
+      - 443:443
+
+volumes:
+  wordpress_volume:
+    name: wordpress_volume
+    driver: local
+    driver_opts:
+      type: "none"
+      o: "bind"
+      device: "/home/filipe/42/inception/volumes/wordpress/"
+  mariadb_volume:
+    name: mariadb_volume
+    driver: local
+    driver_opts:
+      type: "none"
+      o: "bind"
+      device: "/home/filipe/42/inception/volumes/mariadb/"
+
+
+networks:
+  inception_network:
+    name: inception
+    driver: bridge
+
+

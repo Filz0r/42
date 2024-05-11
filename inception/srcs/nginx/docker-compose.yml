@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  mynginx:
+    image: mynginx:1.0
+    environment:
+      WORDPRESS_DOMAIN: ${WORDPRESS_DOMAIN}
+    container_name: nginx
+    restart: always
+    build: .
+    expose:
+      - 443
+
