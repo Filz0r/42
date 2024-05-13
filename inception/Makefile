@@ -1,6 +1,6 @@
 # Define variables
 COMPOSE_FILE := docker-compose.yml
-SRC_DIR := src
+SRC_DIR := srcs
 ENV_FILE := .env
 VOLUME_DIR = ./volumes/mariadb/* ./volumes/wordpress/*
 

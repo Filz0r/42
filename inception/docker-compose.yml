@@ -5,7 +5,7 @@ services:
   mymariadb:
     extends:
       service: mymariadb
-      file: src/mariadb/docker-compose.yml
+      file: srcs/mariadb/docker-compose.yml
     networks:
       - inception_network
     volumes:
@@ -16,7 +16,7 @@ services:
         condition: service_started
     extends:
       service: mywordpress
-      file: src/wordpress/docker-compose.yml
+      file: srcs/wordpress/docker-compose.yml
     networks:
       - inception_network
     volumes:
@@ -26,9 +26,11 @@ services:
      - wordpress_volume:/app:ro
     extends:
       service: mynginx
-      file: src/nginx/docker-compose.yml
+      file: srcs/nginx/docker-compose.yml
     networks:
-      - inception_network
+      inception_network:
+        aliases:
+          - fparreir.42.fr
     ports:
       - 443:443
 
