@@ -41,14 +41,14 @@ volumes:
     driver_opts:
       type: "none"
       o: "bind"
-      device: "/home/filipe/42/inception/volumes/wordpress/"
+      device: "${VOLUME_WP}"
   mariadb_volume:
     name: mariadb_volume
     driver: local
     driver_opts:
       type: "none"
       o: "bind"
-      device: "/home/filipe/42/inception/volumes/mariadb/"
+      device: "${VOLUME_MARIADB}"
 
 
 networks:
