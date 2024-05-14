@@ -1,7 +1,7 @@
 COMPOSE_FILE := docker-compose.yml
 SRC_DIR := srcs
 ENV_FILE := .env
-VOLUME_DIR = /home/fparreir/data/mariadb /home/fparreir/data/wordpress
+VOLUME_DIR = /home/$(shell whoami)/data/mariadb /home/$(shell whoami)/data/wordpress
 FILES := $(shell find $(SRC_DIR) -type f) $(ENV_FILE) $(COMPOSE_FILE)
 
 
@@ -17,6 +17,7 @@ build:
 
 clean: down
 	@sudo rm -rf $(VOLUME_DIR)
+	@docker volume rm -f mariadb_volume wordpress_volume
 	@docker image prune -a -f
 	@docker container prune -f
 	@docker builder prune -a -f
