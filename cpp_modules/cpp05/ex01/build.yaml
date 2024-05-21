@@ -1,0 +1,9 @@
+compilers:
+  - description: Clang
+    match-compiler-exe: "/usr/bin/c++"
+    match-language: CPP
+    include-dirs:
+      - /home/filipe/42/cpp_modules/cpp05/ex01
+      - /usr/include
+      - /usr/include/linux
+      - /usr/include/clang/16/include

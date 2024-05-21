@@ -10,7 +10,6 @@ class Form
 	  Form(const std::string &_name, int gradeToSign, int gradeToExecute);
       Form(const Form &obj);
       ~Form();
-      Form& operator = (const Form &obj);
 
 	  int				getGradeToSign() const;
 	  int				getGradeToExecute() const;
@@ -20,6 +19,7 @@ class Form
 
   private:
 	 Form();
+	 Form& operator=(const Form &obj);
 
 	 bool				isSigned;
 	 const int 			gradeToSign;
@@ -37,6 +37,11 @@ class Form
 	 public:
 	 	const char *what() const throw();
 	 };
+
+	class IsSigned: public std::exception {
+	public:
+		const char *what() const throw();
+	};
 };
 
 std::ostream &operator <<(std::ostream &os, const Form &obj);

@@ -16,18 +16,9 @@ Form::~Form() {
 }
 
 Form::Form(const Form &obj)
- : isSigned(obj.isSigned), gradeToSign(obj.gradeToSign), gradeToExecute(obj.gradeToExecute), name(obj.name) {
+ : isSigned(obj.isSigned), gradeToSign(obj.gradeToSign),
+ 		gradeToExecute(obj.gradeToExecute), name(obj.name) {
 	std::cout << "Form copy constructor called" << std::endl;
-}
-
-Form& Form::operator=(const Form &obj)
-{
-	std::cout << "Form copy assignment operator called" << std::endl;
-
-	if (this != &obj)
-		*this = Form(obj);
-
-	return *this;
 }
 
 int Form::checkGrade(int grade) {
@@ -40,38 +31,41 @@ int Form::checkGrade(int grade) {
 }
 
 const char *Form::GradeTooHigh::what() const throw() {
-	return "Form grade is too high!";
+	return "the grade is too high!";
 }
 
 const char *Form::GradeTooLow::what() const throw() {
-	return "Form grade is too low!";
+	return "the grade is too low!";
 }
 
-int Form::getGradeToExecute() const{
+const char *Form::IsSigned::what() const throw() {
+	return "is already signed!";
+}
+
+int Form::getGradeToExecute() const {
 	return this->gradeToExecute;
 }
 
-int Form::getGradeToSign() const{
+int Form::getGradeToSign() const {
 	return this->gradeToSign;
 }
 
-const std::string &Form::getName() const{
+const std::string &Form::getName() const {
 	return this->name;
 }
 
-bool Form::isFormSigned() const{
+bool Form::isFormSigned() const {
 	return this->isSigned;
 }
 
 void	Form::beSigned(const Bureaucrat &nerd) {
-	if (nerd.getGrade() > this->getGradeToSign())
+	if (nerd.getGrade() > this->getGradeToSign()) {
 		throw Form::GradeTooLow();
-	else
-	{
-		if (!this->isSigned)
+	} else {
+		if (!this->isFormSigned())
 			this->isSigned = !this->isSigned;
 		else
-			std::cout << "This form was already signed!" << std::endl;
+			throw Form::IsSigned();
 	}
 }
 
