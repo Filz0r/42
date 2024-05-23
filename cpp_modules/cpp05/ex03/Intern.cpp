@@ -52,7 +52,7 @@ AForm *Intern::createRobotomyForm(const std::string &target) {
 }
 
 const Intern::FormFunction Intern::functions = {
-		Intern::createRobotomyForm,
+		&Intern::createRobotomyForm,
 		&Intern::createPresidentialForm,
 		&Intern::createShrubberyForm,
 };
