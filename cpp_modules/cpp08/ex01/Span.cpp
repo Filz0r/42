@@ -20,16 +20,27 @@ Span::Span() : capacity(0), occupied(0) {}
 Span::~Span() {
 //	std::cout << "Span Destructor called" << std::endl;
 	this->container.clear();
+	this->indexCache.clear();
 }
 
 Span::Span(const Span &obj) {
-	(void)obj;
+	this->indexCache.reserve(obj.getCapacity());
+	for (std::vector<std::_Rb_tree_const_iterator<int> >::const_iterator it = obj.indexCache.begin(); it != obj.indexCache.end(); ++it)
+		this->addNumber(**it);
+	this->occupied = obj.getOccupied();
+	this->capacity = obj.getCapacity();
 //	std::cout << "Span copy constructor called" << std::endl;
 }
 
 Span& Span::operator=(const Span &obj)
 {
-	(void)obj;
+	if (this != &obj) {
+		this->indexCache.reserve(obj.getCapacity());
+		for (std::vector<std::_Rb_tree_const_iterator<int> >::const_iterator it = obj.indexCache.begin(); it != obj.indexCache.end(); ++it)
+			this->addNumber(**it);
+		this->occupied = obj.getOccupied();
+		this->capacity = obj.getCapacity();
+	}
 //	std::cout << "Span copy assignment operator called" << std::endl;
 	return *this;
 }

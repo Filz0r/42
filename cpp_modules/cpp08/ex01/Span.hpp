@@ -17,8 +17,6 @@ class CannotFindSpan : public std::exception {
 		const char * what() const throw();
 };
 
-// TODO: implement proper copy constructor and assignment operator
-
 class IndexOutOfBounds : public std::exception {
 	public:
 		const char * what() const throw();
@@ -27,7 +25,9 @@ class IndexOutOfBounds : public std::exception {
 class Span
 {
 	public:
-	    Span(unsigned int capacity);
+	    explicit Span(unsigned int capacity);
+		Span(const Span &obj);
+		Span& operator = (const Span &obj);
 		~Span();
 
 		int 			operator[](size_t index) const;
@@ -43,8 +43,6 @@ class Span
 
 	private:
 		Span();
-		Span(const Span &obj);
-		Span& operator = (const Span &obj);
 		unsigned int							capacity;
 		unsigned int							occupied;
 		std::set<int>							container;

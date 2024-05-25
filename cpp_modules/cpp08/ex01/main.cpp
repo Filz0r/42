@@ -85,9 +85,8 @@ int main() {
 		}
 	}
 
+	std::cout << std::endl << "mean tests:" << std::endl;
 	{
-		std::cout << std::endl << "mean tests:" << std::endl;
-
 		Span test(10);
 
 		try {
@@ -101,7 +100,6 @@ int main() {
 			std::cerr << e.what() << std::endl;
 		}
 	}
-
 
 	return 0;
 }
