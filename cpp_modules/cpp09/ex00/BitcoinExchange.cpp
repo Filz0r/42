@@ -36,10 +36,7 @@ bool	DateObj::isValid() const {
 		case 2:
 			daysInMonth = this->isLeapYear() ? 29 : 28;
 			break;
-		case 4:
-		case 6:
-		case 9:
-		case 11:
+		case 4: case 6: case 9: case 11:
 			daysInMonth = 30;
 			break;
 		default:
@@ -65,7 +62,6 @@ bool DateObj::operator==(const DateObj &obj) const {
 }
 
 bool DateObj::operator<(const DateObj &obj) const {
-	// Copilot ftw pt2
 	if (this->year < obj.year)
 		return true;
 	else if (this->year > obj.year)
@@ -82,7 +78,6 @@ bool DateObj::operator<(const DateObj &obj) const {
 }
 
 bool DateObj::operator<=(const DateObj &obj) const {
-	// CoPilot FTW
 	if (this->year < obj.year)
 		return true;
 	else if (this->year > obj.year)
@@ -139,8 +134,8 @@ void	BitcoinExchange::mapInit(const std::string &filePath,
 	if (!database.is_open())
 		throw CannotOpenFile();
 
-	// Ignore first line
 	std::getline(database, line);
+
 	int i = 0;
 	while (std::getline(database, line)) {
 		std::stringstream ss(line);
@@ -148,22 +143,9 @@ void	BitcoinExchange::mapInit(const std::string &filePath,
 		std::getline(ss, date, ',');
 		ss >> value;
 
-		std::string::iterator it;
-		// while we only have whitespace at the start increment it;
-		for (it = date.begin(); it != date.end() && std::isspace(*it); ++it)
-			;
-		// delete everything from begin up to it;
-		date.erase(date.begin(), it);
-		// while we only have whitespace at the end decrement it;
-		for (it = date.end(); it != date.begin() && std::isspace(*(it - 1)); --it)
-			;
-		// delete everything from it up until end
-		date.erase(it, date.end());
-		// Temporary pair so that we can order the list by insertion of elements
 		keyPair tempPair = keyPair (i, DateObj(date));
 		toSet.insert(std::pair<keyPair , double>(tempPair, value));
 
-		// Trick to validate invalid inputs ;)
 		date.clear();
 		value = std::numeric_limits<double>::infinity();
 		i++;
@@ -182,6 +164,7 @@ void	BitcoinExchange::mapInit(const std::string &filePath,
 
 	// Ignore first line
 	std::getline(database, line);
+
 	// Check if file is empty
 	if (line.empty())
 		throw InvalidFile();
