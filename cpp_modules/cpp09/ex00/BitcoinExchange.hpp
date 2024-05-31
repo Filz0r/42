@@ -6,8 +6,7 @@
 #include <map>
 #include <exception>
 #include <limits>
-
-// TODO: add more tests to file.txt
+#include <cstdlib>
 
 class CannotOpenFile : public std::exception {
 	public:
@@ -18,7 +17,6 @@ class InvalidFile : public std::exception {
 public:
 	const char *what() const throw();
 };
-
 
 struct DateObj {
 	public:
@@ -46,11 +44,9 @@ int closestDifference (const DateObj &obj1, const DateObj &obj2);
 
 class BitcoinExchange
 {
-	typedef std::pair<int, std::string> keyStr;
 
 	public:
 		// default constructor
-		typedef std::pair<int, DateObj> keyPair;
 		explicit BitcoinExchange( const std::string &_dbFile );
 
 		// Canonical stuff
@@ -60,6 +56,13 @@ class BitcoinExchange
 		void	run( void );
 
 	private:
+		// Private types
+		typedef std::pair<int, std::string> keyStr;
+		enum Type {
+			DB,
+			INPUT
+		};
+
 		// Canonical stuff
 		BitcoinExchange();
 		BitcoinExchange( const BitcoinExchange &obj );
@@ -67,16 +70,15 @@ class BitcoinExchange
 
 		// Statatic vars/functions
 		static const std::string	originalDbFile;
-		static void	mapInit( const std::string &filePath,
-								std::multimap<keyPair, double> &toSet );
-		static void	mapInit( const std::string &filePath,
+		static void	mapInit( const std::string &filePath, const char delimiter,
 								std::multimap<keyStr, double> &toSet );
+		static bool isHeaderCorrect(const std::string &head, Type t);
 
 		// Private methods
-		std::pair<keyPair, double> 	getClosestDate(const DateObj &toFind);
+		std::pair<keyStr, double> 	getClosestDate(const DateObj &toFind);
 
 		// Class attributes
 		std::string						dbFile;
-  		std::multimap<keyPair , double>	db;
+  		std::multimap<keyStr , double>	db;
   		std::multimap<keyStr , double>	inputDb;
 };

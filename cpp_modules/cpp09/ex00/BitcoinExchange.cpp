@@ -1,4 +1,3 @@
-#include <cstdlib>
 #include "BitcoinExchange.hpp"
 
 const char *CannotOpenFile::what() const throw () {
@@ -6,7 +5,7 @@ const char *CannotOpenFile::what() const throw () {
 }
 
 const char *InvalidFile::what() const throw () {
-	return "Error: File doesn't have anything inside!";
+	return "Error: File contents aren't valid!";
 }
 
 DateObj::DateObj(const std::string &date) {
@@ -54,9 +53,7 @@ bool	DateObj::isValid() const {
 }
 
 bool DateObj::operator==(const DateObj &obj) const {
-	if (this->year != obj.year
-		|| this->month != obj.month
-		|| this->day != obj.day)
+	if (this->year != obj.year || this->month != obj.month || this->day != obj.day)
 		return false;
 	return true;
 }
@@ -106,8 +103,8 @@ const std::string BitcoinExchange::originalDbFile = "data.csv";
 
 BitcoinExchange::BitcoinExchange(const std::string &_dbFile) : dbFile(_dbFile) {
 	try {
-		BitcoinExchange::mapInit(BitcoinExchange::originalDbFile, this->db);
-		BitcoinExchange::mapInit(this->dbFile, this->inputDb);
+		BitcoinExchange::mapInit(BitcoinExchange::originalDbFile, ',', this->db);
+		BitcoinExchange::mapInit(this->dbFile, '|', this->inputDb);
 	} catch (std::exception &e) {
 		std::cout << e.what() << std::endl;
 	}
@@ -119,79 +116,72 @@ BitcoinExchange::~BitcoinExchange() {}
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &obj) { (void)obj; }
 
-BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange &obj) {
-	(void)obj;
-	return *this;
-}
+BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange &obj) { (void)obj; return *this; }
 
-void	BitcoinExchange::mapInit(const std::string &filePath,
-								 std::multimap<keyPair, double> &toSet) {
-	std::ifstream	database(filePath.c_str());
-	std::string		line;
-	std::string		date;
-	double			value;
+bool	BitcoinExchange::isHeaderCorrect(const std::string &head,
+										 BitcoinExchange::Type t) {
+	std::stringstream ss(head);
+	std::string dateStr, valueStr, extraColumns;
 
-	if (!database.is_open())
-		throw CannotOpenFile();
+	std::getline(ss, dateStr, t == DB ? ',' : '|');
+	std::getline(ss, valueStr, t == DB ? ',' : '|');
 
-	std::getline(database, line);
+	std::string::iterator it;
+	for (it = dateStr.begin(); it != dateStr.end() && std::isspace(*it); ++it) ;
+	dateStr.erase(dateStr.begin(), it);
+	for (it = dateStr.end(); it != dateStr.begin() && std::isspace(*(it -1)); --it) ;
+	dateStr.erase(it, dateStr.end());
+	for (it = valueStr.begin(); it != valueStr.end() && std::isspace(*it); ++it) ;
+	valueStr.erase(valueStr.begin(), it);
+	for (it = valueStr.end(); it != valueStr.begin() && std::isspace(*(it - 1)); --it) ;
+	valueStr.erase(it, valueStr.end());
 
-	int i = 0;
-	while (std::getline(database, line)) {
-		std::stringstream ss(line);
-
-		std::getline(ss, date, ',');
-		ss >> value;
-
-		keyPair tempPair = keyPair (i, DateObj(date));
-		toSet.insert(std::pair<keyPair , double>(tempPair, value));
-
-		date.clear();
-		value = std::numeric_limits<double>::infinity();
-		i++;
+	if (dateStr.empty() || valueStr.empty() || dateStr != "date"
+		|| ((t == INPUT  && valueStr != "value") || (t == DB  && valueStr != "exchange_rate"))
+		|| ss >> extraColumns) {
+			return false;
 	}
+	return true;
 }
 
-void	BitcoinExchange::mapInit(const std::string &filePath,
+void	BitcoinExchange::mapInit(const std::string &filePath, const char delimiter,
 								 std::multimap<keyStr, double> &toSet) {
 	std::ifstream	database(filePath.c_str());
-	std::string		line;
-	std::string		date;
+	std::string		line, date;
 	double			value;
 
 	if (!database.is_open())
 		throw CannotOpenFile();
 
-	// Ignore first line
+	// Parsing first line
 	std::getline(database, line);
-
-	// Check if file is empty
-	if (line.empty())
+	Type temp = delimiter == '|' ? INPUT : DB;
+	if (!BitcoinExchange::isHeaderCorrect(line, temp))
 		throw InvalidFile();
 
 	int i = 0;
 	while (std::getline(database, line)) {
+		std::string valueStr, extraInput, extraColumns;
+
+		if (line.empty())
+			continue;
+
 		std::stringstream ss(line);
-		std::string valueStr;
+		std::getline(ss, date, delimiter);
 
-		std::getline(ss, date, '|');
 		ss >> valueStr;
-
 		std::stringstream valueSs(valueStr);
-		std::string extraInput;
-		std::string extraColumns;
+
 		if (!(valueSs >> value) || valueSs >> extraInput || ss >> extraColumns)
 			value = std::numeric_limits<double>::infinity();
 
 		std::string::iterator it;
 		// while we only have whitespace at the start increment it;
-		for (it = date.begin(); it != date.end() && std::isspace(*it); ++it)
-			;
+		for (it = date.begin(); it != date.end() && std::isspace(*it); ++it) ;
 		// delete everything from begin up to it;
 		date.erase(date.begin(), it);
 		// while we only have whitespace at the end decrement it;
-		for (it = date.end(); it != date.begin() && std::isspace(*(it - 1)); --it)
-			;
+		for (it = date.end(); it != date.begin() && std::isspace(*(it - 1)); --it) ;
 		// delete everything from it up until end
 		date.erase(it, date.end());
 
@@ -204,26 +194,33 @@ void	BitcoinExchange::mapInit(const std::string &filePath,
 		value = std::numeric_limits<double>::infinity();
 		i++;
 	}
+//	 Check if line is empty or we reached the eof and the db is still empty
+	if ((database.eof() && toSet.empty()))
+		throw InvalidFile();
 }
 
-std::pair<BitcoinExchange::keyPair, double>	BitcoinExchange::getClosestDate(const DateObj &toFind) {
-	std::map<keyPair, double>::const_iterator it = this->db.begin();
-	std::map<keyPair, double>::const_iterator closest = it;
+std::pair<BitcoinExchange::keyStr, double>	BitcoinExchange::getClosestDate(const DateObj &toFind) {
+	std::map<keyStr, double>::const_iterator it = this->db.begin();
+	std::map<keyStr, double>::const_iterator closest = it;
+	DateObj closestObj(it->first.second);
+
 	for (; it != this->db.end(); ++it)
 	{
-		if (it->first.second == toFind)
+		DateObj temp(it->first.second);
+		if (temp == toFind)
 			return *it;
 
 		// Calculate the difference in days between the current date and the input date
-		int currentDifference = closestDifference(it->first.second, toFind);
+		int currentDifference = closestDifference(temp, toFind);
 
 		// Calculate the difference in days between the closest date and the input date
-		int closestDiff = closestDifference(closest->first.second, toFind);
+		int closestDiff = closestDifference(closestObj, toFind);
 
-		if (currentDifference < closestDiff)
+		if (currentDifference < closestDiff){
 			closest = it;
+			closestObj = DateObj(closest->first.second);
+		}
 	}
-
 	return *closest;
 }
 
@@ -240,7 +237,7 @@ void	BitcoinExchange::run() {
 			} else if (value == std::numeric_limits<double>::infinity()){
 				std::cerr << "Error: invalid number/input" << std::endl;
 			} else {
-				std::pair<keyPair, double> temp2 = this->getClosestDate(temp);
+				std::pair<keyStr, double> temp2 = this->getClosestDate(temp);
 				std::cout << it->first.second << " => " << it->second << " = " << it->second * temp2.second << std::endl;
 			}
 		} else {
