@@ -5,7 +5,6 @@
 class ShrubberyCreationForm : public AForm
 {
 public:
-	ShrubberyCreationForm();
 	ShrubberyCreationForm(const std::string &target);
 	ShrubberyCreationForm(const ShrubberyCreationForm &obj);
 	~ShrubberyCreationForm();
@@ -15,5 +14,7 @@ private:
 	static std::string getAsciiTree();
 
 	ShrubberyCreationForm& operator = (const ShrubberyCreationForm &obj);
+	ShrubberyCreationForm();
 	void callback() const;
+
 };

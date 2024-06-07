@@ -4,22 +4,22 @@
 #include <ShrubberyCreationForm.hpp>
 
 Intern::Intern() {
-	std::cout << "Intern Constructor called" << std::endl;
+//	std::cout << "Intern Constructor called" << std::endl;
 }
 
 Intern::~Intern() {
-	std::cout << "Intern Destructor called" << std::endl;
+//	std::cout << "Intern Destructor called" << std::endl;
 }
 
 Intern::Intern(const Intern &obj) {
 	(void)obj;
-	std::cout << "Intern copy constructor called" << std::endl;
+//	std::cout << "Intern copy constructor called" << std::endl;
 }
 
 Intern& Intern::operator=(const Intern &obj)
 {
 	(void)obj;
-	std::cout << "Intern copy assignment operator called" << std::endl;
+//	std::cout << "Intern copy assignment operator called" << std::endl;
 	return *this;
 }
 

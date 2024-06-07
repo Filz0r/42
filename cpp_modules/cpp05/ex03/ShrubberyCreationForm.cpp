@@ -3,21 +3,21 @@
 
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target)
 	: AForm(target, 145, 137) {
-	std::cout << "ShrubberyCreationForm Constructor called" << std::endl;
+//	std::cout << "ShrubberyCreationForm Constructor called" << std::endl;
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm()
 	: AForm("Default Presidential Form", 145, 137) {
-	std::cout << "ShrubberyCreationForm Constructor called" << std::endl;
+//	std::cout << "ShrubberyCreationForm Constructor called" << std::endl;
 }
 
 ShrubberyCreationForm::~ShrubberyCreationForm() {
-	std::cout << "ShrubberyCreationForm Destructor called" << std::endl;
+//	std::cout << "ShrubberyCreationForm Destructor called" << std::endl;
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &obj)
 		: AForm(obj.getName(), 145, 137) {
-	std::cout << "ShrubberyCreationForm copy constructor called" << std::endl;
+//	std::cout << "ShrubberyCreationForm copy constructor called" << std::endl;
 }
 
 std::string ShrubberyCreationForm::getAsciiTree() {
