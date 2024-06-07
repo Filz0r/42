@@ -1,11 +1,11 @@
 #include "Bureaucrat.hpp"
 
 Bureaucrat::Bureaucrat() : name("John Doe"), grade(1) {
-	std::cout << "Bureaucrat Constructor called" << std::endl;
+//	std::cout << "Bureaucrat Constructor called" << std::endl;
 }
 
-Bureaucrat::Bureaucrat(std::string _name, int _grade) : name(_name), grade(_grade) {
-	std::cout << "Bureaucrat Constructor called" << std::endl;
+Bureaucrat::Bureaucrat(const std::string& _name, int _grade) : name(_name), grade(_grade) {
+//	std::cout << "Bureaucrat Constructor called" << std::endl;
 
 	if (_grade > 150)
 		throw Bureaucrat::GradeTooLow();
@@ -14,21 +14,17 @@ Bureaucrat::Bureaucrat(std::string _name, int _grade) : name(_name), grade(_grad
 }
 
 Bureaucrat::~Bureaucrat() {
-	std::cout << "Bureaucrat Destructor called" << std::endl;
+//	std::cout << "Bureaucrat Destructor called" << std::endl;
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat &obj): name(obj.getName()), grade(obj.getGrade()) {
-	std::cout << "Bureaucrat copy constructor called" << std::endl;
+//	std::cout << "Bureaucrat copy constructor called" << std::endl;
 }
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat &obj)
 {
-	std::cout << "Bureaucrat copy assignment operator called" << std::endl;
-	if (this != &obj)
-	{
-		this->grade = obj.getGrade();
-		this->name = obj.getName();
-	}
+//	std::cout << "Bureaucrat copy assignment operator called" << std::endl;
+	(void) obj;
 	return *this;
 }
 

@@ -5,7 +5,6 @@
 class RobotomyRequestForm : public AForm
 {
 	public:
-		RobotomyRequestForm();
 		RobotomyRequestForm(const std::string &target);
 		RobotomyRequestForm(const RobotomyRequestForm &obj);
 		~RobotomyRequestForm();
@@ -15,6 +14,7 @@ class RobotomyRequestForm : public AForm
 		static void updateFailed();
 		static bool	hasFailed;
 
+		RobotomyRequestForm();
 		RobotomyRequestForm& operator = (const RobotomyRequestForm &obj);
 		void callback() const;
 };

@@ -3,22 +3,22 @@
 
 Form::Form(const std::string &_name, int _gradeToSign, int _gradeToExecute)
 : isSigned(false), gradeToSign(Form::checkGrade(_gradeToSign)), gradeToExecute(Form::checkGrade(_gradeToExecute)), name(_name) {
-	std::cout << "Form complex Constructor called" << std::endl;
+//	std::cout << "Form complex Constructor called" << std::endl;
 }
 
 Form::Form()
 :  isSigned(false), gradeToSign(1), gradeToExecute(1), name("Undefined") {
-	std::cout << "Form Constructor called" << std::endl;
+//	std::cout << "Form Constructor called" << std::endl;
 }
 
 Form::~Form() {
-	std::cout << "Form Destructor called" << std::endl;
+//	std::cout << "Form Destructor called" << std::endl;
 }
 
 Form::Form(const Form &obj)
  : isSigned(obj.isSigned), gradeToSign(obj.gradeToSign),
  		gradeToExecute(obj.gradeToExecute), name(obj.name) {
-	std::cout << "Form copy constructor called" << std::endl;
+//	std::cout << "Form copy constructor called" << std::endl;
 }
 
 int Form::checkGrade(int grade) {

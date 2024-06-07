@@ -4,20 +4,20 @@
 bool RobotomyRequestForm::hasFailed = false;
 
 RobotomyRequestForm::RobotomyRequestForm(const std::string &target) : AForm(target, 72, 45) {
-	std::cout << "RobotomyRequestForm Constructor called" << std::endl;
+//	std::cout << "RobotomyRequestForm Constructor called" << std::endl;
 }
 
 RobotomyRequestForm::RobotomyRequestForm() : AForm("Default Presidential Form", 72, 45) {
-	std::cout << "RobotomyRequestForm Constructor called" << std::endl;
+//	std::cout << "RobotomyRequestForm Constructor called" << std::endl;
 }
 
 RobotomyRequestForm::~RobotomyRequestForm() {
-	std::cout << "RobotomyRequestForm Destructor called" << std::endl;
+//	std::cout << "RobotomyRequestForm Destructor called" << std::endl;
 }
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &obj)
 		: AForm(obj.getName(), 72, 45) {
-	std::cout << "RobotomyRequestForm copy constructor called" << std::endl;
+//	std::cout << "RobotomyRequestForm copy constructor called" << std::endl;
 }
 
 void RobotomyRequestForm::updateFailed() {

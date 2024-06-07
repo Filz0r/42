@@ -5,14 +5,12 @@
 class PresidentialPardonForm : public AForm
 {
    public:
-      	PresidentialPardonForm();
 	  	PresidentialPardonForm(const std::string &target);
       	PresidentialPardonForm(const PresidentialPardonForm &obj);
 	  	~PresidentialPardonForm();
 
-  	private:
+   private:
+		PresidentialPardonForm();
 		PresidentialPardonForm& operator = (const PresidentialPardonForm &obj);
 		void callback() const;
-
-
 };
