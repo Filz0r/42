@@ -104,20 +104,20 @@ void	PmergeMe::Input::sortAndPrintVector() {
 	clock_t start = clock();
 	PmergeMe::mergeSort<std::vector<long> >(this->vectorArr);
 	clock_t end = clock();
-	double elapsed = double(end - start) / double(CLOCKS_PER_SEC);
+	double elapsed = double(end - start) * 1000.0/ double(CLOCKS_PER_SEC);
 //	print<std::vector<long> >(this->vectorArr);
 
-	std::cout << "Time to process a range of " << this->vectorArr.size() << " with std::vector : " << elapsed << " us"<< std::endl;
+	std::cout << "Time to process a range of " << this->vectorArr.size() << " with std::vector : " << elapsed << " ms"<< std::endl;
 }
 
 void	PmergeMe::Input::sortAndPrintDeque() {
 	clock_t start = clock();
 	PmergeMe::mergeSort<std::deque<long> >(this->dequeArr);
 	clock_t end = clock();
-	double elapsed = double(end - start) / double(CLOCKS_PER_SEC);
+	double elapsed = double(end - start)  * 1000.0 / double(CLOCKS_PER_SEC);
 	//	print<std::deque<long> >(this->dequeArr);
 
-	std::cout << "Time to process a range of " << this->dequeArr.size() << " with std::deque : " << elapsed << " us"<< std::endl;
+	std::cout << "Time to process a range of " << this->dequeArr.size() << " with std::deque : " << elapsed << " ms"<< std::endl;
 
 }
 
@@ -137,4 +137,3 @@ void	PmergeMe::print(const T &array) {
 std::ostream	&PmergeMe::operator<<(std::ostream &os, const PmergeMe::Input &obj) {
 	return os << obj.getInput();
 }
-
