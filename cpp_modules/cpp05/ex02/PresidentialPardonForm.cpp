@@ -18,5 +18,5 @@ PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &obj
 }
 
 void PresidentialPardonForm::callback() const {
-//	std::cout << this->getName() << " has been pardoned by Zaphod Beeblebrox" << std::endl;
+	std::cout << this->getName() << " has been pardoned by Zaphod Beeblebrox" << std::endl;
 }

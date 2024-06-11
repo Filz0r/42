@@ -1,5 +1,4 @@
 #include "RobotomyRequestForm.hpp"
-#include <cstdlib>
 
 bool RobotomyRequestForm::hasFailed = false;
 

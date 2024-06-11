@@ -27,11 +27,11 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat &obj) {
 }
 
 const char *Bureaucrat::GradeTooHigh::what() const throw () {
-	return "Your grade is too high bitch!";
+	return "Your grade is too high!";
 }
 
 const char *Bureaucrat::GradeTooLow::what() const throw () {
-	return "Your grade is too low bitch!";
+	return "Your grade is too low!";
 }
 
 int Bureaucrat::getGrade() const {
