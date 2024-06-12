@@ -84,8 +84,6 @@ RPN::RPN(const std::string &_input) {
 	else
 	{
 		std::cout << "fuck" << std::endl;
-
-
 		throw BadInput();
 	}
 }

@@ -64,6 +64,7 @@ void	PmergeMe::Input::printSorted() const {
 	}
 	std::cout << std::endl;
 }
+
 template<typename T>
 void	PmergeMe::mergeSort(T &array) {
 	size_t	len = array.size();
