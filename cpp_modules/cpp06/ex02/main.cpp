@@ -15,5 +15,4 @@ int main() {
 	delete test;
 	delete test1;
 	delete test2;
-//	identify(*test);
 }

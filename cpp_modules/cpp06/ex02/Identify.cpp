@@ -65,8 +65,6 @@ void identify(Base &obj) {
 		} catch (std::exception &e) {}
 	}
 
-
-
 	switch (type) {
 		case 1:
 			std::cout << "The object is off the A class" << std::endl;
