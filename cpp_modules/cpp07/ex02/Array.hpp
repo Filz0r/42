@@ -3,6 +3,8 @@
 #include <iostream>
 #include <exception>
 
+
+
 template<typename T>
 class Array {
 	public:
@@ -20,6 +22,12 @@ class Array {
 
 		~Array() { delete[] array; };
 
+		class IndexOutOfBounds : public std::exception {
+		public:
+			const char	*what() const throw() {
+				return "Error: Index out of bounds!";
+			};
+		};
 		// Operators
 		Array &operator=(const Array &obj) {
 			if (this != &obj)
@@ -49,10 +57,4 @@ class Array {
 	private:
 		size_t	capacity;
 		T		*array;
-		class IndexOutOfBounds : public std::exception {
-		public:
-			const char	*what() const throw() {
-				return "Error: Index out of bounds!";
-			};
-		};
 };
