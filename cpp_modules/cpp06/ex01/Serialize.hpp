@@ -16,5 +16,4 @@ class Serialize
 		Serialize();
 		Serialize(const Serialize &obj);
 		Serialize& operator=(const Serialize &obj);
-
 };

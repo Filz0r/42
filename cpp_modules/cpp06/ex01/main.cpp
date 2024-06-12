@@ -8,7 +8,6 @@ int	main() {
 
 	std::cout << test1;
 	std::cout << "Serialized address: " << ptrAddr << std::endl;
-	std::cout << "Deserialized obj address: " << &temp << std::endl;
 	std::cout << "Deserialized obj" << temp << std::endl;
 
 	delete temp;
