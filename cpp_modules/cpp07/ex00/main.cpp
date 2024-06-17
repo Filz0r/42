@@ -20,6 +20,7 @@ int main() {
 		::swap<std::string>(t3, t4);
 		std::cout << t3 << std::endl;
 		std::cout << t4 << std::endl;
+		std::cout << "-----------------" << std::endl;
 	}
 	//min tests
 	{
@@ -28,6 +29,8 @@ int main() {
 
 		std::cout << ::min<int>(t1, t2) << std::endl;
 		std::cout << ::min<std::string>(t3, t4) << std::endl;
+		std::cout << "-----------------" << std::endl;
+
 	}
 
 	//max tests
@@ -37,5 +40,7 @@ int main() {
 
 		std::cout << ::max<int>(t1, t2) << std::endl;
 		std::cout << ::max<std::string>(t3, t4) << std::endl;
+		std::cout << "-----------------" << std::endl;
+
 	}
 }
