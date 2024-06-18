@@ -74,7 +74,7 @@ int main() {
 		Span test(100000);
 
 		try {
-			test.addNumbers(100000); // this takes a long time because its linear
+			test.addNumbers(100000); // this takes a "long" time because its linear
 
 //			std::cout << test << std::endl;
 
