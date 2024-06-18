@@ -49,5 +49,5 @@ class Span
 		std::vector<std::set<int>::iterator>	indexCache;
 };
 
-
 std::ostream& operator<<(std::ostream& os, const Span& obj);
+bool	compareIterators(const std::set<int>::iterator &a, const std::set<int>::iterator &b);

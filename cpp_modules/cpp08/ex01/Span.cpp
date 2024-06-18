@@ -13,12 +13,11 @@ const char *IndexOutOfBounds::what() const throw() {
 }
 
 Span::Span(unsigned int _capacity) : capacity(_capacity), occupied(0) {
-	indexCache.reserve(_capacity);
+	this->indexCache.reserve(_capacity);
 }
 Span::Span() : capacity(0), occupied(0) {}
 
 Span::~Span() {
-//	std::cout << "Span Destructor called" << std::endl;
 	this->container.clear();
 	this->indexCache.clear();
 }
@@ -29,7 +28,6 @@ Span::Span(const Span &obj) {
 		this->addNumber(**it);
 	this->occupied = obj.getOccupied();
 	this->capacity = obj.getCapacity();
-//	std::cout << "Span copy constructor called" << std::endl;
 }
 
 Span& Span::operator=(const Span &obj)
@@ -41,7 +39,6 @@ Span& Span::operator=(const Span &obj)
 		this->occupied = obj.getOccupied();
 		this->capacity = obj.getCapacity();
 	}
-//	std::cout << "Span copy assignment operator called" << std::endl;
 	return *this;
 }
 
@@ -52,6 +49,8 @@ void	Span::addNumber(int nb) {
 	if (ret.second) {
 		this->indexCache.push_back(ret.first);
 		this->occupied++;
+		std::sort(this->indexCache.begin(), this->indexCache.end(), compareIterators);
+
 	}
 }
 
@@ -108,6 +107,10 @@ int Span::operator[](size_t index) const{
 	if (index >= this->occupied)
 		throw IndexOutOfBounds();
 	return *this->indexCache[index];
+}
+
+bool	compareIterators(const std::set<int>::iterator &a, const std::set<int>::iterator &b) {
+	return *a < *b;
 }
 
 std::ostream 	&operator<<(std::ostream  &os, const Span &obj) {

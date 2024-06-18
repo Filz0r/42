@@ -12,6 +12,7 @@ int main() {
 		test.addNumber(11);
 
 		try {
+			std::cout << test << std::endl;
 			std::cout << test.shortestSpan() << std::endl;
 			std::cout << test.longestSpan() << std::endl;
 		} catch (std::exception &e) {
@@ -73,7 +74,7 @@ int main() {
 		Span test(100000);
 
 		try {
-			test.addNumbers(100000); // this takes a long time because its linear and vector is
+			test.addNumbers(100000); // this takes a long time because its linear
 
 //			std::cout << test << std::endl;
 
@@ -92,7 +93,7 @@ int main() {
 		try {
 			test.addNumbers(-10);
 
-//			std::cout << test << std::endl << std::endl;
+			std::cout << test << std::endl << std::endl;
 
 			std::cout << test.longestSpan() << std::endl;
 			std::cout << test.shortestSpan() << std::endl;
