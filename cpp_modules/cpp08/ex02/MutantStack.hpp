@@ -7,6 +7,9 @@
 template<typename T>
 class MutantStack : public std::stack<T> {
 	public:
+		MutantStack() {};
+		~MutantStack() {};
+
 		typedef typename std::deque<T>::iterator iterator;
 		typedef typename std::deque<T>::const_iterator const_iterator;
 		typedef typename std::deque<T>::reverse_iterator reverse_iterator;
@@ -43,4 +46,11 @@ class MutantStack : public std::stack<T> {
 		const_reverse_iterator rend() const {
 			return this->c.rend();
 		}
+
+	private:
+		MutantStack(const MutantStack &obj) { (void)obj; };
+		MutantStack &operator=(const MutantStack &obj) {
+			(void)obj;
+			return *this;
+		};
 };
