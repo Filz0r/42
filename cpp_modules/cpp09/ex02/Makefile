@@ -1,6 +1,6 @@
 NAME = PmergeMe
 CXX = c++
-CXXFLAGS =  -std=c++98 -Wall -Wextra -Werror # -g3 #-fsanitize=address
+CXXFLAGS =  -std=c++98 -Wall -Wextra -Werror -g3 #-fsanitize=address
 SRC = 	main.cpp PmergeMe.cpp
 BUILD_DIR = build
 INCLUDES = -I.
