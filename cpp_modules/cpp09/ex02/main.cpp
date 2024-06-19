@@ -2,7 +2,7 @@
 
 int main(int ac, char **av) {
 	try {
-		PmergeMe::Input in(ac, ++av);
+		PmergeMe::Data in(ac, ++av);
 
 		std::cout << "Before: " << in << std::endl;
 		in.printSorted();

@@ -18,9 +18,19 @@ const char *PmergeMe::DuplicatedInput::what() const throw() {
 	return ret.c_str();
 }
 
-PmergeMe::Input::Input(size_t ac, char **av) {
-	this->original.reserve(3000);
+PmergeMe::Data::Data(size_t ac, char **av) {
+	// handling bad input
+	if (ac < 2)
+		throw BadInput("No input was given!");
+	else if (ac == 2)
+		throw BadInput("I only work with arguments outside of quotes!");
 
+	// reserving space in the vectors to not constantly reallocate memory when they are full
+	this->sorted.reserve(ac - 1);
+	this->original.reserve(ac - 1);
+	this->vectorArr.reserve(ac - 1);
+
+	// Parse stuff
 	for (size_t i = 0; i < ac - 1; i++) {
 		std::stringstream iss(av[i]);
 		std::stringstream sval(av[i]);
@@ -28,33 +38,41 @@ PmergeMe::Input::Input(size_t ac, char **av) {
 		long	value;
 
 		iss >> temp;
+		// checking if someone is being an ass
 		if (!(sval >> value) || sval >> extraInput
 			|| value < 0 || value > std::numeric_limits<int>::max())
 				throw PmergeMe::BadInput(temp);
+
+		// making the input string look pretty for the print
 		if (i == 0 || (i == ac - 1))
 			temp2 = temp;
 		else
 			temp2 = " " + temp;
+
+		// checking if a number already exists and throwing if it does
 		std::vector<long>::iterator exists = std::find(this->original.begin(), this->original.end(), value);
 		if (exists != this->original.end())
 			throw PmergeMe::DuplicatedInput(temp);
 
-		this->_input.append(temp2);
-		this->original.push_back(value);
+		// Push stuff to data structures
+		this->input.append(temp2);
 		this->sorted.push_back(value);
+		this->original.push_back(value);
 		this->vectorArr.push_back(value);
 		this->dequeArr.push_back(value);
 	}
 
+	// sort one vector right away cuz I'm lazy
 	std::sort(this->sorted.begin(), this->sorted.end());
 }
 
-PmergeMe::Input::~Input() {}
-PmergeMe::Input::Input() {}
+PmergeMe::Data::~Data() {}
+PmergeMe::Data::Data() {}
 
-const std::string &PmergeMe::Input::getInput() const { return this->_input; }
+const std::string &PmergeMe::Data::getInput() const { return this->input; }
 
-void	PmergeMe::Input::printSorted() const {
+// prints the sorted array like the subject shows, again I'm lazy
+void	PmergeMe::Data::printSorted() const {
 	std::vector<long>::const_iterator it = this->sorted.begin();
 	std::cout << "After: ";
 	for(; it != this->sorted.end(); ++it) {
@@ -65,61 +83,25 @@ void	PmergeMe::Input::printSorted() const {
 	std::cout << std::endl;
 }
 
-template<typename T>
-void	PmergeMe::mergeSort(T &array) {
-	size_t	len = array.size();
-	if (len <= 1)
-		return ;
 
-	size_t	middle = len / 2;
-	T left(array.begin(), array.begin() + middle);
-	T right(array.begin() + middle, array.end());
-
-	PmergeMe::mergeSort(left);
-	PmergeMe::mergeSort(right);
-	PmergeMe::merge(left, right, array);
-}
-
-template<typename T>
-void	PmergeMe::merge(T &left, T &right, T &array) {
-	size_t leftSize = array.size() / 2;
-	size_t rightSize = array.size() - leftSize;
-	size_t i = 0, r = 0, l = 0;
-
-	while(l < leftSize && r < rightSize) {
-		if (left[l] < right[r]) {
-			array[i++] = left[l++];
-		} else {
-			array[i++] = right[r++];
-		}
-	}
-	while (l < leftSize) {
-		array[i++] = left[l++];
-	}
-	while (r < rightSize) {
-		array[i++] = right[r++];
-	}
-}
-
-void	PmergeMe::Input::sortAndPrintVector() {
+void	PmergeMe::Data::sortAndPrintVector() {
 	clock_t start = clock();
-	PmergeMe::mergeSort<std::vector<long> >(this->vectorArr);
+	PmergeMe::mergeInsertionSort<std::vector<long> >(this->vectorArr);
 	clock_t end = clock();
 	double elapsed = double(end - start) * 1000.0/ double(CLOCKS_PER_SEC);
 //	print<std::vector<long> >(this->vectorArr);
 
-	std::cout << "Time to process a range of " << this->vectorArr.size() << " with std::vector : " << elapsed << " ms"<< std::endl;
+	std::cout << "Time to process a range of " << this->original.size() << " with std::vector : " << elapsed << " ms"<< std::endl;
 }
 
-void	PmergeMe::Input::sortAndPrintDeque() {
+void	PmergeMe::Data::sortAndPrintDeque() {
 	clock_t start = clock();
-	PmergeMe::mergeSort<std::deque<long> >(this->dequeArr);
+	PmergeMe::mergeInsertionSort<std::deque<long> >(this->dequeArr);
 	clock_t end = clock();
 	double elapsed = double(end - start)  * 1000.0 / double(CLOCKS_PER_SEC);
-	//	print<std::deque<long> >(this->dequeArr);
+//	print<std::deque<long> >(this->dequeArr);
 
-	std::cout << "Time to process a range of " << this->dequeArr.size() << " with std::deque : " << elapsed << " ms"<< std::endl;
-
+	std::cout << "Time to process a range of " << this->original.size() << " with std::deque : " << elapsed << " ms"<< std::endl;
 }
 
 template<typename T>
@@ -135,6 +117,45 @@ void	PmergeMe::print(const T &array) {
 	std::cout << std::endl;
 }
 
-std::ostream	&PmergeMe::operator<<(std::ostream &os, const PmergeMe::Input &obj) {
+template<typename T>
+void	PmergeMe::sort(T &arr) {
+	if (arr.size() <= 1)
+		return ;
+	arr = PmergeMe::pairAndFindLarger(arr);
+	PmergeMe::sort(arr);
+}
+
+template<typename T>
+void	PmergeMe::insert(T &arr, long nb) {
+	arr.insert(std::upper_bound(arr.begin(), arr.end(), nb), nb);
+}
+
+template<typename T>
+T	PmergeMe::pairAndFindLarger(T &arr) {
+	T largerElements;
+
+	for (size_t i = 0; i < arr.size(); i += 2) {
+		if (i + 1 < arr.size()) {
+			largerElements.push_back(std::max(arr[i], arr[i + 1]));
+		} else {
+			largerElements.push_back(arr[i]);
+		}
+	}
+	return largerElements;
+}
+
+template<typename T>
+void	PmergeMe::mergeInsertionSort(T &arr) {
+	T sorted;
+	sorted.push_back(arr[0]);
+	PmergeMe::sort(sorted);
+	for (size_t i = 0; i < arr.size(); ++i) {
+		PmergeMe::insert(sorted, arr[i]);
+	}
+	arr = sorted;
+}
+
+// operators give me lazy ideas
+std::ostream	&PmergeMe::operator<<(std::ostream &os, const PmergeMe::Data &obj) {
 	return os << obj.getInput();
 }

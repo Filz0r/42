@@ -34,31 +34,38 @@ namespace PmergeMe {
 			const char *what() const throw();
 	};
 
-	struct Input {
+	struct Data {
 		private:
 			std::vector<long> 	original;
 			std::vector<long> 	sorted;
 			std::deque<long>	dequeArr;
 			std::vector<long>	vectorArr;
-			std::string			_input;
-			Input();
-			Input(const Input &obj);
-			Input &operator=(const Input &obj);
+			std::string			input;
+			Data();
 
 		public:
 			const std::string &getInput() const;
 			void	printSorted() const;
 			void	sortAndPrintVector();
 			void	sortAndPrintDeque();
-			Input(size_t ac, char **av);
-			~Input();
+			Data(size_t ac, char **av);
+			~Data();
 	};
-	template<typename T>
-	void	mergeSort(T &array);
-	template<typename T>
-	void	merge(T &left,  T &right, T &array);
+
 	template<typename T>
 	void	print(const T &array);
 
-	std::ostream  &operator<<(std::ostream  &os, const Input &obj);
+	template<typename T>
+	void mergeInsertionSort(T &arr);
+
+	template<typename T>
+	void sort(T &arr);
+
+	template<typename T>
+	void insert(T &arr, long nb);
+
+	template<typename T>
+	T pairAndFindLarger(T &arr);
+
+	std::ostream  &operator<<(std::ostream  &os, const Data &obj);
 }
