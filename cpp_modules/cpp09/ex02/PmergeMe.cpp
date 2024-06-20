@@ -117,43 +117,52 @@ void	PmergeMe::print(const T &array) {
 	std::cout << std::endl;
 }
 
-template<typename T>
-void	PmergeMe::sort(T &arr) {
-	if (arr.size() <= 1)
-		return ;
-	arr = PmergeMe::pairAndFindLarger(arr);
-	PmergeMe::sort(arr);
-}
 
+// creates a new container where the largest elements are sorted
+// using the following logic eg:
+// Original container: 4 1 32 3
+// Paired container: 1 4 3 32
+// if the container has a odd length the final element will be left alone
 template<typename T>
-void	PmergeMe::insert(T &arr, long nb) {
-	arr.insert(std::upper_bound(arr.begin(), arr.end(), nb), nb);
-}
-
-template<typename T>
-T	PmergeMe::pairAndFindLarger(T &arr) {
-	T largerElements;
+T	PmergeMe::pairAndSort(T &arr) {
+	T pairs;
 
 	for (size_t i = 0; i < arr.size(); i += 2) {
 		if (i + 1 < arr.size()) {
-			largerElements.push_back(std::max(arr[i], arr[i + 1]));
+			pairs.push_back(std::min(arr[i], arr[i + 1]));
+			pairs.push_back(std::max(arr[i], arr[i + 1]));
 		} else {
-			largerElements.push_back(arr[i]);
+			pairs.push_back(arr[i]);
 		}
 	}
-	return largerElements;
+	return pairs;
 }
 
 template<typename T>
 void	PmergeMe::mergeInsertionSort(T &arr) {
-	T sorted;
-	sorted.push_back(arr[0]);
-	PmergeMe::sort(sorted);
-	for (size_t i = 0; i < arr.size(); ++i) {
-		PmergeMe::insert(sorted, arr[i]);
+	if (arr.size() <= 1)
+		return ;
+	// First we pair the big and small numbers side by side
+	T pairs = PmergeMe::pairAndSort(arr);
+
+	T larger;
+	// Now we add the large part of the container to the larger container
+	for (size_t i = 1; i < pairs.size(); i += 2)
+		larger.push_back(pairs[i]);
+	// Recursion until the larger container is sorted
+	PmergeMe::mergeInsertionSort(larger);
+	// Finally we insert the sorted elements into the larger container
+	for (size_t i = 0; i < pairs.size(); i += 2) {
+		// upper_bound looks for the iterator position where we can insert the element
+		// in a sorted container without messing with the already sorted container
+		// if no element smaller than pairs[i] is found it adds the number to the end
+		// of the container
+		larger.insert(std::upper_bound(larger.begin(), larger.end(), pairs[i]),
+					  pairs[i]);
 	}
-	arr = sorted;
+	arr = larger;
 }
+
 
 // operators give me lazy ideas
 std::ostream	&PmergeMe::operator<<(std::ostream &os, const PmergeMe::Data &obj) {

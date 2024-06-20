@@ -9,6 +9,8 @@
 #include <algorithm>
 #include <ctime>
 
+
+// can you please get updated on github pretty please
 namespace PmergeMe {
 	class BadInput : public std::exception {
 		private:
@@ -59,13 +61,7 @@ namespace PmergeMe {
 	void mergeInsertionSort(T &arr);
 
 	template<typename T>
-	void sort(T &arr);
-
-	template<typename T>
-	void insert(T &arr, long nb);
-
-	template<typename T>
-	T pairAndFindLarger(T &arr);
+	T pairAndSort(T &arr);
 
 	std::ostream  &operator<<(std::ostream  &os, const Data &obj);
 }
