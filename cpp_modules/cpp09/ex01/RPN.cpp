@@ -76,7 +76,7 @@ RPN::RPN(const std::string &_input) {
 			double result = doTheMath(temp, a, b);
 			this->numbers.push(result);
 		}
-		input.erase(0, temp.length() + 1);
+		input.erase(0, temp.length());
 	}
 
 	if (this->numbers.size() == 1)
