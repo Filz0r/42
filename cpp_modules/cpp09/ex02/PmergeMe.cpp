@@ -89,7 +89,7 @@ void	PmergeMe::Data::sortAndPrintVector() {
 	PmergeMe::mergeInsertionSort<std::vector<long> >(this->vectorArr);
 	clock_t end = clock();
 	double elapsed = double(end - start) * 1000.0/ double(CLOCKS_PER_SEC);
-//	print<std::vector<long> >(this->vectorArr);
+	print<std::vector<long> >(this->vectorArr);
 
 	std::cout << "Time to process a range of " << this->original.size() << " with std::vector : " << elapsed << " ms"<< std::endl;
 }
@@ -99,7 +99,7 @@ void	PmergeMe::Data::sortAndPrintDeque() {
 	PmergeMe::mergeInsertionSort<std::deque<long> >(this->dequeArr);
 	clock_t end = clock();
 	double elapsed = double(end - start)  * 1000.0 / double(CLOCKS_PER_SEC);
-//	print<std::deque<long> >(this->dequeArr);
+	print<std::deque<long> >(this->dequeArr);
 
 	std::cout << "Time to process a range of " << this->original.size() << " with std::deque : " << elapsed << " ms"<< std::endl;
 }
@@ -147,7 +147,8 @@ T	PmergeMe::pairAndFindLarger(T &arr) {
 template<typename T>
 void	PmergeMe::mergeInsertionSort(T &arr) {
 	T sorted;
-	sorted.push_back(arr[0]);
+
+//	sorted.push_back(arr[0]);
 	PmergeMe::sort(sorted);
 	for (size_t i = 0; i < arr.size(); ++i) {
 		PmergeMe::insert(sorted, arr[i]);
