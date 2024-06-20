@@ -40,7 +40,7 @@ PmergeMe::Data::Data(size_t ac, char **av) {
 		iss >> temp;
 		// checking if someone is being an ass
 		if (!(sval >> value) || sval >> extraInput
-			|| value < 0 || value > std::numeric_limits<int>::max())
+			|| value <= 0 || value > std::numeric_limits<int>::max())
 				throw PmergeMe::BadInput(temp);
 
 		// making the input string look pretty for the print
