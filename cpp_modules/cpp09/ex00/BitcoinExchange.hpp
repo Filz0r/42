@@ -8,6 +8,8 @@
 #include <limits>
 #include <cstdlib>
 
+// will you fucking update git or not
+
 class CannotOpenFile : public std::exception {
 	public:
 		const char *what() const throw();
@@ -44,7 +46,6 @@ int closestDifference (const DateObj &obj1, const DateObj &obj2);
 
 class BitcoinExchange
 {
-
 	public:
 		// default constructor
 		explicit BitcoinExchange( const std::string &_dbFile );
@@ -68,7 +69,7 @@ class BitcoinExchange
 		BitcoinExchange( const BitcoinExchange &obj );
 		BitcoinExchange& operator = ( const BitcoinExchange &obj );
 
-		// Statatic vars/functions
+		// Static vars/functions
 		static const std::string	originalDbFile;
 		static void	mapInit( const std::string &filePath, const char delimiter,
 								std::multimap<keyStr, double> &toSet );
