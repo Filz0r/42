@@ -6,11 +6,11 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 12:53:13 by fparreir          #+#    #+#             */
-/*   Updated: 2024/11/15 14:43:28 by fparreir         ###   ########.fr       */
+/*   Updated: 2024/11/16 16:31:09 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../include/get_next_line.h"
 
 int	slen(const char *str)
 {
