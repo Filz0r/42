@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 12:53:13 by fparreir          #+#    #+#             */
-/*   Updated: 2024/11/16 15:53:07 by fparreir         ###   ########.fr       */
+/*   Updated: 2024/11/16 17:55:57 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*join_strings(char *str1, char *str2)
 
 	i = 0;
 	j = 0;
-	result = ft_calloc((slen(str1) + slen(str2)) + 1, sizeof(char));
+	result = malloc((slen(str1) + slen(str2)) + 1);
 	while (str1 && str1[i])
 	{
 		result[i] = str1[i];
@@ -68,35 +68,4 @@ int	process_buffer(char *buffer)
 		buffer[i++] = '\0';
 	}
 	return (newline_found);
-}
-
-void	*ft_calloc(size_t nelms, size_t size)
-{
-	unsigned char	*result;
-	size_t			i;
-
-	i = 0;
-	result = malloc(nelms * size);
-	if (!result)
-		return (result);
-	while (i < size * nelms)
-		result[i++] = '\0';
-	return (result);
-}
-
-void	*clear_buffers(char **buffers)
-{
-	int			i;
-
-	i = 0;
-	while (i < MAX_FD)
-	{
-		if (buffers[i])
-		{
-			free(buffers[i]);
-			buffers[i] = NULL;
-		}
-		i++;
-	}
-	return (NULL);
 }

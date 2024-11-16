@@ -6,7 +6,7 @@
 /*   By: fparreir <fparreir@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 13:18:18 by fparreir          #+#    #+#             */
-/*   Updated: 2024/11/16 15:53:13 by fparreir         ###   ########.fr       */
+/*   Updated: 2024/11/16 17:55:27 by fparreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 #include <stdio.h>
 #include <fcntl.h>
 
-int main(void) {
-	int fd[5];
-	char *line;
+int	main(void)
+{
+	int		fd[5];
+	char	*line;
 
 	fd[0] = open("./test_files/file1.txt", O_RDONLY);
 	fd[1] = open("./test_files/file2.txt", O_RDONLY);
@@ -38,7 +39,6 @@ int main(void) {
 			free(line);
 		}
 	}
-//	get_next_line(-1);
 	free(line);
 	for (int i = 0; i < 5; i++)
 		if (fd[i] > 0)
