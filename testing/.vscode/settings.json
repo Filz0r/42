@@ -1,9 +1,0 @@
-{
-	"files.associations": {
-		"ft_char.h": "c",
-		"libft.h": "c",
-		"ft_memory.h": "c",
-		"ft_numbers.h": "c",
-		"ft_string.h": "c"
-	}
-}
